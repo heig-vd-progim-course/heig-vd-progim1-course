@@ -114,11 +114,14 @@ suffisent pas.
 
 ## Sources et pour aller plus loin
 
-- Dunlosky, J. et coll., _Improving Students' Learning With Effective Learning
-  Techniques_, Psychological Science in the Public Interest, 2013. La revue de
-  référence sur l'efficacité comparée des techniques d'étude.
-- Oakley, B., _Learning How to Learn_, cours en ligne gratuit, disponible sur
-  Coursera. Accessible et directement applicable.
+- Science étonnante, [_Mieux apprendre & étudier : les (vraies) techniques
+  scientifiques_](https://www.youtube.com/watch?v=RVB3PBPxMWg). La répétition
+  espacée et l'autoévaluation expliquées et justifiées.
+- Science étonnante, [_Les cartes mentales (mind map) : écrire et prendre ses
+  notes autrement_](https://www.youtube.com/watch?v=8ueBiBOTs9E).
+- Case, N., [_Comment se souvenir de tout pour (quasiment) toujours_](https://ncase.me/remember/fr.html).
+  Court essai interactif sur la répétition espacée, à faire soi-même en dix
+  minutes.
 
 <!-- URLs -->
 

@@ -419,14 +419,16 @@ Ce que vous venez de faire porte un nom : une **spécification**.
 La programmation est une des rares matières où le travail régulier n'est pas un
 conseil moral mais une contrainte technique.
 
-## Trois choses qui fonctionnent
+## Deux techniques qui fonctionnent
 
-1. **Se tester plutôt que relire.** Relire donne une sensation de maîtrise qui
-   ne correspond à rien.
-2. **Espacer plutôt que grouper.** Trois fois vingt minutes valent mieux qu'une
-   heure le dimanche soir.
-3. **Écrire le code soi-même**, même mauvais. Lire une solution et savoir en
-   produire une sont deux compétences différentes.
+1. **La répétition espacée.** Revoir une notion juste avant de l'oublier la
+   fixe mieux qu'une révision groupée la veille. [Science étonnante][video-repetition].
+2. **Les cartes mentales.** Relier les notions entre elles donne une structure
+   que la lecture linéaire d'un cours ne donne pas.
+   [Science étonnante][video-mindmap].
+
+Les deux vidéos sont courtes, sourcées, et valent mieux que ce que je peux en
+dire en une diapositive.
 
 ## Une chose qui ne fonctionne pas
 
@@ -499,6 +501,8 @@ Est-ce que vous avez des questions ?
 	https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/01-donner-des-instructions/
 [license]:
 	https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md
+[video-repetition]: https://www.youtube.com/watch?v=RVB3PBPxMWg
+[video-mindmap]: https://www.youtube.com/watch?v=8ueBiBOTs9E
 
 <!-- Illustrations -->
 
