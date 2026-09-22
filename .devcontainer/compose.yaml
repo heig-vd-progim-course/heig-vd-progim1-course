@@ -1,6 +1,7 @@
 services:
   devcontainer:
-    image: mcr.microsoft.com/devcontainers/base:bookworm
+    # Image Python : Zensical est un paquet Python
+    image: mcr.microsoft.com/devcontainers/python:3-3.14-trixie
     volumes:
       - ..:/workspace:cached
     command: sleep infinity

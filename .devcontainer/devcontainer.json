@@ -2,9 +2,13 @@
 	"name": "HEIG-VD ProgIM1 Course Development Container",
 	"dockerComposeFile": "compose.yaml",
 	"service": "devcontainer",
+	"runServices": ["plantuml"],
 	"workspaceFolder": "/workspace",
 	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		// Necessaire pour generer les presentations avec l'image Docker de Marp
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"moby": false
+		},
 		"ghcr.io/devcontainers/features/java:1": {
 			"jdkDistro": "tem",
 			// Prefer the Maven wrapper when available
@@ -15,21 +19,30 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"bierner.markdown-mermaid",
 				"DavidAnson.vscode-markdownlint",
 				"esbenp.prettier-vscode",
 				"GitHub.copilot-chat",
 				"jebbs.plantuml",
 				"marp-team.marp-vscode",
+				"ms-python.python",
 				"ms-vsliveshare.vsliveshare-pack",
 				"myriad-dreamin.tinymist",
 				"redhat.java",
 				"redhat.vscode-yaml",
 				"streetsidesoftware.code-spell-checker",
 				"streetsidesoftware.code-spell-checker-french",
+				"tamasfe.even-better-toml",
 				"tomoki1207.pdf",
 				"vscjava.vscode-java-pack",
-				"yzhang.markdown-all-in-one"
-			]
+				"yzhang.markdown-all-in-one",
+				"Anthropic.claude-code"
+			],
+			"settings": {
+				"python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+				"plantuml.render": "PlantUMLServer",
+				"plantuml.server": "http://localhost:9090"
+			}
 		}
 	},
 	// Map the user's SSH directory to the container for SSH signing
@@ -37,8 +50,11 @@
 		"type=bind,source=${localEnv:HOME}/.ssh,target=${localEnv:HOME}/.ssh,type=bind,consistency=cached"
 	],
 	// Ports to expose on the container's network host
-	"forwardPorts": [9090],
+	"forwardPorts": [8000, 9090],
 	"portsAttributes": {
+		"8000": {
+			"label": "Zensical Development Server"
+		},
 		"9090": {
 			"label": "PlantUML Server"
 		}

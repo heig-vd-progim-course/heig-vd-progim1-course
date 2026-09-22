@@ -1,0 +1,88 @@
+[project]
+site_url = "https://heig-vd-progim-course.github.io/heig-vd-progim1-course/"
+site_name = "HEIG-VD ProgIM1 Course"
+site_description = "Le dépôt du cours Programmation 1 (ProgIM1) enseigné à la HEIG-VD, Suisse."
+site_author = "Guidoux V."
+
+copyright = "Creative Commons Attribution-ShareAlike 4.0 International"
+
+repo_url = "https://github.com/heig-vd-progim-course/heig-vd-progim1-course"
+repo_name = "heig-vd-progim-course/heig-vd-progim1-course"
+edit_uri = "edit/main/docs/"
+
+# Les tables en ligne TOML doivent tenir sur une seule ligne : ne pas retourner
+# à la ligne à l'intérieur d'une accolade, sinon le fichier ne se parse plus.
+nav = [
+  { "Accueil" = "index.md" },
+  { "Organisation" = [{ "Modalités de l'unité d'enseignement" = "00-organisation/index.md" }, { "Évaluation" = "00-organisation/01-evaluation.md" }, { "Mini-projet et jalons" = "00-organisation/02-mini-projet-et-jalons.md" }, { "Environnement de travail et outils" = "00-organisation/03-environnement-et-outils.md" }] },
+  { "Séances" = [{ "Programme" = "01-seances/index.md" }, { "01 - Donner des instructions" = [{ "Vue d'ensemble" = "01-seances/01-donner-des-instructions/index.md" }, { "Activité - Donner des instructions" = "01-seances/01-donner-des-instructions/01-activite-donner-des-instructions.md" }, { "Les diagrammes d'activité" = "01-seances/01-donner-des-instructions/02-diagrammes-dactivite.md" }, { "Activité - Les règles du jeu" = "01-seances/01-donner-des-instructions/03-activite-jeux-de-societe.md" }, { "Apprendre à apprendre" = "01-seances/01-donner-des-instructions/04-apprendre-a-apprendre.md" }] }, { "02 - De l'instruction à la machine" = "01-seances/02-de-linstruction-a-la-machine.md" }, { "03 - Décrire un problème réel" = "01-seances/03-decrire-un-probleme-reel.md" }, { "04 - Premiers pas en Java" = "01-seances/04-premiers-pas-en-java.md" }, { "05 - Sélection" = "01-seances/05-selection.md" }, { "06 - Itération" = "01-seances/06-iteration.md" }, { "07 - Récapitulatif et évaluation écrite" = "01-seances/07-recapitulatif-et-evaluation-ecrite.md" }, { "08 - Fonctions et lancement du mini-projet" = "01-seances/08-fonctions-et-lancement-du-mini-projet.md" }, { "09 - Tableaux" = "01-seances/09-tableaux.md" }, { "10 - Déboguer et tester" = "01-seances/10-deboguer-et-tester.md" }, { "11 - Git et finalisation" = "01-seances/11-git-et-finalisation.md" }, { "12 - Présentations orales" = "01-seances/12-presentations-orales.md" }] },
+  { "Ressources" = "99-ressources/index.md" },
+]
+
+[project.theme]
+language = "fr"
+features = [
+  "announce.dismiss",
+  "content.action.edit",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.code.select",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  "navigation.path",
+  "navigation.sections",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "toc.follow",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Basculer en mode clair"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Basculer en mode sombre"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Suivre les préférences du système"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/heig-vd-progim-course/heig-vd-progim1-course"
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+toc = { permalink = true }
+pymdownx.arithmatex = { generic = true }
+pymdownx.betterem = {}
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.emoji = { emoji_generator = "zensical.extensions.emoji.to_svg", emoji_index = "zensical.extensions.emoji.twemoji" }
+pymdownx.highlight = { anchor_linenums = true, line_spans = "__span", pygments_lang_class = true }
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.magiclink = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+pymdownx.superfences = { custom_fences = [{ name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }] }
+pymdownx.tabbed = { alternate_style = true, combine_header_slug = true }
+pymdownx.tasklist = { custom_checkbox = true }
+pymdownx.tilde = {}
