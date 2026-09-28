@@ -37,7 +37,8 @@ exécuter sans vous.
 
 ## Déroulé
 
-Quatre périodes, soit 180 minutes pauses comprises.
+Quatre périodes de 45 minutes, soit 180 minutes d'enseignement, plus 30 minutes
+de pause.
 
 | Temps       | Durée  | Contenu                                                  |
 | :---------- | -----: | :------------------------------------------------------- |
@@ -47,9 +48,9 @@ Quatre périodes, soit 180 minutes pauses comprises.
 | 01:20-01:35 | 15 min | Pause                                                     |
 | 01:35-02:00 | 25 min | [Théorie - Les diagrammes d'activité](02-diagrammes-dactivite.md) |
 | 02:00-02:40 | 40 min | [Activité 2 - Les règles du jeu](03-activite-jeux-de-societe.md) et restitution |
-| 02:40-02:50 | 10 min | Pause                                                     |
-| 02:50-03:05 | 15 min | [Théorie - Apprendre à apprendre](04-apprendre-a-apprendre.md) |
-| 03:05-03:25 | 20 min | Atelier d'installation des outils de limitation           |
+| 02:40-02:55 | 15 min | Pause                                                     |
+| 02:55-03:10 | 15 min | [Théorie - Apprendre à apprendre](04-apprendre-a-apprendre.md) |
+| 03:10-03:25 | 15 min | Atelier d'installation des outils de limitation           |
 | 03:25-03:30 |  5 min | Clôture et travail pour la semaine suivante               |
 
 ### Note sur la gestion du temps
