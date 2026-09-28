@@ -9,9 +9,10 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 Le semestre est construit en deux moitiés qui n'ont pas le même rythme.
 
 **Séances 01 à 07 : comprendre.** On part de l'acte de donner une instruction,
-on remonte jusqu'à la machine, puis on descend dans un langage. À chaque
-séance, une activité précède la théorie : on manipule l'idée avant de lui
-donner un nom. La moitié du semestre se termine par une évaluation écrite.
+on programme sans écrire de code, puis on remonte jusqu'à la machine et on
+descend dans un langage. À chaque séance, une activité précède la théorie : on
+manipule l'idée avant de lui donner un nom. La moitié du semestre se termine
+par une évaluation écrite.
 
 **Séances 08 à 12 : faire.** Vous avez tous les éléments de base. Vous les
 appliquez à un problème que vous avez choisi, en autonomie encadrée par des
@@ -22,8 +23,8 @@ jalons. Le cours devient un atelier.
 | Séance | Titre                                                                      | Contenu principal |
 | -----: | :------------------------------------------------------------------------- | :---------------- |
 |     01 | [Donner des instructions](01-donner-des-instructions/index.md)             | Précision des instructions, diagrammes d'activité, apprendre à apprendre |
-|     02 | [De l'instruction à la machine](02-de-linstruction-a-la-machine.md)        | Histoire, code textuel, compilation et interprétation |
-|     03 | [Décrire un problème réel](03-decrire-un-probleme-reel.md)                 | Du problème au diagramme, puis au pseudo-code |
+|     02 | [Programmer sans écrire de code](02-programmer-sans-ecrire-de-code/index.md) | MakeCode Arcade : observer, modifier, créer |
+|     03 | [De l'instruction à la machine](03-de-linstruction-a-la-machine.md)        | Code textuel, compilation et interprétation, puis pseudo-code |
 |     04 | [Premiers pas en Java](04-premiers-pas-en-java.md)                         | Environnement, variables, constantes, types, entrées et sorties |
 |     05 | [Sélection](05-selection.md)                                               | Conditions, `if`, `else`, opérateurs logiques |
 |     06 | [Itération](06-iteration.md)                                               | Boucles `while` et `for`, conditions d'arrêt |
@@ -54,6 +55,10 @@ qui étudient :
 
 - Le cours ne commence plus par la programmation mais par l'acte de donner une
   instruction, avec une activité par deux dès la première séance.
+- La séance 02 se fait entièrement sans écrire de code, avec MakeCode Arcade :
+  observer un programme qui fonctionne, le modifier, puis en créer un. Les
+  limites des blocs, constatées en fin de séance, motivent le passage au code
+  textuel en séance 03.
 - Les diagrammes d'activité sont dessinés à la main avant d'être produits avec
   un outil. L'outil viendra plus tard, s'il vient.
 - L'évaluation est passée d'un examen final unique à une évaluation écrite à

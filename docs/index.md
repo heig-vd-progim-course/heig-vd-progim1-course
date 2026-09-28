@@ -45,8 +45,8 @@ Le programme complet, séance par séance, est disponible sur la page
 | Séance | Contenu                                        | État        |
 | -----: | :--------------------------------------------- | :---------- |
 |     01 | Donner des instructions                        | En cours    |
-|     02 | De l'instruction à la machine                  | À faire     |
-|     03 | Décrire un problème réel                       | À faire     |
+|     02 | Programmer sans écrire de code                 | En cours    |
+|     03 | De l'instruction à la machine                  | À faire     |
 |     04 | Premiers pas en Java                           | À faire     |
 |     05 | Sélection                                      | À faire     |
 |     06 | Itération                                      | À faire     |
