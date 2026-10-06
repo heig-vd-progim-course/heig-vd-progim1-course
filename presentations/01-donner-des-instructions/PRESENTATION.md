@@ -79,15 +79,20 @@ d'une autre personne que moi.
 
 **Il n'y a pas de question bête.** Je suis payé pour y répondre.
 
-## Objectifs de cette séance
+## Objectifs de cette séance (1/2)
 
 À la fin de cette séance, vous devriez être capable de :
 
-- expliquer pourquoi une instruction ambiguë produit un résultat imprévisible ;
-- lire et dessiner un diagramme d'activité simple ;
+- expliquer pourquoi une instruction ambiguë donne n'importe quoi ;
+- lire et dessiner un diagramme d'activité simple.
+
+![bg right:40%][illustration-objectifs]
+
+## Objectifs de cette séance (2/2)
+
 - représenter les règles d'un jeu sous forme de diagramme ;
 - nommer deux techniques d'apprentissage efficaces ;
-- avoir configuré un outil de limitation des sollicitations.
+- avoir configuré un outil de limitation.
 
 ![bg right:40%][illustration-objectifs]
 
@@ -95,11 +100,11 @@ d'une autre personne que moi.
 
 À la fin du semestre, vous devriez être capable de :
 
-> - décrire un problème réel sous forme d'actions, de choix et de répétitions ;
-> - représenter cette description en diagramme et en pseudo-code ;
-> - traduire cette description en un programme Java correct et lisible ;
+> - décrire un problème en actions, choix et répétitions ;
+> - le représenter en diagramme et en pseudo-code ;
+> - le traduire en un programme Java correct et lisible ;
 > - tester et déboguer un programme simple ;
-> - expliquer ce que fait votre propre code et pourquoi.
+> - expliquer votre propre code et vos choix.
 
 ## Le dernier point n'est pas décoratif
 
@@ -115,14 +120,17 @@ rien, ni ici, ni plus tard.
 
 Quatre périodes, découpées en :
 
-- des moments de théorie courts, pour le cadre et le vocabulaire ;
-- des activités, souvent à deux, pour manipuler avant de formaliser ;
-- de la pratique individuelle, pendant laquelle je passe dans les rangs.
-
-Le support écrit sur le site du cours est la référence. Ces diapositives sont
-un résumé : elles ne suffisent pas à réviser.
+- de la théorie courte, pour le cadre et le vocabulaire ;
+- des activités, souvent à deux ;
+- de la pratique, pendant laquelle je passe dans les rangs.
 
 ![bg right:40%][illustration-organisation]
+
+## Le support écrit est la référence
+
+<!-- _class: lead -->
+
+Ces diapositives sont un résumé. **Elles ne suffisent pas à réviser.**
 
 ## Le semestre en deux moitiés
 
@@ -163,38 +171,40 @@ Deux parties, de poids égal :
 ## Partie 1 - Évaluation écrite (50%)
 
 - Au milieu du semestre, en séance 07.
-- Papier et crayon, sans ordinateur, sans documentation, sans IA.
+- Papier et crayon, sans ordinateur, sans IA.
 - Deux périodes.
-
-Ce qui est évalué : lire du code et dire ce qu'il produit, repérer une erreur,
-traduire un énoncé en diagramme, écrire un court fragment de code.
-
-Ce qui ne l'est pas : la syntaxe au point-virgule près.
 
 ![bg right:40%][illustration-evaluation]
 
+## Ce que l'évaluation écrite mesure
+
+**Évalué** : lire du code et dire ce qu'il produit, repérer une erreur,
+traduire un énoncé en diagramme, écrire un court fragment de code.
+
+**Pas évalué** : la syntaxe au point-virgule près.
+
 ## Partie 2 - Mini-projet (50%)
 
-Un petit programme qui résout un problème que vous avez réellement.
+Un programme qui résout un problème que vous avez réellement.
 
 - Vous choisissez le sujet.
-- En ligne de commande, sans interface graphique ni base de données.
-- Réalisé pendant les séances 08 à 12, encadré par cinq jalons.
-- Évalué par une présentation orale de dix minutes.
+- En ligne de commande.
+- Séances 08 à 12, cinq jalons.
+- Évalué par un oral de dix minutes.
 
 ![bg right:40% brightness:1.3][illustration-mini-projet]
 
 ## Les jalons
 
-| Jalon | Séance | Ce que vous rendez                        |
-| :---- | :----- | :---------------------------------------- |
-| J1    | 08     | Le problème choisi, entrées et sorties    |
-| J2    | 09     | Le diagramme d'activité, dessiné à la main |
-| J3    | 10     | Un programme qui compile                  |
-| J4    | 11     | Le cas normal traité, cas manquants listés |
-| J5    | 12     | Rendu final et présentation orale         |
+| Jalon | Séance | Ce que vous rendez                     |
+| :---- | :----- | :------------------------------------- |
+| J1    | 08     | Le problème choisi, entrées et sorties |
+| J2    | 09     | Le diagramme, dessiné à la main        |
+| J3    | 10     | Un programme qui compile               |
+| J4    | 11     | Le cas normal traité                   |
+| J5    | 12     | Rendu final et oral                    |
 
-Les jalons sont **validés ou non validés**, jamais notés.
+**Validés ou non validés**, jamais notés.
 
 ## Pourquoi des jalons
 
@@ -207,7 +217,7 @@ sait pas par où commencer, et ce moment-là prend des heures.
 
 ## La présentation orale
 
-Dix minutes, questions comprises. Ce qui est évalué :
+Dix minutes, questions comprises.
 
 | Critère                                          | Poids |
 | :----------------------------------------------- | ----: |
@@ -217,7 +227,12 @@ Dix minutes, questions comprises. Ce qui est évalué :
 | Les limites et bogues connus sont énoncés        |   15% |
 | Clarté et gestion du temps                       |   10% |
 
-Dire _"je ne sais pas expliquer cette partie"_ coûte moins cher qu'inventer.
+## Un conseil pour l'oral
+
+<!-- _class: lead -->
+
+Dire _"je ne sais pas expliquer cette partie"_ coûte beaucoup moins cher
+qu'inventer.
 
 ## Comment se préparer
 
@@ -298,12 +313,12 @@ ne peut pas deviner ce qu'on a en tête.
 
 Par deux, dos à dos.
 
-- Une personne **voit une figure** et la décrit à voix haute.
-- L'autre **dessine** exactement ce qu'elle entend, sans interpréter.
-- Manche 1 : aucune question autorisée.
-- Manche 2 : on inverse les rôles, questions fermées autorisées.
+- Une personne **voit une figure** et la décrit.
+- L'autre **dessine**, sans interpréter.
+- Manche 1 : aucune question.
+- Manche 2 : rôles inversés, questions fermées.
 
-Six minutes par manche. On compare ensuite les deux feuilles.
+Six minutes par manche.
 
 ![bg right:40%][illustration-activite]
 
@@ -325,10 +340,7 @@ Une description qui est :
 - dans un vocabulaire partagé ;
 - relative à un état connu.
 
-La question suivante : comment écrire cela pour que quelqu'un d'autre puisse
-le vérifier ?
-
-Réponse : on le dessine.
+Comment l'écrire pour qu'elle soit vérifiable ? **On la dessine.**
 
 ## Les diagrammes d'activité
 
@@ -342,14 +354,14 @@ on s'y accroche.
 
 ## Les six symboles
 
-| Symbole                      | Nom          | Sens                      |
-| :--------------------------- | :----------- | :------------------------ |
-| Disque noir plein            | Nœud initial | Ici ça commence           |
-| Rectangle arrondi            | Action       | On fait quelque chose     |
-| Flèche                       | Transition   | Puis on passe à la suite  |
-| Losange, une entrée          | Décision     | On pose une question      |
-| Losange, plusieurs entrées   | Fusion       | Les chemins se rejoignent |
-| Disque noir cerclé           | Nœud final   | Ici ça se termine         |
+| Symbole            | Nom          | Sens                  |
+| :----------------- | :----------- | :-------------------- |
+| Disque plein       | Nœud initial | Ici ça commence       |
+| Rectangle arrondi  | Action       | On fait quelque chose |
+| Flèche             | Transition   | Puis la suite         |
+| Losange, 1 entrée  | Décision     | On pose une question  |
+| Losange, n entrées | Fusion       | Les chemins rejoignent |
+| Disque cerclé      | Nœud final   | Ici ça se termine     |
 
 ## Deux règles de lecture
 
@@ -391,14 +403,12 @@ faisaient pas d'informatique.
 
 ## Activité 2 - Comment ça marche
 
-En groupes de trois ou quatre, avec un jeu et ses règles. **On ne joue pas.**
+Trois ou quatre par jeu. **On ne joue pas.**
 
-1. Lire les règles une fois, en entier.
-2. Répondre par écrit : quand la partie s'arrête-t-elle ? Quels choix a-t-on
-   pendant son tour ?
-3. Dessiner le diagramme d'activité **d'un seul tour**.
-4. Entourer en rouge **tout ce que les règles ne disent pas** et que vous avez
-   dû deviner.
+1. Lire les règles, en entier.
+2. Écrire quand la partie s'arrête.
+3. Dessiner le diagramme **d'un tour**.
+4. Entourer **ce que les règles taisent**.
 
 ![bg right:40%][illustration-activite]
 
@@ -454,10 +464,10 @@ Objectif de sortie : un outil actif sur le téléphone, un sur l'ordinateur.
 
 ## À vous de jouer !
 
-- Terminer l'installation des outils et les utiliser au moins une fois.
-- Reprendre le diagramme d'activité de votre jeu et le corriger à tête reposée.
-- Relire le support de cours de la séance.
-- Bloquer dans votre agenda trois créneaux de vingt minutes par semaine.
+- Terminer l'installation des outils et les utiliser une fois.
+- Corriger le diagramme de votre jeu à tête reposée.
+- Relire le support de cours.
+- Bloquer trois créneaux de vingt minutes par semaine.
 
 ![bg right:40%][illustration-a-vous-de-jouer]
 

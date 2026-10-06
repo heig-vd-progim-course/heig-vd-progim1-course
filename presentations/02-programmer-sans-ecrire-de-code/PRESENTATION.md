@@ -28,9 +28,8 @@ _paginate: false
 [Support de cours][cours] · [Présentation (web)][presentation-web] ·
 [Présentation (PDF)][presentation-pdf]
 
-<small>V. Guidoux, avec l'aide de Claude.</small>
-
-<small>Ce travail est sous licence [CC BY-SA 4.0][license].</small>
+<small>V. Guidoux, avec l'aide de Claude. Ce travail est sous licence
+[CC BY-SA 4.0][license].</small>
 
 ![bg brightness:2 opacity:0.2][illustration-principale]
 
@@ -52,15 +51,20 @@ Vous avez constaté trois choses :
 Aujourd'hui, on donne cet enchaînement à une machine et on regarde si elle fait
 ce que vous aviez prévu.
 
-## Objectifs de cette séance
+## Objectifs de cette séance (1/2)
 
 À la fin de cette séance, vous devriez être capable de :
 
-- lire un programme et prédire son comportement avant de l'exécuter ;
-- retrouver les trois structures dans un programme réel ;
+- lire un programme et prédire son comportement ;
+- retrouver les trois structures dans un programme réel.
+
+![bg right:40%][illustration-objectifs]
+
+## Objectifs de cette séance (2/2)
+
 - expliquer ce qu'est un événement ;
 - modifier un programme sans le casser ;
-- transformer votre diagramme en programme qui fonctionne.
+- transformer votre diagramme en programme.
 
 ![bg right:40%][illustration-objectifs]
 
@@ -158,14 +162,17 @@ Notez simplement aujourd'hui que cela existe et que **cela se dessine mal**.
 
 **Un changement à la fois. On teste après chaque changement.**
 
-- Cinq modifications puis une panne : cinq causes possibles, et leurs
-  combinaisons.
-- Une modification puis une panne : une cause, et vous la connaissez déjà.
+- Cinq modifications puis une panne : cinq causes, et leurs combinaisons.
+- Une modification puis une panne : une cause, déjà connue.
+
+![bg right:40%][illustration-modifier]
+
+## Pourquoi cette règle
+
+<!-- _class: lead -->
 
 Le réflexe de tout changer d'un coup est celui qui vous coûtera le plus cher
 cette année.
-
-![bg right:40%][illustration-modifier]
 
 ## Quatre niveaux de modification
 
@@ -197,18 +204,18 @@ n'avez pas introduit, sans message d'erreur.
 
 Vous dessinez, vous me montrez, et seulement après vous ouvrez l'éditeur.
 
-Qui ouvre l'éditeur en premier passera l'après-midi à empiler des blocs au
-hasard et repartira avec quelque chose qui bouge sans savoir pourquoi.
+Sinon : des blocs empilés au hasard, et quelque chose qui bouge sans qu'on
+sache pourquoi.
 
 ![bg right:40%][illustration-creer]
 
 ## Cinq sujets
 
-1. **Le ramasseur** : des objets apparaissent, les toucher donne un point.
-2. **L'esquive** : des objets tombent, les toucher fait perdre une vie.
+1. **Le ramasseur** : toucher un objet donne un point.
+2. **L'esquive** : toucher un objet fait perdre une vie.
 3. **Le tri** : deux zones, deux couleurs, pousser dans la bonne.
-4. **Le chronomètre** : appuyer exactement au bout de cinq secondes.
-5. **La mémoire** : reproduire une séquence de couleurs qui s'allonge.
+4. **Le chronomètre** : appuyer au bout de cinq secondes.
+5. **La mémoire** : reproduire une séquence qui s'allonge.
 
 Ou le vôtre, du même calibre.
 
@@ -238,15 +245,13 @@ l'ensemble tombe juste. Vous aurez deux problèmes au lieu d'un.
 
 Dans cet ordre, et pas dans un autre :
 
-1. Relisez votre diagramme. Neuf fois sur dix, l'étape qui manque y est absente
-   aussi.
+1. Relisez votre diagramme. Neuf fois sur dix, l'étape qui manque y est
+   absente aussi.
 2. Regardez la documentation des blocs.
-3. Demandez à la personne à côté de dire ce qu'elle comprend de votre
-   programme.
+3. Demandez à votre voisin ce qu'il comprend de votre programme.
 4. Appelez-moi.
 
-La quatrième option est la plus rapide sur le moment et la moins utile sur le
-semestre.
+La quatrième est la plus rapide, et la moins utile.
 
 ## Restitution croisée
 
