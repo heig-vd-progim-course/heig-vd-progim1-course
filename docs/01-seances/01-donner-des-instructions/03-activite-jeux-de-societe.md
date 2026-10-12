@@ -84,39 +84,6 @@ Vous referez cet exercice au jalon 2 du mini-projet, sur votre propre problème.
 Ce sera plus difficile, parce que les trous d'un énoncé qu'on a écrit soi-même
 sont beaucoup plus durs à voir.
 
-## Notes pour l'équipe enseignante
-
-### Choix des jeux
-
-Privilégier des jeux dont un tour est court et clairement délimité, avec deux
-ou trois décisions par tour au maximum. Éviter les jeux à pose d'ouvriers ou à
-phases multiples, qui produisent des diagrammes illisibles en 25 minutes.
-
-Quelques familles qui fonctionnent bien :
-
-- jeux de cartes à tour simple, type Uno, 6 qui prend, Skyjo ;
-- jeux de dés avec relance, type Yam's, Qwixx, Can't Stop ;
-- petits jeux de plis ou de collection, type Saboteur, Love Letter.
-
-Prévoir un jeu par groupe, et au moins deux jeux différents dans la salle pour
-que la restitution ne soit pas répétitive.
-
-### Déroulement
-
-- Annoncer d'emblée qu'on ne joue pas. Sinon, la moitié des groupes joue une
-  partie et ne produit rien.
-- Passer dans les groupes à dix minutes pour vérifier qu'ils dessinent un
-  **tour** et non une **partie**. C'est l'erreur de cadrage la plus fréquente
-  et elle coûte toute l'activité.
-- Photographier les diagrammes intéressants pour la séance 03, où l'on
-  reprendra la même démarche sur le problème fil rouge.
-
-### Prolongement possible
-
-Contacter une ludothèque locale ou un éditeur pour un prêt de jeux. Une piste
-évoquée pour cette édition : la ludothèque d'Yverdon-les-Bains et la boutique
-Deck'lick.
-
 <!-- URLs -->
 
 [licence]:

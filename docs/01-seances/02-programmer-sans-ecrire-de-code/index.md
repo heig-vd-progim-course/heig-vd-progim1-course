@@ -13,6 +13,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - Phase 1 : [Observer](01-observer.md)
 - Phase 2 : [Modifier](02-modifier.md)
 - Phase 3 : [Créer](03-creer.md)
+- Notes pour l'équipe enseignante :
+  [Lien vers les notes](../../98-equipe-enseignante/02-programmer-sans-ecrire-de-code.md)
 
 ## Objectifs
 

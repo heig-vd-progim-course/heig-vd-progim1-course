@@ -1,4 +1,4 @@
-# Séance 09 - Tableaux
+# Séance 08 - Tableaux et lancement du mini-projet
 
 V. Guidoux, avec l'aide de Claude.
 
@@ -12,8 +12,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Intention
 
-Manipuler des collections de données : déclaration, parcours, recherche d'un
-maximum, calcul sur l'ensemble.
+Ranger plusieurs valeurs dans une seule variable, et les parcourir. C'est aussi
+la séance où chaque personne choisit le problème de son mini-projet.
 
 ## Objectifs pressentis
 
@@ -21,12 +21,19 @@ maximum, calcul sur l'ensemble.
 
 - déclarer et remplir un tableau ;
 - parcourir un tableau avec une boucle ;
-- calculer une somme, une moyenne, un minimum et un maximum sur un tableau ;
-- éviter le dépassement d'indice.
+- calculer une somme, une moyenne, un minimum et un maximum ;
+- éviter le dépassement d'indice ;
+- poser son propre problème de mini-projet en entrées et sortie.
+
+## Le fil rouge à cette séance
+
+Les notes sont rangées dans un tableau, et la fonction de moyenne prend ce
+tableau en paramètre au lieu de deux valeurs.
 
 ## Activité pressentie
 
-Atelier mini-projet. Rendu du jalon 2 : le diagramme d'activité de la solution.
+Seconde moitié de la séance en atelier : chaque personne choisit son problème
+et rend le jalon 1.
 
 <!-- URLs -->
 

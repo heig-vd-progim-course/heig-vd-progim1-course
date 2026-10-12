@@ -15,6 +15,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - Théorie : [Les diagrammes d'activité](02-diagrammes-dactivite.md)
 - Activité 2 : [Les règles du jeu](03-activite-jeux-de-societe.md)
 - Théorie : [Apprendre à apprendre](04-apprendre-a-apprendre.md)
+- Notes pour l'équipe enseignante :
+  [Lien vers les notes](../../98-equipe-enseignante/01-donner-des-instructions.md)
 
 ## Objectifs
 

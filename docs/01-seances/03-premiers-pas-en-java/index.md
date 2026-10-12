@@ -14,6 +14,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - Théorie :
   [La machine virtuelle et la compilation](02-machine-virtuelle-et-compilation.md)
 - Théorie : [Les types et les variables](03-types-et-variables.md)
+- Notes pour l'équipe enseignante :
+  [Lien vers les notes](../../98-equipe-enseignante/03-premiers-pas-en-java.md)
 
 ## Objectifs
 

@@ -95,28 +95,6 @@ Notez le temps que cela vous a pris. Nous y reviendrons en séance 10.
 Ce dernier point a un nom : c'est la raison d'être des **constantes**, que vous
 verrez en séance 04.
 
-## Notes pour l'équipe enseignante
-
-### Matériel à préparer
-
-Le même programme que la phase 1, en copie modifiable. Vérifier soi-même que
-les douze modifications sont réalisables dans le programme choisi, et chronométrer
-les niveaux 3 et 4 : c'est là que le temps part.
-
-Préparer volontairement le programme avec **une valeur dupliquée à deux
-endroits**, pour que la modification 1 ou 3 échoue partiellement chez une partie
-de la classe. C'est le meilleur argument possible en faveur des constantes, et
-il ne coûte rien à mettre en place.
-
-### Pendant la phase
-
-- La règle du changement unique ne sera pas respectée spontanément. Le rappeler
-  une fois collectivement à dix minutes, puis individuellement.
-- Pour l'exercice d'échange, imposer que le bogue soit visible en jouant. Un
-  bogue caché dans une branche jamais atteinte ne s'y prête pas.
-- Personne ne finira les douze modifications. C'est prévu. Le dire d'emblée
-  évite le sentiment d'échec.
-
 <!-- URLs -->
 
 [licence]:

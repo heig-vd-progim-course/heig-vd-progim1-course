@@ -142,23 +142,6 @@ La question suivante est : comment écrit-on cela pour que ce soit lisible et
 vérifiable par quelqu'un d'autre ? Réponse de la séance : on le dessine. Voir
 [Les diagrammes d'activité](02-diagrammes-dactivite.md).
 
-## Notes pour l'équipe enseignante
-
-- Annoncer l'objectif avant de commencer, en une phrase, et sans humour :
-  _"On va observer ce qui se passe quand on donne des instructions à quelqu'un
-  qui ne peut pas deviner ce qu'on a en tête."_ Une activité présentée comme un
-  jeu est jouée comme un jeu.
-- Ne pas laisser la manche 1 dépasser six minutes, même si personne n'a fini.
-  L'échec partiel est le matériau du débriefing.
-- Circuler pour repérer les formulations intéressantes à citer au débriefing.
-  Noter deux ou trois instructions entendues, textuellement.
-- Résister à l'envie de donner les conclusions. Si la classe ne trouve pas
-  "l'ordre compte", poser la question : _"Si je dicte les mêmes phrases dans le
-  désordre, j'obtiens le même dessin ?"_
-- Les binômes qui réussissent très bien la manche 1 ont en général convenu d'un
-  repère à l'avance. C'est un excellent cas à exposer : ils ont inventé une
-  convention, donc un début de langage.
-
 <!-- URLs -->
 
 [licence]:
