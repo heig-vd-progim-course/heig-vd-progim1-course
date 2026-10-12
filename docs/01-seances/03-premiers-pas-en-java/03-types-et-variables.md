@@ -13,6 +13,109 @@ l'**état**.
 Une **variable**, c'est exactement cela : un endroit où le programme retient
 quelque chose, avec un nom pour y revenir.
 
+## Où écrire votre code : dans `main`
+
+Ouvrez `src/Main.java` dans votre projet `hello-world`. Vous y trouvez ceci :
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Bonjour tout le monde");
+    }
+}
+```
+
+Pour l'instant, **tout ce que vous écrirez se place entre les deux accolades
+de la méthode `main`**, à la place de la ligne `System.out.println(...)` ou en
+dessous. Pas avant, pas après, pas en dehors.
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // ← Votre code commence ici
+
+        // ← et se termine ici
+    }
+}
+```
+
+`main` est le **point d'entrée** du programme : quand vous cliquez sur la
+flèche verte, Java cherche `main` et exécute ses lignes une par une, de haut
+en bas. Ce qui n'est pas dans `main` n'est pas exécuté.
+
+Les autres mots (`public`, `class`, `static`, `void`, `String[] args`) seront
+expliqués au fil des séances. Pour l'instant, considérez-les comme un cadre
+qu'on ne touche pas.
+
+!!! warning "Tous les exemples de cette page vont dans `main`"
+
+    Pour gagner de la place, les exemples ci-dessous ne montrent que les lignes
+    qui comptent. Quand vous lisez :
+
+    ```java
+    int age = 20;
+    System.out.println(age);
+    ```
+
+    il faut comprendre que le fichier complet est :
+
+    ```java
+    public class Main {
+        public static void main(String[] args) {
+            int age = 20;
+            System.out.println(age);
+        }
+    }
+    ```
+
+    Si IntelliJ souligne tout en rouge, vérifiez d'abord que vos lignes sont
+    bien **à l'intérieur** des accolades de `main`.
+
+## Voir ce que fait le programme : `System.out.println`
+
+Une variable vit dans la mémoire de l'ordinateur. Vous ne la voyez pas. Le
+seul moyen de savoir ce qu'elle contient, c'est de **l'afficher dans la
+console**, avec `System.out.println`.
+
+**Une ligne `System.out.println` dans le code produit une ligne dans la
+console.** Pas plus, pas moins, et dans le même ordre :
+
+```java
+System.out.println("Première ligne");
+System.out.println("Deuxième ligne");
+System.out.println("Troisième ligne");
+```
+
+```text
+Première ligne
+Deuxième ligne
+Troisième ligne
+```
+
+Si une ligne que vous attendiez n'apparaît pas dans la console, c'est que le
+`System.out.println` correspondant n'a pas été exécuté. Si une valeur vous
+surprend, c'est la console qui a raison, pas votre intuition.
+
+!!! tip "Le raccourci `sout`"
+
+    Dans IntelliJ, tapez `sout` puis appuyez sur ++tab++ (ou ++enter++).
+    IntelliJ écrit `System.out.println();` pour vous et place le curseur entre
+    les parenthèses.
+
+    Vous allez l'écrire des centaines de fois cette année. Prenez l'habitude
+    dès maintenant.
+
+La console s'ouvre en bas d'IntelliJ quand vous cliquez sur la flèche verte.
+Elle affiche ce que vos `println` ont produit, suivi de
+`Process finished with exit code 0` quand le programme s'est terminé
+normalement.
+
+!!! example "À vous"
+
+    Écrivez trois `sout` dans `main` qui affichent votre prénom, votre ville et
+    votre plat préféré. Lancez. Puis **inversez l'ordre** de deux lignes dans
+    le code, et relancez. Qu'est-ce qui a changé dans la console ?
+
 ## Déclarer une variable
 
 ```java
@@ -25,22 +128,98 @@ Trois éléments, dans l'ordre :
 - `age` : le **nom**, choisi par vous ;
 - `20` : la **valeur** initiale.
 
-Une fois déclarée, la variable se réutilise par son nom :
+Déclarer une variable ne produit **rien** dans la console. Le programme retient
+la valeur, mais ne la montre pas. Pour la voir, il faut la passer à
+`System.out.println` :
 
 ```java
 int age = 20;
-age = age + 1;
 System.out.println(age);
 ```
 
 ```text
-21
+20
 ```
+
+Notez qu'il n'y a pas de guillemets autour de `age` : on demande d'afficher
+**ce que contient** la variable `age`, pas le mot « age ». La différence est
+expliquée plus bas, dans la section sur `String`.
+
+Une fois déclarée, la variable se réutilise par son nom, et on peut changer sa
+valeur :
+
+```java
+int age = 20;
+System.out.println(age);
+age = age + 1;
+System.out.println(age);
+age = 30;
+System.out.println(age);
+```
+
+```text
+20
+21
+30
+```
+
+Trois `println`, trois lignes. Chacune montre la valeur de `age` **au moment
+où la ligne est exécutée**. C'est la même variable, mais son contenu a changé
+entre deux affichages.
 
 Le signe `=` n'est pas celui des mathématiques. `age = age + 1` ne dit pas que
 `age` est égal à `age` plus un, ce qui serait faux. Il dit : **calcule
 `age + 1`, et range le résultat dans `age`**. C'est une affectation, pas une
 équation.
+
+On n'écrit le type qu'**une seule fois**, à la déclaration. Ensuite, on utilise
+seulement le nom. Écrire `int age = 30;` une deuxième fois provoque une
+erreur : la variable `age` existe déjà.
+
+### Afficher une variable avec une explication
+
+Une console remplie de nombres sans contexte devient vite illisible. On colle
+un texte devant la valeur avec `+` :
+
+```java
+int age = 20;
+System.out.println("Âge : " + age);
+age = age + 1;
+System.out.println("Âge l'année prochaine : " + age);
+```
+
+```text
+Âge : 20
+Âge l'année prochaine : 21
+```
+
+Prenez cette habitude : quand vous affichez une variable pour vérifier sa
+valeur, écrivez son nom à côté. Avec dix `println`, vous saurez immédiatement
+quelle ligne de la console correspond à quelle ligne du code.
+
+!!! example "À vous : modifier, relancer, vérifier"
+
+    Recopiez ce code dans `main` :
+
+    ```java
+    int score = 10;
+    System.out.println("Score de départ : " + score);
+    score = score + 5;
+    System.out.println("Après bonus : " + score);
+    score = score * 2;
+    System.out.println("Après doublement : " + score);
+    ```
+
+    1. **Avant** de lancer, écrivez sur une feuille les trois lignes que vous
+       attendez dans la console. Lancez, et comparez.
+    2. Changez la valeur de départ à `0`. Prédisez, relancez, vérifiez.
+    3. Ajoutez une ligne `score = score - 100;` suivie d'un `sout` qui affiche
+       le score. Prédisez, relancez, vérifiez.
+    4. Supprimez le deuxième `System.out.println`. Combien de lignes reste-t-il
+       dans la console ? La valeur finale a-t-elle changé ?
+
+    La réponse à la question 4 est importante : `println` **montre** une
+    valeur, il ne la **change** pas.
 
 ## Pourquoi déclarer un type
 
@@ -137,19 +316,179 @@ séance 05.
 
 ### Et `String` ?
 
-`String` contient du texte et s'écrit avec une majuscule, parce que **ce n'est
-pas un type primitif** : c'est une classe. Nous verrons ce que cela implique en
-ProgIM2. Pour l'instant, il s'utilise comme les autres, avec des guillemets
-doubles :
+`String` contient du texte : un mot, une phrase, un prénom, une adresse. On
+appelle ce texte une **chaîne de caractères**.
+
+Il s'écrit avec une majuscule, parce que **ce n'est pas un type primitif** :
+c'est une classe. Nous verrons ce que cela implique en ProgIM2. Pour
+l'instant, il se déclare comme les autres :
 
 ```java
 String prenom = "Camille";
+System.out.println(prenom);
+```
+
+```text
+Camille
+```
+
+#### Les guillemets doubles sont obligatoires
+
+Un texte s'écrit **toujours entre guillemets doubles** `"..."`. Les guillemets
+indiquent à Java où le texte commence et où il s'arrête. Ils ne font pas
+partie du texte : ils n'apparaissent pas dans la console.
+
+Sans guillemets, Java ne voit plus du texte, il voit un **nom de variable** :
+
+```java
+String prenom = Camille;
+```
+
+```text
+error: cannot find symbol
+  symbol:   variable Camille
+```
+
+Java a cherché une variable qui s'appellerait `Camille`, ne l'a pas trouvée,
+et refuse de compiler. Le message « cannot find symbol » sur un mot qui
+devrait être du texte veut presque toujours dire : **il manque des
+guillemets**.
+
+Les guillemets sont la frontière entre deux mondes :
+
+| Vous écrivez | Java comprend                                   | Console    |
+| :----------- | :---------------------------------------------- | :--------- |
+| `prenom`     | la variable `prenom`, donc ce qu'elle contient  | `Camille`  |
+| `"prenom"`   | le texte p-r-e-n-o-m, tel quel                  | `prenom`   |
+| `Camille`    | une variable `Camille`, qui n'existe pas        | erreur     |
+| `"Camille"`  | le texte C-a-m-i-l-l-e, tel quel                | `Camille`  |
+
+```java
+String prenom = "Camille";
+System.out.println(prenom);
+System.out.println("prenom");
+```
+
+```text
+Camille
+prenom
+```
+
+Même mot, une paire de guillemets de différence, deux résultats différents.
+
+#### Guillemets doubles, pas simples
+
+Les apostrophes simples `'A'` sont réservées au type `char`, qui ne contient
+qu'**un seul** caractère. Pour du texte, ce sont toujours des guillemets
+doubles :
+
+```java
+String salutation = 'Bonjour';
+```
+
+```text
+error: unclosed character literal
+```
+
+Et un guillemet oublié à la fin produit une erreur du même genre :
+
+```java
+String salutation = "Bonjour;
+```
+
+```text
+error: unclosed string literal
+```
+
+Java a ouvert le texte au premier `"` et cherche en vain où il se ferme.
+
+#### `"20"` n'est pas `20`
+
+Un nombre entre guillemets n'est plus un nombre : c'est du texte qui
+ressemble à un nombre.
+
+```java
+int nombre = 20;
+String texte = "20";
+
+System.out.println(nombre + 1);
+System.out.println(texte + 1);
+```
+
+```text
+21
+201
+```
+
+Avec un `int`, `+` additionne. Avec un `String`, `+` **colle** : c'est la
+**concaténation**. Les deux lignes affichent quelque chose de plausible, et
+une seule fait ce que vous vouliez probablement.
+
+#### Coller du texte et des variables
+
+La concaténation sert surtout à construire des phrases :
+
+```java
+String prenom = "Camille";
+int age = 20;
+System.out.println("Bonjour " + prenom + ", tu as " + age + " ans.");
+```
+
+```text
+Bonjour Camille, tu as 20 ans.
+```
+
+Java ne rajoute **aucun espace** de lui-même. Les espaces doivent se trouver
+à l'intérieur des guillemets :
+
+```java
+System.out.println("Bonjour" + prenom);
 System.out.println("Bonjour " + prenom);
 ```
 
 ```text
+BonjourCamille
 Bonjour Camille
 ```
+
+Une chaîne peut aussi être vide, `""`, et une variable `String` peut changer
+de valeur comme n'importe quelle autre :
+
+```java
+String message = "";
+System.out.println("[" + message + "]");
+message = "Salut";
+System.out.println("[" + message + "]");
+message = message + " tout le monde";
+System.out.println("[" + message + "]");
+```
+
+```text
+[]
+[Salut]
+[Salut tout le monde]
+```
+
+Les crochets ne servent qu'à rendre visible le début et la fin du texte dans
+la console, ce qui est bien utile pour repérer une chaîne vide ou un espace en
+trop.
+
+!!! example "À vous : les guillemets"
+
+    Dans `main`, avec `String ville = "Yverdon";` :
+
+    1. Affichez `ville`, puis `"ville"`. Avant de lancer, prédisez les deux
+       lignes de la console.
+    2. Retirez les guillemets autour de `"Yverdon"` dans la déclaration.
+       Lancez. Lisez le message d'erreur : quel mot Java ne trouve-t-il pas ?
+       Remettez les guillemets.
+    3. Affichez la phrase `J'habite à Yverdon.` en utilisant la variable.
+       Vérifiez dans la console qu'il y a bien un espace avant `Yverdon` et
+       un point à la fin.
+    4. Changez la valeur de `ville` pour votre propre ville, sans toucher au
+       `println`. Relancez. Quelle ligne de la console a changé ?
+    5. Prédisez puis vérifiez : `System.out.println("5" + 5);` et
+       `System.out.println(5 + 5);`.
 
 ## La division entière, premier piège
 
@@ -445,35 +784,59 @@ que vous n'en aviez changé qu'un. Une constante n'existe qu'à un seul endroit.
 
 ## Atelier
 
-Dans votre projet `hello-world`. Chaque exercice se fait en modifiant le
-fichier et en relançant.
+Dans votre projet `hello-world`, **dans la méthode `main`** de
+`src/Main.java`. Chaque exercice se fait en modifiant le fichier et en
+relançant.
 
-1. Déclarez une variable pour votre prénom, une pour votre âge, une pour votre
+Pour chaque exercice, suivez le même cycle :
+
+1. **prédire** : écrivez ce que la console devrait afficher ;
+2. **lancer** : cliquez sur la flèche verte ;
+3. **comparer** : chaque ligne de la console correspond à un `println` du
+   code. Si une ligne ne correspond pas à votre prédiction, trouvez lequel ;
+4. **modifier** une valeur, et recommencer.
+
+Ce cycle est la compétence de la séance, plus que n'importe quel type.
+
+1. Déclarez une variable `int compteur = 0;`. Affichez-la. Ajoutez-lui 1 et
+   affichez-la à nouveau, trois fois de suite. La console doit afficher
+   `0`, `1`, `2`, `3` sur quatre lignes. Changez la valeur de départ à `10` :
+   quelles lignes changent ?
+2. Déclarez une variable pour votre prénom, une pour votre âge, une pour votre
    taille en mètres. Affichez une phrase les utilisant toutes les trois. Quels
-   types avez-vous choisis, et pourquoi ?
-2. Affichez le résultat de `0.1 + 0.2`. Puis affichez-le arrondi à deux
+   types avez-vous choisis, et pourquoi ? Changez ensuite la valeur de
+   chaque variable, sans toucher au `println`, et vérifiez que la phrase de
+   la console suit.
+3. Affichez le résultat de `0.1 + 0.2`. Puis affichez-le arrondi à deux
    décimales.
-3. Calculez la moyenne de trois notes stockées dans trois variables `int`.
+4. Calculez la moyenne de trois notes stockées dans trois variables `int`.
    Obtenez d'abord le résultat faux, puis corrigez-le. Expliquez à voix haute à
    la personne à côté de vous d'où venait l'erreur.
-4. Trouvez par vous-même la valeur de `Integer.MAX_VALUE + 2`. Prédisez avant
+5. Trouvez par vous-même la valeur de `Integer.MAX_VALUE + 2`. Prédisez avant
    d'exécuter.
-5. Déclarez une constante `PASSING_GRADE` à 4.0, puis essayez de la modifier à
+6. Déclarez une constante `PASSING_GRADE` à 4.0, puis essayez de la modifier à
    la ligne suivante. Lisez le message d'erreur et reformulez-le avec vos mots.
-6. Que vaut `(int) -3.99` ? Prédisez, puis vérifiez. Est-ce que cela vous
+7. Que vaut `(int) -3.99` ? Prédisez, puis vérifiez. Est-ce que cela vous
    surprend ?
 
-L'exercice 3 est celui qui compte. C'est le bogue que vous referez tous dans le
+L'exercice 4 est celui qui compte. C'est le bogue que vous referez tous dans le
 mini-projet.
 
 ## Résumé
 
+- Pour l'instant, tout votre code s'écrit entre les accolades de la méthode
+  `main`, qui est exécutée de haut en bas.
+- Un `System.out.println` (raccourci `sout`) produit une ligne dans la
+  console. C'est le seul moyen de voir ce que contient une variable.
 - Une variable est un état que le programme retient, avec un type, un nom et
   une valeur.
 - Huit types primitifs. En pratique : `int`, `double`, `boolean`, parfois
   `char` et `long`.
 - La division de deux entiers est entière, et le compilateur ne vous
   préviendra pas.
+- Un `String` s'écrit toujours entre guillemets doubles. Sans eux, Java
+  cherche une variable de ce nom. Avec un `String`, `+` colle au lieu
+  d'additionner.
 - Les nombres à virgule sont approchés, et l'erreur s'accumule à chaque
   opération. Jamais de `==` sur un `double`.
 - Une conversion qui perd de l'information doit être demandée explicitement.
