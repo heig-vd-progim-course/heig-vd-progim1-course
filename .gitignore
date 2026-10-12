@@ -9,7 +9,7 @@
 ## Marp
 # Outputs
 *.html
-# *.pdf
+*.pdf
 
 ## SQLite databases
 *.db
