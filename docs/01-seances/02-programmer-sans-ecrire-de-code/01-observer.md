@@ -96,34 +96,6 @@ machine : _"si un jour ceci arrive, alors fais cela"_.
 - Si je supprime ce bloc, qu'est-ce qui casse ? Ne le faites pas encore, notez
   votre réponse : vous la vérifierez en phase 2.
 
-## Notes pour l'équipe enseignante
-
-### Matériel à préparer
-
-Deux ou trois programmes MakeCode partagés, de complexité croissante, dont les
-liens sont distribués en classe. Critères pour un bon programme d'observation :
-
-- il fonctionne, sans bogue visible ;
-- il tient sur un écran de blocs, quitte à zoomer ;
-- il contient exactement les trois structures et au moins deux événements ;
-- il comporte au moins un comportement contre-intuitif, que la majorité de la
-  classe prédira faux.
-
-Le dernier point fait la valeur de la phase. Un programme dont tout le monde
-prédit correctement le comportement n'enseigne rien.
-
-### Pendant la phase
-
-- Passer voir les grilles avant que les gens ne lancent le jeu. Certaines
-  personnes lanceront d'abord ; le leur faire remarquer sans en faire une
-  affaire.
-- Relever deux ou trois prédictions fausses intéressantes pour le débriefing
-  final.
-- Ne pas répondre aux questions du type _"ça fait quoi ce bloc ?"_ par la
-  réponse. Renvoyer à la [documentation des blocs](https://arcade.makecode.com/reference)
-  ou à l'infobulle de l'éditeur. C'est la première occasion du semestre de
-  faire chercher plutôt que de dire.
-
 <!-- URLs -->
 
 [licence]:

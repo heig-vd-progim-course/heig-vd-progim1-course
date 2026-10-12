@@ -210,37 +210,6 @@ Vous ne quittez pas la salle avant d'avoir coché les cinq lignes.
 | Le téléchargement du JDK n'aboutit pas                  | Réseau de l'école. Passer par le partage de connexion ou par [adoptium.net](https://adoptium.net/temurin/releases/) |
 | Accents cassés à l'affichage                            | Problème d'encodage. On le traitera ; ce n'est pas votre faute   |
 
-## Notes pour l'équipe enseignante
-
-### Avant la séance
-
-- Tester l'installation complète sur une machine Windows et une machine macOS
-  depuis le réseau de l'école, y compris le téléchargement du JDK depuis
-  IntelliJ. C'est l'étape qui tombe le plus souvent sur un pare-feu.
-- Prévoir une clé USB avec les installateurs IntelliJ pour Windows, macOS
-  Intel et macOS Apple Silicon, plus les JDK Temurin correspondants. Vingt
-  téléchargements simultanés saturent la salle.
-- Vérifier que les personnes ont les droits d'administration sur leur machine.
-  C'est la cause de blocage la plus bête et la plus fréquente.
-
-### Pendant l'atelier
-
-- Afficher la checklist de sortie au tableau dès le début.
-- Faire lever la main aux personnes qui ont terminé et les envoyer aider les
-  autres. C'est la seule manière de tenir cinquante minutes avec vingt
-  machines différentes.
-- Tenir une liste des personnes non validées en fin de séance et les
-  recontacter dans la semaine. Ne pas attendre la séance 04 pour le découvrir.
-
-### Mention de la licence étudiante
-
-JetBrains propose une licence gratuite à usage éducatif donnant accès aux
-fonctionnalités payantes. Elle n'est **pas nécessaire** pour ce cours, et je ne
-la présente pas en séance pour ne pas ajouter une étape de création de compte à
-un atelier déjà chargé. Elle est mentionnée ici pour celles et ceux qui la
-demandent :
-[programmes éducatifs JetBrains](https://www.jetbrains.com/community/education/).
-
 <!-- URLs -->
 
 [licence]:

@@ -137,51 +137,6 @@ Dans l'ordre, et pas dans un autre :
 Cet ordre est volontaire. La quatrième option est la plus rapide sur le moment
 et la moins utile sur le semestre.
 
-## Notes pour l'équipe enseignante
-
-### Validation des diagrammes
-
-Le passage de validation est le goulot d'étranglement : avec vingt personnes,
-il faut tenir une minute par diagramme. Deux questions suffisent :
-
-1. _"Montre-moi où la partie se termine."_
-2. _"Qu'est-ce que ton programme doit retenir ?"_
-
-Un diagramme sans fin ou sans variable identifiée repart pour deux minutes.
-
-### Choix de sujets
-
-Les sujets 4 et 5 sont plus difficiles qu'ils n'en ont l'air : le chronomètre
-demande de manipuler le temps, la mémoire demande une liste. Les laisser
-disponibles pour les personnes qui avancent vite, mais ne pas les recommander
-d'emblée.
-
-### Pendant la construction
-
-- Circuler en regardant les écrans plutôt qu'en attendant les mains levées.
-  Une personne bloquée depuis dix minutes ne lève pas la main.
-- Résister à la tentation de prendre la souris. Décrire le bloc à chercher,
-  pas le poser.
-- Noter qui termine en avance : ces personnes animent la restitution croisée.
-
-### Le débriefing final
-
-Cinq minutes, sur une seule question : **qu'est-ce que les blocs vous ont
-empêché de faire ?**
-
-Les réponses attendues, à faire émerger plutôt qu'à énoncer :
-
-- on ne peut pas chercher un mot dans son programme ;
-- on ne peut pas copier une partie du programme dans un message pour demander
-  de l'aide ;
-- on ne peut pas voir ce qui a changé entre hier et aujourd'hui ;
-- on ne peut pas travailler à deux sur le même programme ;
-- au-delà d'un écran, on ne retrouve plus rien.
-
-Ces cinq limites sont exactement les raisons pour lesquelles le code
-professionnel est du texte. C'est la transition vers la séance 03 ; ne pas la
-donner maintenant, l'annoncer.
-
 <!-- URLs -->
 
 [licence]:
