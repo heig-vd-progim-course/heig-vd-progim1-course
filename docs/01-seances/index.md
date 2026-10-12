@@ -25,7 +25,7 @@ jalons. Le cours devient un atelier.
 |     01 | [Donner des instructions](01-donner-des-instructions/index.md)             | Précision des instructions, diagrammes d'activité, apprendre à apprendre |
 |     02 | [Programmer sans écrire de code](02-programmer-sans-ecrire-de-code/index.md) | MakeCode Arcade : observer, modifier, créer |
 |     03 | [Premiers pas en Java](03-premiers-pas-en-java/index.md)                   | Installation, machine virtuelle et compilation, types et variables |
-|     04 | [Du diagramme au code](04-du-diagramme-au-code.md)                         | Saisie clavier, affichage, premier programme complet |
+|     04 | [Du diagramme au code](04-du-diagramme-au-code/index.md)                   | Entrées, traitement, sortie. Saisie clavier, affichage, premier programme complet |
 |     05 | [Fonctions et portée des variables](05-fonctions-et-portee.md)             | Paramètres, traitement, résultat. Ce qu'une variable voit |
 |     06 | [Conditions](06-conditions.md)                                             | `if`, `else`, opérateurs de comparaison et logiques |
 |      — | **Évaluation écrite** (50 %)                                               | Papier et crayon, sans ressources |

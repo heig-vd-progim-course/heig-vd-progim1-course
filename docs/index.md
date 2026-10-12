@@ -47,7 +47,7 @@ Le programme complet, séance par séance, est disponible sur la page
 |     01 | Donner des instructions                        | Prêt        |
 |     02 | Programmer sans écrire de code                 | Prêt        |
 |     03 | Premiers pas en Java                           | Prêt        |
-|     04 | Du diagramme au code                           | À faire     |
+|     04 | Du diagramme au code                           | Prêt        |
 |     05 | Fonctions et portée des variables              | À faire     |
 |     06 | Conditions                                     | À faire     |
 |      — | **Évaluation écrite**                          | À faire     |

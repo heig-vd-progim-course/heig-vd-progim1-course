@@ -100,8 +100,9 @@ comprime si la séance déborde.
 |     01 | [Donner des instructions](01-donner-des-instructions.md)      |
 |     02 | [Programmer sans écrire de code](02-programmer-sans-ecrire-de-code.md) |
 |     03 | [Premiers pas en Java](03-premiers-pas-en-java.md)            |
+|     04 | [Du diagramme au code](04-du-diagramme-au-code.md)            |
 
-Les séances 04 à 12 n'ont pas encore de notes : leur contenu est à l'état
+Les séances 05 à 12 n'ont pas encore de notes : leur contenu est à l'état
 d'esquisse.
 
 ## Contribuer
