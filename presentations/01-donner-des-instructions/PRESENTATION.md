@@ -11,7 +11,7 @@ title: HEIG-VD ProgIM1 Course - Donner des instructions
 description: Modalités de l'unité d'enseignement et première séance "Donner des instructions" pour l'unité d'enseignement ProgIM1 enseignée à la HEIG-VD, Suisse
 url: https://heig-vd-progim-course.github.io/heig-vd-progim1-course/presentations/01-donner-des-instructions/
 header: "**Donner des instructions**"
-footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://github.com/heig-vd-progim-course/heig-vd-progim1-course) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
+footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://heig-vd-progim-course.github.io/heig-vd-progim1-course/) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
 headingDivider: 2
 math: mathjax
 -->

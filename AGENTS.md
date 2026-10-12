@@ -233,7 +233,7 @@ title: HEIG-VD ProgIM1 Course - [Sujet]
 description: [Description] pour l'unité d'enseignement ProgIM1 enseignée à la HEIG-VD, Suisse
 url: https://heig-vd-progim-course.github.io/heig-vd-progim1-course/presentations/NN-nom/
 header: "**[Sujet]**"
-footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://github.com/heig-vd-progim-course/heig-vd-progim1-course) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
+footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://heig-vd-progim-course.github.io/heig-vd-progim1-course/) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
 headingDivider: 2
 math: mathjax
 -->
