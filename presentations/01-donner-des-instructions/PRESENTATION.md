@@ -32,8 +32,6 @@ _paginate: false
 
 <small>Ce travail est sous licence [CC BY-SA 4.0][license].</small>
 
-![bg brightness:2 opacity:0.2][illustration-principale]
-
 ## Bienvenue en Programmation 1
 
 <!-- _class: lead -->
@@ -86,15 +84,11 @@ d'une autre personne que moi.
 - expliquer pourquoi une instruction ambiguë donne n'importe quoi ;
 - lire et dessiner un diagramme d'activité simple.
 
-![bg right:40%][illustration-objectifs]
-
 ## Objectifs de cette séance (2/2)
 
 - représenter les règles d'un jeu sous forme de diagramme ;
 - nommer deux techniques d'apprentissage efficaces ;
 - avoir configuré un outil de limitation.
-
-![bg right:40%][illustration-objectifs]
 
 ## Objectifs de l'unité d'enseignement
 
@@ -123,8 +117,6 @@ Quatre périodes, découpées en :
 - de la théorie courte, pour le cadre et le vocabulaire ;
 - des activités, souvent à deux ;
 - de la pratique, pendant laquelle je passe dans les rangs.
-
-![bg right:40%][illustration-organisation]
 
 ## Le support écrit est la référence
 
@@ -166,15 +158,11 @@ Deux parties, de poids égal :
 | Évaluation écrite | Entre 06 et 07  |   50% |
 | Mini-projet       | Séances 08 à 12 |   50% |
 
-![bg right:40%][illustration-evaluation]
-
 ## Partie 1 - Évaluation écrite (50%)
 
 - Au milieu du semestre, entre les séances 06 et 07.
 - Papier et crayon, sans ordinateur, sans IA.
 - Deux périodes.
-
-![bg right:40%][illustration-evaluation]
 
 ## Ce que l'évaluation écrite mesure
 
@@ -191,8 +179,6 @@ Un programme qui résout un problème que vous avez réellement.
 - En ligne de commande.
 - Séances 08 à 12, cinq jalons.
 - Évalué par un oral de dix minutes.
-
-![bg right:40% brightness:1.3][illustration-mini-projet]
 
 ## Les jalons
 
@@ -320,8 +306,6 @@ Par deux, dos à dos.
 
 Six minutes par manche.
 
-![bg right:40%][illustration-activite]
-
 ## Activité 1 - Ce qu'on en retient
 
 - Sans **vocabulaire partagé**, une instruction ne veut rien dire.
@@ -410,8 +394,6 @@ Trois ou quatre par jeu. **On ne joue pas.**
 3. Dessiner le diagramme **d'un tour**.
 4. Entourer **ce que les règles taisent**.
 
-![bg right:40%][illustration-activite]
-
 ## Activité 2 - Restitution
 
 Deux minutes par groupe :
@@ -469,37 +451,11 @@ Objectif de sortie : un outil actif sur le téléphone, un sur l'ordinateur.
 - Relire le support de cours.
 - Bloquer trois créneaux de vingt minutes par semaine.
 
-![bg right:40%][illustration-a-vous-de-jouer]
-
 ## Questions
 
 <!-- _class: lead -->
 
 Est-ce que vous avez des questions ?
-
-## Sources
-
-- [Illustration principale][illustration-principale] par
-  [Richard Jacobs](https://unsplash.com/@rj2747) sur
-  [Unsplash](https://unsplash.com/photos/8oenpCXktqQ)
-- [Illustration objectifs][illustration-objectifs] par
-  [Aline de Nadai](https://unsplash.com/@alinedenadai) sur
-  [Unsplash](https://unsplash.com/photos/j6brni7fpvs)
-- [Illustration organisation][illustration-organisation] par
-  [American Jael](https://unsplash.com/@americanjael) sur
-  [Unsplash](https://unsplash.com/photos/OEvLi8LM7cc)
-- [Illustration activité][illustration-activite] par
-  [Samuel Girven](https://unsplash.com/@samuelgirven) sur
-  [Unsplash](https://unsplash.com/photos/VJ2s0c20qCo)
-- [Illustration mini-projet][illustration-mini-projet] par
-  [Alec Favale](https://unsplash.com/@alecfavale) sur
-  [Unsplash](https://unsplash.com/photos/Ivzo69e18nk)
-- [Illustration évaluation][illustration-evaluation] par
-  [Nguyen Dang Hoang Nhu](https://unsplash.com/@nguyendhn) sur
-  [Unsplash](https://unsplash.com/photos/qDgTQOYk6B8)
-- [Illustration à vous de jouer][illustration-a-vous-de-jouer] par
-  [Tim van Cleef](https://unsplash.com/@_timvancleef) sur
-  [Unsplash](https://unsplash.com/photos/1JBOZwuW7sI)
 
 <!-- URLs -->
 
@@ -513,20 +469,3 @@ Est-ce que vous avez des questions ?
 	https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md
 [video-repetition]: https://www.youtube.com/watch?v=RVB3PBPxMWg
 [video-mindmap]: https://www.youtube.com/watch?v=8ueBiBOTs9E
-
-<!-- Illustrations -->
-
-[illustration-principale]:
-	https://images.unsplash.com/photo-1517486430290-35657bdcef51?fit=crop&h=720
-[illustration-objectifs]:
-	https://images.unsplash.com/photo-1516389573391-5620a0263801?fit=crop&h=720
-[illustration-organisation]:
-	https://images.unsplash.com/photo-1712762056200-50d8f803ba10?fit=crop&h=720
-[illustration-activite]:
-	https://images.unsplash.com/photo-1576678927484-cc907957088c?fit=crop&h=720
-[illustration-mini-projet]:
-	https://images.unsplash.com/photo-1563460716037-460a3ad24ba9?fit=crop&h=720
-[illustration-evaluation]:
-	https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?fit=crop&h=720
-[illustration-a-vous-de-jouer]:
-	https://images.unsplash.com/photo-1554906493-4812e307243d?fit=crop&h=720

@@ -78,12 +78,6 @@
 - Piaget, J. et Illich, I., cités dans les
   [ressources pour l'équipe enseignante du cours DAI](https://github.com/heig-vd-dai-course/heig-vd-dai-course/tree/main/99.99-resources-for-the-teaching-staff).
 
-## Illustrations
-
-Les illustrations des présentations proviennent d'[Unsplash](https://unsplash.com)
-et sont créditées individuellement sur la diapositive _"Sources"_ de chaque
-présentation.
-
 ## Utilisation d'outils d'intelligence artificielle
 
 Ce dépôt a été produit avec l'assistance d'outils d'intelligence artificielle,

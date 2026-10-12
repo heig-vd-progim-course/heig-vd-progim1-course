@@ -31,8 +31,6 @@ _paginate: false
 <small>V. Guidoux, avec l'aide de Claude. Ce travail est sous licence
 [CC BY-SA 4.0][license].</small>
 
-![bg brightness:2 opacity:0.2][illustration-principale]
-
 ## _Retrouvez plus de détails dans le support de cours_
 
 <!-- _class: lead -->
@@ -58,15 +56,11 @@ ce que vous aviez prévu.
 - lire un programme et prédire son comportement ;
 - retrouver les trois structures dans un programme réel.
 
-![bg right:40%][illustration-objectifs]
-
 ## Objectifs de cette séance (2/2)
 
 - expliquer ce qu'est un événement ;
 - modifier un programme sans le casser ;
 - transformer votre diagramme en programme.
-
-![bg right:40%][illustration-objectifs]
 
 ## L'outil du jour
 
@@ -121,8 +115,6 @@ coup et vous aurez l'impression d'avoir compris.
 
 Prédire d'abord vous dit exactement où votre modèle mental est faux.
 
-![bg right:40%][illustration-observer]
-
 ## Ce que vous cherchez
 
 Dans le programme qu'on vous donne, retrouvez :
@@ -165,8 +157,6 @@ Notez simplement aujourd'hui que cela existe et que **cela se dessine mal**.
 - Cinq modifications puis une panne : cinq causes, et leurs combinaisons.
 - Une modification puis une panne : une cause, déjà connue.
 
-![bg right:40%][illustration-modifier]
-
 ## Pourquoi cette règle
 
 <!-- _class: lead -->
@@ -206,8 +196,6 @@ Vous dessinez, vous me montrez, et seulement après vous ouvrez l'éditeur.
 
 Sinon : des blocs empilés au hasard, et quelque chose qui bouge sans qu'on
 sache pourquoi.
-
-![bg right:40%][illustration-creer]
 
 ## Cinq sujets
 
@@ -279,8 +267,6 @@ La question est _"qu'est-ce que mon programme ne dit pas clairement ?"_
 - Écrire trois lignes : ce que les blocs ont facilité, et à quel moment ils
   vous ont gêné.
 
-![bg right:40%][illustration-a-vous-de-jouer]
-
 ## Une note sur l'outil
 
 MakeCode est publié sous licence MIT et son code source est public.
@@ -297,27 +283,6 @@ outils en ligne que vous utiliserez.
 
 Est-ce que vous avez des questions ?
 
-## Sources
-
-- [Illustration principale][illustration-principale] par
-  [Richard Jacobs](https://unsplash.com/@rj2747) sur
-  [Unsplash](https://unsplash.com/photos/8oenpCXktqQ)
-- [Illustration objectifs][illustration-objectifs] par
-  [Aline de Nadai](https://unsplash.com/@alinedenadai) sur
-  [Unsplash](https://unsplash.com/photos/j6brni7fpvs)
-- [Illustration observer][illustration-observer] par
-  [American Jael](https://unsplash.com/@americanjael) sur
-  [Unsplash](https://unsplash.com/photos/OEvLi8LM7cc)
-- [Illustration modifier][illustration-modifier] par
-  [Samuel Girven](https://unsplash.com/@samuelgirven) sur
-  [Unsplash](https://unsplash.com/photos/VJ2s0c20qCo)
-- [Illustration créer][illustration-creer] par
-  [Alec Favale](https://unsplash.com/@alecfavale) sur
-  [Unsplash](https://unsplash.com/photos/Ivzo69e18nk)
-- [Illustration à vous de jouer][illustration-a-vous-de-jouer] par
-  [Tim van Cleef](https://unsplash.com/@_timvancleef) sur
-  [Unsplash](https://unsplash.com/photos/1JBOZwuW7sI)
-
 <!-- URLs -->
 
 [presentation-web]:
@@ -328,18 +293,3 @@ Est-ce que vous avez des questions ?
 	https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/02-programmer-sans-ecrire-de-code/
 [license]:
 	https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md
-
-<!-- Illustrations -->
-
-[illustration-principale]:
-	https://images.unsplash.com/photo-1517486430290-35657bdcef51?fit=crop&h=720
-[illustration-objectifs]:
-	https://images.unsplash.com/photo-1516389573391-5620a0263801?fit=crop&h=720
-[illustration-observer]:
-	https://images.unsplash.com/photo-1712762056200-50d8f803ba10?fit=crop&h=720
-[illustration-modifier]:
-	https://images.unsplash.com/photo-1576678927484-cc907957088c?fit=crop&h=720
-[illustration-creer]:
-	https://images.unsplash.com/photo-1563460716037-460a3ad24ba9?fit=crop&h=720
-[illustration-a-vous-de-jouer]:
-	https://images.unsplash.com/photo-1554906493-4812e307243d?fit=crop&h=720

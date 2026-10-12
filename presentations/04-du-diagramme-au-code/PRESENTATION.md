@@ -32,8 +32,6 @@ _paginate: false
 
 <small>Ce travail est sous licence [CC BY-SA 4.0][license].</small>
 
-![bg brightness:2 opacity:0.2][illustration-principale]
-
 ## _Retrouvez plus de détails dans le support de cours_
 
 <!-- _class: lead -->
@@ -57,15 +55,11 @@ Mais vos programmes ne savent répéter que les valeurs écrites dedans.
 - poser un problème en entrées, traitement, sortie ;
 - lire une valeur au clavier et la convertir.
 
-![bg right:40%][illustration-objectifs]
-
 ## Objectifs de cette séance (2/2)
 
 - afficher un résultat lisible ;
 - traduire un diagramme en Java ;
 - repérer ce que l'énoncé ne couvre pas.
-
-![bg right:40%][illustration-objectifs]
 
 ## Le programme de la séance
 
@@ -90,8 +84,6 @@ Aujourd'hui : deux notes, une moyenne. Il sera réécrit à chaque séance.
 <!-- _class: lead -->
 
 **Ordinateurs fermés.**
-
-![bg right:40%][illustration-atelier]
 
 ## Trois colonnes
 
@@ -296,8 +288,6 @@ Moyenne : 4.0
 
 IntelliJ ne s'ouvre qu'après l'avoir montré à la personne à côté.
 
-![bg right:40%][illustration-atelier]
-
 ## La méthode
 
 1. Le diagramme, à la main.
@@ -328,28 +318,11 @@ Le dernier cas est le plus inquiétant. Notez-le.
 - Faire au moins une extension, diagramme compris.
 - Lister les cas que votre programme ne gère pas.
 
-![bg right:40%][illustration-a-vous-de-jouer]
-
 ## Questions
 
 <!-- _class: lead -->
 
 Est-ce que vous avez des questions ?
-
-## Sources
-
-- [Illustration principale][illustration-principale] par
-  [Samuel Girven](https://unsplash.com/@samuelgirven) sur
-  [Unsplash](https://unsplash.com/photos/VJ2s0c20qCo)
-- [Illustration objectifs][illustration-objectifs] par
-  [Aline de Nadai](https://unsplash.com/@alinedenadai) sur
-  [Unsplash](https://unsplash.com/photos/j6brni7fpvs)
-- [Illustration atelier][illustration-atelier] par
-  [American Jael](https://unsplash.com/@americanjael) sur
-  [Unsplash](https://unsplash.com/photos/OEvLi8LM7cc)
-- [Illustration à vous de jouer][illustration-a-vous-de-jouer] par
-  [Tim van Cleef](https://unsplash.com/@_timvancleef) sur
-  [Unsplash](https://unsplash.com/photos/1JBOZwuW7sI)
 
 <!-- URLs -->
 
@@ -361,14 +334,3 @@ Est-ce que vous avez des questions ?
 	https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/04-du-diagramme-au-code/
 [license]:
 	https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md
-
-<!-- Illustrations -->
-
-[illustration-principale]:
-	https://images.unsplash.com/photo-1576678927484-cc907957088c?fit=crop&h=720
-[illustration-objectifs]:
-	https://images.unsplash.com/photo-1516389573391-5620a0263801?fit=crop&h=720
-[illustration-atelier]:
-	https://images.unsplash.com/photo-1712762056200-50d8f803ba10?fit=crop&h=720
-[illustration-a-vous-de-jouer]:
-	https://images.unsplash.com/photo-1554906493-4812e307243d?fit=crop&h=720

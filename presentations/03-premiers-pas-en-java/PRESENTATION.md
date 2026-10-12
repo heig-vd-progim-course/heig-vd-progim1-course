@@ -32,8 +32,6 @@ _paginate: false
 
 <small>Ce travail est sous licence [CC BY-SA 4.0][license].</small>
 
-![bg brightness:2 opacity:0.2][illustration-principale]
-
 ## _Retrouvez plus de détails dans le support de cours_
 
 <!-- _class: lead -->
@@ -60,15 +58,11 @@ Programmer sans texte, et buter sur cinq limites :
 - installer IntelliJ et exécuter un programme Java ;
 - expliquer ce qu'est la machine virtuelle Java.
 
-![bg right:40%][illustration-objectifs]
-
 ## Objectifs de cette séance (2/2)
 
 - distinguer une erreur de compilation d'une erreur d'exécution ;
 - déclarer une variable avec un type adapté ;
 - expliquer pourquoi `0.1 + 0.2` ne vaut pas `0.3`.
-
-![bg right:40%][illustration-objectifs]
 
 ## Le programme de la séance
 
@@ -111,8 +105,6 @@ Les consignes détaillées sont sur le
 [support de cours][cours].
 
 Checklist de sortie au tableau. Vous ne partez pas sans l'avoir cochée.
-
-![bg right:40%][illustration-atelier]
 
 ## Trois choses à savoir avant de télécharger
 
@@ -301,8 +293,6 @@ C'est un luxe. Lisez-le.
 ## Les types et les variables
 
 <!-- _class: lead -->
-
-![bg right:40%][illustration-types]
 
 ## Une variable, c'est l'état de la séance 01
 
@@ -597,31 +587,11 @@ Une constante n'existe qu'à un seul endroit, et le compilateur monte la garde.
 - Afficher prénom, âge et taille avec trois types différents.
 - Refaire l'exercice de la moyenne.
 
-![bg right:40%][illustration-a-vous-de-jouer]
-
 ## Questions
 
 <!-- _class: lead -->
 
 Est-ce que vous avez des questions ?
-
-## Sources
-
-- [Illustration principale][illustration-principale] par
-  [Richard Jacobs](https://unsplash.com/@rj2747) sur
-  [Unsplash](https://unsplash.com/photos/8oenpCXktqQ)
-- [Illustration objectifs][illustration-objectifs] par
-  [Aline de Nadai](https://unsplash.com/@alinedenadai) sur
-  [Unsplash](https://unsplash.com/photos/j6brni7fpvs)
-- [Illustration atelier][illustration-atelier] par
-  [American Jael](https://unsplash.com/@americanjael) sur
-  [Unsplash](https://unsplash.com/photos/OEvLi8LM7cc)
-- [Illustration types][illustration-types] par
-  [Samuel Girven](https://unsplash.com/@samuelgirven) sur
-  [Unsplash](https://unsplash.com/photos/VJ2s0c20qCo)
-- [Illustration à vous de jouer][illustration-a-vous-de-jouer] par
-  [Tim van Cleef](https://unsplash.com/@_timvancleef) sur
-  [Unsplash](https://unsplash.com/photos/1JBOZwuW7sI)
 
 <!-- URLs -->
 
@@ -633,16 +603,3 @@ Est-ce que vous avez des questions ?
 	https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/03-premiers-pas-en-java/
 [license]:
 	https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md
-
-<!-- Illustrations -->
-
-[illustration-principale]:
-	https://images.unsplash.com/photo-1517486430290-35657bdcef51?fit=crop&h=720
-[illustration-objectifs]:
-	https://images.unsplash.com/photo-1516389573391-5620a0263801?fit=crop&h=720
-[illustration-atelier]:
-	https://images.unsplash.com/photo-1712762056200-50d8f803ba10?fit=crop&h=720
-[illustration-types]:
-	https://images.unsplash.com/photo-1576678927484-cc907957088c?fit=crop&h=720
-[illustration-a-vous-de-jouer]:
-	https://images.unsplash.com/photo-1554906493-4812e307243d?fit=crop&h=720

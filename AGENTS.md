@@ -247,19 +247,16 @@ math: mathjax
 - Thème `custom-marp-theme`, jamais `default`. Ne pas ajouter de `<style>`.
 - Ordre des diapositives : titre, _"Retrouvez plus de détails dans le support de
   cours"_, rappel de la séance précédente, objectifs, contenu, _"À vous de jouer
-  !"_, questions, sources.
-- La diapositive des sources ne liste **que** les crédits d'illustrations.
-- Les illustrations sont des photos Unsplash référencées en bas de fichier et
-  créditées nommément. Ne pas inventer d'identifiant de photo : reprendre une
-  illustration déjà utilisée dans le dépôt plutôt que d'en fabriquer un.
+  !"_, questions.
+- **Pas d'images** dans les présentations : ni illustration, ni fond
+  (`![bg]`), ni diapositive de sources. Le texte et le code suffisent.
 
 ### Densité
 
-Une diapositive `![bg right:40%]` ne dispose que de 60 % de la largeur, ce qui
-double le nombre de lignes. C'est la première cause de débordement.
-
-En pratique : une diapositive d'objectifs ne tient pas au-delà de trois puces
-courtes avec une illustration à droite. Découper en `(1/2)` et `(2/2)`.
+Les lignes de code et les traces d'erreur longues débordent en largeur. Sur une
+diapositive, citer la ligne utile en code en ligne et renvoyer au support pour
+le message complet. Une diapositive trop chargée se découpe en `(1/2)` et
+`(2/2)`.
 
 **Avant de livrer, lancer le contrôle :**
 
