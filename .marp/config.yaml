@@ -2,7 +2,8 @@ allowLocalFiles: true
 html: true
 jpegQuality: 100
 lang: fr
-themeSet: .marp
+# Chemin relatif au dossier de ce fichier, pas au dossier courant
+themeSet: theme.css
 options:
   markdown:
     breaks: false
