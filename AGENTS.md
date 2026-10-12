@@ -289,18 +289,25 @@ qui précède.
 
 | Séance | Notions disponibles à partir de là                        |
 | -----: | :-------------------------------------------------------- |
-|     01 | Séquence, sélection, itération, mais dessinées uniquement |
-|     02 | Programmation par blocs, événements                       |
-|     03 | Variables, types primitifs, affichage console             |
-|     04 | Pseudo-code, premier programme complet, saisie clavier    |
-|     05 | Conditions et opérateurs logiques                         |
-|     06 | Boucles                                                   |
-|     07 | Évaluation écrite (50 % de la note)                       |
-|     08 | Fonctions. Lancement du mini-projet                       |
-|     09 | Tableaux                                                  |
-|     10 | Débogage et tests                                         |
-|     11 | Git                                                       |
-|     12 | Présentations orales                                      |
+|     01 | Séquence, sélection, itération, mais dessinées uniquement  |
+|     02 | Programmation par blocs, événements                        |
+|     03 | Variables, types primitifs, affichage console              |
+|     04 | Saisie clavier, programme complet de bout en bout          |
+|     05 | Fonctions, paramètres, valeur de retour, portée            |
+|     06 | Conditions et opérateurs logiques                          |
+|      — | Évaluation écrite (50 %), entre les séances 06 et 07       |
+|     07 | Boucles                                                    |
+|     08 | Tableaux. Lancement du mini-projet                         |
+|     09 | Chaînes de caractères et formatage                         |
+|     10 | Débogage et tests                                          |
+|     11 | Git                                                        |
+|     12 | Présentations orales                                       |
+|      — | Évaluation finale, après le semestre                       |
+
+Deux points qui surprennent et qui sont volontaires : **les fonctions arrivent
+avant les conditions et les boucles**, selon l'ordre du cours Java
+d'OpenClassrooms, et **il n'y a pas de pseudo-code** dans ce cours. On passe du
+diagramme d'activité directement au Java.
 
 Un **fil rouge** traverse les séances 04 à 09 : calculer la moyenne des notes
 d'un groupe et dire qui a réussi. À chaque séance, il est repris avec l'outil du

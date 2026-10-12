@@ -20,8 +20,8 @@ de :
 
 - décrire un problème réel sous forme d'un enchaînement d'actions, de choix et
   de répétitions ;
-- représenter cet enchaînement sous forme de diagramme et de pseudo-code ;
-- traduire cette description en un programme Java correct et lisible ;
+- représenter cet enchaînement sous forme de diagramme ;
+- traduire ce diagramme en un programme Java correct et lisible ;
 - utiliser les variables, les constantes, les types de base, les structures de
   contrôle, les fonctions et les tableaux ;
 - tester et déboguer un programme simple ;
@@ -44,18 +44,20 @@ Le programme complet, séance par séance, est disponible sur la page
 
 | Séance | Contenu                                        | État        |
 | -----: | :--------------------------------------------- | :---------- |
-|     01 | Donner des instructions                        | En cours    |
-|     02 | Programmer sans écrire de code                 | En cours    |
-|     03 | Premiers pas en Java                           | En cours    |
-|     04 | Du problème au programme                       | À faire     |
-|     05 | Sélection                                      | À faire     |
-|     06 | Itération                                      | À faire     |
-|     07 | Récapitulatif et évaluation écrite             | À faire     |
-|     08 | Fonctions et lancement du mini-projet          | À faire     |
-|     09 | Tableaux                                       | À faire     |
+|     01 | Donner des instructions                        | Prêt        |
+|     02 | Programmer sans écrire de code                 | Prêt        |
+|     03 | Premiers pas en Java                           | Prêt        |
+|     04 | Du diagramme au code                           | À faire     |
+|     05 | Fonctions et portée des variables              | À faire     |
+|     06 | Conditions                                     | À faire     |
+|      — | **Évaluation écrite**                          | À faire     |
+|     07 | Boucles                                        | À faire     |
+|     08 | Tableaux et lancement du mini-projet           | À faire     |
+|     09 | Chaînes de caractères                          | À faire     |
 |     10 | Déboguer et tester                             | À faire     |
 |     11 | Git et finalisation                            | À faire     |
 |     12 | Présentations orales                           | À faire     |
+|      — | **Évaluation finale**                          | À faire     |
 
 ## Licence et attribution
 

@@ -101,7 +101,7 @@ d'une autre personne que moi.
 À la fin du semestre, vous devriez être capable de :
 
 > - décrire un problème en actions, choix et répétitions ;
-> - le représenter en diagramme et en pseudo-code ;
+> - le représenter sous forme de diagramme ;
 > - le traduire en un programme Java correct et lisible ;
 > - tester et déboguer un programme simple ;
 > - expliquer votre propre code et vos choix.
@@ -137,7 +137,7 @@ Ces diapositives sont un résumé. **Elles ne suffisent pas à réviser.**
 **Séances 01 à 07 - comprendre**
 
 De l'instruction donnée à une personne jusqu'au programme Java. Une évaluation
-écrite à la séance 07.
+écrite entre les séances 06 et 07.
 
 **Séances 08 à 12 - faire**
 
@@ -163,14 +163,14 @@ Deux parties, de poids égal :
 
 | Partie            | Quand           | Poids |
 | :---------------- | :-------------- | ----: |
-| Évaluation écrite | Séance 07       |   50% |
+| Évaluation écrite | Entre 06 et 07  |   50% |
 | Mini-projet       | Séances 08 à 12 |   50% |
 
 ![bg right:40%][illustration-evaluation]
 
 ## Partie 1 - Évaluation écrite (50%)
 
-- Au milieu du semestre, en séance 07.
+- Au milieu du semestre, entre les séances 06 et 07.
 - Papier et crayon, sans ordinateur, sans IA.
 - Deux périodes.
 
