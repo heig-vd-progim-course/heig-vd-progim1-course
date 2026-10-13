@@ -19,9 +19,9 @@ double grade1 = 4.5;
 double grade2 = 5.0;
 ```
 
-Pour calculer une autre moyenne, il faut modifier le code, recompiler,
-relancer. Un programme qui ne sait traiter que les valeurs qu'on a écrites
-dedans n'est pas très utile.
+Pour calculer une autre moyenne, il faut modifier le code, recompiler, relancer.
+Un programme qui ne sait traiter que les valeurs qu'on a écrites dedans n'est
+pas très utile.
 
 Il faut que le programme **demande** les valeurs au moment où il s'exécute.
 
@@ -46,8 +46,8 @@ Bonjour Camille
 `IO.readln("Votre prénom : ")` fait deux choses :
 
 1. il affiche le texte entre parenthèses, sans aller à la ligne ;
-2. il **attend** que la personne tape une ligne et appuie sur Entrée, puis
-   rend ce qu'elle a tapé.
+2. il **attend** que la personne tape une ligne et appuie sur Entrée, puis rend
+   ce qu'elle a tapé.
 
 Pendant qu'il attend, votre programme est arrêté. Rien d'autre ne s'exécute.
 
@@ -57,8 +57,8 @@ Pendant qu'il attend, votre programme est arrêté. Rien d'autre ne s'exécute.
     curseur est resté dans l'éditeur, ce que vous tapez s'écrit dans votre
     code. Le programme, lui, attend toujours.
 
-`IO` fait partie de Java depuis la version 25, celle que vous avez installée.
-Il ne demande aucun `import`. Sa documentation officielle tient en une page :
+`IO` fait partie de Java depuis la version 25, celle que vous avez installée. Il
+ne demande aucun `import`. Sa documentation officielle tient en une page :
 [java.lang.IO](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IO.html).
 
 ## Ce qui revient est toujours du texte
@@ -75,8 +75,8 @@ Votre note : 4.5
 4.51
 ```
 
-Vous avez déjà vu ce résultat en séance 03 : avec un `String`, `+` colle au
-lieu d'additionner. `"4.5"` n'est pas `4.5`.
+Vous avez déjà vu ce résultat en séance 03 : avec un `String`, `+` colle au lieu
+d'additionner. `"4.5"` n'est pas `4.5`.
 
 Et si l'on essaie de ranger directement le résultat dans un `double` :
 
@@ -107,8 +107,8 @@ Votre note : 4.5
 5.5
 ```
 
-`Double.parseDouble` lit un texte et rend le `double` qu'il représente. Pour
-un nombre entier, c'est `Integer.parseInt` :
+`Double.parseDouble` lit un texte et rend le `double` qu'il représente. Pour un
+nombre entier, c'est `Integer.parseInt` :
 
 ```java
 int age = Integer.parseInt(IO.readln("Votre âge : "));
@@ -121,14 +121,14 @@ L'année prochaine, vous aurez 21 ans.
 ```
 
 La deuxième forme imbrique les deux appels sur une ligne : `IO.readln` est
-exécuté d'abord, et son résultat est passé directement à `Integer.parseInt`.
-Les deux formes font la même chose. Utilisez celle que vous lisez le mieux.
+exécuté d'abord, et son résultat est passé directement à `Integer.parseInt`. Les
+deux formes font la même chose. Utilisez celle que vous lisez le mieux.
 
 ## Ce qui peut mal tourner
 
 Votre programme compile. Il démarre. Et pourtant, il peut s'arrêter net, selon
-ce que la personne tape. C'est une **erreur à l'exécution**, la deuxième
-famille d'erreurs vue en séance 03.
+ce que la personne tape. C'est une **erreur à l'exécution**, la deuxième famille
+d'erreurs vue en séance 03.
 
 ### Une virgule au lieu d'un point
 
@@ -141,16 +141,16 @@ Exception in thread "main" java.lang.NumberFormatException: For input string: "4
 	at Main.main(Main.java:4)
 ```
 
-`Double.parseDouble` n'accepte que le **point** comme séparateur décimal,
-quelle que soit la langue de votre ordinateur. C'est la même règle que dans
-votre code : on écrit `4.5`, jamais `4,5`.
+`Double.parseDouble` n'accepte que le **point** comme séparateur décimal, quelle
+que soit la langue de votre ordinateur. C'est la même règle que dans votre code
+: on écrit `4.5`, jamais `4,5`.
 
 ### Rien du tout
 
 En appuyant sur Entrée sans rien taper :
 
 ```text
-Votre note : 
+Votre note :
 Exception in thread "main" java.lang.NumberFormatException: empty String
 	at java.base/jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:1842)
 	at java.base/jdk.internal.math.FloatingDecimal.parseDouble(FloatingDecimal.java:110)
@@ -198,8 +198,8 @@ Les espaces avant et après le nombre, eux, sont tolérés : `" 4.5 "` donne bie
 ### Et pour l'instant, on n'y peut rien
 
 Votre programme ne sait pas encore vérifier ce qu'on lui donne : il faudrait
-pouvoir lui faire poser une question et agir selon la réponse. C'est le sujet
-de la séance 06.
+pouvoir lui faire poser une question et agir selon la réponse. C'est le sujet de
+la séance 06.
 
 En attendant, la règle est une hypothèse, et elle s'écrit : _"on suppose que la
 personne tape un nombre, avec un point"_. Notez-la dans votre liste des cas non
@@ -220,8 +220,7 @@ couverts.
 
 ## Résumé
 
-- `IO.readln("...")` affiche une question et attend une ligne tapée au
-  clavier.
+- `IO.readln("...")` affiche une question et attend une ligne tapée au clavier.
 - Ce qui revient est **toujours** un `String`.
 - `Double.parseDouble` et `Integer.parseInt` convertissent un texte en nombre.
 - Si le texte n'est pas un nombre valide, le programme s'arrête avec une
@@ -232,7 +231,7 @@ couverts.
 
 - [java.lang.IO](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IO.html) -
   documentation officielle, une page.
-- [Double.parseDouble](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Double.html#parseDouble(java.lang.String)) -
+- [Double.parseDouble](<https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Double.html#parseDouble(java.lang.String)>) -
   documentation officielle. Exigeante, mais c'est la référence.
 
 <!-- URLs -->

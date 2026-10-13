@@ -7,8 +7,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 ## Objectif
 
 Écrire le premier programme du fil rouge en partant de votre propre diagramme
-d'activité, et vérifier qu'il fait ce que vous aviez prévu. C'est la méthode
-qui servira pour tous les programmes du semestre, mini-projet compris.
+d'activité, et vérifier qu'il fait ce que vous aviez prévu. C'est la méthode qui
+servira pour tous les programmes du semestre, mini-projet compris.
 
 **Règle de l'atelier : le diagramme d'abord, sur papier. IntelliJ ne s'ouvre
 qu'après l'avoir montré à la personne à côté de vous.**
@@ -39,11 +39,11 @@ Complétez ce tableau sur papier, en calculant à la main :
 
 | Première note | Deuxième note | Moyenne affichée attendue |
 | ------------: | ------------: | :------------------------ |
-| 4             | 5             |                           |
-| 4.5           | 5             |                           |
-| 6             | 6             |                           |
-| 1             | 6             |                           |
-| 3.3           | 4.6           |                           |
+|             4 |             5 |                           |
+|           4.5 |             5 |                           |
+|             6 |             6 |                           |
+|             1 |             6 |                           |
+|           3.3 |           4.6 |                           |
 
 Ajoutez deux lignes de votre choix.
 
@@ -55,8 +55,8 @@ s'il est plausible.
 
 Créez un nouveau projet `fil-rouge` dans IntelliJ, comme en séance 03.
 
-Traduisez votre diagramme **action par action**. Pour chaque rectangle, une
-ou deux lignes de code. Mettez en commentaire, au-dessus de chaque groupe de
+Traduisez votre diagramme **action par action**. Pour chaque rectangle, une ou
+deux lignes de code. Mettez en commentaire, au-dessus de chaque groupe de
 lignes, le texte du rectangle correspondant :
 
 ```java
@@ -86,8 +86,7 @@ Si non, il y a trois possibilités, et il faut savoir laquelle :
 - votre diagramme ne fait pas ce que dit l'énoncé.
 
 Rappelez-vous : sur un ordinateur réglé en français, `printf` peut afficher une
-virgule là où votre tableau a un point. Ce n'est pas une différence de
-résultat.
+virgule là où votre tableau a un point. Ce n'est pas une différence de résultat.
 
 ## 5. Essayer de le casser
 
@@ -98,8 +97,8 @@ Lancez le programme et tapez ce que personne ne devrait taper :
 - `quatre` ;
 - `7` et `8`.
 
-Pour chacun : que se passe-t-il ? Est-ce une erreur de compilation, une erreur
-à l'exécution, ou pas d'erreur du tout ?
+Pour chacun : que se passe-t-il ? Est-ce une erreur de compilation, une erreur à
+l'exécution, ou pas d'erreur du tout ?
 
 Le dernier cas est le plus inquiétant. Ajoutez-le à votre liste des cas non
 couverts : vous saurez le traiter en séance 06.
@@ -110,14 +109,14 @@ Pour celles et ceux qui ont terminé. Pour chaque extension, le même ordre :
 trois colonnes, diagramme, tableau de tests, code.
 
 1. **Trois notes.** La moyenne de trois notes au lieu de deux.
-2. **Le nom.** Le programme demande aussi le nom de la personne et affiche
-   une phrase complète.
+2. **Le nom.** Le programme demande aussi le nom de la personne et affiche une
+   phrase complète.
 3. **La pondération.** L'évaluation écrite et le mini-projet comptent chacun
    pour 50 % de la note de ce cours. Écrivez le programme qui calcule la note
    finale à partir des deux. Les poids sont des constantes `final`.
 4. **Le demi-point.** Affichez aussi la moyenne arrondie au demi-point.
-5. **Les problèmes 2 et 3** de l'activité : le trajet à pied et le partage
-   de l'addition.
+5. **Les problèmes 2 et 3** de l'activité : le trajet à pied et le partage de
+   l'addition.
 
 ## Comparaison
 

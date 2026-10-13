@@ -29,8 +29,8 @@ programme qui fait quelque chose d'utile, de bout en bout : il reçoit des
 valeurs, il calcule, il répond.
 
 C'est aussi la séance qui lance le **fil rouge** du semestre : calculer la
-moyenne des notes d'un groupe de personnes et dire qui a réussi. Aujourd'hui,
-la première version : deux notes et une moyenne.
+moyenne des notes d'un groupe de personnes et dire qui a réussi. Aujourd'hui, la
+première version : deux notes et une moyenne.
 
 À la fin de cette séance, vous devriez être capable de :
 
@@ -46,16 +46,16 @@ la première version : deux notes et une moyenne.
 Quatre périodes de 45 minutes, soit 180 minutes d'enseignement, plus 30 minutes
 de pause.
 
-| Temps       | Durée  | Contenu                                                  |
-| :---------- | -----: | :------------------------------------------------------- |
-| 00:00-00:10 | 10 min | Rappel de la séance 03 et cadrage                         |
-| 00:10-00:40 | 30 min | [Activité - Poser le problème](01-activite-poser-le-probleme.md) |
-| 00:40-01:15 | 35 min | [Théorie - Lire au clavier](02-lire-au-clavier.md)        |
-| 01:15-01:30 | 15 min | Pause                                                     |
+| Temps       |  Durée | Contenu                                                              |
+| :---------- | -----: | :------------------------------------------------------------------- |
+| 00:00-00:10 | 10 min | Rappel de la séance 03 et cadrage                                    |
+| 00:10-00:40 | 30 min | [Activité - Poser le problème](01-activite-poser-le-probleme.md)     |
+| 00:40-01:15 | 35 min | [Théorie - Lire au clavier](02-lire-au-clavier.md)                   |
+| 01:15-01:30 | 15 min | Pause                                                                |
 | 01:30-02:05 | 35 min | [Théorie - Afficher un résultat lisible](03-afficher-un-resultat.md) |
-| 02:05-02:20 | 15 min | Pause                                                     |
+| 02:05-02:20 | 15 min | Pause                                                                |
 | 02:20-03:15 | 55 min | [Atelier - Du diagramme au code](04-atelier-du-diagramme-au-code.md) |
-| 03:15-03:30 | 15 min | Comparaison des solutions, clôture                        |
+| 03:15-03:30 | 15 min | Comparaison des solutions, clôture                                   |
 
 ### Note sur la gestion du temps
 
@@ -64,8 +64,8 @@ l'atelier, puis la partie sur l'arrondi de la page _"Afficher un résultat
 lisible"_. Vous pouvez les faire à la maison.
 
 Ce qui ne se coupe pas : à la fin de la séance, chaque personne a un programme
-qui lit deux notes au clavier et affiche leur moyenne, et l'a construit à
-partir de son propre diagramme.
+qui lit deux notes au clavier et affiche leur moyenne, et l'a construit à partir
+de son propre diagramme.
 
 ## Méthodes d'enseignement et d'apprentissage
 
@@ -90,8 +90,8 @@ tableau de tests.
 - Écrire, sur papier, la liste des cas que votre programme ne gère pas. Gardez
   cette liste : elle servira en séance 06.
 - Relire la section sur les erreurs de la page
-  [Lire au clavier](02-lire-au-clavier.md). Vous devez pouvoir dire, pour
-  chaque message, ce qui l'a provoqué.
+  [Lire au clavier](02-lire-au-clavier.md). Vous devez pouvoir dire, pour chaque
+  message, ce qui l'a provoqué.
 
 <!-- URLs -->
 

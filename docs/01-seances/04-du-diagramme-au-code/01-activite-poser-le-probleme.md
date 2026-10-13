@@ -7,8 +7,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 ## Objectif
 
 Avant d'écrire une ligne de code, savoir dire ce que le programme reçoit, ce
-qu'il en fait et ce qu'il rend. Et repérer ce que l'énoncé ne dit pas, parce
-que le programme, lui, devra bien en faire quelque chose.
+qu'il en fait et ce qu'il rend. Et repérer ce que l'énoncé ne dit pas, parce que
+le programme, lui, devra bien en faire quelque chose.
 
 **Règle de l'activité : personne n'ouvre son ordinateur.**
 
@@ -16,16 +16,16 @@ que le programme, lui, devra bien en faire quelque chose.
 
 Tout programme que vous écrirez ce semestre peut se décrire en trois colonnes.
 
-| Entrées                         | Traitement                   | Sortie                    |
-| :------------------------------ | :--------------------------- | :------------------------ |
-| Ce que le programme **reçoit**  | Ce qu'il **calcule**         | Ce qu'il **rend**         |
+| Entrées                        | Traitement           | Sortie            |
+| :----------------------------- | :------------------- | :---------------- |
+| Ce que le programme **reçoit** | Ce qu'il **calcule** | Ce qu'il **rend** |
 
 Un exemple, avant de vous laisser faire : convertir une température donnée en
 degrés Celsius en degrés Fahrenheit.
 
-| Entrées                  | Traitement                     | Sortie                            |
-| :----------------------- | :----------------------------- | :-------------------------------- |
-| Une température en °C    | `fahrenheit = celsius × 9 / 5 + 32` | La température en °F, au dixième |
+| Entrées               | Traitement                          | Sortie                           |
+| :-------------------- | :---------------------------------- | :------------------------------- |
+| Une température en °C | `fahrenheit = celsius × 9 / 5 + 32` | La température en °F, au dixième |
 
 Et le diagramme d'activité qui en découle :
 
@@ -37,25 +37,25 @@ flowchart TD
     c --> fin(((Fin)))
 ```
 
-Les trois colonnes deviennent trois actions, dans l'ordre. Ce n'est pas
-toujours aussi direct, mais c'est le point de départ.
+Les trois colonnes deviennent trois actions, dans l'ordre. Ce n'est pas toujours
+aussi direct, mais c'est le point de départ.
 
 ## Ce que l'énoncé ne dit pas
 
 Un énoncé en français est toujours incomplet. Même celui de la température :
 
 - La température peut-elle être négative ? Oui, et le calcul fonctionne.
-- Combien de décimales à l'affichage ? L'énoncé dit _"au dixième"_ : c'est
-  vous qui l'avez ajouté, et c'est une décision.
+- Combien de décimales à l'affichage ? L'énoncé dit _"au dixième"_ : c'est vous
+  qui l'avez ajouté, et c'est une décision.
 - Que se passe-t-il si quelqu'un tape _"vingt"_ ? L'énoncé ne le dit pas.
 
-Ces questions n'ont pas toujours de réponse aujourd'hui. Ce qui compte, c'est
-de les **écrire**. Une question non écrite devient un bogue que vous
-découvrirez plus tard.
+Ces questions n'ont pas toujours de réponse aujourd'hui. Ce qui compte, c'est de
+les **écrire**. Une question non écrite devient un bogue que vous découvrirez
+plus tard.
 
-Quand vous ne pouvez pas trancher, notez une **hypothèse** : _"on suppose que
-la personne tape un nombre"_. Une hypothèse écrite se vérifie et se remet en
-cause. Une hypothèse implicite, non.
+Quand vous ne pouvez pas trancher, notez une **hypothèse** : _"on suppose que la
+personne tape un nombre"_. Une hypothèse écrite se vérifie et se remet en cause.
+Une hypothèse implicite, non.
 
 ## À vous
 
@@ -89,8 +89,8 @@ et ses questions ouvertes. Comparez avec les autres groupes :
 - Une question vous paraît-elle sans importance ? Défendez-le.
 
 Vous verrez que deux groupes peuvent poser le même problème différemment, et
-avoir raison tous les deux. Ce qui n'est pas acceptable, c'est une colonne
-floue : _"des trucs"_ n'est pas une entrée.
+avoir raison tous les deux. Ce qui n'est pas acceptable, c'est une colonne floue
+: _"des trucs"_ n'est pas une entrée.
 
 <!-- URLs -->
 
