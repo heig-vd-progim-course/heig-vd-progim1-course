@@ -10,10 +10,11 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   [Lien vers la présentation](https://heig-vd-progim-course.github.io/heig-vd-progim1-course/presentations/04-du-diagramme-au-code/)
 - Présentation (PDF) :
   [Lien vers le PDF](https://heig-vd-progim-course.github.io/heig-vd-progim1-course/presentations/04-du-diagramme-au-code/04-du-diagramme-au-code-presentation.pdf)
-- Activité : [Poser le problème](01-activite-poser-le-probleme.md)
-- Théorie : [Lire au clavier](02-lire-au-clavier.md)
-- Théorie : [Afficher un résultat lisible](03-afficher-un-resultat.md)
-- Atelier : [Du diagramme au code](04-atelier-du-diagramme-au-code.md)
+- Théorie : [Les opérations arithmétiques](01-operations-arithmetiques.md)
+- Activité : [Poser le problème](02-activite-poser-le-probleme.md)
+- Théorie : [Lire au clavier](03-lire-au-clavier.md)
+- Théorie : [Afficher un résultat lisible](04-afficher-un-resultat.md)
+- Atelier : [Du diagramme au code](05-atelier-du-diagramme-au-code.md)
 - Notes pour l'équipe enseignante :
   [Lien vers les notes](../../98-equipe-enseignante/04-du-diagramme-au-code.md)
 
@@ -34,6 +35,8 @@ première version : deux notes et une moyenne.
 
 À la fin de cette séance, vous devriez être capable de :
 
+- utiliser les opérateurs arithmétiques et prévoir l'ordre dans lequel ils
+  s'appliquent ;
 - poser un problème en termes d'entrées, de traitement et de sortie ;
 - lire une valeur saisie au clavier et la convertir en nombre ;
 - expliquer pourquoi une saisie peut faire planter un programme qui compile ;
@@ -49,30 +52,21 @@ de pause.
 | Temps       |  Durée | Contenu                                                              |
 | :---------- | -----: | :------------------------------------------------------------------- |
 | 00:00-00:10 | 10 min | Rappel de la séance 03 et cadrage                                    |
-| 00:10-00:40 | 30 min | [Activité - Poser le problème](01-activite-poser-le-probleme.md)     |
-| 00:40-01:15 | 35 min | [Théorie - Lire au clavier](02-lire-au-clavier.md)                   |
-| 01:15-01:30 | 15 min | Pause                                                                |
-| 01:30-02:05 | 35 min | [Théorie - Afficher un résultat lisible](03-afficher-un-resultat.md) |
-| 02:05-02:20 | 15 min | Pause                                                                |
-| 02:20-03:15 | 55 min | [Atelier - Du diagramme au code](04-atelier-du-diagramme-au-code.md) |
-| 03:15-03:30 | 15 min | Comparaison des solutions, clôture                                   |
-
-### Note sur la gestion du temps
-
-Si la séance déborde, ce qui se coupe en premier, ce sont les extensions de
-l'atelier, puis la partie sur l'arrondi de la page _"Afficher un résultat
-lisible"_. Vous pouvez les faire à la maison.
-
-Ce qui ne se coupe pas : à la fin de la séance, chaque personne a un programme
-qui lit deux notes au clavier et affiche leur moyenne, et l'a construit à partir
-de son propre diagramme.
+| 00:10-00:35 | 25 min | [Théorie - Les opérations arithmétiques](01-operations-arithmetiques.md) |
+| 00:35-01:05 | 30 min | [Activité - Poser le problème](02-activite-poser-le-probleme.md)     |
+| 01:05-01:20 | 15 min | Pause                                                                |
+| 01:20-01:50 | 30 min | [Théorie - Lire au clavier](03-lire-au-clavier.md)                   |
+| 01:50-02:20 | 30 min | [Théorie - Afficher un résultat lisible](04-afficher-un-resultat.md) |
+| 02:20-02:35 | 15 min | Pause                                                                |
+| 02:35-03:20 | 45 min | [Atelier - Du diagramme au code](05-atelier-du-diagramme-au-code.md) |
+| 03:20-03:30 | 10 min | Discussion des solutions, clôture                                    |
 
 ## Méthodes d'enseignement et d'apprentissage
 
-- Activité en groupe, sans ordinateur.
-- Démonstration commentée.
 - Présentation magistrale courte.
-- Atelier individuel, avec comparaison par deux.
+- Démonstration commentée.
+- Activité individuelle, suivie d'une discussion en classe.
+- Atelier individuel, suivi d'une discussion en classe.
 
 ## Méthodes d'évaluation
 
@@ -87,10 +81,10 @@ tableau de tests.
 - Terminer le programme du fil rouge, s'il ne l'est pas. Il sera repris dès le
   début de la séance 05 : ne venez pas sans lui.
 - Faire au moins une des extensions de l'atelier, diagramme compris.
-- Écrire, sur papier, la liste des cas que votre programme ne gère pas. Gardez
-  cette liste : elle servira en séance 06.
+- Écrire la liste des cas que votre programme ne gère pas. Gardez cette liste :
+  elle servira en séance 06.
 - Relire la section sur les erreurs de la page
-  [Lire au clavier](02-lire-au-clavier.md). Vous devez pouvoir dire, pour chaque
+  [Lire au clavier](03-lire-au-clavier.md). Vous devez pouvoir dire, pour chaque
   message, ce qui l'a provoqué.
 
 <!-- URLs -->

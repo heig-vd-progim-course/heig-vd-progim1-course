@@ -2,8 +2,14 @@
 
 # Genere les diagrammes PlantUML en SVG, a cote de leur fichier source.
 #
-# Les sources vivent dans `docs/`, donc les SVG produits sont copies tels quels
-# par Zensical dans le site et peuvent etre references depuis les pages.
+# Deux emplacements sont traites :
+#   - `docs/` : les SVG sont copies tels quels par Zensical dans le site et
+#     peuvent etre references depuis les pages ;
+#   - `presentations/<slug>/images/` : les SVG sont references par les
+#     presentations Marp avec `./images/<nom>.svg`, puis copies dans
+#     `docs/presentations/<slug>/images/` par `generate-presentations.sh`.
+#
+# Ce script doit donc tourner AVANT `generate-presentations.sh`.
 #
 # Extensions reconnues : `.puml` et `.plantuml`.
 
@@ -28,10 +34,10 @@ fi
 
 shopt -s globstar nullglob
 
-sources=(docs/**/*.puml docs/**/*.plantuml)
+sources=(docs/**/*.puml docs/**/*.plantuml presentations/**/*.puml presentations/**/*.plantuml)
 
 if [ ${#sources[@]} -eq 0 ]; then
-	echo "Aucun diagramme PlantUML trouve dans docs/. Rien a faire."
+	echo "Aucun diagramme PlantUML trouve dans docs/ ni dans presentations/. Rien a faire."
 	exit 0
 fi
 

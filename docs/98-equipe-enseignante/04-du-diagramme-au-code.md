@@ -23,8 +23,7 @@ colonnes, diagramme, tests, code. C'est la méthode du mini-projet.
 | Exécuter les exemples avec un JDK 25  | Voir ci-dessous. Les sorties du support ont été obtenues sur JDK 21 |
 | Tester `IO.readln` dans IntelliJ      | Sur Windows et macOS, console de l'IDE, avec un accent dans la saisie |
 | Vérifier la liste de la séance 03     | Les personnes sans environnement fonctionnel doivent être réglées **avant** |
-| Préparer le tableau                   | Trois colonnes vides pour la mise en commun de l'activité   |
-| Papier et crayons                     | L'activité et le début de l'atelier se font sans ordinateur |
+| Préparer le tableau                   | Trois colonnes vides pour la discussion de l'activité       |
 
 ### Les sorties ont été obtenues sur JDK 21
 
@@ -63,18 +62,34 @@ une solution où les valeurs sont en dur, et poser la question : _"et si je veux
 la taille de quelqu'un d'autre ?"_. C'est l'entrée en matière de la saisie
 clavier.
 
+## Pendant la théorie - Les opérations arithmétiques
+
+Une révision de la séance 03 plus qu'une nouveauté : la division entière y a
+déjà été vue. Ce qui est neuf, c'est l'ordre des opérations et `Math`.
+
+- Le cas `grade1 + grade2 / 2` est celui qui reviendra dans l'atelier. Le
+  faire prédire à la salle avant d'afficher la sortie.
+- Le cas `9 / 5 * celsius` est plus fin : il combine priorité et division
+  entière. C'est le bon moment pour faire le lien avec l'exemple de la
+  température de l'activité qui suit.
+- `2 ^ 10` qui vaut 8 surprend tout le monde. Ne pas expliquer le XOR : dire
+  que c'est une opération sur les bits, hors sujet ici, et passer.
+- Les raccourcis (`+=`, `++`) sont montrés pour être reconnus, pas exigés.
+
 ## Pendant l'activité - Poser le problème
 
-- Ordinateurs fermés. Être ferme : sans cela, la moitié de la salle ouvre
-  IntelliJ et code la moyenne en trois minutes sans rien poser.
+Travail individuel, sur papier ou dans un fichier texte, suivi d'une
+discussion en classe.
+
 - Le problème 1 est trivial exprès. L'intérêt est dans les questions
   ouvertes : notes au dixième ou au demi-point, note hors de l'échelle,
-  séparateur décimal, arrondi, nombre de notes. Si un groupe n'en trouve
+  séparateur décimal, arrondi, nombre de notes. Si quelqu'un n'en trouve
   aucune, lui demander _"que fait le programme si je tape 7 ?"_.
 - Le problème 3 (l'addition) est le plus riche : pourboire, centimes qui ne
-  tombent pas juste, arrondi aux 5 centimes. Le garder pour la mise en commun.
-- Refuser les colonnes floues au tableau. _"Les notes"_ n'est pas une entrée ;
-  _"deux nombres entre 1 et 6, au dixième"_ en est une.
+  tombent pas juste, arrondi aux 5 centimes. Le garder pour la discussion.
+- Pendant la discussion, demander ce que les personnes ont mis, et noter les
+  réponses au tableau. Relever les colonnes floues : _"les notes"_ n'est pas
+  une entrée ; _"deux nombres entre 1 et 6, au dixième"_ en est une.
 
 ### Ce qu'il faut faire émerger
 
@@ -140,10 +155,12 @@ L'arrondi au demi-point et le bloc repliable. Ne jamais couper le cas 3.3 et
 
 ## Pendant l'atelier
 
-- **Contrôler le diagramme avant l'ouverture d'IntelliJ.** Passer dans les
-  rangs dans les dix premières minutes et vérifier que les diagrammes existent.
-  Les personnes qui codent d'abord et dessinent après produisent un diagramme
-  recopié du code, qui n'a servi à rien.
+- **Le diagramme avant le code.** Passer dans les rangs dans les dix premières
+  minutes et vérifier que les diagrammes existent. Les personnes qui codent
+  d'abord et dessinent après produisent un diagramme recopié du code, qui n'a
+  servi à rien.
+- Le bogue `grade1 + grade2 / 2` apparaîtra malgré la théorie. Le tableau de
+  tests le détecte : c'est sa raison d'être.
 - **Le tableau de tests est la partie qu'on saute.** Exiger de le voir rempli,
   surtout la colonne _"attendue"_, avant de valider.
 - Le cas 3.3 et 4.6 est dans le tableau exprès. Les personnes qui ont suivi la
@@ -159,11 +176,10 @@ La pondération réutilise `final`, vu en séance 03. Le partage de l'addition
 ramène la question des centimes et de l'arrondi aux 5 centimes, sans solution
 propre aujourd'hui. C'est voulu.
 
-## Comparaison et clôture
+## Discussion et clôture
 
 Faire projeter deux ou trois programmes différents, idéalement un avec et un
-sans arrondi. Faire retrouver le diagramme dans le code par quelqu'un d'autre
-que la personne qui l'a écrit.
+sans arrondi. Demander à la classe de retrouver le diagramme dans le code.
 
 Clore par la liste des cas non couverts : _"votre programme accepte 7.5 comme
 moyenne. En séance 06, il saura refuser."_ Rappeler que la séance 05 commence
@@ -176,7 +192,8 @@ par ce programme.
 | Les extensions de l'atelier                 | Le diagramme avant le code                    |
 | L'arrondi au demi-point, le bloc repliable  | Le tableau de tests                           |
 | Le problème 3 de l'activité                 | La lecture d'une `NumberFormatException`      |
-| La comparaison finale, réduite à un exemple | Le cas 3.3 et 4.6                             |
+| La discussion finale, réduite à un exemple  | Le cas 3.3 et 4.6                             |
+| Les raccourcis et `Math`, survolés          | L'ordre des opérations                        |
 
 ## La contrainte de progression
 

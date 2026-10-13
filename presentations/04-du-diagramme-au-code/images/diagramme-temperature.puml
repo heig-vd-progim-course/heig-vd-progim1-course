@@ -1,0 +1,11 @@
+@startuml diagramme-temperature
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 18
+
+start
+:Lire la température en °C;
+:Calculer la température en °F;
+:Afficher les deux températures;
+stop
+@enduml
