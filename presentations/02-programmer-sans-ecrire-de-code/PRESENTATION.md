@@ -11,7 +11,7 @@ title: HEIG-VD ProgIM1 Course - Programmer sans écrire de code
 description: Séance "Programmer sans écrire de code" avec MakeCode Arcade pour l'unité d'enseignement ProgIM1 enseignée à la HEIG-VD, Suisse
 url: https://heig-vd-progim-course.github.io/heig-vd-progim1-course/presentations/02-programmer-sans-ecrire-de-code/
 header: "**Programmer sans écrire de code**"
-footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://github.com/heig-vd-progim-course/heig-vd-progim1-course) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
+footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://heig-vd-progim-course.github.io/heig-vd-progim1-course/) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
 headingDivider: 2
 math: mathjax
 -->

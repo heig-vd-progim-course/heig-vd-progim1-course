@@ -7,8 +7,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 ## Objectif
 
 Produire une sortie qu'une personne peut lire sans effort : une phrase, et des
-nombres avec le nombre de décimales voulu. Et savoir ce que l'affichage cache
-de la valeur réelle.
+nombres avec le nombre de décimales voulu. Et savoir ce que l'affichage cache de
+la valeur réelle.
 
 ## Ce que donne `println`
 
@@ -75,13 +75,13 @@ Camille a obtenu 4.8 de moyenne.
 
 Les trous que vous utiliserez :
 
-| Trou   | Pour                                       | Exemple de sortie |
-| :----- | :----------------------------------------- | :---------------- |
-| `%s`   | Un texte, un `String`                      | `Camille`         |
-| `%d`   | Un nombre entier, un `int` ou un `long`    | `20`              |
-| `%.1f` | Un nombre à virgule, avec une décimale     | `4.8`             |
-| `%.2f` | Un nombre à virgule, avec deux décimales   | `4.75`            |
-| `%n`   | Un passage à la ligne                      |                   |
+| Trou   | Pour                                     | Exemple de sortie |
+| :----- | :--------------------------------------- | :---------------- |
+| `%s`   | Un texte, un `String`                    | `Camille`         |
+| `%d`   | Un nombre entier, un `int` ou un `long`  | `20`              |
+| `%.1f` | Un nombre à virgule, avec une décimale   | `4.8`             |
+| `%.2f` | Un nombre à virgule, avec deux décimales | `4.75`            |
+| `%n`   | Un passage à la ligne                    |                   |
 
 `printf` ne va **pas** à la ligne tout seul. Sans `%n` :
 
@@ -165,17 +165,17 @@ Sur un ordinateur réglé en français, de Suisse ou de France :
 `println` affiche toujours un point. `printf` suit la langue de votre
 ordinateur. Et `Double.parseDouble`, à la saisie, n'accepte que le point.
 
-Ce n'est pas une erreur de votre part, et il n'y a rien à corriger
-aujourd'hui. Mais si votre programme affiche `4,75` et refuse ensuite qu'on lui
-tape `4,75`, vous savez maintenant pourquoi.
+Ce n'est pas une erreur de votre part, et il n'y a rien à corriger aujourd'hui.
+Mais si votre programme affiche `4,75` et refuse ensuite qu'on lui tape `4,75`,
+vous savez maintenant pourquoi.
 
 ## Afficher arrondi n'est pas arrondir
 
-`%.1f` change ce qui est **affiché**. La valeur dans la variable, elle, reste
-la même. La plupart du temps, cela suffit. Pas toujours.
+`%.1f` change ce qui est **affiché**. La valeur dans la variable, elle, reste la
+même. La plupart du temps, cela suffit. Pas toujours.
 
-Prenez les notes 3.3 et 4.6. Leur moyenne exacte est 3.95, qui s'arrondit à
-4.0 au dixième. Avec le programme ci-dessus :
+Prenez les notes 3.3 et 4.6. Leur moyenne exacte est 3.95, qui s'arrondit à 4.0
+au dixième. Avec le programme ci-dessus :
 
 ```text
 Nom : Camille
@@ -185,8 +185,8 @@ Camille a obtenu 3.9 de moyenne.
 ```
 
 `printf` a arrondi `3.9499999999999997`, la valeur réellement stockée, et non
-3.95. Sur un bulletin, c'est la différence entre une note suffisante et une
-note insuffisante.
+3.95. Sur un bulletin, c'est la différence entre une note suffisante et une note
+insuffisante.
 
 Pour arrondir la **valeur** au dixième, avant de l'afficher :
 

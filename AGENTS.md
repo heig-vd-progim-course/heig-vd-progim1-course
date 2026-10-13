@@ -78,11 +78,11 @@ docs/                        contenu du site Zensical
 presentations/
   NN-nom-de-la-seance/
     PRESENTATION.md          source Marp
-    images/
+    images/                  diagrammes PlantUML (.puml) et SVG générés
 .marp/                       config.yaml et theme.css, ne pas modifier le thème
 zensical.toml                configuration du site, dont la navigation
 generate-presentations.sh    Marp vers docs/presentations/ (HTML et PDF)
-generate-diagrams.sh         PlantUML vers SVG, à côté des sources
+generate-diagrams.sh         PlantUML vers SVG, à côté des sources (docs/ et presentations/)
 check-presentations.py       contrôle de débordement des diapositives
 ```
 
@@ -233,7 +233,7 @@ title: HEIG-VD ProgIM1 Course - [Sujet]
 description: [Description] pour l'unité d'enseignement ProgIM1 enseignée à la HEIG-VD, Suisse
 url: https://heig-vd-progim-course.github.io/heig-vd-progim1-course/presentations/NN-nom/
 header: "**[Sujet]**"
-footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://github.com/heig-vd-progim-course/heig-vd-progim1-course) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
+footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://heig-vd-progim-course.github.io/heig-vd-progim1-course/) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
 headingDivider: 2
 math: mathjax
 -->
@@ -248,8 +248,13 @@ math: mathjax
 - Ordre des diapositives : titre, _"Retrouvez plus de détails dans le support de
   cours"_, rappel de la séance précédente, objectifs, contenu, _"À vous de jouer
   !"_, questions.
-- **Pas d'images** dans les présentations : ni illustration, ni fond
+- **Pas d'illustrations** dans les présentations : ni photo, ni fond
   (`![bg]`), ni diapositive de sources. Le texte et le code suffisent.
+- Seule exception : les **diagrammes**, écrits en PlantUML. La source
+  `.puml` vit dans `presentations/NN-nom/images/`, le SVG est généré à côté
+  par `generate-diagrams.sh`, et la diapositive l'insère avec
+  `![h:420](./images/nom.svg)`. Le même diagramme peut figurer dans le
+  support en Mermaid.
 
 ### Densité
 

@@ -7,18 +7,17 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 ## Objectif
 
 Écrire le premier programme du fil rouge en partant de votre propre diagramme
-d'activité, et vérifier qu'il fait ce que vous aviez prévu. C'est la méthode
-qui servira pour tous les programmes du semestre, mini-projet compris.
+d'activité, et vérifier qu'il fait ce que vous aviez prévu. C'est la méthode qui
+servira pour tous les programmes du semestre, mini-projet compris.
 
-**Règle de l'atelier : le diagramme d'abord, sur papier. IntelliJ ne s'ouvre
-qu'après l'avoir montré à la personne à côté de vous.**
+**Règle de l'atelier : le diagramme d'abord, le code ensuite.**
 
 ## 1. Le diagramme
 
 Reprenez les trois colonnes du problème 1 de l'
-[activité](01-activite-poser-le-probleme.md) : la moyenne de deux notes.
+[activité](02-activite-poser-le-probleme.md) : la moyenne de deux notes.
 
-Dessinez le diagramme d'activité du programme, à la main. Rappel des règles de
+Dessinez le diagramme d'activité du programme. Rappel des règles de
 la [séance 01](../01-donner-des-instructions/02-diagrammes-dactivite.md) :
 
 - un verbe à l'infinitif par action ;
@@ -28,22 +27,22 @@ la [séance 01](../01-donner-des-instructions/02-diagrammes-dactivite.md) :
 Il n'y a aucune décision dans ce programme, et aucune répétition. C'est une
 séquence, et c'est tout.
 
-Montrez votre diagramme à la personne à côté de vous. S'il est différent du
-sien, ce n'est pas un problème. S'il ne permet pas de savoir dans quel ordre
-faire les choses, c'en est un.
+Relisez-le en vous demandant si quelqu'un d'autre pourrait l'exécuter sans
+vous poser de question. S'il ne permet pas de savoir dans quel ordre faire les
+choses, il n'est pas terminé.
 
 ## 2. Le tableau de tests
 
 Avant d'écrire le code, écrivez ce que le programme **devra** afficher.
-Complétez ce tableau sur papier, en calculant à la main :
+Complétez ce tableau en calculant vous-même, sans exécuter de code :
 
 | Première note | Deuxième note | Moyenne affichée attendue |
 | ------------: | ------------: | :------------------------ |
-| 4             | 5             |                           |
-| 4.5           | 5             |                           |
-| 6             | 6             |                           |
-| 1             | 6             |                           |
-| 3.3           | 4.6           |                           |
+|             4 |             5 |                           |
+|           4.5 |             5 |                           |
+|             6 |             6 |                           |
+|             1 |             6 |                           |
+|           3.3 |           4.6 |                           |
 
 Ajoutez deux lignes de votre choix.
 
@@ -55,8 +54,8 @@ s'il est plausible.
 
 Créez un nouveau projet `fil-rouge` dans IntelliJ, comme en séance 03.
 
-Traduisez votre diagramme **action par action**. Pour chaque rectangle, une
-ou deux lignes de code. Mettez en commentaire, au-dessus de chaque groupe de
+Traduisez votre diagramme **action par action**. Pour chaque rectangle, une ou
+deux lignes de code. Mettez en commentaire, au-dessus de chaque groupe de
 lignes, le texte du rectangle correspondant :
 
 ```java
@@ -81,13 +80,12 @@ le résultat affiché est-il celui que vous aviez écrit ?
 
 Si non, il y a trois possibilités, et il faut savoir laquelle :
 
-- votre calcul à la main est faux ;
+- votre calcul est faux ;
 - votre code ne fait pas ce que dit votre diagramme ;
 - votre diagramme ne fait pas ce que dit l'énoncé.
 
 Rappelez-vous : sur un ordinateur réglé en français, `printf` peut afficher une
-virgule là où votre tableau a un point. Ce n'est pas une différence de
-résultat.
+virgule là où votre tableau a un point. Ce n'est pas une différence de résultat.
 
 ## 5. Essayer de le casser
 
@@ -98,8 +96,8 @@ Lancez le programme et tapez ce que personne ne devrait taper :
 - `quatre` ;
 - `7` et `8`.
 
-Pour chacun : que se passe-t-il ? Est-ce une erreur de compilation, une erreur
-à l'exécution, ou pas d'erreur du tout ?
+Pour chacun : que se passe-t-il ? Est-ce une erreur de compilation, une erreur à
+l'exécution, ou pas d'erreur du tout ?
 
 Le dernier cas est le plus inquiétant. Ajoutez-le à votre liste des cas non
 couverts : vous saurez le traiter en séance 06.
@@ -110,22 +108,22 @@ Pour celles et ceux qui ont terminé. Pour chaque extension, le même ordre :
 trois colonnes, diagramme, tableau de tests, code.
 
 1. **Trois notes.** La moyenne de trois notes au lieu de deux.
-2. **Le nom.** Le programme demande aussi le nom de la personne et affiche
-   une phrase complète.
+2. **Le nom.** Le programme demande aussi le nom de la personne et affiche une
+   phrase complète.
 3. **La pondération.** L'évaluation écrite et le mini-projet comptent chacun
    pour 50 % de la note de ce cours. Écrivez le programme qui calcule la note
    finale à partir des deux. Les poids sont des constantes `final`.
 4. **Le demi-point.** Affichez aussi la moyenne arrondie au demi-point.
-5. **Les problèmes 2 et 3** de l'activité : le trajet à pied et le partage
-   de l'addition.
+5. **Les problèmes 2 et 3** de l'activité : le trajet à pied et le partage de
+   l'addition.
 
-## Comparaison
+## Discussion
 
-En fin d'atelier, échangez votre code avec celui d'une autre personne.
+En fin d'atelier, nous regardons quelques programmes ensemble, en classe :
 
-- Est-ce que vous retrouvez son diagramme en lisant son code ?
-- Avez-vous fait les mêmes choix de types, de noms de variables, d'arrondi ?
-- Lequel des deux programmes est le plus facile à lire ? Pourquoi ?
+- Retrouve-t-on le diagramme en lisant le code ?
+- Quels choix de types, de noms de variables, d'arrondi avez-vous faits ?
+- Quels cas de votre tableau de tests vous ont surpris ?
 
 ??? note "Une solution possible, à ouvrir après avoir écrit la vôtre"
 

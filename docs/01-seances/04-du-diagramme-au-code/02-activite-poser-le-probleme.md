@@ -10,22 +10,20 @@ Avant d'écrire une ligne de code, savoir dire ce que le programme reçoit, ce
 qu'il en fait et ce qu'il rend. Et repérer ce que l'énoncé ne dit pas, parce
 que le programme, lui, devra bien en faire quelque chose.
 
-**Règle de l'activité : personne n'ouvre son ordinateur.**
-
 ## Trois colonnes
 
 Tout programme que vous écrirez ce semestre peut se décrire en trois colonnes.
 
-| Entrées                         | Traitement                   | Sortie                    |
-| :------------------------------ | :--------------------------- | :------------------------ |
-| Ce que le programme **reçoit**  | Ce qu'il **calcule**         | Ce qu'il **rend**         |
+| Entrées                        | Traitement           | Sortie            |
+| :----------------------------- | :------------------- | :---------------- |
+| Ce que le programme **reçoit** | Ce qu'il **calcule** | Ce qu'il **rend** |
 
 Un exemple, avant de vous laisser faire : convertir une température donnée en
 degrés Celsius en degrés Fahrenheit.
 
-| Entrées                  | Traitement                     | Sortie                            |
-| :----------------------- | :----------------------------- | :-------------------------------- |
-| Une température en °C    | `fahrenheit = celsius × 9 / 5 + 32` | La température en °F, au dixième |
+| Entrées               | Traitement                          | Sortie                           |
+| :-------------------- | :---------------------------------- | :------------------------------- |
+| Une température en °C | `fahrenheit = celsius * 9 / 5 + 32` | La température en °F, au dixième |
 
 Et le diagramme d'activité qui en découle :
 
@@ -59,7 +57,8 @@ cause. Une hypothèse implicite, non.
 
 ## À vous
 
-Par groupes de trois ou quatre, sur papier. Pour chacun des trois problèmes :
+Individuellement, sur papier ou dans un fichier texte. Pour chacun des trois
+problèmes :
 
 1. remplissez les trois colonnes ;
 2. listez au moins trois questions que l'énoncé laisse ouvertes ;
@@ -79,18 +78,17 @@ C'est le fil rouge du semestre. Vous le reprendrez à chaque séance.
 
 > Partager une addition de restaurant entre plusieurs personnes.
 
-## Mise en commun
+## Discussion
 
-Chaque groupe vient écrire au tableau ses colonnes pour un des trois problèmes,
-et ses questions ouvertes. Comparez avec les autres groupes :
+Nous reprenons ensuite les trois problèmes ensemble, en classe :
 
-- Avez-vous les mêmes entrées ? Si non, lesquelles sont justes ?
-- Quelle question l'autre groupe a-t-il vue et pas vous ?
-- Une question vous paraît-elle sans importance ? Défendez-le.
+- Qu'avez-vous mis comme entrées ? Tout le monde a-t-il les mêmes ?
+- Quelles questions avez-vous trouvées que d'autres n'ont pas vues ?
+- Quelles hypothèses avez-vous faites, et pourquoi ?
 
-Vous verrez que deux groupes peuvent poser le même problème différemment, et
-avoir raison tous les deux. Ce qui n'est pas acceptable, c'est une colonne
-floue : _"des trucs"_ n'est pas une entrée.
+Deux personnes peuvent poser le même problème différemment et avoir raison
+toutes les deux. Ce qui ne fonctionne pas, c'est une colonne floue : _"des
+trucs"_ n'est pas une entrée.
 
 <!-- URLs -->
 

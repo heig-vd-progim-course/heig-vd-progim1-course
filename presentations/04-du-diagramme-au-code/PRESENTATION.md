@@ -11,7 +11,7 @@ title: HEIG-VD ProgIM1 Course - Du diagramme au code
 description: Séance "Du diagramme au code" - poser un problème, lire au clavier, afficher un résultat - pour l'unité d'enseignement ProgIM1 enseignée à la HEIG-VD, Suisse
 url: https://heig-vd-progim-course.github.io/heig-vd-progim1-course/presentations/04-du-diagramme-au-code/
 header: "**Du diagramme au code**"
-footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://github.com/heig-vd-progim-course/heig-vd-progim1-course) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
+footer: '[**HEIG-VD**](https://heig-vd.ch) - [ProgIM1 2026-2027](https://heig-vd-progim-course.github.io/heig-vd-progim1-course/) - [CC BY-SA 4.0](https://github.com/heig-vd-progim-course/heig-vd-progim1-course/blob/main/LICENSE.md)'
 headingDivider: 2
 math: mathjax
 -->
@@ -52,6 +52,7 @@ Mais vos programmes ne savent répéter que les valeurs écrites dedans.
 
 À la fin de cette séance, vous devriez être capable de :
 
+- calculer en respectant l'ordre des opérations ;
 - poser un problème en entrées, traitement, sortie ;
 - lire une valeur au clavier et la convertir.
 
@@ -63,13 +64,14 @@ Mais vos programmes ne savent répéter que les valeurs écrites dedans.
 
 ## Le programme de la séance
 
-| Partie                       | Durée  |
-| :--------------------------- | -----: |
-| Poser le problème            | 30 min |
-| Lire au clavier              | 35 min |
-| Afficher un résultat lisible | 35 min |
-| Atelier - du diagramme au code | 55 min |
-| Comparaison des solutions    | 15 min |
+| Partie                         | Durée  |
+| :----------------------------- | -----: |
+| Les opérations arithmétiques   | 25 min |
+| Poser le problème              | 30 min |
+| Lire au clavier                | 30 min |
+| Afficher un résultat lisible   | 30 min |
+| Atelier - du diagramme au code | 45 min |
+| Discussion des solutions       | 10 min |
 
 ## Le fil rouge démarre
 
@@ -79,20 +81,112 @@ Mais vos programmes ne savent répéter que les valeurs écrites dedans.
 
 Aujourd'hui : deux notes, une moyenne. Il sera réécrit à chaque séance.
 
+## Les opérations arithmétiques
+
+<!-- _class: lead -->
+
+## Cinq opérateurs
+
+| Code      | Résultat | Opération                  |
+| :-------- | -------: | :------------------------- |
+| `7 + 2`   | `9`      | Addition                   |
+| `7 - 2`   | `5`      | Soustraction               |
+| `7 * 2`   | `14`     | Multiplication             |
+| `7 / 2`   | `3`      | Division, **entière** ici  |
+| `7 % 2`   | `1`      | Reste de la division       |
+| `7.0 / 2` | `3.5`    | Division                   |
+
+## À quoi sert le reste
+
+```java
+int totalMinutes = 135;
+int hours = totalMinutes / 60;
+int minutes = totalMinutes % 60;
+System.out.println(hours + " h " + minutes + " min");
+```
+
+```text
+2 h 15 min
+```
+
+Unités complètes avec `/`, ce qui dépasse avec `%`.
+
+## L'ordre des opérations
+
+`*`, `/`, `%` avant `+`, `-`. Puis de gauche à droite.
+
+```java
+System.out.println(grade1 + grade2 / 2);    // 4.0 et 5.0
+System.out.println((grade1 + grade2) / 2);
+```
+
+```text
+6.5
+4.5
+```
+
+Pas d'erreur, un résultat plausible, et faux. **Dans le doute, des
+parenthèses.**
+
+## Quand l'ordre change le type
+
+```java
+double celsius = 20;
+System.out.println(celsius * 9 / 5 + 32);
+System.out.println(9 / 5 * celsius + 32);
+```
+
+```text
+68.0
+52.0
+```
+
+`9 / 5` est calculé en premier, entre deux entiers : `1`.
+
+## Raccourcis et `Math`
+
+| Écriture         | Équivaut à / calcule  |
+| :--------------- | :-------------------- |
+| `score += 5`     | `score = score + 5`   |
+| `score++`        | `score = score + 1`   |
+| `Math.pow(2, 10)` | `1024.0`             |
+| `Math.sqrt(16)`  | `4.0`                 |
+| `Math.round(4.5)` | `5`                  |
+
+## `^` n'est pas la puissance
+
+<!-- _class: lead -->
+
+```java
+System.out.println(2 ^ 10);
+```
+
+```text
+8
+```
+
+Ça compile, et ce n'est pas `1024`. La puissance, c'est `Math.pow`.
+
 ## Poser le problème
 
 <!-- _class: lead -->
 
-**Ordinateurs fermés.**
+Avant d'écrire une ligne de code.
 
 ## Trois colonnes
 
 | Entrées         | Traitement        | Sortie          |
 | :-------------- | :---------------- | :-------------- |
 | Ce qu'il reçoit | Ce qu'il calcule  | Ce qu'il rend   |
-| Une température en °C | `celsius × 9 / 5 + 32` | La température en °F |
+| Une température en °C | `celsius * 9 / 5 + 32` | La température en °F |
 
 Trois colonnes, trois actions dans le diagramme.
+
+## Le diagramme qui en découle
+
+<!-- _class: lead -->
+
+![h:420](./images/diagramme-temperature.svg)
 
 ## Ce que l'énoncé ne dit pas
 
@@ -104,13 +198,22 @@ Une question non écrite devient un bogue.
 
 Quand vous ne pouvez pas trancher : écrivez une **hypothèse**.
 
-## À vous, par groupes
+## À vous
 
 1. La moyenne de deux notes.
 2. Le temps d'un trajet à pied.
 3. Le partage d'une addition au restaurant.
 
 Pour chacun : les trois colonnes, trois questions ouvertes, vos hypothèses.
+Sur papier ou dans un fichier texte.
+
+## Discussion
+
+- Qu'avez-vous mis comme entrées ?
+- Quelles questions avez-vous trouvées ?
+- Quelles hypothèses avez-vous faites, et pourquoi ?
+
+_"Des trucs"_ n'est pas une entrée.
 
 ## Lire au clavier
 
@@ -284,21 +387,29 @@ Moyenne : 4.0
 
 <!-- _class: lead -->
 
-**Le diagramme d'abord, sur papier.**
-
-IntelliJ ne s'ouvre qu'après l'avoir montré à la personne à côté.
+**Le diagramme d'abord, le code ensuite.**
 
 ## La méthode
 
-1. Le diagramme, à la main.
+1. Le diagramme.
 2. Le tableau de tests, **avant** le code.
 3. Le code, un commentaire par rectangle.
 4. Vérifier chaque ligne du tableau.
 5. Essayer de le casser.
 
+## Le tableau de tests, avant le code
+
+| Première note | Deuxième note | Moyenne affichée attendue |
+| ------------: | ------------: | :------------------------ |
+|             4 |             5 |                           |
+|           4.5 |             5 |                           |
+|             6 |             6 |                           |
+|             1 |             6 |                           |
+|           3.3 |           4.6 |                           |
+
 ## Trois raisons d'un résultat faux
 
-- Votre calcul à la main est faux.
+- Votre calcul est faux.
 - Votre code ne fait pas ce que dit le diagramme.
 - Votre diagramme ne fait pas ce que dit l'énoncé.
 
