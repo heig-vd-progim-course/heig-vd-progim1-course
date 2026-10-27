@@ -213,6 +213,13 @@ l'intérieur d'une accolade, le fichier ne se parse plus.
 Toute page ajoutée doit être ajoutée à `nav`, et toute page retirée doit en être
 retirée.
 
+## Support et présentation restent synchronisés
+
+Toute modification d'une présentation se reporte **dans le même mouvement**
+dans le support de cours, et inversement : mêmes exemples, mêmes valeurs,
+mêmes sorties. La présentation résume le support, elle ne le contredit
+jamais. Avant de livrer, relire les deux côte à côte pour la séance touchée.
+
 ## Conventions Marp
 
 Une présentation par séance, dans `presentations/NN-nom-de-la-seance/`.
@@ -283,6 +290,18 @@ Aucun débordement ne doit subsister.
   clavier. Cette règle est la plus facile à enfreindre sans s'en rendre compte.
 - Les messages d'erreur sont donnés en entier, avec le nom du fichier et le
   numéro de ligne.
+- **Une opération, deux opérandes.** Dès qu'une expression arithmétique
+  enchaîne plus d'un opérateur, des parenthèses explicites fixent l'ordre :
+  `(distanceKm / speedKmh) * 60`, `((celsius * 9) / 5) + 32`,
+  `(exam * 0.6) + (project * 0.4)`. On ne compte jamais sur la priorité des
+  opérateurs dans un exemple. Exception : les pages qui enseignent justement
+  la priorité (séance 04), où l'expression sans parenthèses est l'objet de
+  l'exemple. La concaténation de texte (`"a" + b + "c"`) n'est pas concernée.
+  Règle en vigueur à partir de la séance 05.
+- **Des valeurs calculables de tête.** Choisir des arguments qui donnent des
+  résultats ronds, vérifiables sans calculatrice (`walkingMinutes(10, 5)`
+  donne 120), sauf quand l'exemple porte précisément sur un résultat
+  surprenant (virgule flottante, division entière).
 
 ### Toujours le fichier entier (à partir de la séance 05)
 

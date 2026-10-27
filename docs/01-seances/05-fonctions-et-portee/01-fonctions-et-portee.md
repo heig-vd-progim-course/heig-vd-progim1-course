@@ -26,8 +26,8 @@ qui en rendent une. Et savoir où une variable existe, et où elle n'existe pas.
 
 ## Rappel : entrées, traitement, sortie
 
-En séance 04, vous avez posé chaque problème en trois colonnes avant d'écrire
-le code.
+En séance 04, vous avez posé chaque problème en trois colonnes avant d'écrire le
+code.
 
 | Entrées                        | Traitement              | Sortie            |
 | :----------------------------- | :---------------------- | :---------------- |
@@ -45,6 +45,147 @@ flowchart LR
 ```
 
 Retenez cette correspondance. Tout le vocabulaire de cette page en découle.
+
+## Remplacer par la valeur
+
+Avant de parler de fonctions, une règle que vous appliquez depuis la séance 03
+sans l'avoir formulée. Tout ce qui suit en dépend.
+
+**Avant d'exécuter une ligne, Java remplace chaque variable par la valeur
+qu'elle contient à ce moment-là.** Puis il calcule, puis il exécute.
+
+### Une variable ou sa valeur : même résultat
+
+Ces deux programmes affichent exactement la même chose.
+
+=== "Avec une variable"
+
+    ```java title="Main.java" linenums="1" hl_lines="3 4"
+    public class Main {
+        public static void main(String[] args) {
+            double grade = 4.5;
+            System.out.println(grade);
+        }
+    }
+    ```
+
+    ```text
+    4.5
+    ```
+
+=== "Avec la valeur"
+
+    ```java title="Main.java" linenums="1" hl_lines="3"
+    public class Main {
+        public static void main(String[] args) {
+            System.out.println(4.5);
+        }
+    }
+    ```
+
+    ```text
+    4.5
+    ```
+
+À la ligne 4 du premier programme, Java remplace `grade` par `4.5`. La ligne
+devient `System.out.println(4.5);`, c'est-à-dire la ligne 3 du second.
+
+### Un calcul, pas à pas
+
+```java title="Main.java" linenums="1" hl_lines="5"
+public class Main {
+    public static void main(String[] args) {
+        double grade1 = 4.5;
+        double grade2 = 5.0;
+        double average = (grade1 + grade2) / 2;
+        System.out.println(average);
+    }
+}
+```
+
+```text
+4.75
+```
+
+La ligne 5, une étape à la fois :
+
+| Étape                   | Ce que Java a devant lui |
+| :---------------------- | :----------------------- |
+| La ligne écrite         | `(grade1 + grade2) / 2`  |
+| Remplacer les variables | `(4.5 + 5.0) / 2`        |
+| Calculer la parenthèse  | `9.5 / 2`                |
+| Calculer la division    | `4.75`                   |
+| Ranger le résultat      | `average` contient 4.75  |
+
+Puis, à la ligne 6, `average` est remplacée par `4.75`.
+
+### La valeur au moment de la ligne
+
+Une variable est remplacée par ce qu'elle contient **au moment où la ligne
+s'exécute**. Pas avant, pas après. Prédisez ce que ce programme affiche :
+
+```java title="Main.java" linenums="1" hl_lines="4 5"
+public class Main {
+    public static void main(String[] args) {
+        double a = 4.0;
+        double b = a;
+        a = 6.0;
+        System.out.println(a);
+        System.out.println(b);
+    }
+}
+```
+
+```text
+6.0
+4.0
+```
+
+À la ligne 4, `a` est remplacée par `4.0` : la ligne devient `double b = 4.0;`.
+`b` reçoit une **copie** de la valeur, pas un lien vers `a`. Quand `a` change à
+la ligne 5, `b` ne bouge pas.
+
+### À gauche du `=`, pas de remplacement
+
+```java title="Main.java" linenums="1" hl_lines="4"
+public class Main {
+    public static void main(String[] args) {
+        int age = 20;
+        age = age + 1;
+        System.out.println(age);
+    }
+}
+```
+
+```text
+21
+```
+
+À la ligne 4, seul le `age` de **droite** est remplacé : `age = 20 + 1;`. Celui
+de gauche ne désigne pas une valeur, mais l'endroit où ranger le résultat.
+
+### Un appel aussi est remplacé par sa valeur
+
+La même règle vaut pour un appel de fonction. Java exécute l'appel, puis le
+remplace par la valeur qu'il rend.
+
+```java title="Main.java" linenums="1" hl_lines="3"
+public class Main {
+    public static void main(String[] args) {
+        double result = Math.sqrt(16) + 1;
+        System.out.println(result);
+    }
+}
+```
+
+```text
+5.0
+```
+
+À la ligne 3 : `Math.sqrt(16) + 1`, puis `4.0 + 1`, puis `5.0`.
+
+Gardez ces deux idées pour la suite de la séance : **une variable est remplacée
+par sa valeur**, **un appel est remplacé par ce qu'il rend**.
 
 ## Vous utilisez déjà des fonctions
 
@@ -82,6 +223,156 @@ qu'elle rend**. C'est tout l'intérêt d'une fonction.
 
 Aujourd'hui, vous passez de l'autre côté : vous allez écrire les vôtres.
 
+## Décortiquer l'arrondi au dixième
+
+Le fil rouge arrondit la moyenne avec une ligne vue en séance 04 :
+
+```java
+double rounded = Math.round(average * 10) / 10.0;
+```
+
+Elle va servir d'exemple pendant toute la séance. Avant d'en faire une fonction,
+prenons-la morceau par morceau.
+
+### Ce que fait `Math.round`
+
+`Math.round` est une fonction : on lui donne un nombre, elle rend **l'entier le
+plus proche**. Quand le nombre tombe pile au milieu, elle arrondit vers le haut.
+
+```java title="Main.java" linenums="1" hl_lines="3-5"
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(Math.round(4.4));
+        System.out.println(Math.round(4.5));
+        System.out.println(Math.round(4.6));
+    }
+}
+```
+
+```text
+4
+5
+5
+```
+
+Deux choses à retenir :
+
+- ce qu'elle rend est un **entier**, de type `long` : un `int` qui peut aller
+  plus loin. Il n'a plus aucune décimale ;
+- elle ne sait arrondir **qu'à l'unité**. Elle n'a pas d'option _"au dixième"_.
+
+Or une moyenne de 4.75 doit devenir 4.8, pas 5. D'où l'astuce.
+
+### L'astuce : déplacer la virgule
+
+On ne peut arrondir qu'à l'unité ? Alors on **déplace la virgule** pour que les
+dixièmes deviennent des unités, on arrondit, puis on remet la virgule à sa
+place.
+
+Trois étapes, avec deux valeurs : 4.75, la moyenne de Noah, et 4.32.
+
+| Étape                          | Code              | Avec 4.75 | Avec 4.32 |
+| :----------------------------- | :---------------- | --------: | --------: |
+| 1. Décaler la virgule à droite | `average * 10`    |    `47.5` |    `43.2` |
+| 2. Arrondir à l'entier         | `Math.round(...)` |      `48` |      `43` |
+| 3. Remettre la virgule         | `... / 10.0`      |     `4.8` |     `4.3` |
+
+- Étape 1 : multiplier par 10 déplace la virgule d'un rang. Le chiffre des
+  dixièmes, 7 ou 3, devient le chiffre des unités.
+- Étape 2 : `Math.round` arrondit à l'unité. Comme les dixièmes sont devenus des
+  unités, c'est bien au dixième qu'on arrondit. 47.5 tombe au milieu, il monte
+  à 48. 43.2 est plus près de 43.
+- Étape 3 : diviser par 10 ramène la virgule à sa place.
+
+Le même calcul, une étape par ligne, pour voir chaque valeur intermédiaire :
+
+=== "Avec 4.75"
+
+    ```java title="Main.java" linenums="1" hl_lines="5-7"
+    public class Main {
+        public static void main(String[] args) {
+            double average = 4.75;
+
+            double timesTen = average * 10;
+            long roundedTimesTen = Math.round(timesTen);
+            double rounded = roundedTimesTen / 10.0;
+
+            System.out.println(timesTen);
+            System.out.println(roundedTimesTen);
+            System.out.println(rounded);
+        }
+    }
+    ```
+
+    ```text
+    47.5
+    48
+    4.8
+    ```
+
+=== "Avec 4.32"
+
+    ```java title="Main.java" linenums="1" hl_lines="3"
+    public class Main {
+        public static void main(String[] args) {
+            double average = 4.32;
+
+            double timesTen = average * 10;
+            long roundedTimesTen = Math.round(timesTen);
+            double rounded = roundedTimesTen / 10.0;
+
+            System.out.println(timesTen);
+            System.out.println(roundedTimesTen);
+            System.out.println(rounded);
+        }
+    }
+    ```
+
+    ```text
+    43.2
+    43
+    4.3
+    ```
+
+Seule la ligne 3 change entre les deux onglets. Les lignes 5 à 7 font les trois
+étapes du tableau, dans l'ordre. `Math.round(average * 10) / 10.0` fait
+exactement la même chose, en une ligne : Java calcule d'abord ce qui est entre
+les parenthèses, puis l'appel, puis la division.
+
+### Pourquoi `10.0` et pas `10`
+
+À l'étape 3, `roundedTimesTen` est un `long`, un entier. Divisé par l'entier
+`10`, c'est une **division entière**, le premier piège de la séance 03 :
+
+```java title="Main.java" linenums="1" hl_lines="4 5"
+public class Main {
+    public static void main(String[] args) {
+        long roundedTimesTen = Math.round(4.75 * 10);
+        System.out.println(roundedTimesTen / 10.0);
+        System.out.println(roundedTimesTen / 10);
+    }
+}
+```
+
+```text
+4.8
+4
+```
+
+Avec `10.0`, un nombre à virgule, la division garde les décimales. Avec `10`,
+elle les jette : 48 / 10 donne 4. Gardez ce `4` en tête, vous allez le revoir
+dans la section suivante.
+
+??? note "Arrondir à autre chose qu'au dixième"
+
+    Le principe est toujours le même : multiplier pour que la précision voulue
+    devienne l'unité, arrondir, rediviser.
+
+    - au centième : `Math.round(value * 100) / 100.0` ;
+    - au demi-point, comme en séance 04 : `Math.round(value * 2) / 2.0` ;
+    - aux 5 centimes : `Math.round(amount * 20) / 20.0`, puisqu'il y a 20 fois
+      5 centimes dans un franc.
+
 ## Pourquoi écrire ses propres fonctions
 
 Le fil rouge, pour trois personnes, avec ce que vous savez déjà :
@@ -113,7 +404,8 @@ Lou : 4.0
 
 Noah et Lou ont la même moyenne exacte, 4.75. Le programme affiche 4.8 pour
 l'une et 4.0 pour l'autre. La ligne 10 a été copiée, puis un `.0` s'est perdu :
-`/ 10` au lieu de `/ 10.0`, la division entière de la séance 03.
+`/ 10` au lieu de `/ 10.0`. C'est le `4` de la section précédente, rangé dans un
+`double`, d'où `4.0`.
 
 C'est le problème que vous avez déjà rencontré en séance 02 et en séance 03 :
 **une même chose écrite à plusieurs endroits finit par ne plus être la même**.
@@ -182,8 +474,8 @@ partout, et il se corrige à un seul endroit.
 ### Où l'écrire
 
 Une fonction s'écrit **dans la classe** `Main`, **à côté** de `main`, jamais à
-l'intérieur. `main` est elle-même une fonction : vous en écrivez une deuxième
-au même niveau.
+l'intérieur. `main` est elle-même une fonction : vous en écrivez une deuxième au
+même niveau.
 
 L'ordre n'a pas d'importance : `roundToTenth` peut être écrite avant ou après
 `main`. Le programme commence toujours par `main`.
@@ -197,10 +489,10 @@ Le programme ne lit plus le fichier de haut en bas. Il suit les appels.
 3. Ligne 12, il rencontre `roundToTenth(averageCamille)`. Il **met `main` en
    pause**, copie la valeur de `averageCamille` (3.9499999999999997) dans
    `value`, et saute à la ligne 3.
-4. Ligne 4, `return rounded;` renvoie 4.0 à l'endroit de l'appel.
-   `roundToTenth` est terminée, `main` reprend à la ligne 12.
-5. L'appel `roundToTenth(averageCamille)` est remplacé par sa valeur, 4.0, et
-   la ligne affiche `Camille : 4.0`.
+4. Ligne 4, `return rounded;` renvoie 4.0 à l'endroit de l'appel. `roundToTenth`
+   est terminée, `main` reprend à la ligne 12.
+5. L'appel `roundToTenth(averageCamille)` est remplacé par sa valeur, 4.0, et la
+   ligne affiche `Camille : 4.0`.
 6. Même chose aux lignes 13 et 14.
 
 Une fonction qui n'est jamais appelée n'est jamais exécutée, comme une ligne
@@ -231,14 +523,14 @@ public class Main {
 
 ### Du côté de la déclaration : lignes 2 à 5
 
-| Morceau            | Nom                  | Ce que c'est                                  |
-| :----------------- | :------------------- | :-------------------------------------------- |
-| `public static`    | modificateurs        | Le même cadre que `main`. Expliqué plus tard  |
-| `double`           | type de retour       | Le type de la valeur que la fonction rend     |
-| `roundToTenth`     | nom                  | Un verbe, en anglais, en camelCase            |
-| `(double value)`   | liste des paramètres | Ce que la fonction reçoit : un type et un nom |
-| lignes 3 et 4      | corps                | Le traitement, entre les accolades            |
-| `return rounded;`  | instruction `return` | Rend la valeur et termine la fonction         |
+| Morceau           | Nom                  | Ce que c'est                                  |
+| :---------------- | :------------------- | :-------------------------------------------- |
+| `public static`   | modificateurs        | Le même cadre que `main`. Expliqué plus tard  |
+| `double`          | type de retour       | Le type de la valeur que la fonction rend     |
+| `roundToTenth`    | nom                  | Un verbe, en anglais, en camelCase            |
+| `(double value)`  | liste des paramètres | Ce que la fonction reçoit : un type et un nom |
+| lignes 3 et 4     | corps                | Le traitement, entre les accolades            |
+| `return rounded;` | instruction `return` | Rend la valeur et termine la fonction         |
 
 La ligne 2, jusqu'à l'accolade, s'appelle l'**en-tête** de la fonction.
 
@@ -258,12 +550,14 @@ Les deux mots sont souvent confondus, y compris en ligne. Dans ce cours :
 - l'**argument** est la valeur donnée au moment de l'appel : `averageCamille`,
   ligne 12.
 
-À l'appel, la valeur de l'argument est **copiée** dans le paramètre.
+À l'appel, la valeur de l'argument est **copiée** dans le paramètre. C'est le
+`double b = a;` de la section
+[Remplacer par la valeur](#remplacer-par-la-valeur) : une copie, pas un lien.
 
 ### La signature
 
-Au sens strict, en Java, la **signature** d'une fonction est son nom et la
-liste des types de ses paramètres. Celle de `roundToTenth` est :
+Au sens strict, en Java, la **signature** d'une fonction est son nom et la liste
+des types de ses paramètres. Celle de `roundToTenth` est :
 
 ```text
 roundToTenth(double)
@@ -275,8 +569,8 @@ tutoriels, dont celui d'OpenClassrooms, appellent _"signature"_ toute la
 première ligne : sachez que les deux usages existent, et que ce cours suit la
 définition officielle.
 
-La signature dit ce qu'il faut savoir pour **appeler** la fonction : son nom,
-et quoi lui donner, dans quel ordre.
+La signature dit ce qu'il faut savoir pour **appeler** la fonction : son nom, et
+quoi lui donner, dans quel ordre.
 
 ### Fonction ou méthode
 
@@ -292,8 +586,8 @@ L'argument `averageCamille` arrive dans le paramètre `value`. Les noms sont
 différents, et c'est normal : la fonction ne connaît pas le nom de la variable
 qui lui a été passée. Elle ne reçoit qu'une **valeur**.
 
-Un argument n'est même pas forcément une variable. Ces trois appels sont
-valides : `roundToTenth(4.75)`, `roundToTenth((grade1 + grade2) / 2)`,
+Un argument n'est même pas forcément une variable. Ces trois appels sont valides
+: `roundToTenth(4.75)`, `roundToTenth((grade1 + grade2) / 2)`,
 `roundToTenth(Math.sqrt(17))`. Dans chaque cas, Java calcule d'abord la valeur
 de l'argument, puis la copie dans `value`.
 
@@ -305,50 +599,60 @@ problème du trajet à pied de la séance 04 :
 ```java title="Main.java" linenums="1" hl_lines="2 7 8"
 public class Main {
     public static double walkingMinutes(double distanceKm, double speedKmh) {
-        return distanceKm / speedKmh * 60;
+        return (distanceKm / speedKmh) * 60;
     }
 
     public static void main(String[] args) {
-        System.out.println(walkingMinutes(3, 5));
-        System.out.println(walkingMinutes(5, 3));
+        System.out.println(walkingMinutes(10, 5));
+        System.out.println(walkingMinutes(5, 10));
     }
 }
 ```
 
 ```text
-36.0
-100.0
+120.0
+30.0
 ```
 
-Trois kilomètres à 5 km/h prennent 36 minutes. La ligne 8 calcule cinq
-kilomètres à 3 km/h. Le premier argument va dans le premier paramètre, le
-deuxième dans le deuxième. **Java ne regarde que la position**, jamais le nom.
-Inverser deux arguments du même type compile, s'exécute, et donne un résultat
-faux.
+Dix kilomètres à 5 km/h, c'est 10 / 5 = 2 heures, soit 120 minutes. La ligne 8
+calcule autre chose : cinq kilomètres à 10 km/h, une demi-heure. Le premier
+argument va dans le premier paramètre, le deuxième dans le deuxième. **Java ne
+regarde que la position**, jamais le nom. Inverser deux arguments du même type
+compile, s'exécute, et donne un résultat faux.
 
 D'où l'importance de noms de paramètres qui disent ce qu'ils contiennent, avec
 l'unité si elle compte : `distanceKm`, pas `a`.
+
+!!! tip "Une opération, deux opérandes"
+
+    Remarquez les parenthèses de la ligne 3 : `(distanceKm / speedKmh) * 60`.
+    Sans elles, Java donnerait le même résultat, parce qu'il calcule de gauche
+    à droite. Mais il faudrait le savoir, et s'en souvenir.
+
+    Règle de ce cours : **une opération porte sur deux valeurs**. Dès qu'un
+    calcul en enchaîne plusieurs, des parenthèses disent dans quel ordre les
+    faire. On lit alors le calcul comme on le ferait à la main : d'abord la
+    durée en heures, ensuite la conversion en minutes.
 
 ### Le compilateur vérifie le type et le nombre
 
 Un argument du mauvais type :
 
-```java title="Main.java" linenums="1" hl_lines="7 8"
+```java title="Main.java" linenums="1" hl_lines="7"
 public class Main {
     public static double roundToTenth(double value) {
         return Math.round(value * 10) / 10.0;
     }
 
     public static void main(String[] args) {
-        String text = "3.95";
-        System.out.println(roundToTenth(text));
+        System.out.println(roundToTenth("Virginie"));
     }
 }
 ```
 
 ```text
-Main.java:8: error: incompatible types: String cannot be converted to double
-        System.out.println(roundToTenth(text));
+Main.java:7: error: incompatible types: String cannot be converted to double
+        System.out.println(roundToTenth("Virginie"));
                                         ^
 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
 1 error
@@ -363,18 +667,18 @@ Un argument en trop ou en moins :
 ```java title="Main.java" linenums="1" hl_lines="7"
 public class Main {
     public static double walkingMinutes(double distanceKm, double speedKmh) {
-        return distanceKm / speedKmh * 60;
+        return (distanceKm / speedKmh) * 60;
     }
 
     public static void main(String[] args) {
-        System.out.println(walkingMinutes(3));
+        System.out.println(walkingMinutes(10));
     }
 }
 ```
 
 ```text
 Main.java:7: error: method walkingMinutes in class Main cannot be applied to given types;
-        System.out.println(walkingMinutes(3));
+        System.out.println(walkingMinutes(10));
                            ^
   required: double,double
   found:    int
@@ -489,13 +793,13 @@ Plus traître, parce que cela compile :
 
 Dans l'onglet _avant_, `roundToTenth` a bien calculé 4.0 et l'a rendu, ligne 8.
 Personne ne l'a récupéré : la valeur est perdue. La fonction ne modifie **pas**
-`average`. Dans l'onglet _après_, le résultat est rangé dans une variable,
-ligne 8, et c'est elle qu'on affiche, ligne 9.
+`average`. Dans l'onglet _après_, le résultat est rangé dans une variable, ligne
+8, et c'est elle qu'on affiche, ligne 9.
 
 ### `void` : une fonction qui ne rend rien
 
-Certaines fonctions font quelque chose sans rien rendre : afficher, par
-exemple. Leur type de retour est `void`, _"vide"_. C'est le cas de `main`.
+Certaines fonctions font quelque chose sans rien rendre : afficher, par exemple.
+Leur type de retour est `void`, _"vide"_. C'est le cas de `main`.
 
 ```java title="Main.java" linenums="1" hl_lines="2-4 7"
 public class Main {
@@ -513,8 +817,8 @@ public class Main {
 Camille a obtenu 4.8 de moyenne.
 ```
 
-Une fonction `void` n'a pas de `return` suivi d'une valeur. Et son appel ne
-vaut rien : on ne peut pas le ranger dans une variable.
+Une fonction `void` n'a pas de `return` suivi d'une valeur. Et son appel ne vaut
+rien : on ne peut pas le ranger dans une variable.
 
 ```java title="Main.java" linenums="1" hl_lines="8"
 public class Main {
@@ -581,8 +885,8 @@ celle qu'elle a appelée ait terminé :
 5. ligne 8, `computeAverage` rend 4.0 à `main` ;
 6. ligne 12, `main` reprend, range 4.0 dans `result`, puis l'affiche ligne 13.
 
-C'est ainsi qu'on construit un programme plus grand : des fonctions courtes,
-qui en utilisent d'autres. `main` finit par ne plus faire que lire, appeler et
+C'est ainsi qu'on construit un programme plus grand : des fonctions courtes, qui
+en utilisent d'autres. `main` finit par ne plus faire que lire, appeler et
 afficher.
 
 ## La portée des variables
@@ -777,7 +1081,7 @@ Notez que le message cite la signature : `roundToTenth(double)`.
         public static final double PROJECT_WEIGHT = 0.5;
 
         public static double computeFinalGrade(double exam, double project) {
-            return exam * EXAM_WEIGHT + project * PROJECT_WEIGHT;
+            return (exam * EXAM_WEIGHT) + (project * PROJECT_WEIGHT);
         }
 
         public static void main(String[] args) {
@@ -842,12 +1146,12 @@ une fonction toute trouvée.
 - [Returning a Value from a Method](https://docs.oracle.com/javase/tutorial/java/javaOO/returnvalue.html) -
   `return` et `void`.
 - [Exécutez des fonctions](https://openclassrooms.com/fr/courses/8383791-apprenez-a-programmer-en-java/8439602-executez-des-fonctions) -
-  le chapitre correspondant d'OpenClassrooms, en français. Attention, il
-  appelle _"signature"_ toute la première ligne.
-- [Java Visualizer de Python Tutor](https://pythontutor.com/java.html) -
-  collez un des fichiers de cette page et suivez pas à pas les appels et les
-  variables de chaque fonction. Le meilleur moyen de _voir_ la portée. Il ne
-  connaît pas `IO.readln` : utilisez-le sur des programmes sans saisie.
+  le chapitre correspondant d'OpenClassrooms, en français. Attention, il appelle
+  _"signature"_ toute la première ligne.
+- [Java Visualizer de Python Tutor](https://pythontutor.com/java.html) - collez
+  un des fichiers de cette page et suivez pas à pas les appels et les variables
+  de chaque fonction. Le meilleur moyen de _voir_ la portée. Il ne connaît pas
+  `IO.readln` : utilisez-le sur des programmes sans saisie.
 
 <!-- URLs -->
 
