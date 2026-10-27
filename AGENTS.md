@@ -284,6 +284,40 @@ Aucun débordement ne doit subsister.
 - Les messages d'erreur sont donnés en entier, avec le nom du fichier et le
   numéro de ligne.
 
+### Toujours le fichier entier (à partir de la séance 05)
+
+Les personnes peinent avec le cadre `public class Main { public static void
+main(...) }`. Un extrait de trois lignes ne s'exécute pas tel quel, et elles
+ne savent pas où le placer. Dans le support, **chaque exemple Java montre le
+fichier `Main.java` complet**, numéroté, avec les lignes utiles surlignées :
+
+````markdown
+```java title="Main.java" linenums="1" hl_lines="2-5 12"
+public class Main {
+    ...
+}
+```
+````
+
+- `hl_lines` surligne les lignes **ajoutées ou modifiées**, ou celle que cite
+  le message d'erreur. Les numéros de `linenums` sont ceux du compilateur :
+  `Main.java:9` désigne la ligne 9 affichée.
+- Quand un exemple transforme le précédent, deux onglets `=== "Avant"` et
+  `=== "Après"`, chacun avec le fichier entier. Dans _Avant_, on surligne ce
+  qui va disparaître ou changer ; dans _Après_, ce qui est nouveau. Une phrase
+  sous les onglets dit ce qui a été ajouté, modifié et supprimé.
+- Une ligne isolée reste possible **en code en ligne**, dans une phrase, quand
+  elle n'a pas vocation à être exécutée seule.
+- Dans les présentations, Marp ne sait pas surligner : le fichier entier reste
+  la règle quand il tient sur la diapositive (douze lignes au plus sans texte),
+  et le titre de la diapositive désigne les lignes utiles. Sinon, découper en
+  `(1/2)` et `(2/2)`.
+- Les ateliers peuvent contenir des **bugs placés exprès**, à faire trouver et
+  corriger. Ils sont annoncés comme tels, et leur correction est dans un bloc
+  repliable.
+
+Les séances 03 et 04 ne suivent pas encore cette règle.
+
 ## Progression
 
 L'ordre des notions est contraignant. Chaque séance ne peut s'appuyer que sur ce

@@ -75,6 +75,21 @@
   résultat sur séquence, sélection et itération.
 - Tardif, J., pour la définition de la compétence citée dans les principes du
   cours.
+- Kallia, M. et Sentance, S., _Threshold concepts, conceptions and skills:
+  teachers' experiences with students' engagement in functions_, Journal of
+  Computer Assisted Learning, 37(2), 2021, pour les fonctions comme concept
+  seuil (séance 05).
+- Margulieux, L., Morrison, B. et Decker, A., _Design and pilot testing of
+  subgoal labeled worked examples for five core concepts in CS1_, ITiCSE 2019,
+  pour les exemples commentés.
+- Sentance, S. et Waite, J., démarche PRIMM (_Predict, Run, Investigate,
+  Modify, Make_), pour les activités de prédiction.
+- [Catalogue d'idées fausses en programmation](https://tha.de/misconceptions),
+  pour les idées fausses sur les fonctions, les paramètres et la portée.
+- [Apprenez à programmer en Java](https://openclassrooms.com/fr/courses/8383791-apprenez-a-programmer-en-java)
+  d'OpenClassrooms, pour l'ordre des notions et le chapitre sur les fonctions.
+- [Java Visualizer](https://pythontutor.com/java.html) de Python Tutor, par
+  Philip Guo, pour visualiser les appels de fonctions et la portée.
 - Piaget, J. et Illich, I., cités dans les
   [ressources pour l'équipe enseignante du cours DAI](https://github.com/heig-vd-dai-course/heig-vd-dai-course/tree/main/99.99-resources-for-the-teaching-staff).
 
