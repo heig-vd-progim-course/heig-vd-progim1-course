@@ -6,8 +6,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Rappel de la séance 01
 
-Dans l'activité de dictée de dessin, vous aviez besoin de savoir d'où partait
-le crayon pour que l'instruction suivante ait un sens. Nous avions appelé cela
+Dans l'activité de dictée de dessin, vous aviez besoin de savoir d'où partait le
+crayon pour que l'instruction suivante ait un sens. Nous avions appelé cela
 l'**état**.
 
 Une **variable**, c'est exactement cela : un endroit où le programme retient
@@ -25,8 +25,8 @@ public class Main {
 }
 ```
 
-Pour l'instant, **tout ce que vous écrirez se place entre les deux accolades
-de la méthode `main`**, à la place de la ligne `System.out.println(...)` ou en
+Pour l'instant, **tout ce que vous écrirez se place entre les deux accolades de
+la méthode `main`**, à la place de la ligne `System.out.println(...)` ou en
 dessous. Pas avant, pas après, pas en dehors.
 
 ```java
@@ -39,9 +39,9 @@ public class Main {
 }
 ```
 
-`main` est le **point d'entrée** du programme : quand vous cliquez sur la
-flèche verte, Java cherche `main` et exécute ses lignes une par une, de haut
-en bas. Ce qui n'est pas dans `main` n'est pas exécuté.
+`main` est le **point d'entrée** du programme : quand vous cliquez sur la flèche
+verte, Java cherche `main` et exécute ses lignes une par une, de haut en bas. Ce
+qui n'est pas dans `main` n'est pas exécuté.
 
 Les autres mots (`public`, `class`, `static`, `void`, `String[] args`) seront
 expliqués au fil des séances. Pour l'instant, considérez-les comme un cadre
@@ -73,9 +73,9 @@ qu'on ne touche pas.
 
 ## Voir ce que fait le programme : `System.out.println`
 
-Une variable vit dans la mémoire de l'ordinateur. Vous ne la voyez pas. Le
-seul moyen de savoir ce qu'elle contient, c'est de **l'afficher dans la
-console**, avec `System.out.println`.
+Une variable vit dans la mémoire de l'ordinateur. Vous ne la voyez pas. Le seul
+moyen de savoir ce qu'elle contient, c'est de **l'afficher dans la console**,
+avec `System.out.println`.
 
 **Une ligne `System.out.println` dans le code produit une ligne dans la
 console.** Pas plus, pas moins, et dans le même ordre :
@@ -141,9 +141,72 @@ System.out.println(age);
 20
 ```
 
-Notez qu'il n'y a pas de guillemets autour de `age` : on demande d'afficher
-**ce que contient** la variable `age`, pas le mot « age ». La différence est
+Notez qu'il n'y a pas de guillemets autour de `age` : on demande d'afficher **ce
+que contient** la variable `age`, pas le mot « age ». La différence est
 expliquée plus bas, dans la section sur `String`.
+
+### Une variable est remplacée par sa valeur
+
+**Avant d'exécuter une ligne, Java remplace chaque variable par la valeur
+qu'elle contient à ce moment-là.** Puis il exécute la ligne.
+
+Ces deux programmes affichent donc exactement la même chose :
+
+=== "Avec une variable"
+
+    ```java title="Main.java" linenums="1" hl_lines="3 4"
+    public class Main {
+        public static void main(String[] args) {
+            double grade = 4.5;
+            System.out.println(grade);
+        }
+    }
+    ```
+
+    ```text
+    4.5
+    ```
+
+=== "Avec la valeur"
+
+    ```java title="Main.java" linenums="1" hl_lines="3"
+    public class Main {
+        public static void main(String[] args) {
+            System.out.println(4.5);
+        }
+    }
+    ```
+
+    ```text
+    4.5
+    ```
+
+À la ligne 4 du premier programme, Java remplace `grade` par `4.5`, et la ligne
+devient `System.out.println(4.5);`.
+
+Le remplacement se fait **au moment où la ligne s'exécute**, avec la valeur de
+ce moment-là. Prédisez ce que ce programme affiche avant de lire la sortie :
+
+```java title="Main.java" linenums="1" hl_lines="4 5"
+public class Main {
+    public static void main(String[] args) {
+        double a = 4.0;
+        double b = a;
+        a = 6.0;
+        System.out.println(a);
+        System.out.println(b);
+    }
+}
+```
+
+```text
+6.0
+4.0
+```
+
+À la ligne 4, `a` est remplacée par `4.0` : la ligne devient `double b = 4.0;`.
+`b` reçoit une **copie** de la valeur, pas un lien vers `a`. Quand `a` change à
+la ligne 5, `b` ne bouge pas.
 
 Une fois déclarée, la variable se réutilise par son nom, et on peut changer sa
 valeur :
@@ -163,23 +226,27 @@ System.out.println(age);
 30
 ```
 
-Trois `println`, trois lignes. Chacune montre la valeur de `age` **au moment
-où la ligne est exécutée**. C'est la même variable, mais son contenu a changé
-entre deux affichages.
+Trois `println`, trois lignes. Chacune montre la valeur de `age` **au moment où
+la ligne est exécutée**. C'est la même variable, mais son contenu a changé entre
+deux affichages.
 
 Le signe `=` n'est pas celui des mathématiques. `age = age + 1` ne dit pas que
 `age` est égal à `age` plus un, ce qui serait faux. Il dit : **calcule
 `age + 1`, et range le résultat dans `age`**. C'est une affectation, pas une
 équation.
 
+Seul le `age` de **droite** est remplacé par sa valeur : avec `age` à 20, la
+ligne devient `age = 20 + 1;`. Celui de gauche ne désigne pas une valeur, mais
+l'endroit où ranger le résultat.
+
 On n'écrit le type qu'**une seule fois**, à la déclaration. Ensuite, on utilise
-seulement le nom. Écrire `int age = 30;` une deuxième fois provoque une
-erreur : la variable `age` existe déjà.
+seulement le nom. Écrire `int age = 30;` une deuxième fois provoque une erreur :
+la variable `age` existe déjà.
 
 ### Afficher une variable avec une explication
 
-Une console remplie de nombres sans contexte devient vite illisible. On colle
-un texte devant la valeur avec `+` :
+Une console remplie de nombres sans contexte devient vite illisible. On colle un
+texte devant la valeur avec `+` :
 
 ```java
 int age = 20;
@@ -234,10 +301,9 @@ int age = "vingt";
 error: incompatible types: String cannot be converted to int
 ```
 
-C'est une contrainte, et c'est un service. Cette erreur apparaît sur votre
-écran en trois secondes. Dans un langage qui ne vérifie rien, le même code
-démarre, tourne, et plante plus tard, ailleurs, sans que rien n'indique d'où
-cela vient.
+C'est une contrainte, et c'est un service. Cette erreur apparaît sur votre écran
+en trois secondes. Dans un langage qui ne vérifie rien, le même code démarre,
+tourne, et plante plus tard, ailleurs, sans que rien n'indique d'où cela vient.
 
 ## Les huit types primitifs
 
@@ -246,12 +312,12 @@ les seuls qui ne sont pas des objets.
 
 ### Les nombres entiers
 
-| Type    | Taille  | Valeur minimale            | Valeur maximale            |
-| :------ | :------ | -------------------------: | -------------------------: |
-| `byte`  | 8 bits  | -128                       | 127                        |
-| `short` | 16 bits | -32 768                    | 32 767                     |
-| `int`   | 32 bits | -2 147 483 648             | 2 147 483 647              |
-| `long`  | 64 bits | -9 223 372 036 854 775 808 | 9 223 372 036 854 775 807  |
+| Type    | Taille  |            Valeur minimale |           Valeur maximale |
+| :------ | :------ | -------------------------: | ------------------------: |
+| `byte`  | 8 bits  |                       -128 |                       127 |
+| `short` | 16 bits |                    -32 768 |                    32 767 |
+| `int`   | 32 bits |             -2 147 483 648 |             2 147 483 647 |
+| `long`  | 64 bits | -9 223 372 036 854 775 808 | 9 223 372 036 854 775 807 |
 
 **En pratique, utilisez `int`.** C'est le choix par défaut, et il couvre
 l'immense majorité des cas. Passez à `long` quand vous dépassez deux milliards,
@@ -260,8 +326,8 @@ ce qui arrive avec des durées en millisecondes ou des identifiants.
 `byte` et `short` existent pour économiser la mémoire dans des contextes très
 contraints. Vous n'en aurez pas besoin cette année.
 
-Un `long` s'écrit avec un `L` à la fin, et on peut aérer les grands nombres
-avec des traits de soulignement :
+Un `long` s'écrit avec un `L` à la fin, et on peut aérer les grands nombres avec
+des traits de soulignement :
 
 ```java
 long population = 9_000_000_000L;
@@ -279,15 +345,15 @@ System.out.println(population);
 | `float`  | 32 bits | 7                              |
 | `double` | 64 bits | 15 à 16                        |
 
-**Utilisez `double`.** `float` n'économise que quatre octets et perd beaucoup
-de précision ; il n'a d'intérêt que dans des cas très particuliers.
+**Utilisez `double`.** `float` n'économise que quatre octets et perd beaucoup de
+précision ; il n'a d'intérêt que dans des cas très particuliers.
 
 ### Les deux autres
 
-| Type      | Contient                       | Exemple          |
-| :-------- | :----------------------------- | :--------------- |
-| `char`    | Un seul caractère              | `char c = 'A';`  |
-| `boolean` | Vrai ou faux, rien d'autre     | `boolean ok = true;` |
+| Type      | Contient                   | Exemple              |
+| :-------- | :------------------------- | :------------------- |
+| `char`    | Un seul caractère          | `char c = 'A';`      |
+| `boolean` | Vrai ou faux, rien d'autre | `boolean ok = true;` |
 
 Un `char` se note avec des apostrophes simples. Il est stocké comme un nombre :
 
@@ -320,8 +386,8 @@ séance 05.
 appelle ce texte une **chaîne de caractères**.
 
 Il s'écrit avec une majuscule, parce que **ce n'est pas un type primitif** :
-c'est une classe. Nous verrons ce que cela implique en ProgIM2. Pour
-l'instant, il se déclare comme les autres :
+c'est une classe. Nous verrons ce que cela implique en ProgIM2. Pour l'instant,
+il se déclare comme les autres :
 
 ```java
 String prenom = "Camille";
@@ -335,8 +401,8 @@ Camille
 #### Les guillemets doubles sont obligatoires
 
 Un texte s'écrit **toujours entre guillemets doubles** `"..."`. Les guillemets
-indiquent à Java où le texte commence et où il s'arrête. Ils ne font pas
-partie du texte : ils n'apparaissent pas dans la console.
+indiquent à Java où le texte commence et où il s'arrête. Ils ne font pas partie
+du texte : ils n'apparaissent pas dans la console.
 
 Sans guillemets, Java ne voit plus du texte, il voit un **nom de variable** :
 
@@ -349,19 +415,18 @@ error: cannot find symbol
   symbol:   variable Camille
 ```
 
-Java a cherché une variable qui s'appellerait `Camille`, ne l'a pas trouvée,
-et refuse de compiler. Le message « cannot find symbol » sur un mot qui
-devrait être du texte veut presque toujours dire : **il manque des
-guillemets**.
+Java a cherché une variable qui s'appellerait `Camille`, ne l'a pas trouvée, et
+refuse de compiler. Le message « cannot find symbol » sur un mot qui devrait
+être du texte veut presque toujours dire : **il manque des guillemets**.
 
 Les guillemets sont la frontière entre deux mondes :
 
-| Vous écrivez | Java comprend                                   | Console    |
-| :----------- | :---------------------------------------------- | :--------- |
-| `prenom`     | la variable `prenom`, donc ce qu'elle contient  | `Camille`  |
-| `"prenom"`   | le texte p-r-e-n-o-m, tel quel                  | `prenom`   |
-| `Camille`    | une variable `Camille`, qui n'existe pas        | erreur     |
-| `"Camille"`  | le texte C-a-m-i-l-l-e, tel quel                | `Camille`  |
+| Vous écrivez | Java comprend                                  | Console   |
+| :----------- | :--------------------------------------------- | :-------- |
+| `prenom`     | la variable `prenom`, donc ce qu'elle contient | `Camille` |
+| `"prenom"`   | le texte p-r-e-n-o-m, tel quel                 | `prenom`  |
+| `Camille`    | une variable `Camille`, qui n'existe pas       | erreur    |
+| `"Camille"`  | le texte C-a-m-i-l-l-e, tel quel               | `Camille` |
 
 ```java
 String prenom = "Camille";
@@ -379,8 +444,8 @@ Même mot, une paire de guillemets de différence, deux résultats différents.
 #### Guillemets doubles, pas simples
 
 Les apostrophes simples `'A'` sont réservées au type `char`, qui ne contient
-qu'**un seul** caractère. Pour du texte, ce sont toujours des guillemets
-doubles :
+qu'**un seul** caractère. Pour du texte, ce sont toujours des guillemets doubles
+:
 
 ```java
 String salutation = 'Bonjour';
@@ -404,8 +469,8 @@ Java a ouvert le texte au premier `"` et cherche en vain où il se ferme.
 
 #### `"20"` n'est pas `20`
 
-Un nombre entre guillemets n'est plus un nombre : c'est du texte qui
-ressemble à un nombre.
+Un nombre entre guillemets n'est plus un nombre : c'est du texte qui ressemble à
+un nombre.
 
 ```java
 int nombre = 20;
@@ -421,8 +486,8 @@ System.out.println(texte + 1);
 ```
 
 Avec un `int`, `+` additionne. Avec un `String`, `+` **colle** : c'est la
-**concaténation**. Les deux lignes affichent quelque chose de plausible, et
-une seule fait ce que vous vouliez probablement.
+**concaténation**. Les deux lignes affichent quelque chose de plausible, et une
+seule fait ce que vous vouliez probablement.
 
 #### Coller du texte et des variables
 
@@ -438,8 +503,8 @@ System.out.println("Bonjour " + prenom + ", tu as " + age + " ans.");
 Bonjour Camille, tu as 20 ans.
 ```
 
-Java ne rajoute **aucun espace** de lui-même. Les espaces doivent se trouver
-à l'intérieur des guillemets :
+Java ne rajoute **aucun espace** de lui-même. Les espaces doivent se trouver à
+l'intérieur des guillemets :
 
 ```java
 System.out.println("Bonjour" + prenom);
@@ -451,8 +516,8 @@ BonjourCamille
 Bonjour Camille
 ```
 
-Une chaîne peut aussi être vide, `""`, et une variable `String` peut changer
-de valeur comme n'importe quelle autre :
+Une chaîne peut aussi être vide, `""`, et une variable `String` peut changer de
+valeur comme n'importe quelle autre :
 
 ```java
 String message = "";
@@ -469,8 +534,8 @@ System.out.println("[" + message + "]");
 [Salut tout le monde]
 ```
 
-Les crochets ne servent qu'à rendre visible le début et la fin du texte dans
-la console, ce qui est bien utile pour repérer une chaîne vide ou un espace en
+Les crochets ne servent qu'à rendre visible le début et la fin du texte dans la
+console, ce qui est bien utile pour repérer une chaîne vide ou un espace en
 trop.
 
 !!! example "À vous : les guillemets"
@@ -507,8 +572,8 @@ System.out.println(7.0 / 2);
 Quand les deux opérandes sont des entiers, Java fait une **division entière** :
 il garde le quotient et jette le reste. `7 / 2` vaut `3`, pas `3.5`.
 
-L'opérateur `%`, appelé **modulo**, donne ce reste. Il vous servira
-constamment : tester la parité, boucler sur un cycle, formater un affichage.
+L'opérateur `%`, appelé **modulo**, donne ce reste. Il vous servira constamment
+: tester la parité, boucler sur un cycle, formater un affichage.
 
 Pour obtenir une division décimale, il suffit qu'un seul des deux soit décimal.
 
@@ -530,10 +595,9 @@ System.out.println((double) somme / 3);
 4.666666666666667
 ```
 
-La première ligne est fausse, et elle ne produit **aucune erreur**. Le
-programme compile, s'exécute, affiche un résultat plausible, et il est faux.
-C'est exactement le type de bogue que le compilateur ne peut pas attraper pour
-vous.
+La première ligne est fausse, et elle ne produit **aucune erreur**. Le programme
+compile, s'exécute, affiche un résultat plausible, et il est faux. C'est
+exactement le type de bogue que le compilateur ne peut pas attraper pour vous.
 
 ## La virgule flottante, le vrai piège
 
@@ -552,13 +616,13 @@ Python, en JavaScript, en C et dans votre tableur.
 
 ### Pourquoi
 
-Un `double` est stocké en binaire, sur 64 bits. En binaire, on écrit les
-nombres comme des sommes de puissances de deux : un demi, un quart, un
-huitième, et ainsi de suite.
+Un `double` est stocké en binaire, sur 64 bits. En binaire, on écrit les nombres
+comme des sommes de puissances de deux : un demi, un quart, un huitième, et
+ainsi de suite.
 
 Avec ces briques, `0.5` s'écrit exactement. `0.25` aussi. Mais `0.1` ne tombe
-jamais juste : il faudrait une infinité de termes. L'ordinateur s'arrête donc
-au bit près et garde la valeur représentable la plus proche.
+jamais juste : il faudrait une infinité de termes. L'ordinateur s'arrête donc au
+bit près et garde la valeur représentable la plus proche.
 
 C'est le même phénomène qu'un tiers en décimal : `0,3333...` ne se termine
 jamais, et si vous écrivez `0,33`, vous avez déjà perdu quelque chose.
@@ -696,8 +760,7 @@ System.out.println(decimal);
 5.0
 ```
 
-Un `int` entre sans problème dans un `double` : aucune information n'est
-perdue.
+Un `int` entre sans problème dans un `double` : aucune information n'est perdue.
 
 ### Explicites, quand quelque chose se perd
 
@@ -713,8 +776,8 @@ System.out.println(tronque);
 3
 ```
 
-Notez que cela **tronque** et n'arrondit pas. `3.99` devient `3`. Pour
-arrondir, il y a `Math.round`.
+Notez que cela **tronque** et n'arrondit pas. `3.99` devient `3`. Pour arrondir,
+il y a `Math.round`.
 
 Java vous oblige à écrire `(int)` parce qu'il veut une confirmation : vous êtes
 en train de jeter de l'information, et il refuse de le faire dans votre dos.
@@ -735,8 +798,8 @@ Ajouter un au plus grand `int` donne le plus petit. Le compteur a fait le tour,
 comme un compteur kilométrique mécanique qui repasse à zéro.
 
 Aucune erreur, aucun avertissement. Le programme continue avec une valeur
-absurde. C'est pour cela qu'on choisit son type en pensant à l'ordre de
-grandeur des valeurs attendues.
+absurde. C'est pour cela qu'on choisit son type en pensant à l'ordre de grandeur
+des valeurs attendues.
 
 ### La concaténation, qui surprend tout le monde
 
@@ -760,8 +823,8 @@ Les règles du cours, et les conventions de Java :
 
 - en **anglais** : `averageGrade`, pas `moyenneNote` ;
 - en **camelCase** : première lettre minuscule, puis une majuscule par mot ;
-- un nom qui dit **ce que la variable contient**, pas son type :
-  `studentCount`, pas `nbInt` ;
+- un nom qui dit **ce que la variable contient**, pas son type : `studentCount`,
+  pas `nbInt` ;
 - pas d'abréviation sauf si elle est universelle : `index` plutôt que `idx` ;
 - une `CONSTANTE` en majuscules avec des traits de soulignement.
 
@@ -778,35 +841,34 @@ double passing_grade = 4.0;
 ```
 
 Le mot-clé `final` déclare une **constante** : une variable qu'on ne peut plus
-modifier après sa création. C'est la réponse au problème que vous avez
-rencontré en séance 02, quand une même valeur était écrite à deux endroits et
-que vous n'en aviez changé qu'un. Une constante n'existe qu'à un seul endroit.
+modifier après sa création. C'est la réponse au problème que vous avez rencontré
+en séance 02, quand une même valeur était écrite à deux endroits et que vous
+n'en aviez changé qu'un. Une constante n'existe qu'à un seul endroit.
 
 ## Atelier
 
-Dans votre projet `hello-world`, **dans la méthode `main`** de
-`src/Main.java`. Chaque exercice se fait en modifiant le fichier et en
-relançant.
+Dans votre projet `hello-world`, **dans la méthode `main`** de `src/Main.java`.
+Chaque exercice se fait en modifiant le fichier et en relançant.
 
 Pour chaque exercice, suivez le même cycle :
 
 1. **prédire** : écrivez ce que la console devrait afficher ;
 2. **lancer** : cliquez sur la flèche verte ;
-3. **comparer** : chaque ligne de la console correspond à un `println` du
-   code. Si une ligne ne correspond pas à votre prédiction, trouvez lequel ;
+3. **comparer** : chaque ligne de la console correspond à un `println` du code.
+   Si une ligne ne correspond pas à votre prédiction, trouvez lequel ;
 4. **modifier** une valeur, et recommencer.
 
 Ce cycle est la compétence de la séance, plus que n'importe quel type.
 
 1. Déclarez une variable `int compteur = 0;`. Affichez-la. Ajoutez-lui 1 et
-   affichez-la à nouveau, trois fois de suite. La console doit afficher
-   `0`, `1`, `2`, `3` sur quatre lignes. Changez la valeur de départ à `10` :
-   quelles lignes changent ?
+   affichez-la à nouveau, trois fois de suite. La console doit afficher `0`,
+   `1`, `2`, `3` sur quatre lignes. Changez la valeur de départ à `10` : quelles
+   lignes changent ?
 2. Déclarez une variable pour votre prénom, une pour votre âge, une pour votre
    taille en mètres. Affichez une phrase les utilisant toutes les trois. Quels
-   types avez-vous choisis, et pourquoi ? Changez ensuite la valeur de
-   chaque variable, sans toucher au `println`, et vérifiez que la phrase de
-   la console suit.
+   types avez-vous choisis, et pourquoi ? Changez ensuite la valeur de chaque
+   variable, sans toucher au `println`, et vérifiez que la phrase de la console
+   suit.
 3. Affichez le résultat de `0.1 + 0.2`. Puis affichez-le arrondi à deux
    décimales.
 4. Calculez la moyenne de trois notes stockées dans trois variables `int`.
@@ -826,17 +888,16 @@ mini-projet.
 
 - Pour l'instant, tout votre code s'écrit entre les accolades de la méthode
   `main`, qui est exécutée de haut en bas.
-- Un `System.out.println` (raccourci `sout`) produit une ligne dans la
-  console. C'est le seul moyen de voir ce que contient une variable.
-- Une variable est un état que le programme retient, avec un type, un nom et
-  une valeur.
-- Huit types primitifs. En pratique : `int`, `double`, `boolean`, parfois
-  `char` et `long`.
-- La division de deux entiers est entière, et le compilateur ne vous
-  préviendra pas.
-- Un `String` s'écrit toujours entre guillemets doubles. Sans eux, Java
-  cherche une variable de ce nom. Avec un `String`, `+` colle au lieu
-  d'additionner.
+- Un `System.out.println` (raccourci `sout`) produit une ligne dans la console.
+  C'est le seul moyen de voir ce que contient une variable.
+- Une variable est un état que le programme retient, avec un type, un nom et une
+  valeur.
+- Huit types primitifs. En pratique : `int`, `double`, `boolean`, parfois `char`
+  et `long`.
+- La division de deux entiers est entière, et le compilateur ne vous préviendra
+  pas.
+- Un `String` s'écrit toujours entre guillemets doubles. Sans eux, Java cherche
+  une variable de ce nom. Avec un `String`, `+` colle au lieu d'additionner.
 - Les nombres à virgule sont approchés, et l'erreur s'accumule à chaque
   opération. Jamais de `==` sur un `double`.
 - Une conversion qui perd de l'information doit être demandée explicitement.

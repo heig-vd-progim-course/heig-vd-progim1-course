@@ -108,6 +108,23 @@ séance accroche son vocabulaire à ce tableau. Le laisser affiché.
 Si un fil rouge de la séance 04 contient une erreur d'arrondi copiée (`/ 10`),
 le montrer : c'est la motivation de la séance, sortie des copies de la classe.
 
+## Pendant la théorie - Remplacer par la valeur
+
+Une dizaine de minutes, juste après le rappel. Cette règle est donnée en séance
+03, mais l'expérience montre qu'elle n'est pas acquise : beaucoup de personnes
+voient une variable comme une chose plutôt que comme un nom pour une valeur.
+Sans elle, ni l'argument copié dans le paramètre, ni l'appel remplacé par sa
+valeur de retour n'ont de sens.
+
+- **Faire prédire `double b = a;` puis `a = 6.0;`.** Une partie de la salle
+  répond `6.0` deux fois. C'est exactement l'idée fausse qui reviendra avec
+  `addBonus` dans la partie sur la portée.
+- **Dérouler le calcul au tableau**, une ligne par étape : la ligne écrite, les
+  variables remplacées, chaque opération. C'est le même geste que le décorticage
+  de l'arrondi qui suit.
+- **Finir par `Math.sqrt(16) + 1`** : un appel est remplacé par ce qu'il rend.
+  C'est la transition vers les fonctions.
+
 ## Pendant la théorie - Décortiquer l'arrondi au dixième
 
 La ligne `Math.round(average * 10) / 10.0` a été donnée en séance 04 sans être

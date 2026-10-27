@@ -86,6 +86,76 @@ Puis : `IO.readln`, `Double.parseDouble`, `printf`, `Math.round`.
 
 Une fonction, ce sont les trois colonnes, pour un **morceau** de programme.
 
+## Remplacer par la valeur
+
+<!-- _class: lead -->
+
+Avant d'exécuter une ligne, Java **remplace chaque variable par sa valeur**.
+
+Puis il calcule, puis il exécute.
+
+## Une variable ou sa valeur : même résultat
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        double grade = 4.5;
+        System.out.println(grade);
+    }
+}
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(4.5);
+    }
+}
+```
+
+## Un calcul, pas à pas
+
+`double average = (grade1 + grade2) / 2;` avec `grade1` à 4.5 et `grade2` à 5.0
+
+| Étape                   | Ce que Java a devant lui |
+| :---------------------- | :----------------------- |
+| La ligne écrite         | `(grade1 + grade2) / 2`  |
+| Remplacer les variables | `(4.5 + 5.0) / 2`        |
+| Calculer la parenthèse  | `9.5 / 2`                |
+| Calculer la division    | `4.75`                   |
+
+## La valeur au moment de la ligne (1/2)
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        double a = 4.0;
+        double b = a;
+        a = 6.0;
+        System.out.println(a);
+        System.out.println(b);
+    }
+}
+```
+
+Prédisez les deux lignes.
+
+## La valeur au moment de la ligne (2/2)
+
+`6.0` puis `4.0`.
+
+- Ligne 4 : `a` est remplacée par `4.0`, la ligne devient `double b = 4.0;`.
+- `b` reçoit une **copie**, pas un lien vers `a`.
+- À gauche du `=`, pas de remplacement : dans `age = age + 1;`, seul le `age` de
+  droite devient une valeur.
+
+## Un appel aussi est remplacé
+
+`Math.sqrt(16) + 1` → `4.0 + 1` → `5.0`
+
+- Une **variable** est remplacée par sa valeur.
+- Un **appel** est remplacé par ce qu'il rend.
+
 ## Vous utilisez déjà des fonctions
 
 | Appel                       | On lui donne | Elle rend   |

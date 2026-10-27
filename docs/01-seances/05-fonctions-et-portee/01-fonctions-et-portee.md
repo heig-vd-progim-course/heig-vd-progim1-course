@@ -46,6 +46,147 @@ flowchart LR
 
 Retenez cette correspondance. Tout le vocabulaire de cette page en découle.
 
+## Remplacer par la valeur
+
+Avant de parler de fonctions, une règle que vous appliquez depuis la séance 03
+sans l'avoir formulée. Tout ce qui suit en dépend.
+
+**Avant d'exécuter une ligne, Java remplace chaque variable par la valeur
+qu'elle contient à ce moment-là.** Puis il calcule, puis il exécute.
+
+### Une variable ou sa valeur : même résultat
+
+Ces deux programmes affichent exactement la même chose.
+
+=== "Avec une variable"
+
+    ```java title="Main.java" linenums="1" hl_lines="3 4"
+    public class Main {
+        public static void main(String[] args) {
+            double grade = 4.5;
+            System.out.println(grade);
+        }
+    }
+    ```
+
+    ```text
+    4.5
+    ```
+
+=== "Avec la valeur"
+
+    ```java title="Main.java" linenums="1" hl_lines="3"
+    public class Main {
+        public static void main(String[] args) {
+            System.out.println(4.5);
+        }
+    }
+    ```
+
+    ```text
+    4.5
+    ```
+
+À la ligne 4 du premier programme, Java remplace `grade` par `4.5`. La ligne
+devient `System.out.println(4.5);`, c'est-à-dire la ligne 3 du second.
+
+### Un calcul, pas à pas
+
+```java title="Main.java" linenums="1" hl_lines="5"
+public class Main {
+    public static void main(String[] args) {
+        double grade1 = 4.5;
+        double grade2 = 5.0;
+        double average = (grade1 + grade2) / 2;
+        System.out.println(average);
+    }
+}
+```
+
+```text
+4.75
+```
+
+La ligne 5, une étape à la fois :
+
+| Étape                   | Ce que Java a devant lui |
+| :---------------------- | :----------------------- |
+| La ligne écrite         | `(grade1 + grade2) / 2`  |
+| Remplacer les variables | `(4.5 + 5.0) / 2`        |
+| Calculer la parenthèse  | `9.5 / 2`                |
+| Calculer la division    | `4.75`                   |
+| Ranger le résultat      | `average` contient 4.75  |
+
+Puis, à la ligne 6, `average` est remplacée par `4.75`.
+
+### La valeur au moment de la ligne
+
+Une variable est remplacée par ce qu'elle contient **au moment où la ligne
+s'exécute**. Pas avant, pas après. Prédisez ce que ce programme affiche :
+
+```java title="Main.java" linenums="1" hl_lines="4 5"
+public class Main {
+    public static void main(String[] args) {
+        double a = 4.0;
+        double b = a;
+        a = 6.0;
+        System.out.println(a);
+        System.out.println(b);
+    }
+}
+```
+
+```text
+6.0
+4.0
+```
+
+À la ligne 4, `a` est remplacée par `4.0` : la ligne devient `double b = 4.0;`.
+`b` reçoit une **copie** de la valeur, pas un lien vers `a`. Quand `a` change à
+la ligne 5, `b` ne bouge pas.
+
+### À gauche du `=`, pas de remplacement
+
+```java title="Main.java" linenums="1" hl_lines="4"
+public class Main {
+    public static void main(String[] args) {
+        int age = 20;
+        age = age + 1;
+        System.out.println(age);
+    }
+}
+```
+
+```text
+21
+```
+
+À la ligne 4, seul le `age` de **droite** est remplacé : `age = 20 + 1;`. Celui
+de gauche ne désigne pas une valeur, mais l'endroit où ranger le résultat.
+
+### Un appel aussi est remplacé par sa valeur
+
+La même règle vaut pour un appel de fonction. Java exécute l'appel, puis le
+remplace par la valeur qu'il rend.
+
+```java title="Main.java" linenums="1" hl_lines="3"
+public class Main {
+    public static void main(String[] args) {
+        double result = Math.sqrt(16) + 1;
+        System.out.println(result);
+    }
+}
+```
+
+```text
+5.0
+```
+
+À la ligne 3 : `Math.sqrt(16) + 1`, puis `4.0 + 1`, puis `5.0`.
+
+Gardez ces deux idées pour la suite de la séance : **une variable est remplacée
+par sa valeur**, **un appel est remplacé par ce qu'il rend**.
+
 ## Vous utilisez déjà des fonctions
 
 Relisez votre programme de la séance 04. Il en contient plusieurs.
@@ -409,7 +550,9 @@ Les deux mots sont souvent confondus, y compris en ligne. Dans ce cours :
 - l'**argument** est la valeur donnée au moment de l'appel : `averageCamille`,
   ligne 12.
 
-À l'appel, la valeur de l'argument est **copiée** dans le paramètre.
+À l'appel, la valeur de l'argument est **copiée** dans le paramètre. C'est le
+`double b = a;` de la section
+[Remplacer par la valeur](#remplacer-par-la-valeur) : une copie, pas un lien.
 
 ### La signature
 
