@@ -26,7 +26,7 @@ jalons. Le cours devient un atelier.
 |     02 | [Programmer sans écrire de code](02-programmer-sans-ecrire-de-code/index.md) | MakeCode Arcade : observer, modifier, créer |
 |     03 | [Premiers pas en Java](03-premiers-pas-en-java/index.md)                   | Installation, machine virtuelle et compilation, types et variables |
 |     04 | [Du diagramme au code](04-du-diagramme-au-code/index.md)                   | Entrées, traitement, sortie. Saisie clavier, affichage, premier programme complet |
-|     05 | [Fonctions et portée des variables](05-fonctions-et-portee.md)             | Paramètres, traitement, résultat. Ce qu'une variable voit |
+|     05 | [Fonctions et portée des variables](05-fonctions-et-portee/index.md)       | Paramètres, corps, valeur de retour. Ce qu'une variable voit |
 |     06 | [Conditions](06-conditions.md)                                             | `if`, `else`, opérateurs de comparaison et logiques |
 |      — | **Évaluation écrite** (50 %)                                               | Papier et crayon, sans ressources |
 |     07 | [Boucles](07-boucles.md)                                                   | `while`, `for`, conditions d'arrêt |
@@ -51,7 +51,7 @@ Sa forme évolue à chaque séance :
 | Séance | Ce que devient la solution                                      |
 | -----: | :-------------------------------------------------------------- |
 |     04 | Un programme qui lit deux notes au clavier et affiche la moyenne |
-|     05 | La moyenne devient une **fonction** qui prend des notes et rend un résultat |
+|     05 | La moyenne devient une **fonction** qui prend des notes et rend un résultat, appelée pour trois personnes |
 |     06 | Le programme **décide** si la moyenne est suffisante              |
 |     07 | Il accepte un **nombre quelconque** de notes                      |
 |     08 | Les notes sont rangées dans un **tableau** et parcourues          |

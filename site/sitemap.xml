@@ -34,28 +34,61 @@
         <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/01-donner-des-instructions/04-apprendre-a-apprendre/</loc>
       </url>
       <url>
-        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/02-de-linstruction-a-la-machine/</loc>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/02-programmer-sans-ecrire-de-code/</loc>
       </url>
       <url>
-        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/03-decrire-un-probleme-reel/</loc>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/02-programmer-sans-ecrire-de-code/01-observer/</loc>
       </url>
       <url>
-        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/04-premiers-pas-en-java/</loc>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/02-programmer-sans-ecrire-de-code/02-modifier/</loc>
       </url>
       <url>
-        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/05-selection/</loc>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/02-programmer-sans-ecrire-de-code/03-creer/</loc>
       </url>
       <url>
-        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/06-iteration/</loc>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/03-premiers-pas-en-java/</loc>
       </url>
       <url>
-        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/07-recapitulatif-et-evaluation-ecrite/</loc>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/03-premiers-pas-en-java/01-installer-son-environnement/</loc>
       </url>
       <url>
-        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/08-fonctions-et-lancement-du-mini-projet/</loc>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/03-premiers-pas-en-java/02-machine-virtuelle-et-compilation/</loc>
       </url>
       <url>
-        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/09-tableaux/</loc>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/03-premiers-pas-en-java/03-types-et-variables/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/04-du-diagramme-au-code/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/04-du-diagramme-au-code/01-operations-arithmetiques/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/04-du-diagramme-au-code/02-activite-poser-le-probleme/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/04-du-diagramme-au-code/03-lire-au-clavier/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/04-du-diagramme-au-code/04-afficher-un-resultat/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/04-du-diagramme-au-code/05-atelier-du-diagramme-au-code/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/05-fonctions-et-portee/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/06-conditions/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/07-boucles/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/08-tableaux-et-lancement-du-mini-projet/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/09-chaines-de-caracteres/</loc>
       </url>
       <url>
         <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/01-seances/10-deboguer-et-tester/</loc>
@@ -68,5 +101,20 @@
       </url>
       <url>
         <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/99-ressources/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/98-equipe-enseignante/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/98-equipe-enseignante/01-donner-des-instructions/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/98-equipe-enseignante/02-programmer-sans-ecrire-de-code/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/98-equipe-enseignante/03-premiers-pas-en-java/</loc>
+      </url>
+      <url>
+        <loc>https://heig-vd-progim-course.github.io/heig-vd-progim1-course/98-equipe-enseignante/04-du-diagramme-au-code/</loc>
       </url>
 </urlset>
