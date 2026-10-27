@@ -14,8 +14,8 @@ ne fait plus que lire, appeler et afficher.
 n'affiche rien.**
 
 Comme dans le support, chaque programme est donné **en entier**. Créez un
-nouveau projet `seance-05` dans IntelliJ et remplacez le contenu de
-`Main.java` à chaque exercice.
+nouveau projet `seance-05` dans IntelliJ et remplacez le contenu de `Main.java`
+à chaque exercice.
 
 ## 1. Prédire
 
@@ -154,7 +154,7 @@ Chacun de ces programmes contient **une** erreur, placée exprès. Pour chacun :
 ```java title="Main.java" linenums="1"
 public class Main {
     public static double toFahrenheit(double celsius) {
-        double fahrenheit = celsius * 9 / 5 + 32;
+        double fahrenheit = ((celsius * 9) / 5) + 32;
         return fahrenheit;
     }
 
@@ -191,7 +191,7 @@ devrait afficher.
 ```java title="Main.java" linenums="1"
 public class Main {
     public static double computeFinalGrade(double exam, double project) {
-        return exam * 0.6 + project * 0.4;
+        return (exam * 0.6) + (project * 0.4);
     }
 
     public static void main(String[] args) {
@@ -221,7 +221,7 @@ public class Main {
     ```java title="Main.java" linenums="1" hl_lines="9"
     public class Main {
         public static double toFahrenheit(double celsius) {
-            double fahrenheit = celsius * 9 / 5 + 32;
+            double fahrenheit = ((celsius * 9) / 5) + 32;
             return fahrenheit;
         }
 
@@ -274,7 +274,7 @@ public class Main {
     4.3
     ```
 
-    La bonne réponse est 2.5 × 0.6 + 5.5 × 0.4 = 3.7 : une note insuffisante.
+    La bonne réponse est (2.5 × 0.6) + (5.5 × 0.4) = 1.5 + 2.2 = 3.7 : une note insuffisante.
     Le programme en affiche une suffisante. Ligne 9, les arguments sont
     inversés : `project` arrive dans le paramètre `exam`. Java ne regarde que
     l'ordre, et les deux sont des `double` : le compilateur ne peut rien voir.
@@ -282,7 +282,7 @@ public class Main {
     ```java title="Main.java" linenums="1" hl_lines="9"
     public class Main {
         public static double computeFinalGrade(double exam, double project) {
-            return exam * 0.6 + project * 0.4;
+            return (exam * 0.6) + (project * 0.4);
         }
 
         public static void main(String[] args) {
@@ -379,8 +379,7 @@ Ajoutez une troisième fonction, `readGrade`, qui reçoit la question à poser e
 rend la note tapée, déjà convertie en `double`. Elle lit au clavier : ce n'est
 pas une fonction de calcul, la règle ne s'applique pas à elle.
 
-Vérifiez à nouveau avec votre tableau de tests, en tapant les notes cette
-fois.
+Vérifiez à nouveau avec votre tableau de tests, en tapant les notes cette fois.
 
 ??? note "Une solution possible pour l'étape 2"
 
@@ -510,14 +509,14 @@ appels de test dans `main`.
 
 1. **La température.** `celsiusToFahrenheit`, qui reçoit des degrés Celsius et
    rend des degrés Fahrenheit.
-2. **Le trajet à pied.** `walkingMinutes`, qui reçoit une distance en
-   kilomètres et une vitesse en km/h, et rend une durée en minutes.
-3. **Le partage de l'addition.** `splitBill`, qui reçoit un montant total et
-   un nombre de personnes, et rend la part de chacune arrondie aux 5 centimes.
+2. **Le trajet à pied.** `walkingMinutes`, qui reçoit une distance en kilomètres
+   et une vitesse en km/h, et rend une durée en minutes.
+3. **Le partage de l'addition.** `splitBill`, qui reçoit un montant total et un
+   nombre de personnes, et rend la part de chacune arrondie aux 5 centimes.
    Écrivez l'arrondi aux 5 centimes dans sa propre fonction, `roundTo5Cents`.
 4. **La durée lisible.** `formatDuration`, qui reçoit un nombre entier de
-   minutes et rend un `String` comme `"2 h 15 min"`. Une fonction peut rendre
-   un texte.
+   minutes et rend un `String` comme `"2 h 15 min"`. Une fonction peut rendre un
+   texte.
 5. **La note finale.** `computeFinalGrade`, avec l'évaluation écrite et le
    mini-projet à 50 % chacun. Les poids sont des constantes : voyez le bloc
    repliable _"Et une constante utilisée par plusieurs fonctions ?"_ du
@@ -529,7 +528,7 @@ appels de test dans `main`.
     ```java title="Main.java" linenums="1"
     public class Main {
         public static double walkingMinutes(double distanceKm, double speedKmh) {
-            return distanceKm / speedKmh * 60;
+            return (distanceKm / speedKmh) * 60;
         }
 
         public static double roundTo5Cents(double amount) {
@@ -543,7 +542,7 @@ appels de test dans `main`.
         public static double computeFinalGrade(double exam, double project) {
             final double EXAM_WEIGHT = 0.5;
             final double PROJECT_WEIGHT = 0.5;
-            return exam * EXAM_WEIGHT + project * PROJECT_WEIGHT;
+            return (exam * EXAM_WEIGHT) + (project * PROJECT_WEIGHT);
         }
 
         public static String formatDuration(int totalMinutes) {
@@ -557,7 +556,7 @@ appels de test dans `main`.
         }
 
         public static void main(String[] args) {
-            System.out.println(walkingMinutes(3, 5));
+            System.out.println(walkingMinutes(10, 5));
             System.out.println(splitBill(100, 3));
             System.out.println(computeFinalGrade(4.2, 5.5));
             System.out.println(formatDuration(135));
@@ -567,7 +566,7 @@ appels de test dans `main`.
     ```
 
     ```text
-    36.0
+    120.0
     33.35
     4.85
     2 h 15 min
@@ -583,8 +582,8 @@ En fin d'atelier, nous regardons quelques programmes ensemble, en classe :
 
 - Lisez seulement `main`. Comprend-on ce que fait le programme sans lire les
   fonctions ?
-- Quels noms de fonctions avez-vous choisis ? Lesquels disent ce qu'elles
-  font, lesquels non ?
+- Quels noms de fonctions avez-vous choisis ? Lesquels disent ce qu'elles font,
+  lesquels non ?
 - Qui a écrit une fonction de calcul qui affiche ? Qu'est-ce que cela empêche ?
 - Quel bug de la partie _Réparer_ vous a pris le plus de temps, et pourquoi ?
 

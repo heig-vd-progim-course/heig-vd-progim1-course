@@ -67,7 +67,7 @@ Puis : `IO.readln`, `Double.parseDouble`, `printf`, `Math.round`.
 
 ## Le programme de la séance
 
-| Partie                                       | Durée  |
+| Partie                                       |  Durée |
 | :------------------------------------------- | -----: |
 | Rappel : entrées, traitement, sortie         | 15 min |
 | Écrire et appeler une fonction               | 45 min |
@@ -80,23 +80,127 @@ Puis : `IO.readln`, `Double.parseDouble`, `printf`, `Math.round`.
 
 <!-- _class: lead -->
 
-| Entrées        | Traitement | Sortie           |
-| :------------- | :--------- | :--------------- |
+| Entrées        | Traitement | Sortie               |
+| :------------- | :--------- | :------------------- |
 | **paramètres** | **corps**  | **valeur de retour** |
 
 Une fonction, ce sont les trois colonnes, pour un **morceau** de programme.
 
 ## Vous utilisez déjà des fonctions
 
-| Appel                       | On lui donne | Elle rend     |
-| :-------------------------- | :----------- | :------------ |
-| `Double.parseDouble("4.5")` | un `String`  | `4.5`         |
-| `Math.round(4.6)`           | un nombre    | `5`           |
-| `Math.sqrt(16)`             | un nombre    | `4.0`         |
-| `IO.readln("Note : ")`      | une question | un `String`   |
+| Appel                       | On lui donne | Elle rend   |
+| :-------------------------- | :----------- | :---------- |
+| `Double.parseDouble("4.5")` | un `String`  | `4.5`       |
+| `Math.round(4.6)`           | un nombre    | `5`         |
+| `Math.sqrt(16)`             | un nombre    | `4.0`       |
+| `IO.readln("Note : ")`      | une question | un `String` |
 
 Vous ne savez pas **comment** elles font. Vous savez quoi leur donner, et ce
 qu'elles rendent.
+
+## Décortiquer l'arrondi au dixième
+
+<!-- _class: lead -->
+
+`Math.round(average * 10) / 10.0`
+
+La ligne du fil rouge, morceau par morceau.
+
+## `Math.round` : l'entier le plus proche
+
+| Appel             | Rend |
+| :---------------- | ---: |
+| `Math.round(4.4)` |  `4` |
+| `Math.round(4.5)` |  `5` |
+| `Math.round(4.6)` |  `5` |
+
+- Rend un **entier** (`long`) : plus aucune décimale.
+- N'arrondit **qu'à l'unité**. Or on veut 4.75 → 4.8.
+
+## L'astuce : déplacer la virgule
+
+1. **Décaler** la virgule : les dixièmes deviennent des unités.
+2. **Arrondir** à l'unité avec `Math.round`.
+3. **Remettre** la virgule à sa place.
+
+Deux exemples : **4.75** (la moyenne de Noah) et **4.32**.
+
+## Étape 1 : décaler la virgule
+
+`average * 10`
+
+| `average` | `average * 10` |
+| --------: | -------------: |
+|    `4.75` |         `47.5` |
+|    `4.32` |         `43.2` |
+
+Le chiffre des dixièmes, 7 ou 3, devient le chiffre des unités.
+
+## Étape 2 : arrondir à l'entier
+
+`Math.round(average * 10)`
+
+|  Avant | `Math.round(...)` |
+| -----: | ----------------: |
+| `47.5` |              `48` |
+| `43.2` |              `43` |
+
+47.5 est pile au milieu : il monte. 43.2 est plus près de 43.
+
+## Étape 3 : remettre la virgule
+
+`Math.round(average * 10) / 10.0`
+
+| Avant | `... / 10.0` |
+| ----: | -----------: |
+|  `48` |        `4.8` |
+|  `43` |        `4.3` |
+
+4.75 → 47.5 → 48 → **4.8**. 4.32 → 43.2 → 43 → **4.3**.
+
+## Une étape par ligne
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        double average = 4.75;
+
+        double timesTen = average * 10;
+        long roundedTimesTen = Math.round(timesTen);
+        double rounded = roundedTimesTen / 10.0;
+
+        System.out.println(timesTen);
+        System.out.println(roundedTimesTen);
+        System.out.println(rounded);
+    }
+}
+```
+
+## Une étape par ligne : la sortie
+
+| `average` | `timesTen` | `roundedTimesTen` | `rounded` |
+| --------: | ---------: | ----------------: | --------: |
+|    `4.75` |     `47.5` |              `48` |     `4.8` |
+|    `4.32` |     `43.2` |              `43` |     `4.3` |
+
+`Math.round(average * 10) / 10.0` fait la même chose en une ligne : les
+parenthèses d'abord, puis l'appel, puis la division.
+
+## Pourquoi `10.0` et pas `10`
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        long roundedTimesTen = Math.round(4.75 * 10);
+        System.out.println(roundedTimesTen / 10.0);
+        System.out.println(roundedTimesTen / 10);
+    }
+}
+```
+
+`4.8` puis `4`. Un `long` divisé par l'entier `10` : **division entière**.
+
+Retenez ce `4`.
 
 ## Le problème : copier un calcul
 
@@ -144,14 +248,14 @@ Le calcul n'est écrit qu'une fois. La fonction est **à côté** de `main`.
 
 ## Le vocabulaire : l'en-tête et le corps
 
-| Morceau             | Nom                  |
-| :------------------ | :------------------- |
-| `public static`     | modificateurs        |
-| `double`            | type de retour       |
-| `roundToTenth`      | nom                  |
-| `(double value)`    | paramètres           |
-| `{ ... }`           | corps                |
-| `return ...;`       | instruction `return` |
+| Morceau          | Nom                  |
+| :--------------- | :------------------- |
+| `public static`  | modificateurs        |
+| `double`         | type de retour       |
+| `roundToTenth`   | nom                  |
+| `(double value)` | paramètres           |
+| `{ ... }`        | corps                |
+| `return ...;`    | instruction `return` |
 
 ## Le vocabulaire : l'appel
 
@@ -169,8 +273,8 @@ Le calcul n'est écrit qu'une fois. La fonction est **à côté** de `main`.
 Le **nom** et les **types des paramètres** : `roundToTenth(double)`
 
 - Ni le type de retour, ni les noms, ni `public static`.
-- Définition officielle de Java. Beaucoup de tutoriels appellent
-  _"signature"_ toute la première ligne.
+- Définition officielle de Java. Beaucoup de tutoriels appellent _"signature"_
+  toute la première ligne.
 
 Fonction ou **méthode** ? En Java, officiellement : méthode.
 
@@ -180,12 +284,12 @@ Fonction ou **méthode** ? En Java, officiellement : méthode.
 public class Main {
     public static double walkingMinutes(double distanceKm,
                                         double speedKmh) {
-        return distanceKm / speedKmh * 60;
+        return (distanceKm / speedKmh) * 60;
     }
 
     public static void main(String[] args) {
-        System.out.println(walkingMinutes(3, 5));
-        System.out.println(walkingMinutes(5, 3));
+        System.out.println(walkingMinutes(10, 5));
+        System.out.println(walkingMinutes(5, 10));
     }
 }
 ```
@@ -195,23 +299,25 @@ Prédisez les deux lignes.
 ## L'ordre compte, les noms non (2/2)
 
 ```text
-36.0
-100.0
+120.0
+30.0
 ```
+
+10 km à 5 km/h : 2 h, soit 120 min. 5 km à 10 km/h : 30 min.
 
 Le premier argument va dans le premier paramètre. Java ne regarde **que la
 position**.
 
-Arguments inversés : ça compile, et c'est faux. D'où des noms qui disent
-l'unité : `distanceKm`, pas `a`.
+Arguments inversés : ça compile, et c'est faux. D'où des noms qui disent l'unité
+: `distanceKm`, pas `a`.
 
 ## Le compilateur vérifie type et nombre
 
-Mauvais type, `roundToTenth(text)` avec un `String` :
+Mauvais type, `roundToTenth("Virginie")` :
 
 `error: incompatible types: String cannot be converted to double`
 
-Mauvais nombre, `walkingMinutes(3)` :
+Mauvais nombre, `walkingMinutes(10)` :
 
 `error: method walkingMinutes in class Main cannot be applied to given types;`
 
@@ -366,8 +472,8 @@ public class Main {
 
 - Terminer le fil rouge en fonctions, étape 3 comprise.
 - Au moins deux extensions, avec leur tableau de tests.
-- Pour chaque cas non couvert de la séance 04 : dans quelle fonction le
-  vérifier ?
+- Pour chaque cas non couvert de la séance 04 : dans quelle fonction le vérifier
+  ?
 
 ## Questions
 
