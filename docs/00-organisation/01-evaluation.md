@@ -62,9 +62,8 @@ page
 
 Un [examen blanc (PDF)](examen-blanc.pdf) reprend le format de l'évaluation,
 avec des situations rencontrées dans les supports et les ateliers. Faites-le sur
-papier, sans ressource et en temps limité, puis comparez avec le
-[corrigé (PDF)](examen-blanc-corrige.pdf). Chaque explication du corrigé renvoie
-à la page du support où retourner en cas d'erreur.
+papier, sans ressource et en temps limité, avant la séance où il est corrigé
+collectivement.
 
 ## Partie 2 - Mini-projet (50%)
 

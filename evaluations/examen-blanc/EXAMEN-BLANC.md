@@ -77,10 +77,9 @@ Générer le PDF depuis la racine du dépôt :
 
 Cet examen blanc prépare à l'évaluation écrite du **lundi 9 novembre 2026, de
 13h00 à 15h00**. Faites-le dans les mêmes conditions : sur papier, sans
-ressource, en temps limité. Ne regardez le corrigé, disponible séparément,
-qu'une fois l'examen terminé. Ses questions reprennent toutes des situations
-rencontrées en cours : exemples des supports, programmes des ateliers, erreurs
-expliquées.
+ressource, en temps limité, avant la séance où il est corrigé collectivement.
+Ses questions reprennent toutes des situations rencontrées en cours : exemples
+des supports, programmes des ateliers, erreurs expliquées.
 
 L'évaluation dure 120 minutes et compte pour 50 % de la note de l'unité
 d'enseignement, le mini-projet pour les 50 % restants. Elle porte sur les

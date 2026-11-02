@@ -82,7 +82,7 @@ presentations/
 evaluations/
   questions-insecables.lua   filtre Pandoc : une question ne se coupe pas
   nom-de-levaluation/
-    NOM.md, NOM-CORRIGE.md   sources Pandoc, énoncé et corrigé
+    NOM.md                   source Pandoc de l'énoncé
     images/                  diagrammes PlantUML (.puml) et PNG générés
 .marp/                       config.yaml et theme.css, ne pas modifier le thème
 zensical.toml                configuration du site, dont la navigation
@@ -292,9 +292,11 @@ de l'évaluation à blanc du cours MSCI de V. Guidoux : en-tête LaTeX avec
 `fancyhdr`, tableau du nom, parties par type de question, cases à cocher
 `- [ ]`, code numéroté avec `{.java .numberLines}`.
 
-- Le corrigé est la référence : bonnes cases cochées `- [x]`, puis un bloc
-  `> **Corrigé** :` qui renvoie à la séance et à la page du support. L'énoncé en
-  est dérivé : mêmes questions, cases vides, sans les blocs _Corrigé_.
+- Seul l'énoncé est publié : la correction se fait collectivement en classe.
+  Le corrigé vit hors de ce dépôt public, dans le dossier
+  `heig-vd-progim1-course-evaluations` de l'enseignant : mêmes questions, bonnes
+  cases cochées `- [x]`, puis un bloc `> **Corrigé** :` qui renvoie à la séance
+  et à la page du support.
 - Un examen blanc ne pose que des situations déjà rencontrées dans les supports
   et les ateliers : mêmes programmes, mêmes valeurs, mêmes erreurs.
 - Toute sortie et tout message d'erreur cités ont été obtenus en exécutant le
