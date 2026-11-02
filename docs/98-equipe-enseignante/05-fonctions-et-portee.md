@@ -177,6 +177,42 @@ fonction"_.
   `roundToTenth(average);` seul sur sa ligne. Le programme compile, et la
   moyenne n'est pas arrondie.
 
+### Le live coding sur l'ordre des arguments
+
+Une démonstration en quatre étapes, enregistrée le 2 novembre 2026 et publiée
+sans son dans
+[Live coding - L'ordre des arguments](../01-seances/05-fonctions-et-portee/03-live-coding-ordre-des-arguments.md).
+Elle part de `walkingMinutes(10, 5)` et `walkingMinutes(5, 10)`, et réécrit le
+programme sans jamais changer l'affichage (`120.0` puis `30.0`) :
+
+1. les valeurs écrites dans l'appel ;
+2. le résultat rangé dans `result1` et `result2` ;
+3. les arguments rangés dans `coucou` et `velo`, des noms qui ne veulent rien
+   dire ;
+4. ces variables renommées `distanceKm` et `speedKmh`, comme les paramètres,
+   avec `walkingMinutes(speedKmh, distanceKm)` qui donne toujours `30.0`.
+
+Ce qu'il faut faire émerger : chaque étape est équivalente à la précédente, et
+seule la position de l'argument décide du paramètre qui le reçoit. L'étape 4
+est celle qui démonte l'idée fausse _"les noms des arguments doivent
+correspondre à ceux des paramètres"_ : la salle s'attend souvent à ce que
+`speedKmh` aille dans `speedKmh`.
+
+Piège propre à IntelliJ : les _inlay hints_ (`distanceKm:` en gris devant
+l'argument) font croire à des arguments nommés. Certaines personnes les
+recopient, et obtiennent `')' or ',' expected`. Le dire avant de commencer, et
+s'en servir : à l'étape 3, IntelliJ affiche `distanceKm:` devant `velo`, ce qui
+montre la règle mieux qu'un discours.
+
+Le chapitre actuel d'OpenClassrooms (_Exécutez des fonctions_) ne parle ni de
+l'ordre des arguments ni de la distinction paramètre et argument. L'ancienne
+version du cours le fait, dans
+[Gérez différents types de passage de paramètre](https://openclassrooms.com/fr/courses/6173501-apprenez-a-programmer-en-java/6458826-gerez-differents-types-de-passage-de-parametre)
+: _"Chaque valeur est affectée à un paramètre dans l'ordre de leur
+définition"_, puis le passage par valeur. C'est ce chapitre qui est cité dans
+le support. Il est annoncé comme bientôt archivé : vérifier le lien avant
+chaque rentrée.
+
 ### Le vocabulaire
 
 Exiger les mots justes à l'oral dès cette séance : _"tu passes quel argument ?

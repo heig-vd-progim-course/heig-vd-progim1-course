@@ -623,6 +623,11 @@ compile, s'exécute, et donne un résultat faux.
 D'où l'importance de noms de paramètres qui disent ce qu'ils contiennent, avec
 l'unité si elle compte : `distanceKm`, pas `a`.
 
+Le [live coding sur l'ordre des arguments](03-live-coding-ordre-des-arguments.md)
+reprend ce programme en quatre étapes, avec la vidéo de la démonstration faite
+en classe. Il montre qu'une variable nommée `speedKmh`, passée en premier,
+arrive quand même dans `distanceKm`.
+
 !!! tip "Une opération, deux opérandes"
 
     Remarquez les parenthèses de la ligne 3 : `(distanceKm / speedKmh) * 60`.
@@ -1148,6 +1153,10 @@ une fonction toute trouvée.
 - [Exécutez des fonctions](https://openclassrooms.com/fr/courses/8383791-apprenez-a-programmer-en-java/8439602-executez-des-fonctions) -
   le chapitre correspondant d'OpenClassrooms, en français. Attention, il appelle
   _"signature"_ toute la première ligne.
+- [Gérez différents types de passage de paramètre](https://openclassrooms.com/fr/courses/6173501-apprenez-a-programmer-en-java/6458826-gerez-differents-types-de-passage-de-parametre) -
+  l'ancienne version du cours d'OpenClassrooms, qui dit, elle, que les
+  arguments sont affectés aux paramètres dans l'ordre et que leur valeur est
+  recopiée. La fin du chapitre, sur les objets, dépasse ce cours.
 - [Java Visualizer de Python Tutor](https://pythontutor.com/java.html) - collez
   un des fichiers de cette page et suivez pas à pas les appels et les variables
   de chaque fonction. Le meilleur moyen de _voir_ la portée. Il ne connaît pas
