@@ -11,6 +11,10 @@
 *.html
 *.pdf
 
+## Evaluations
+# PDF generes par `generate-evaluations.sh`, versionnes
+!docs/00-organisation/*.pdf
+
 ## SQLite databases
 *.db
 

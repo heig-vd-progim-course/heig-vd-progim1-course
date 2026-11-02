@@ -79,10 +79,16 @@ presentations/
   NN-nom-de-la-seance/
     PRESENTATION.md          source Marp
     images/                  diagrammes PlantUML (.puml) et SVG générés
+evaluations/
+  questions-insecables.lua   filtre Pandoc : une question ne se coupe pas
+  nom-de-levaluation/
+    NOM.md                   source Pandoc de l'énoncé
+    images/                  diagrammes PlantUML (.puml) et PNG générés
 .marp/                       config.yaml et theme.css, ne pas modifier le thème
 zensical.toml                configuration du site, dont la navigation
 generate-presentations.sh    Marp vers docs/presentations/ (HTML et PDF)
 generate-diagrams.sh         PlantUML vers SVG, à côté des sources (docs/ et presentations/)
+generate-evaluations.sh      Pandoc vers docs/00-organisation/ (PDF versionnés)
 check-presentations.py       contrôle de débordement des diapositives
 ```
 
@@ -278,6 +284,27 @@ python3 check-presentations.py
 
 Il mesure chaque diapositive avec le thème du dépôt et signale ce qui dépasse.
 Aucun débordement ne doit subsister.
+
+## Évaluations et examens blancs
+
+Les sources vivent dans `evaluations/`, en Markdown pour Pandoc, sur le modèle
+de l'évaluation à blanc du cours MSCI de V. Guidoux : en-tête LaTeX avec
+`fancyhdr`, tableau du nom, parties par type de question, cases à cocher
+`- [ ]`, code numéroté avec `{.java .numberLines}`.
+
+- Seul l'énoncé est publié : la correction se fait collectivement en classe.
+  Le corrigé vit hors de ce dépôt public, dans le dossier
+  `heig-vd-progim1-course-evaluations` de l'enseignant : mêmes questions, bonnes
+  cases cochées `- [x]`, puis un bloc `> **Corrigé** :` qui renvoie à la séance
+  et à la page du support.
+- Un examen blanc ne pose que des situations déjà rencontrées dans les supports
+  et les ateliers : mêmes programmes, mêmes valeurs, mêmes erreurs.
+- Toute sortie et tout message d'erreur cités ont été obtenus en exécutant le
+  programme avec le JDK du cours, comme pour les exemples du support.
+
+`./generate-evaluations.sh` produit les PDF dans `docs/00-organisation/`, d'où
+la page _Évaluation_ les publie. Le workflow GitHub n'a ni Pandoc ni LaTeX : les
+PDF sont **versionnés**, et se régénèrent à chaque modification d'une source.
 
 ## Exemples de code
 

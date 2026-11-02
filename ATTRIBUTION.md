@@ -62,6 +62,12 @@
 - [Mermaid](https://mermaid.js.org/) by
   [Knut Sveidqvist](https://github.com/knsv) et ses contributrices et
   contributeurs, sous licence MIT, pour les diagrammes du site.
+- [Pandoc](https://pandoc.org/) by [John MacFarlane](https://johnmacfarlane.net/)
+  et ses contributrices et contributeurs, sous licence GPL, pour la génération
+  des évaluations et des examens blancs en PDF.
+- [PlantUML](https://plantuml.com/) by
+  [Arnaud Roques](https://github.com/arnaudroques) et ses contributrices et
+  contributeurs, pour les diagrammes des présentations et des évaluations.
 
 ## Sources pédagogiques
 
