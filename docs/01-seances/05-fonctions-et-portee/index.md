@@ -12,6 +12,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   [Lien vers le PDF](https://heig-vd-progim-course.github.io/heig-vd-progim1-course/presentations/05-fonctions-et-portee/05-fonctions-et-portee-presentation.pdf)
 - Théorie : [Les fonctions et la portée des variables](01-fonctions-et-portee.md)
 - Atelier : [Découper en fonctions](02-atelier-decouper-en-fonctions.md)
+- Live coding (vidéo et code) :
+  [L'ordre des arguments](03-live-coding-ordre-des-arguments.md)
 - Notes pour l'équipe enseignante :
   [Lien vers les notes](../../98-equipe-enseignante/05-fonctions-et-portee.md)
 
@@ -94,6 +96,10 @@ que votre tableau de tests de la séance 04.
 - Relire votre liste des cas non couverts de la séance 04. Pour chaque cas,
   dites dans quelle fonction il faudrait le vérifier. Vous saurez écrire ces
   vérifications en séance 06.
+- Revoir le
+  [live coding sur l'ordre des arguments](03-live-coding-ordre-des-arguments.md)
+  et exécuter vous-même ses quatre étapes. Avant chaque exécution, prédisez ce
+  qui s'affiche.
 - Coller un des programmes du support dans le
   [Java Visualizer de Python Tutor](https://pythontutor.com/java.html) et
   suivre l'exécution pas à pas.
