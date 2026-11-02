@@ -8,10 +8,10 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 La note de l'unité d'enseignement est composée de deux parties de poids égal :
 
-| Partie                | Quand     | Poids | Forme                             |
-| :-------------------- | :-------- | ----: | :-------------------------------- |
-| Évaluation écrite     | Entre les séances 06 et 07 |   50% | Papier et crayon, sans ressources |
-| Mini-projet           | Séances 08 à 12 |   50% | Projet a jalons + présentation orale |
+| Partie            | Quand                 | Poids | Forme                                |
+| :---------------- | :-------------------- | ----: | :----------------------------------- |
+| Évaluation écrite | Lundi 9 novembre 2026 |   50% | Papier et crayon, sans ressources    |
+| Mini-projet       | Séances 08 à 12       |   50% | Projet a jalons + présentation orale |
 
 Les deux parties mesurent deux choses différentes et complémentaires :
 l'évaluation écrite mesure ce que vous avez compris, le mini-projet mesure ce
@@ -19,24 +19,32 @@ que vous savez faire quand personne ne vous dit quoi faire.
 
 ## Partie 1 - Évaluation écrite (50%)
 
-- Au milieu du semestre, dans un créneau dédié entre les séances 06 et 07.
-- Sur papier, sans ordinateur, sans documentation, sans outil d'intelligence
-  artificielle.
-- Durée : deux périodes.
+- Le **lundi 9 novembre 2026, de 13h00 à 15h00**, entre les séances 06 et 07.
+- Durée : 120 minutes.
+- Sur papier, sans aucune ressource : ni ordinateur, ni téléphone, ni outil
+  d'intelligence artificielle, ni notes de cours, ni feuille de résumé.
+- Uniquement des questions **vrai ou faux** et **à choix multiple**.
 
 ### Ce qui est évalué
 
-- Lire un bout de code et dire ce qu'il produit.
-- Repérer et expliquer une erreur dans un code donné.
-- Traduire un énoncé en diagramme d'activité.
-- Compléter ou écrire un court fragment de code à la main.
-- Expliquer un terme du vocabulaire du cours avec vos mots.
+Le contenu des séances 01 à 05, ateliers compris :
+
+- lire un programme et dire ce qu'il affiche ;
+- reconnaître une erreur, et dire si elle survient à la compilation ou à
+  l'exécution ;
+- lire un diagramme d'activité ;
+- nommer les parties d'un programme : déclaration, type, nom, valeur,
+  affectation, paramètre, argument, valeur de retour, portée.
+
+Le vocabulaire y tient une place importante. Savoir écrire un programme ne
+suffit pas : il faut aussi savoir dire ce que fait chacune de ses parties.
 
 ### Ce qui n'est pas évalué
 
-- La syntaxe exacte au point-virgule près. Une erreur de syntaxe isolée qui
-  n'empêche pas de comprendre votre intention ne coûte pas de point.
+- Écrire du code ou dessiner un diagramme : aucune question ne le demande.
 - La mémorisation de la bibliothèque standard Java.
+- **Les conditions.** Elles sont vues en séance 06, qui ne fait pas partie de
+  cette évaluation.
 - **Les boucles.** Elles sont vues en séance 07, donc après cette évaluation.
   Elles relèvent de l'évaluation finale.
 
@@ -48,16 +56,20 @@ sur l'ensemble du cours, boucles et tableaux compris.
 ### Comment s'y préparer
 
 Refaire les exercices sans regarder la solution, à la main, sur papier. C'est
-inconfortable et c'est exactement pour cette raison que cela fonctionne. Voir
-la page [Apprendre à apprendre](../01-seances/01-donner-des-instructions/04-apprendre-a-apprendre.md).
+inconfortable et c'est exactement pour cette raison que cela fonctionne. Voir la
+page
+[Apprendre à apprendre](../01-seances/01-donner-des-instructions/04-apprendre-a-apprendre.md).
 
-Un examen blanc est distribué à la fin de la séance 06 et corrigé
-collectivement.
+Un [examen blanc (PDF)](examen-blanc.pdf) reprend le format de l'évaluation,
+avec des situations rencontrées dans les supports et les ateliers. Faites-le sur
+papier, sans ressource et en temps limité, puis comparez avec le
+[corrigé (PDF)](examen-blanc-corrige.pdf). Chaque explication du corrigé renvoie
+à la page du support où retourner en cas d'erreur.
 
 ## Partie 2 - Mini-projet (50%)
 
-Le mini-projet occupe la seconde moitié du semestre. Il est décrit en détail
-sur la page [Mini-projet et jalons](02-mini-projet-et-jalons.md).
+Le mini-projet occupe la seconde moitié du semestre. Il est décrit en détail sur
+la page [Mini-projet et jalons](02-mini-projet-et-jalons.md).
 
 Il se décompose ainsi :
 
@@ -79,10 +91,10 @@ rien pour votre employeur non plus.
 | Critère                                                          | Poids |
 | :--------------------------------------------------------------- | ----: |
 | Le problème traité est clairement posé et le choix est justifié  |   15% |
-| La conception (diagramme, découpage en fonctions) est expliquée   |   25% |
-| Le code présenté est compris ligne à ligne par la personne        |   35% |
-| Les limites, bogues connus et pistes d'amélioration sont énoncés  |   15% |
-| La clarté de la présentation et la gestion du temps               |   10% |
+| La conception (diagramme, découpage en fonctions) est expliquée  |   25% |
+| Le code présenté est compris ligne à ligne par la personne       |   35% |
+| Les limites, bogues connus et pistes d'amélioration sont énoncés |   15% |
+| La clarté de la présentation et la gestion du temps              |   10% |
 
 Le critère central est le troisième. Si vous ne savez pas expliquer une partie
 de votre code, dites-le : une limite assumée coûte beaucoup moins cher qu'une

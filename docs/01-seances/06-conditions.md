@@ -37,8 +37,9 @@ directe en code. Puis chasse aux cas non couverts dans le programme du voisin.
 
 ## Point d'attention
 
-C'est la dernière séance avant l'évaluation écrite. Prévoir un examen blanc en
-fin de séance et le corriger collectivement.
+C'est la dernière séance avant l'évaluation écrite, qui porte sur les séances 01
+à 05. L'[examen blanc](../00-organisation/01-evaluation.md) est publié avant :
+prévoir un temps pour le corriger collectivement.
 
 <!-- URLs -->
 
