@@ -339,8 +339,8 @@ aucun message d'erreur** ?
 
 - [ ] Afficher `somme / 3` pour la moyenne des notes 5, 4 et 5, rangée dans
       `int somme`
-- [ ] Appeler `computeFinalGrade(project, exam)`, dont les paramètres sont, dans
-      l'ordre, `exam` puis `project`
+- [ ] Afficher avec `printf("%.1f%n", average)` la moyenne des notes 3.3 et 4.6,
+      sans l'arrondir avant
 - [ ] Afficher `Integer.MAX_VALUE + 1`
 - [ ] Afficher `5 / 0`
 
@@ -621,8 +621,122 @@ public class Main {
 - [ ] Erreur de compilation à la ligne 3 : `fahrenheit` est déclarée deux fois
 
 ```{=latex}
+\newpage
+```
+
+## Partie D : Trouver le bug
+
+_**Note** : chaque question de cette partie vaut 2 points. Chaque programme
+contient **un** bug, placé exprès. Une seule réponse est correcte._
+
+### Question 38 (2 points)
+
+Ce programme devrait convertir 20 °C en degrés Fahrenheit et afficher `68.0`. Il
+affiche `52.0`, sans aucun message d'erreur.
+
+```{.java .numberLines}
+public class Main {
+    public static void main(String[] args) {
+        double celsius = 20;
+        double fahrenheit = 9 / 5 * celsius + 32;
+        System.out.println(fahrenheit);
+    }
+}
+```
+
+Quelle ligne contient le bug ?
+
+- [ ] La ligne 3 : `20` est un entier, il faudrait écrire `20.0`
+- [ ] La ligne 4
+- [ ] La ligne 5
+- [ ] Aucune : `52.0` est le bon résultat
+
+### Question 39 (2 points)
+
+L'examen compte pour 60 % et le projet pour 40 %. La personne a obtenu 2.5 à
+l'examen et 5.5 au projet : le programme devrait afficher `3.7`. Il affiche
+`4.3`, sans aucun message d'erreur.
+
+```{.java .numberLines}
+public class Main {
+    public static double computeFinalGrade(double exam, double project) {
+        return (exam * 0.6) + (project * 0.4);
+    }
+
+    public static void main(String[] args) {
+        double exam = 2.5;
+        double project = 5.5;
+        System.out.println(computeFinalGrade(project, exam));
+    }
+}
+```
+
+Quelle ligne contient le bug ?
+
+- [ ] La ligne 2
+- [ ] La ligne 3
+- [ ] La ligne 8
+- [ ] La ligne 9
+
+### Question 40 (2 points)
+
+Ce programme ne compile pas.
+
+```{.java .numberLines}
+public class Main {
+    public static void computeAverage(double grade1, double grade2) {
+        double average = (grade1 + grade2) / 2;
+        System.out.println(average);
+    }
+
+    public static void main(String[] args) {
+        double average = computeAverage(4.5, 5.0);
+        System.out.printf("Moyenne : %.1f%n", average);
+    }
+}
+```
+
+Le compilateur signale la ligne 8 :
+
+```text
+Main.java:8: error: incompatible types: void cannot be converted to double
+```
+
+Quelle correction fait afficher `Moyenne : 4.8` ?
+
+- [ ] Ligne 8, écrire seulement `computeAverage(4.5, 5.0);`, sans
+      `double average =`
+- [ ] Ligne 2, remplacer `void` par `double`, et ligne 4, remplacer
+      `System.out.println(average);` par `return average;`
+- [ ] Ligne 9, remplacer `%.1f` par `%d`
+- [ ] Ligne 3, renommer `average` en `result`, pour ne pas avoir deux variables
+      du même nom
+
+### Question 41 (2 points)
+
+Ce programme ne compile pas. Quelle ligne contient le bug ?
+
+```{.java .numberLines}
+public class Main {
+    public static double roundToTenth(double value) {
+        double value = Math.round(value * 10) / 10.0;
+        return value;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(roundToTenth(3.95));
+    }
+}
+```
+
+- [ ] La ligne 2
+- [ ] La ligne 3
+- [ ] La ligne 4
+- [ ] La ligne 8
+
+```{=latex}
 \vspace*{\fill}
 \begin{center}
-\textbf{Total : 59 points}
+\textbf{Total : 67 points}
 \end{center}
 ```
