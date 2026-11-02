@@ -32,6 +32,7 @@ Le contenu des séances 01 à 05, ateliers compris :
 - lire un programme et dire ce qu'il affiche ;
 - reconnaître une erreur, et dire si elle survient à la compilation ou à
   l'exécution ;
+- trouver la ligne qui contient un bug, ou la correction qui le répare ;
 - lire un diagramme d'activité ;
 - nommer les parties d'un programme : déclaration, type, nom, valeur,
   affectation, paramètre, argument, valeur de retour, portée.
