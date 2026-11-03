@@ -102,8 +102,9 @@ comprime si la séance déborde.
 |     03 | [Premiers pas en Java](03-premiers-pas-en-java.md)            |
 |     04 | [Du diagramme au code](04-du-diagramme-au-code.md)            |
 |     05 | [Fonctions et portée des variables](05-fonctions-et-portee.md) |
+|     06 | [Conditions](06-conditions.md)                                |
 
-Les séances 06 à 12 n'ont pas encore de notes : leur contenu est à l'état
+Les séances 07 à 12 n'ont pas encore de notes : leur contenu est à l'état
 d'esquisse.
 
 ## Contribuer

@@ -1,0 +1,17 @@
+@startuml diagramme-appreciation
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 18
+
+start
+if (Au moins 5.5 ?) then ([oui])
+  :Excellent;
+elseif (Au moins 5 ?) then ([oui])
+  :Bien;
+elseif (Au moins 4 ?) then ([oui])
+  :Suffisant;
+else ([non])
+  :Insuffisant;
+endif
+stop
+@enduml

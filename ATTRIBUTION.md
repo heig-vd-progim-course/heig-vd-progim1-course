@@ -68,6 +68,10 @@
 - [PlantUML](https://plantuml.com/) by
   [Arnaud Roques](https://github.com/arnaudroques) et ses contributrices et
   contributeurs, pour les diagrammes des présentations et des évaluations.
+- [tsParticles confetti](https://github.com/tsparticles/tsparticles) by
+  [Matteo Bruni](https://github.com/matteobruni) et ses contributrices et
+  contributeurs, sous licence MIT, pour les confettis des quiz du site, comme
+  dans le cours UPInfo.
 
 ## Sources pédagogiques
 
@@ -93,7 +97,19 @@
 - [Catalogue d'idées fausses en programmation](https://tha.de/misconceptions),
   pour les idées fausses sur les fonctions, les paramètres et la portée.
 - [Apprenez à programmer en Java](https://openclassrooms.com/fr/courses/8383791-apprenez-a-programmer-en-java)
-  d'OpenClassrooms, pour l'ordre des notions et le chapitre sur les fonctions.
+  d'OpenClassrooms, pour l'ordre des notions et les chapitres sur les fonctions
+  et les conditions.
+- Chiodini, L., Moreno Santos, I., Gallidabino, A., Tafliovich, A., Santos, A.
+  L. et Hauswirth, M., _A Curated Inventory of Programming Language
+  Misconceptions_, ITiCSE 2021, et le catalogue
+  [progmiscon.org](https://progmiscon.org/), pour les idées fausses sur les
+  conditions (séance 06).
+- Roediger, H. L. et Karpicke, J. D., _Test-Enhanced Learning_, Psychological
+  Science, 17(3), 2006, et Butler, A. C. et Roediger, H. L., _Feedback enhances
+  the positive effects and reduces the negative effects of multiple-choice
+  testing_, Memory & Cognition, 36(3), 2008, pour les quiz à choix multiple.
+- Porter, L., Bailey Lee, C. et Simon, B., _Halving Fail Rates using Peer
+  Instruction_, SIGCSE 2013, pour les votes en classe.
 - [Java Visualizer](https://pythontutor.com/java.html) de Python Tutor, par
   Philip Guo, pour visualiser les appels de fonctions et la portée.
 - Piaget, J. et Illich, I., cités dans les

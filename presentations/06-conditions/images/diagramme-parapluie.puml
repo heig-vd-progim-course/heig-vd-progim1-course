@@ -1,0 +1,14 @@
+@startuml diagramme-parapluie
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 18
+
+start
+:Regarder par la fenêtre;
+if (Il pleut ?) then ([oui])
+  :Prendre un parapluie;
+else ([non])
+endif
+:Sortir;
+stop
+@enduml

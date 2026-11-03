@@ -49,7 +49,7 @@ Le programme complet, séance par séance, est disponible sur la page
 |     03 | Premiers pas en Java                           | Prêt        |
 |     04 | Du diagramme au code                           | Prêt        |
 |     05 | Fonctions et portée des variables              | Prêt        |
-|     06 | Conditions                                     | À faire     |
+|     06 | Conditions                                     | Prêt        |
 |      — | **Évaluation écrite**                          | À faire     |
 |     07 | Boucles                                        | À faire     |
 |     08 | Tableaux et lancement du mini-projet           | À faire     |
