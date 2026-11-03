@@ -257,7 +257,7 @@ public class Main {
 }
 ```
 
-Même sortie : `true` puis `false`. On rend **directement** la comparaison.
+Même sortie. On rend **directement** la comparaison.
 
 ## Quiz
 
