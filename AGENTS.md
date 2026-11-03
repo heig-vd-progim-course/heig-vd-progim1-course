@@ -210,6 +210,36 @@ Types utilisés : `note`, `tip`, `warning`, `danger`. Avec parcimonie.
 Les diagrammes sont en Mermaid dans un bloc ` ```mermaid `. Donner un libellé à
 chaque nœud : un nœud vide casse le rendu.
 
+### Les quiz
+
+Un quiz à choix multiple s'écrit avec une liste de cases à cocher dans un bloc
+`quiz`. La bonne réponse est cochée, l'explication facultative s'affiche une
+fois la bonne réponse trouvée, avec des confettis :
+
+```markdown
+<div class="quiz" markdown>
+
+`average` vaut 4. Que vaut `average > 4` ?
+
+- [ ] `true`
+- [x] `false`
+
+<div class="quiz-explanation" markdown>
+
+`>` est strictement plus grand.
+
+</div>
+
+</div>
+```
+
+Le comportement est dans `docs/javascripts/quiz.js`, le style dans
+`docs/stylesheets/quiz.css`, les confettis viennent de `@tsparticles/confetti`
+comme dans UPInfo. Une seule bonne réponse par quiz, et chaque mauvaise
+réponse vise une idée fausse précise : un distracteur absurde ne mesure rien.
+Dans la présentation, le même quiz se pose en deux diapositives, la question
+avec les choix A à D, puis la réponse.
+
 ### La navigation
 
 Elle est définie à la main dans `zensical.toml`, clé `nav`. **Une table en ligne
@@ -376,7 +406,7 @@ qui précède.
 |     03 | Variables, types primitifs, affichage console              |
 |     04 | Saisie clavier, programme complet de bout en bout          |
 |     05 | Fonctions, paramètres, valeur de retour, portée            |
-|     06 | Conditions et opérateurs logiques                          |
+|     06 | Conditions, opérateurs logiques, `switch`, ternaire        |
 |      — | Évaluation écrite (50 %), entre les séances 06 et 07       |
 |     07 | Boucles                                                    |
 |     08 | Tableaux. Lancement du mini-projet                         |

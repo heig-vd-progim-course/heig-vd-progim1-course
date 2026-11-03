@@ -27,7 +27,7 @@ jalons. Le cours devient un atelier.
 |     03 | [Premiers pas en Java](03-premiers-pas-en-java/index.md)                   | Installation, machine virtuelle et compilation, types et variables |
 |     04 | [Du diagramme au code](04-du-diagramme-au-code/index.md)                   | Entrées, traitement, sortie. Saisie clavier, affichage, premier programme complet |
 |     05 | [Fonctions et portée des variables](05-fonctions-et-portee/index.md)       | Paramètres, corps, valeur de retour. Ce qu'une variable voit |
-|     06 | [Conditions](06-conditions.md)                                             | `if`, `else`, opérateurs de comparaison et logiques |
+|     06 | [Conditions](06-conditions/index.md)                                       | `if`, `else`, opérateurs de comparaison et logiques, `switch`, ternaire |
 |      — | **Évaluation écrite** (50 %)                                               | Papier et crayon, sans ressources |
 |     07 | [Boucles](07-boucles.md)                                                   | `while`, `for`, conditions d'arrêt |
 |     08 | [Tableaux et lancement du mini-projet](08-tableaux-et-lancement-du-mini-projet.md) | Collections de données, parcours. Jalon 1 |
