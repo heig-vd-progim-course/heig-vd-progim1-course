@@ -301,13 +301,6 @@ Déclarez-la **avant** le `if`.
 **Toute condition se teste avec trois valeurs : une qui la rend vraie, une qui
 la rend fausse, et la valeur limite.**
 
-## Le déroulé de l'atelier
-
-1. **Prédire** : quatre programmes, prédiction écrite avant d'exécuter.
-2. **Réparer** : quatre bugs placés exprès.
-3. **Écrire** : trois fonctions qui rendent un `boolean`.
-4. **Le fil rouge décide** : `hasPassed`, puis le verdict.
-
 ## Plus de deux chemins
 
 ![h:420](./images/diagramme-appreciation.svg)
@@ -468,14 +461,6 @@ Chaque frontière est un endroit où un `>` à la place d'un `>=` passe inaperç
 
 **Avant d'écrire une suite de conditions, écrivez le tableau des cas qu'elle
 doit couvrir, avec une valeur de chaque côté de chaque limite.**
-
-## Le déroulé de l'atelier
-
-1. **Prédire** : deux programmes.
-2. **Réparer** : trois bugs placés exprès.
-3. **Écrire** : `ticketPrice`, `isWeekend`, `isLeapYear`.
-4. **Le fil rouge se protège** : `isValidGrade`, puis `describe`.
-5. **La chasse** : faites mentir le programme de votre voisin.
 
 ## L'opérateur ternaire
 

@@ -64,18 +64,6 @@ Programmer sans texte, et buter sur cinq limites :
 - déclarer une variable avec un type adapté ;
 - expliquer pourquoi `0.1 + 0.2` ne vaut pas `0.3`.
 
-## Le programme de la séance
-
-| Partie                      |  Durée |
-| :-------------------------- | -----: |
-| Installer son environnement | 50 min |
-| Premier programme           | 30 min |
-| La machine virtuelle        | 30 min |
-| Les types et les variables  | 55 min |
-
-**Objectif non négociable de la matinée** : tout le monde repart avec IntelliJ
-qui fonctionne et un Hello World qui s'exécute.
-
 ## Pourquoi Java
 
 Ce n'est ni le plus simple, ni le plus moderne.

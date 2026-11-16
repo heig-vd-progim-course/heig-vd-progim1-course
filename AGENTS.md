@@ -339,6 +339,9 @@ math: mathjax
 - Ordre des diapositives : titre, _"Retrouvez plus de détails dans le support de
   cours"_, rappel de la séance précédente, objectifs, contenu, _"À vous de jouer
   !"_, questions.
+- **Pas de diapositive de planning** : ni programme minuté de la séance, ni
+  déroulé d'un atelier ou d'une activité. Le déroulé vit dans le support ;
+  une diapositive d'atelier ne porte que sa règle.
 - **Pas d'illustrations** dans les présentations : ni photo, ni fond
   (`![bg]`), ni diapositive de sources. Le texte et le code suffisent.
 - Seule exception : les **diagrammes**, écrits en PlantUML. La source
