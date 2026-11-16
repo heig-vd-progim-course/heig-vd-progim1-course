@@ -1,0 +1,14 @@
+@startuml q07
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 22
+!pragma useVerticalIf on
+
+start
+if (note au moins 1 OU au plus 6 ?) then ([oui])
+  :Afficher Note valide;
+else ([non])
+  :Afficher Note invalide;
+endif
+stop
+@enduml

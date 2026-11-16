@@ -29,6 +29,9 @@ seule la valeur limite les distingue.
 | `switch` et ternaire à la fin, pas en annexe                | Demande explicite : ils viennent une fois `if`, `else` et les opérateurs logiques compris                       |
 | Le `switch` avec `->` uniquement                            | Celui du cours OpenClassrooms actuel. La forme avec `break` est dans un bloc repliable, pour la lecture de code |
 | Un `switch` sur un `String` avant la séance 09              | Réagir à un texte tapé sans `equals`, et désamorcer `choice == "a"`, qui compile et ment                       |
+| Une activité en quatuors, après la deuxième théorie         | Énoncé, diagramme, code et sortie : relier les trois écritures d'une décision. Après `else if` et `&&`, pas avant |
+| Les diagrammes des cartes en PlantUML                        | Une source texte par diagramme, régénérée par le script des cartes : modifiable sans outil de dessin              |
+| Des problèmes de Parsons dans les deux ateliers             | La structure d'un `if` et l'ordre des `else if`, sans la charge de la syntaxe. Voir les notes de la séance 07      |
 
 ### Ce que fait OpenClassrooms
 
@@ -128,6 +131,8 @@ attendu des quiz vient de l'effort de rappel et de la rétroaction, pas d'eux.
 | Préparer les deux live codings           | Voir les sections correspondantes. Un projet IntelliJ vide, police agrandie                        |
 | Récupérer deux ou trois fils rouges      | Ceux de la séance 05, étape 3. Ils servent de point de départ au premier atelier                   |
 | Avoir le diagramme du parapluie au tableau | Celui de la séance 01. Il reste affiché pendant la première théorie                              |
+| Imprimer les cartes de l'activité        | [Le PDF des cartes](materiel/06-conditions-cartes.pdf) : 21 pages A4, **en couleur**, recto seul, à couper en deux (A5) |
+| Trier les cartes                         | Avec 35 personnes, 8 quatuors (retirer Q10 et Q09) et 3 arbitres. Compter quinze minutes au massicot |
 
 ### Les sorties ont été obtenues sur JDK 25
 
@@ -213,7 +218,7 @@ l'erreur. Faire dire à la salle pourquoi il n'y a pas d'erreur de compilation.
 
 ## Correction au tableau, en live coding
 
-Quinze minutes, à partir des questions de la salle. Si elles ne viennent pas,
+Dix minutes, à partir des questions de la salle. Si elles ne viennent pas,
 cette suite, une étape par question :
 
 1. Écrire `canVote` avec `>`, tester 25 et 12. Demander : _"c'est juste ?"_.
@@ -249,6 +254,72 @@ celui que prendra votre test.
 - Ne pas présenter le court-circuit comme un point central. Il est dans un bloc
   repliable : à mentionner si la question vient.
 
+## Activité - Des conditions en quatuor
+
+Vingt minutes, entre la deuxième théorie et le second atelier : deux pour la
+règle et la minute de silence, dix pour se retrouver, huit pour vérifier et
+débriefer. C'est la version à quatre cartes de l'activité de la séance 07 ;
+l'argumentaire et les limites de ce que la recherche en dit sont dans
+[les notes de la séance 07](07-boucles.md#ce-que-dit-la-recherche).
+
+### Les cartes
+
+Le PDF commence par la page de solutions, à donner aux arbitres. Chaque carte
+porte son identifiant en petit, en bas à droite.
+
+| Quatuor | Ce qu'il vise                                                                 | Sortie              |
+| :-----: | :---------------------------------------------------------------------------- | :------------------ |
+|   Q01   | La référence : `>=` à la limite de 4                                          | `Réussi`            |
+|   Q02   | Le jumeau de Q01 avec `>` : la limite tombe du mauvais côté                    | `Échoué`            |
+|   Q03   | Un `if` sans `else` : la ligne qui suit s'exécute toujours                    | `Fin`               |
+|   Q04   | `else if` dans le bon ordre                                                    | `Bien`              |
+|   Q05   | Les mêmes conditions dans le mauvais ordre : la première vraie gagne           | `Suffisant`         |
+|   Q06   | L'intervalle avec `&&`                                                         | `Note invalide`     |
+|   Q07   | Le jumeau de Q06 avec `\|\|` : toujours vrai                                   | `Note valide`       |
+|   Q08   | Deux `if` indépendants : les deux blocs s'exécutent                            | `Bien` et `Suffisant` |
+|   Q09   | Le prix du billet, à 16 ans                                                    | `20 francs`         |
+|   Q10   | Le même code à 6 ans : **même diagramme** que Q09, autre valeur               | `10 francs`         |
+
+Les codes ont été exécutés avec `eclipse-temurin:25-jdk`. Les diagrammes sont
+dans `materiel/06-conditions/diagrammes/`, le PDF se régénère avec
+`python3 materiel/06-conditions/generer-cartes.py`.
+
+Avec moins de personnes, retirer les quatuors dans cet ordre : Q10, Q09, Q08,
+Q03, Q07, Q06, Q05, Q04, Q02, Q01. Ne pas descendre en dessous de quatre
+quatuors : Q01, Q02, Q04 et Q05 forment le cœur de l'activité. Q09 et Q10 vont
+ensemble : on les garde ou on les retire tous les deux.
+
+### Ce qu'il faut faire
+
+- **Lire la règle, puis une minute de silence**, cartes en main. Sans elle,
+  les gens se lèvent et cherchent au hasard.
+- **Distribuer au hasard**, faces cachées, en mélangeant les quatre sortes.
+- **Renvoyer aux arbitres**, ne pas valider soi-même.
+- **Clôture** : chaque quatuor lit son énoncé et sa sortie, en une phrase.
+  Pour Q02, Q05 et Q07, demander à la salle si elle est d'accord avant de
+  confirmer.
+
+### Ce qui rate habituellement
+
+- **Q09 et Q10 s'échangent leur diagramme.** Ce n'est pas une erreur : les
+  deux diagrammes sont identiques. C'est la bonne question du débriefing :
+  _"qu'est-ce qui vous a départagés ?"_. Réponse attendue : la valeur.
+- **Q05 est pris pour une erreur d'impression.** Une personne trouve que ce
+  code est faux et cherche le « bon ». Il n'y en a pas : le code est faux, et
+  sa sortie l'est aussi. C'est le bug du quiz de la théorie.
+- **Q07 est associé à _"Note invalide"_**, parce que 7 n'est pas une note
+  valable. Faire suivre le diagramme : avec `OU`, `7 >= 1` suffit.
+- **Le bruit.** Annoncer un signal de fin avant de lancer.
+
+### Débriefing
+
+Les trois questions du support. Ce qu'il faut faire émerger :
+
+- un diagramme et un code disent la même chose si, pour **chaque** valeur, ils
+  prennent le même chemin ;
+- un code peut compiler, s'exécuter, et donner une réponse fausse (Q02, Q05,
+  Q07) : le compilateur ne connaît pas l'énoncé.
+
 ## Pendant le second atelier
 
 - **Le bug 1 (`ticketPrice`)** demande d'écrire le tableau de tests avant
@@ -278,9 +349,13 @@ L'objectif est qu'ils sachent **lire** ces deux formes et choisir.
 - **La forme avec `break`** : ne pas la montrer en classe. Elle est dans le
   support pour celles et ceux qui la croiseront.
 
-## Live coding et clôture
+## Clôture
 
-Dix minutes. Écrire en direct un petit menu :
+Cinq minutes, depuis l'ajout de l'activité en quatuors. Le menu ci-dessous ne
+se fait plus en classe que s'il reste du temps : sinon, il passe dans la
+correction de la séance suivante.
+
+Écrire en direct un petit menu :
 
 1. `IO.readln("Votre choix (a, b ou q) : ")`, puis un `switch` sur le texte.
 2. Dans le `case "a"`, lire deux notes et afficher la moyenne arrondie avec les
@@ -301,6 +376,8 @@ Dix minutes. Écrire en direct un petit menu :
 | La chasse aux cas non couverts                           | Le fil rouge qui décide, testé à 4                    |
 | Le court-circuit et les `double`, renvoyés au support     | La règle des trois valeurs                            |
 | Le live coding final                                     | Le quiz sur l'ordre des `else if`                     |
+| Les exercices de remise en ordre, à faire à la maison    | Le débriefing de l'activité en quatuors               |
+| L'activité, réduite à 8 minutes sans vérification à voix haute |                                                 |
 
 ## La contrainte de progression
 

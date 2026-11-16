@@ -455,6 +455,15 @@ Décidez sur la valeur **arrondie**, celle qu'on affiche.
 
 Chaque frontière est un endroit où un `>` à la place d'un `>=` passe inaperçu.
 
+## Activité - Des conditions en quatuor
+
+<!-- _class: lead -->
+
+**Avant de rejoindre qui que ce soit, suivez le chemin de votre carte dans
+votre tête, avec la valeur donnée.**
+
+Un énoncé, un diagramme, un code, une sortie.
+
 ## Atelier - Couvrir tous les cas
 
 <!-- _class: lead -->

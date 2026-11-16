@@ -24,6 +24,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - Atelier : [Décider](02-atelier-decider.md)
 - Théorie :
   [Plusieurs cas et opérateurs logiques](03-plusieurs-cas-et-operateurs-logiques.md)
+- Activité :
+  [Des conditions en quatuor](activite-des-conditions-en-quatuor.md)
 - Atelier : [Couvrir tous les cas](04-atelier-couvrir-tous-les-cas.md)
 - Théorie : [`switch` et l'opérateur ternaire](05-switch-et-ternaire.md)
 - Notes pour l'équipe enseignante :
@@ -63,21 +65,23 @@ de pause.
 | :---------- | -----: | :---------------------------------------------------------------------------------------------- |
 | 00:00-00:15 | 15 min | [Rappel de la séance 05 : dans quel ordre ?](01-decider-avec-if.md#rappel-dans-quel-ordre)       |
 | 00:15-00:30 | 15 min | [Théorie - Décider avec `if` et `else`](01-decider-avec-if.md#du-losange-au-code)                |
-| 00:30-01:10 | 40 min | [Atelier - Décider](02-atelier-decider.md)                                                      |
-| 01:10-01:25 | 15 min | Correction au tableau, en live coding                                                           |
-| 01:25-01:40 | 15 min | Pause                                                                                           |
-| 01:40-02:00 | 20 min | [Théorie - Plusieurs cas et opérateurs logiques](03-plusieurs-cas-et-operateurs-logiques.md)     |
-| 02:00-02:35 | 35 min | [Atelier - Couvrir tous les cas, parties 1 à 5](04-atelier-couvrir-tous-les-cas.md)              |
-| 02:35-02:50 | 15 min | Pause                                                                                           |
-| 02:50-03:05 | 15 min | [Théorie - `switch` et l'opérateur ternaire](05-switch-et-ternaire.md)                           |
-| 03:05-03:20 | 15 min | [Atelier - Couvrir tous les cas, partie 6](04-atelier-couvrir-tous-les-cas.md#6-apres-la-pause-switch-et-ternaire) |
-| 03:20-03:30 | 10 min | Live coding, discussion, clôture                                                                |
+| 00:30-01:05 | 35 min | [Atelier - Décider](02-atelier-decider.md)                                                      |
+| 01:05-01:15 | 10 min | Correction au tableau, en live coding                                                           |
+| 01:15-01:30 | 15 min | Pause                                                                                           |
+| 01:30-01:50 | 20 min | [Théorie - Plusieurs cas et opérateurs logiques](03-plusieurs-cas-et-operateurs-logiques.md)     |
+| 01:50-02:10 | 20 min | [Activité - Des conditions en quatuor](activite-des-conditions-en-quatuor.md)                   |
+| 02:10-02:40 | 30 min | [Atelier - Couvrir tous les cas, parties 1 à 5](04-atelier-couvrir-tous-les-cas.md)              |
+| 02:40-02:55 | 15 min | Pause                                                                                           |
+| 02:55-03:10 | 15 min | [Théorie - `switch` et l'opérateur ternaire](05-switch-et-ternaire.md)                           |
+| 03:10-03:25 | 15 min | [Atelier - Couvrir tous les cas, partie 6](04-atelier-couvrir-tous-les-cas.md#6-apres-la-pause-switch-et-ternaire) |
+| 03:25-03:30 |  5 min | Clôture                                                                                         |
 
 ### Note sur la gestion du temps
 
 Si la séance déborde, ce sont la partie _Écrire_ des deux ateliers et l'étape 2
 de la partie 6 qui sautent : elles se terminent à la maison. La théorie sur
-`switch` et l'opérateur ternaire peut se réduire à la lecture de la page.
+`switch` et l'opérateur ternaire peut se réduire à la lecture de la page, et
+les exercices de remise en ordre se font à la maison.
 
 Ce qui ne se coupe jamais : les parties _Prédire_ et _Réparer_ du premier
 atelier, et le fil rouge qui décide. Un programme qui distingue réussi et
@@ -88,7 +92,10 @@ atelier, et le fil rouge qui décide. Un programme qui distingue réussi et
 - Présentation magistrale courte, entrecoupée de prédictions et de quiz à
   choix multiple, à faire en classe.
 - Démonstration commentée, erreurs comprises.
-- Ateliers individuels : prédire, exécuter, réparer, puis écrire.
+- Activité en mouvement : retrouver les quatre cartes qui vont ensemble,
+  énoncé, diagramme, code et sortie.
+- Ateliers individuels : prédire, remettre des lignes dans l'ordre, exécuter,
+  réparer, puis écrire.
 - Échange de programmes entre voisins pour chercher les cas non couverts.
 - Correction au tableau, en live coding, à partir des questions de la classe.
 
@@ -97,8 +104,8 @@ atelier, et le fil rouge qui décide. Un programme qui distingue réussi et
 Cette séance ne donne pas lieu à une note, et elle n'est **pas** évaluée à
 l'évaluation écrite du 9 novembre.
 
-La vérification est immédiate : les quiz du support vous disent tout de suite
-si vous avez juste, vos prédictions correspondent ou non à ce que la console
+La vérification est immédiate : les quiz et les exercices de remise en ordre
+du support vous disent tout de suite si vous avez juste, vos prédictions correspondent ou non à ce que la console
 affiche, et votre tableau de tests révèle les limites mal placées.
 
 ## À faire pour la semaine suivante
