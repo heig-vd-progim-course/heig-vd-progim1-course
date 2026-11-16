@@ -20,12 +20,14 @@ permissions:
   pages: write
   id-token: write
 
+# Version d'Ubuntu fixee : `ubuntu-latest` change de version sans prevenir
+# (Ubuntu 26 a partir d'octobre 2026). On monte de version quand on le decide.
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Generer les diagrammes avec PlantUML
         run: bash generate-diagrams.sh
@@ -37,7 +39,7 @@ jobs:
           args: generate-presentations.sh
 
       - name: Installer Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: 3.x
 
@@ -48,7 +50,7 @@ jobs:
         run: zensical build --clean
 
       - name: Televerser le site
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: site
           path: site
@@ -59,25 +61,25 @@ jobs:
     # Ne deployer que sur `main` et sur les tags, pas sur les pull requests
     if: github.event_name == 'push'
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: GitHub Pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Configurer GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Telecharger le site
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: site
           path: site
 
       - name: Preparer l'artefact GitHub Pages
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
       - name: Deployer sur GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
