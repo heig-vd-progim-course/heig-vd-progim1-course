@@ -1,0 +1,14 @@
+@startuml diagramme-boucle
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 18
+
+start
+:count vaut 0;
+while (count plus petit que 3 ?) is ([oui])
+  :Afficher count;
+  :Ajouter 1 à count;
+endwhile ([non])
+:Afficher Fin;
+stop
+@enduml
