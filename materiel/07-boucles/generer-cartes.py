@@ -22,7 +22,7 @@ sys.path.insert(0, str(HERE.parent))
 
 from cartes import (  # noqa: E402
     BAND_OUTPUT, ROOT, card, code_body, document, highlight, output_body,
-    statement_body, two_per_page, write,
+    statement_body, one_per_page, write,
 )
 
 HTML_OUT = HERE / "cartes.html"
@@ -91,8 +91,8 @@ def solutions_page():
   <h1>Séance 07 - Des boucles en chair et en os</h1>
   <p>Solutions des trios, pour l'équipe enseignante et les arbitres.
   {{pages}} pages A4 en tout, à imprimer en couleur, recto seul.
-  Pages 2 à 19 : cartes de trios, à couper en deux (A5).
-  Pages 20 à 27 : cartes de la boucle jouée, en A4 paysage.</p>
+  Pages 2 à 37 : cartes de trios, une par page.
+  Pages 38 à 45 : cartes de la boucle jouée.</p>
   <p>Ordre de retrait si la salle compte moins de 36 personnes :
   T09, T08, T07, T12, T06, T05, T11, T10, T04, T03, T02, T01.</p>
   <table>
@@ -136,7 +136,7 @@ def main():
     codes = [card("code", t, code_body(c)) for t, _, c, _ in TRIOS]
     outputs = [card("output", t, output_body(o)) for t, _, _, o in TRIOS]
     pages = [solutions_page()]
-    pages += two_per_page(statements) + two_per_page(codes) + two_per_page(outputs)
+    pages += one_per_page(statements) + one_per_page(codes) + one_per_page(outputs)
     pages += played_pages()
     write(document("Séance 07 - Cartes de l'activité", pages, EXTRA_CSS), HTML_OUT, PDF_OUT)
 

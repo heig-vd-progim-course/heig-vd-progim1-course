@@ -131,8 +131,8 @@ attendu des quiz vient de l'effort de rappel et de la rétroaction, pas d'eux.
 | Préparer les deux live codings           | Voir les sections correspondantes. Un projet IntelliJ vide, police agrandie                        |
 | Récupérer deux ou trois fils rouges      | Ceux de la séance 05, étape 3. Ils servent de point de départ au premier atelier                   |
 | Avoir le diagramme du parapluie au tableau | Celui de la séance 01. Il reste affiché pendant la première théorie                              |
-| Imprimer les cartes de l'activité        | [Le PDF des cartes](materiel/06-conditions-cartes.pdf) : 21 pages A4, **en couleur**, recto seul, à couper en deux (A5) |
-| Trier les cartes                         | Avec 35 personnes, 8 quatuors (retirer Q10 et Q09) et 3 arbitres. Compter quinze minutes au massicot |
+| Imprimer les cartes de l'activité        | [Le PDF des cartes](materiel/06-conditions-cartes.pdf) : 41 pages A4, **en couleur**, recto seul. La page 1 donne les solutions, puis une carte par page en paysage, sans découpe |
+| Trier les cartes                         | Avec 35 personnes, 8 quatuors (retirer Q10 et Q09) et 3 arbitres. Les cartes sont rangées par sorte : énoncés, diagrammes, codes, sorties |
 
 ### Les sorties ont été obtenues sur JDK 25
 

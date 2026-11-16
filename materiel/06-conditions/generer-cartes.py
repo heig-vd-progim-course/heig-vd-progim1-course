@@ -23,7 +23,7 @@ sys.path.insert(0, str(HERE.parent))
 
 from cartes import (  # noqa: E402
     ROOT, card, diagram_body, document, highlight, output_body,
-    render_plantuml, statement_body, two_per_page, write,
+    render_plantuml, scale_svgs, statement_body, one_per_page, write,
 )
 
 HTML_OUT = HERE / "cartes.html"
@@ -84,8 +84,8 @@ def solutions_page():
 <div class="page portrait solutions">
   <h1>Séance 06 - Des conditions en quatuor</h1>
   <p>Solutions des quatuors, pour l'équipe enseignante et les arbitres.
-  {{pages}} pages A4 en tout, à imprimer en couleur, recto seul, puis à couper
-  en deux (A5). Les diagrammes de Q09 et Q10 sont identiques : c'est voulu,
+  {{pages}} pages A4 en tout, à imprimer en couleur, recto seul : une carte
+  par page, en paysage. Les diagrammes de Q09 et Q10 sont identiques : c'est voulu,
   seule la valeur les distingue.</p>
   <p>Ordre de retrait si la salle compte moins de 40 personnes :
   {REMOVAL_ORDER}.</p>
@@ -97,24 +97,23 @@ def solutions_page():
 
 
 EXTRA_CSS = """
-.code-small { font-size: 19pt; line-height: 1.3; }
-.statement { font-size: 30pt; }
+.landscape > .card .code-small { font-size: 28pt; line-height: 1.3; }
+.landscape > .card .statement { font-size: 40pt; }
 .solutions { font-size: 8.5pt; padding: 10mm 12mm; }
 .mini { font-size: 6.5pt; }
-.diagram { width: 182mm; height: 112mm; flex: none; }
-.diagram svg { width: 100% !important; height: 100% !important; }
 """
 
 
 def main():
     svgs = {q[0]: render_plantuml(DIAGRAMS / f"{q[0].lower()}.puml") for q in QUARTETS}
+    svgs = scale_svgs(svgs, 262, 168)
     statements = [card("statement", q, statement_body(s)) for q, s, _, _ in QUARTETS]
     diagrams = [card("diagram", q, diagram_body(svgs[q])) for q, _, _, _ in QUARTETS]
     codes = [card("code", q, code_body(c)) for q, _, c, _ in QUARTETS]
     outputs = [card("output", q, output_body(o)) for q, _, _, o in QUARTETS]
     pages = [solutions_page()]
     for group in (statements, diagrams, codes, outputs):
-        pages += two_per_page(group)
+        pages += one_per_page(group)
     write(document("Séance 06 - Cartes de l'activité", pages, EXTRA_CSS), HTML_OUT, PDF_OUT)
 
 

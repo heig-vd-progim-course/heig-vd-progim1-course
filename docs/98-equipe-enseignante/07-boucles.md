@@ -163,7 +163,7 @@ mouvement s'ajoute à une tâche qui tient seule.
 | Quoi                                     | Détail                                                                                                     |
 | :--------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
 | Imprimer les cartes                      | [Le PDF des cartes](materiel/07-boucles-cartes.pdf), voir la section suivante. **En couleur**              |
-| Découper et trier les cartes             | 36 cartes de trios, plus 8 cartes pour jouer la boucle. Compter vingt minutes au massicot                 |
+| Trier les cartes                         | 36 cartes de trios, plus 8 cartes pour jouer la boucle. Une carte par page : aucune découpe              |
 | Prévoir un objet pour l'exécution        | Une balle, une craie, un feutre géant : un objet qui se passe de main en main et se voit du fond de la salle |
 | Prévoir deux feutres et une feuille blanche | Pour la personne `i`, qui efface et réécrit sa valeur                                                    |
 | Libérer un espace devant le tableau      | Huit personnes debout, en ligne, face à la classe                                                          |
@@ -173,15 +173,15 @@ mouvement s'ajoute à une tâche qui tient seule.
 
 ### Ce qu'il faut imprimer
 
-Le PDF tient sur **27 pages A4**, à imprimer en **couleur**, recto seul.
+Le PDF tient sur **45 pages A4**, à imprimer en **couleur**, recto seul. Une carte par page, en paysage, pour qu'elle se lise de loin.
 
-| Pages | Contenu                                                 | Quantité          | Découpe                     |
+| Pages | Contenu                                                 | Quantité          | Format                      |
 | :---: | :------------------------------------------------------ | :---------------- | :-------------------------- |
-|   1   | Solutions des trios, pour vous                          | 1 exemplaire      | Aucune                      |
-|  2-7  | Cartes **Énoncé**, bandeau vert, deux par page          | 12 cartes         | En deux, format A5          |
-| 8-13  | Cartes **Code**, bandeau bleu, deux par page            | 12 cartes         | En deux, format A5          |
-| 14-19 | Cartes **Sortie**, bandeau gris, deux par page          | 12 cartes         | En deux, format A5          |
-| 20-27 | Cartes de la boucle jouée, une par page                 | 8 cartes          | Aucune, format A4 paysage   |
+|   1   | Solutions des trios, pour vous                          | 1 exemplaire      | A4 portrait                 |
+| 2-13  | Cartes **Énoncé**, bandeau vert                         | 12 cartes         | A4 paysage                  |
+| 14-25 | Cartes **Code**, bandeau bleu                           | 12 cartes         | A4 paysage                  |
+| 26-37 | Cartes **Sortie**, bandeau gris                         | 12 cartes         | A4 paysage                  |
+| 38-45 | Cartes de la boucle jouée                               | 8 cartes          | A4 paysage                  |
 
 Le nombre exact de pages est indiqué en tête du PDF ; il fait foi si ce tableau
 a pris du retard.

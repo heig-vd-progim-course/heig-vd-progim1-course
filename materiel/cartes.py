@@ -112,12 +112,43 @@ def diagram_body(svg):
     return f'<div class="diagram">{svg}</div>'
 
 
-def two_per_page(cards):
-    pages = []
-    for start in range(0, len(cards), 2):
-        pair = "".join(cards[start:start + 2])
-        pages.append(f'<div class="page portrait">{pair}</div>')
-    return pages
+def one_per_page(cards):
+    """Une carte par page, en A4 paysage : grande, lisible du fond de la salle."""
+    return [f'<div class="page landscape">{card_html}</div>' for card_html in cards]
+
+
+SVG_SIZE = re.compile(r'viewBox="0 0 (?P<w>[\d.]+) (?P<h>[\d.]+)"')
+
+
+def scale_svgs(svgs, max_width_mm, max_height_mm):
+    """Met tous les diagrammes à la même échelle, sans les déformer.
+
+    L'échelle est celle qui fait tenir le plus grand diagramme dans la zone
+    donnée. Les autres sont plus petits, mais leur texte a la même taille.
+    PlantUML écrit `preserveAspectRatio="none"` et une taille en pixels :
+    on remplace les deux.
+    """
+    sizes = {}
+    for key, svg in svgs.items():
+        match = SVG_SIZE.search(svg)
+        sizes[key] = (float(match["w"]), float(match["h"]))
+    scale = min(
+        min(max_width_mm / width, max_height_mm / height)
+        for width, height in sizes.values()
+    )
+    scaled = {}
+    for key, svg in svgs.items():
+        width, height = sizes[key]
+        root = re.match(r"<svg[^>]*>", svg).group(0)
+        new_root = re.sub(r'\s(style|width|height|preserveAspectRatio)="[^"]*"', "", root)
+        new_root = new_root.replace(
+            "<svg",
+            f'<svg width="{width * scale:.1f}mm" height="{height * scale:.1f}mm" '
+            'preserveAspectRatio="xMidYMid meet"',
+            1,
+        )
+        scaled[key] = new_root + svg[len(root):]
+    return scaled
 
 
 def render_plantuml(puml):
@@ -182,8 +213,14 @@ pre {{ font-family: "DejaVu Sans Mono", "JetBrains Mono", monospace; margin: 0; 
   padding: 4mm 18mm; min-width: 70mm; min-height: 30mm; text-align: left;
   -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }}
-.diagram {{ height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; }}
-.diagram svg {{ max-height: 112mm; max-width: 180mm; width: auto; height: auto; }}
+.diagram {{ display: flex; align-items: center; justify-content: center; }}
+.landscape > .card {{ width: 297mm; height: 210mm; border-bottom: none; }}
+.landscape > .card header {{ font-size: 26pt; padding: 5mm 12mm; }}
+.landscape > .card footer {{ font-size: 10pt; right: 8mm; bottom: 6mm; }}
+.landscape > .card .card-body {{ padding: 8mm 16mm; }}
+.landscape > .card .statement {{ font-size: 46pt; }}
+.landscape > .card .code {{ font-size: 32pt; }}
+.landscape > .card .console {{ font-size: 40pt; padding: 6mm 24mm; min-width: 100mm; min-height: 40mm; }}
 .solutions {{ padding: 14mm 14mm; font-size: 9.5pt; }}
 .solutions h1 {{ font-size: 15pt; margin: 0 0 3mm; }}
 .solutions p {{ margin: 0 0 3mm; }}
