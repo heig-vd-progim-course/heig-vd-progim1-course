@@ -1,0 +1,14 @@
+@startuml q03
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 22
+!pragma useVerticalIf on
+
+start
+if (moyenne au moins 4 ?) then ([oui])
+  :Afficher Bravo;
+else ([non])
+endif
+:Afficher Fin;
+stop
+@enduml

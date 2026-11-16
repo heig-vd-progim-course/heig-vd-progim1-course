@@ -89,6 +89,49 @@ public class Main {
     `age >= 18` est faux et `hasTicket` est vrai. `&&` donne faux, `||` donne
     vrai. La dernière ligne inverse la première.
 
+### Remettre dans l'ordre
+
+Les lignes de ce programme ont été mélangées. Faites-les glisser, à la souris
+ou au doigt (par la poignée, à gauche de la ligne), pour les remettre dans
+l'ordre, puis cliquez sur _Valider ma solution_. Au clavier : sélectionnez une
+ligne avec ++tab++, puis déplacez-la avec ++arrow-up++ et ++arrow-down++.
+
+Chaque validation compte comme un essai. Si vous n'y arrivez pas en trois
+essais, relisez la page de théorie avant de continuer.
+
+<div class="parsons" markdown>
+
+Ce programme affiche `Bien`.
+
+```java
+public class Main {
+    public static String describe(double average) {
+        if (average >= 5.5) {
+            return "Excellent";
+        } else if (average >= 5) {
+            return "Bien";
+        } else if (average >= 4) {
+            return "Suffisant";
+        } else {
+            return "Insuffisant";
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println(describe(5.2));
+    }
+}
+```
+
+<div class="parsons-explanation" markdown>
+
+Avec `>=`, les conditions vont de la plus exigeante à la moins exigeante :
+la première condition vraie gagne. Dans l'autre sens, 5.2 serait déclarée
+_Suffisant_.
+
+</div>
+
+</div>
+
 ## 2. Réparer
 
 Une erreur par programme, placée exprès. Même démarche que dans le premier

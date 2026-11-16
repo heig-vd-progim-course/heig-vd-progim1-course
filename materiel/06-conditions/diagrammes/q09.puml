@@ -1,0 +1,16 @@
+@startuml q09
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 22
+!pragma useVerticalIf on
+
+start
+if (âge plus petit que 6 ?) then ([oui])
+  :Afficher Gratuit;
+elseif (âge plus petit que 16 ?) then ([oui])
+  :Afficher 10 francs;
+else ([non])
+  :Afficher 20 francs;
+endif
+stop
+@enduml

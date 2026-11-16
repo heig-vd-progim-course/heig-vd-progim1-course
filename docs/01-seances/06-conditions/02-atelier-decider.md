@@ -141,6 +141,89 @@ public class Main {
 
     `isEven(7)` rend `false`, donc c'est le bloc du `else` qui s'exécute.
 
+### Remettre dans l'ordre
+
+Les lignes de ces programmes ont été mélangées. Faites-les glisser, à la souris
+ou au doigt (par la poignée, à gauche de la ligne), pour les remettre dans
+l'ordre, puis cliquez sur _Valider ma solution_. Au clavier : sélectionnez une
+ligne avec ++tab++, puis déplacez-la avec ++arrow-up++ et ++arrow-down++.
+
+Chaque validation compte comme un essai. Si vous n'y arrivez pas en trois
+essais, relisez la page de théorie avant de continuer.
+
+<div class="parsons" markdown>
+
+Ce programme affiche `Réussi`.
+
+```java
+public class Main {
+    public static boolean hasPassed(double average) {
+        return average >= 4;
+    }
+    public static void main(String[] args) {
+        double average = 4.5;
+        if (hasPassed(average)) {
+            System.out.println("Réussi");
+        } else {
+            System.out.println("Échoué");
+        }
+    }
+}
+```
+
+<div class="parsons-explanation" markdown>
+
+`hasPassed` est une fonction à part, au même niveau que `main`. Dans `main`,
+le bloc du `if` affiche `Réussi`, celui du `else` affiche `Échoué`.
+
+</div>
+
+</div>
+
+<div class="parsons" markdown>
+
+Ce programme affiche `Verdict : réussi`.
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        double average = 4.5;
+        String verdict;
+        if (average >= 4) {
+            verdict = "réussi";
+        } else {
+            verdict = "échoué";
+        }
+        System.out.println("Verdict : " + verdict);
+    }
+}
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        String verdict;
+        double average = 4.5;
+        if (average >= 4) {
+            verdict = "réussi";
+        } else {
+            verdict = "échoué";
+        }
+        System.out.println("Verdict : " + verdict);
+    }
+}
+```
+
+<div class="parsons-explanation" markdown>
+
+`String verdict;` doit venir **avant** le `if` : déclarée dans un bloc, la
+variable disparaîtrait à son accolade fermante. Les deux déclarations peuvent
+s'écrire dans un sens ou dans l'autre : les deux ordres sont acceptés.
+
+</div>
+
+</div>
+
 ## 2. Réparer
 
 Chacun de ces programmes contient **une** erreur, placée exprès. Pour chacun :
