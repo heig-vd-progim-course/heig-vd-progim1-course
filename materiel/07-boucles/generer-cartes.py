@@ -4,38 +4,29 @@ en os.
 
 Produit `cartes.html` à côté de ce script, puis le PDF publié dans
 `docs/98-equipe-enseignante/materiel/07-boucles-cartes.pdf`, avec Chrome ou
-Chromium en mode headless.
+Chromium en mode headless. La mise en page et la coloration du code sont dans
+`materiel/cartes.py`.
 
     python3 materiel/07-boucles/generer-cartes.py
 
-Les couleurs du code reprennent la coloration syntaxique d'IntelliJ IDEA, thème
-clair. Toute sortie écrite ici a été obtenue en exécutant le code avec le JDK
-25 du cours : si vous modifiez un code, réexécutez-le.
+Toute sortie écrite ici a été obtenue en exécutant le code avec le JDK 25 du
+cours : si vous modifiez un code, réexécutez-le.
 """
 
 import html
-import re
-import shutil
-import subprocess
+import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parent.parent
+sys.path.insert(0, str(HERE.parent))
+
+from cartes import (  # noqa: E402
+    BAND_OUTPUT, ROOT, card, code_body, document, highlight, output_body,
+    statement_body, two_per_page, write,
+)
+
 HTML_OUT = HERE / "cartes.html"
 PDF_OUT = ROOT / "docs" / "98-equipe-enseignante" / "materiel" / "07-boucles-cartes.pdf"
-
-# Couleurs d'IntelliJ IDEA, thème clair
-COLOR_KEYWORD = "#0033B3"
-COLOR_NUMBER = "#1750EB"
-COLOR_STRING = "#067D17"
-COLOR_METHOD = "#00627A"
-COLOR_FIELD = "#871094"
-COLOR_TEXT = "#080808"
-
-# Bandeaux des trois sortes de cartes
-BAND_STATEMENT = COLOR_STRING  # du texte en français, comme une chaîne
-BAND_CODE = COLOR_KEYWORD  # la couleur des mots-clés
-BAND_OUTPUT = "#3C3F41"  # la console
 
 TRIOS = [
     ("T01", "Afficher les nombres de 0 à 5",
@@ -86,86 +77,6 @@ PLAYED = [
     ('System.out.println("Fin");', "Après la boucle"),
 ]
 
-KEYWORDS = {
-    "int", "double", "boolean", "while", "for", "do", "if", "else", "return",
-    "public", "static", "void", "class", "new", "true", "false",
-}
-
-TOKEN = re.compile(
-    r'(?P<string>"[^"]*")|(?P<number>\b\d+(?:\.\d+)?\b)'
-    r"|(?P<word>[A-Za-z_]\w*)|(?P<space>\s+)|(?P<other>.)"
-)
-
-
-def highlight(code):
-    """Colore une ligne ou un bloc de Java comme IntelliJ, thème clair."""
-    out = []
-    tokens = list(TOKEN.finditer(code))
-    for index, match in enumerate(tokens):
-        text = html.escape(match.group(0))
-        kind = match.lastgroup
-        if kind == "string":
-            out.append(f'<span style="color:{COLOR_STRING}">{text}</span>')
-        elif kind == "number":
-            out.append(f'<span style="color:{COLOR_NUMBER}">{text}</span>')
-        elif kind == "word":
-            word = match.group(0)
-            following = tokens[index + 1].group(0) if index + 1 < len(tokens) else ""
-            previous = tokens[index - 1].group(0) if index > 0 else ""
-            if word in KEYWORDS:
-                out.append(f'<span style="color:{COLOR_KEYWORD}">{text}</span>')
-            elif following == "(":
-                out.append(f'<span style="color:{COLOR_METHOD}">{text}</span>')
-            elif word == "out" and previous == ".":
-                out.append(
-                    f'<span style="color:{COLOR_FIELD};font-style:italic">{text}</span>'
-                )
-            else:
-                out.append(text)
-        else:
-            out.append(text)
-    return "".join(out)
-
-
-def card(kind, trio_id, body):
-    labels = {
-        "statement": ("Énoncé", BAND_STATEMENT),
-        "code": ("Code", BAND_CODE),
-        "output": ("Sortie", BAND_OUTPUT),
-    }
-    label, color = labels[kind]
-    return f"""
-<section class="card card-{kind}">
-  <header style="background:{color}">{label}</header>
-  <div class="card-body">{body}</div>
-  <footer>{trio_id}</footer>
-</section>"""
-
-
-def statement_body(text):
-    return f'<p class="statement">{html.escape(text)}</p>'
-
-
-def code_body(code):
-    return f'<pre class="code">{highlight(code)}</pre>'
-
-
-def output_body(output):
-    if output == "":
-        content = '<span class="empty">&nbsp;</span>'
-    else:
-        content = html.escape(output)
-    return f'<pre class="console">{content}</pre>'
-
-
-def two_per_page(cards):
-    pages = []
-    for start in range(0, len(cards), 2):
-        pair = "".join(cards[start:start + 2])
-        pages.append(f'<div class="page portrait">{pair}</div>')
-    return pages
-
-
 def solutions_page():
     rows = []
     for trio_id, statement, code, output in TRIOS:
@@ -212,95 +123,22 @@ def played_pages():
     return pages
 
 
-CSS = f"""
-@page {{ size: A4 portrait; margin: 0; }}
-@page landscape {{ size: A4 landscape; margin: 0; }}
-* {{ box-sizing: border-box; }}
-body {{ margin: 0; font-family: "DejaVu Sans", Arial, sans-serif; color: {COLOR_TEXT}; }}
-.page {{ break-after: page; overflow: hidden; }}
-.page:last-child {{ break-after: auto; }}
-.portrait {{ width: 210mm; height: 297mm; }}
-.landscape {{ page: landscape; width: 297mm; height: 210mm; }}
-.card {{
-  position: relative; width: 210mm; height: 148.5mm;
-  border-bottom: 0.3mm dashed #999; display: flex; flex-direction: column;
-}}
-.card:last-child {{ border-bottom: none; }}
-.card header {{
-  color: white; font-size: 22pt; font-weight: bold; letter-spacing: 0.08em;
-  text-transform: uppercase; padding: 4mm 10mm;
-  -webkit-print-color-adjust: exact; print-color-adjust: exact;
-}}
-.card-body {{ flex: 1; display: flex; align-items: center; justify-content: center; padding: 6mm 14mm; }}
-.card footer {{ position: absolute; right: 6mm; bottom: 4mm; font-size: 8pt; color: #bbb; }}
-.statement {{ font-size: 34pt; line-height: 1.25; text-align: center; margin: 0; }}
-pre {{ font-family: "DejaVu Sans Mono", "JetBrains Mono", monospace; margin: 0; }}
-.code {{ font-size: 25pt; line-height: 1.35; }}
-.console {{
-  font-size: 28pt; line-height: 1.15; background: #F2F2F2; border: 0.5mm solid #CCC;
-  padding: 4mm 18mm; min-width: 70mm; min-height: 30mm; text-align: left;
-  -webkit-print-color-adjust: exact; print-color-adjust: exact;
-}}
-.solutions {{ padding: 14mm 14mm; font-size: 9.5pt; }}
-.solutions h1 {{ font-size: 15pt; margin: 0 0 3mm; }}
-.solutions p {{ margin: 0 0 3mm; }}
-.solutions table {{ border-collapse: collapse; width: 100%; }}
-.solutions th, .solutions td {{ border: 0.2mm solid #999; padding: 1.2mm 2mm; vertical-align: top; text-align: left; }}
-.mini {{ font-size: 7.5pt; line-height: 1.2; }}
-.played {{ display: flex; flex-direction: column; align-items: center; justify-content: center; }}
-.played-line {{ font-size: 54pt; }}
-.played-variable {{ font-size: 160pt; }}
-.played-role {{ font-size: 20pt; color: #777; margin-top: 14mm; }}
+EXTRA_CSS = """
+.played { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.played-line { font-size: 54pt; }
+.played-variable { font-size: 160pt; }
+.played-role { font-size: 20pt; color: #777; margin-top: 14mm; }
 """
 
 
-def build_html():
+def main():
     statements = [card("statement", t, statement_body(s)) for t, s, _, _ in TRIOS]
     codes = [card("code", t, code_body(c)) for t, _, c, _ in TRIOS]
     outputs = [card("output", t, output_body(o)) for t, _, _, o in TRIOS]
     pages = [solutions_page()]
     pages += two_per_page(statements) + two_per_page(codes) + two_per_page(outputs)
     pages += played_pages()
-    body = "".join(pages).replace("{pages}", str(len(pages)))
-    return f"""<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<title>Séance 07 - Cartes de l'activité</title>
-<style>{CSS}</style>
-</head>
-<body>{body}</body>
-</html>
-"""
-
-
-def find_chrome():
-    for name in ("google-chrome", "chromium", "chromium-browser", "google-chrome-stable"):
-        path = shutil.which(name)
-        if path:
-            return path
-    return None
-
-
-def main():
-    HTML_OUT.write_text(build_html(), encoding="utf-8")
-    print(f"HTML : {HTML_OUT.relative_to(ROOT)}")
-
-    chrome = find_chrome()
-    if chrome is None:
-        print("Chrome introuvable : ouvrez le HTML et imprimez-le en PDF.")
-        return
-
-    PDF_OUT.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(
-        [
-            chrome, "--headless", "--disable-gpu", "--no-pdf-header-footer",
-            f"--print-to-pdf={PDF_OUT}", HTML_OUT.as_uri(),
-        ],
-        check=True,
-        stderr=subprocess.DEVNULL,
-    )
-    print(f"PDF : {PDF_OUT.relative_to(ROOT)}")
+    write(document("Séance 07 - Cartes de l'activité", pages, EXTRA_CSS), HTML_OUT, PDF_OUT)
 
 
 if __name__ == "__main__":

@@ -386,7 +386,11 @@ de l'évaluation à blanc du cours MSCI de V. Guidoux : en-tête LaTeX avec
 Le matériel à imprimer d'une séance (cartes d'activité, par exemple) suit la
 même logique : une source dans `materiel/NN-nom-de-la-seance/`, un PDF
 versionné dans `docs/98-equipe-enseignante/materiel/`, régénéré à chaque
-modification de la source.
+modification de la source. Le script de chaque séance ne contient que ses
+cartes ; la mise en page, la coloration du code et le rendu des diagrammes
+sont dans `materiel/cartes.py`. Les diagrammes des cartes s'écrivent en
+PlantUML, dans `materiel/NN-nom-de-la-seance/diagrammes/`, comme ceux des
+présentations : jamais en HTML ou en image dessinée à la main.
 
 `./generate-evaluations.sh` produit les PDF dans `docs/00-organisation/`, d'où
 la page _Évaluation_ les publie. Le workflow GitHub n'a ni Pandoc ni LaTeX : les
