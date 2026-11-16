@@ -79,6 +79,8 @@ presentations/
   NN-nom-de-la-seance/
     PRESENTATION.md          source Marp
     images/                  diagrammes PlantUML (.puml) et SVG générés
+materiel/
+  NN-nom-de-la-seance/       sources du matériel à imprimer (script Python vers HTML)
 evaluations/
   questions-insecables.lua   filtre Pandoc : une question ne se coupe pas
   nom-de-levaluation/
@@ -377,6 +379,11 @@ de l'évaluation à blanc du cours MSCI de V. Guidoux : en-tête LaTeX avec
   et les ateliers : mêmes programmes, mêmes valeurs, mêmes erreurs.
 - Toute sortie et tout message d'erreur cités ont été obtenus en exécutant le
   programme avec le JDK du cours, comme pour les exemples du support.
+
+Le matériel à imprimer d'une séance (cartes d'activité, par exemple) suit la
+même logique : une source dans `materiel/NN-nom-de-la-seance/`, un PDF
+versionné dans `docs/98-equipe-enseignante/materiel/`, régénéré à chaque
+modification de la source.
 
 `./generate-evaluations.sh` produit les PDF dans `docs/00-organisation/`, d'où
 la page _Évaluation_ les publie. Le workflow GitHub n'a ni Pandoc ni LaTeX : les

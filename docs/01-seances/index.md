@@ -29,7 +29,7 @@ jalons. Le cours devient un atelier.
 |     05 | [Fonctions et portée des variables](05-fonctions-et-portee/index.md)       | Paramètres, corps, valeur de retour. Ce qu'une variable voit |
 |     06 | [Conditions](06-conditions/index.md)                                       | `if`, `else`, opérateurs de comparaison et logiques, `switch`, ternaire |
 |      — | **Évaluation écrite** (50 %)                                               | Papier et crayon, sans ressources |
-|     07 | [Boucles](07-boucles.md)                                                   | `while`, `for`, conditions d'arrêt |
+|     07 | [Boucles](07-boucles/index.md)                                             | `while`, `for`, `do-while`, trois ingrédients d'une boucle |
 |     08 | [Tableaux et lancement du mini-projet](08-tableaux-et-lancement-du-mini-projet.md) | Collections de données, parcours. Jalon 1 |
 |     09 | [Chaînes de caractères](09-chaines-de-caracteres.md)                       | Manipuler du texte, formater une sortie. Jalon 2 |
 |     10 | [Déboguer et tester](10-deboguer-et-tester.md)                             | Lire une erreur, isoler un bogue, vérifier. Jalon 3 |
@@ -53,7 +53,7 @@ Sa forme évolue à chaque séance :
 |     04 | Un programme qui lit deux notes au clavier et affiche la moyenne |
 |     05 | La moyenne devient une **fonction** qui prend des notes et rend un résultat, appelée pour trois personnes |
 |     06 | Le programme **décide** si la moyenne est suffisante              |
-|     07 | Il accepte un **nombre quelconque** de notes                      |
+|     07 | Il **redemande** une note invalide, et accepte un nombre quelconque de notes et de personnes |
 |     08 | Les notes sont rangées dans un **tableau** et parcourues          |
 |     09 | La sortie est **formatée** proprement et les noms sont gérés      |
 

@@ -51,7 +51,7 @@ Le programme complet, séance par séance, est disponible sur la page
 |     05 | Fonctions et portée des variables              | Prêt        |
 |     06 | Conditions                                     | Prêt        |
 |      — | **Évaluation écrite**                          | À faire     |
-|     07 | Boucles                                        | À faire     |
+|     07 | Boucles                                        | En cours    |
 |     08 | Tableaux et lancement du mini-projet           | À faire     |
 |     09 | Chaînes de caractères                          | À faire     |
 |     10 | Déboguer et tester                             | À faire     |

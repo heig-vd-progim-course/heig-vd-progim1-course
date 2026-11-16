@@ -15,6 +15,10 @@
 # PDF generes par `generate-evaluations.sh`, versionnes
 !docs/00-organisation/*.pdf
 
+## Matériel à imprimer
+# PDF generes depuis `materiel/`, versionnes
+!docs/98-equipe-enseignante/materiel/*.pdf
+
 ## SQLite databases
 *.db
 
