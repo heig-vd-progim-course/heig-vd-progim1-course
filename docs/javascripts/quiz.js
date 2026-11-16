@@ -9,6 +9,9 @@
 // est marquée et l'on peut réessayer. La bonne réponse affiche l'explication et
 // lance des confettis, sauf si le système demande de réduire les animations.
 //
+// Chaque clic compte comme un essai. Si la bonne réponse n'est pas trouvée du
+// premier coup, un message suggère de relire l'explication et la section.
+//
 // Les confettis viennent de `@tsparticles/confetti`, chargé avant ce script
 // dans `zensical.toml`, comme dans le cours UPInfo.
 
@@ -56,6 +59,16 @@
 		feedback.setAttribute("aria-live", "polite");
 		answers[answers.length - 1].parentElement.after(feedback);
 
+		const advice = document.createElement("p");
+		advice.className = "quiz-advice";
+		advice.hidden = true;
+		advice.textContent =
+			"Vous n'avez pas trouvé du premier coup. Lisez l'explication, puis " +
+			"relisez la section avant de continuer.";
+		feedback.after(advice);
+
+		let attempts = 0;
+
 		answers.forEach((answer) => {
 			const checkbox = answer.querySelector("input[type='checkbox']");
 			const isCorrect = checkbox !== null && checkbox.checked;
@@ -75,10 +88,19 @@
 					return;
 				}
 
+				if (answer.classList.contains("quiz-answer--wrong")) {
+					return;
+				}
+				attempts++;
+
 				if (isCorrect) {
 					answer.classList.add("quiz-answer--correct");
 					quiz.classList.add("quiz--solved");
-					feedback.textContent = "Bonne réponse.";
+					feedback.textContent =
+						attempts === 1
+							? "Bonne réponse, du premier coup."
+							: "Bonne réponse, trouvée en " + attempts + " essais.";
+					advice.hidden = attempts === 1;
 					if (explanation) {
 						explanation.hidden = false;
 					}

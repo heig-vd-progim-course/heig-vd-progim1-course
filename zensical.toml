@@ -10,11 +10,13 @@ repo_url = "https://github.com/heig-vd-progim-course/heig-vd-progim1-course"
 repo_name = "heig-vd-progim-course/heig-vd-progim1-course"
 edit_uri = "edit/main/docs/"
 
-# Quiz à choix multiples du support, avec les confettis du cours UPInfo
-extra_css = ["stylesheets/quiz.css"]
+# Quiz à choix multiples et problèmes de Parsons du support, avec les confettis
+# du cours UPInfo
+extra_css = ["stylesheets/quiz.css", "stylesheets/parsons.css"]
 extra_javascript = [
   "https://cdn.jsdelivr.net/npm/@tsparticles/confetti@4.4.0/tsparticles.confetti.bundle.min.js",
   "javascripts/quiz.js",
+  "javascripts/parsons.js",
 ]
 
 # Les tables en ligne TOML doivent tenir sur une seule ligne : ne pas retourner

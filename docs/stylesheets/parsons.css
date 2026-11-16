@@ -1,0 +1,163 @@
+/* Problèmes de Parsons, voir `docs/javascripts/parsons.js`. */
+
+.md-typeset .parsons {
+	margin: 1.5em 0;
+	padding: 0.2rem 1rem 0.6rem;
+	border: 0.05rem solid var(--md-default-fg-color--lightest);
+	border-left: 0.2rem solid var(--md-accent-fg-color);
+	border-radius: 0.2rem;
+}
+
+.md-typeset .parsons::before {
+	content: "Remettre dans l'ordre";
+	display: block;
+	margin-top: 0.6rem;
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--md-accent-fg-color);
+}
+
+.md-typeset ol.parsons-lines {
+	margin: 0.8em 0 0;
+	padding: 0;
+	list-style: none;
+	counter-reset: none;
+}
+
+.md-typeset ol.parsons-lines li.parsons-line {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	margin: 0.25rem 0;
+	padding: 0.15rem 0.6rem 0.15rem 0.3rem;
+	list-style: none;
+	background-color: var(--md-code-bg-color);
+	border: 0.05rem solid var(--md-default-fg-color--lightest);
+	border-radius: 0.2rem;
+	cursor: grab;
+	/* Au doigt, on fait défiler la page en touchant la ligne, et on la déplace
+	   par sa poignée : voir `.parsons-handle` */
+	touch-action: pan-y;
+	user-select: none;
+	transition:
+		border-color 0.15s,
+		box-shadow 0.15s;
+}
+
+.md-typeset ol.parsons-lines li.parsons-line:hover,
+.md-typeset ol.parsons-lines li.parsons-line:focus-visible {
+	border-color: var(--md-accent-fg-color);
+	outline: none;
+}
+
+.md-typeset ol.parsons-lines li.parsons-line--dragging {
+	cursor: grabbing;
+	border-color: var(--md-accent-fg-color);
+	box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.25);
+	position: relative;
+	z-index: 1;
+}
+
+/* Poignée : six points, dessinés sans image */
+.md-typeset .parsons-handle {
+	flex: none;
+	width: 0.5rem;
+	height: 0.8rem;
+	background-image: radial-gradient(
+		circle,
+		var(--md-default-fg-color--light) 0.08rem,
+		transparent 0.09rem
+	);
+	background-size: 0.25rem 0.27rem;
+	background-repeat: repeat;
+	background-clip: content-box;
+	touch-action: none;
+}
+
+/* Sur un écran tactile, une poignée assez grande pour le doigt */
+@media (pointer: coarse) {
+	.md-typeset .parsons-handle {
+		width: 1.6rem;
+		height: 1.6rem;
+		padding: 0.4rem 0.55rem;
+		margin: -0.3rem 0 -0.3rem -0.3rem;
+		background-size: 0.25rem 0.27rem;
+		background-origin: content-box;
+	}
+}
+
+.md-typeset ol.parsons-lines li.parsons-line code {
+	flex: 1;
+	min-width: 0;
+	padding: 0.2rem 0;
+	/* Une ligne trop longue passe à la ligne plutôt que de défiler seule */
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+	background: transparent;
+	box-shadow: none;
+}
+
+@media (max-width: 44.9375em) {
+	.md-typeset ol.parsons-lines li.parsons-line code {
+		font-size: 0.75em;
+	}
+}
+
+.md-typeset .parsons--solved ol.parsons-lines li.parsons-line {
+	cursor: default;
+	border-color: #2e7d32;
+	background-color: rgba(46, 125, 50, 0.12);
+}
+
+.md-typeset .parsons--solved .parsons-handle {
+	visibility: hidden;
+}
+
+.md-typeset .parsons-toolbar {
+	margin-top: 0.6rem;
+}
+
+.md-typeset .parsons-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.md-typeset .parsons-buttons .md-button {
+	margin: 0;
+	padding: 0.3em 0.9em;
+	font-size: 0.7rem;
+}
+
+.md-typeset .parsons-buttons .md-button:disabled {
+	opacity: 0.5;
+	cursor: default;
+}
+
+.md-typeset .parsons-feedback {
+	min-height: 1.2em;
+	margin: 0.5rem 0 0;
+	font-weight: 700;
+}
+
+.md-typeset .parsons--wrong .parsons-feedback {
+	color: #c62828;
+}
+
+.md-typeset .parsons--solved .parsons-feedback {
+	color: #2e7d32;
+}
+
+.md-typeset .parsons-advice {
+	margin: 0.4rem 0 0;
+	padding: 0.4rem 0.6rem;
+	border-left: 0.2rem solid #f57c00;
+	background-color: rgba(245, 124, 0, 0.1);
+}
+
+.md-typeset .parsons-explanation {
+	padding-top: 0.2rem;
+	border-top: 0.05rem dashed var(--md-default-fg-color--lightest);
+}

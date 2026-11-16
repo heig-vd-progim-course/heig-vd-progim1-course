@@ -235,10 +235,56 @@ fois la bonne réponse trouvée, avec des confettis :
 
 Le comportement est dans `docs/javascripts/quiz.js`, le style dans
 `docs/stylesheets/quiz.css`, les confettis viennent de `@tsparticles/confetti`
-comme dans UPInfo. Une seule bonne réponse par quiz, et chaque mauvaise
-réponse vise une idée fausse précise : un distracteur absurde ne mesure rien.
+comme dans UPInfo. Le quiz compte les essais : si la bonne réponse n'est pas
+trouvée du premier coup, il le dit et suggère de relire la section. Une seule
+bonne réponse par quiz, et chaque mauvaise réponse vise une idée fausse
+précise : un distracteur absurde ne mesure rien.
 Dans la présentation, le même quiz se pose en deux diapositives, la question
 avec les choix A à D, puis la réponse.
+
+### Les problèmes de Parsons
+
+Un problème de Parsons fait remettre dans l'ordre des lignes de code mélangées.
+Le code s'écrit **dans le bon ordre**, dans un bloc `parsons` ; le script le
+mélange à l'affichage. On déplace les lignes à la souris, au doigt ou avec les
+flèches du clavier, puis on clique sur _Valider ma solution_ : rien n'est
+vérifié avant, pour qu'on ne puisse pas gagner en déplaçant les lignes au
+hasard. Chaque validation est un essai compté. Au-delà de trois essais sans
+succès, un message suggère de retravailler la matière, sans bloquer la suite.
+`data-attempts="5"` sur le `<div>` change ce seuil. Les confettis partent au
+bon ordre :
+
+````markdown
+<div class="parsons" markdown>
+
+Ce programme affiche `3`, `2`, `1`, puis `Partez !`.
+
+```java
+public class Main {
+    ...
+}
+```
+
+<div class="parsons-explanation" markdown>
+
+Explication facultative, affichée une fois l'ordre trouvé.
+
+</div>
+
+</div>
+````
+
+Le comportement est dans `docs/javascripts/parsons.js`, le style dans
+`docs/stylesheets/parsons.css`. Le bloc de code n'a ni `title`, ni `linenums`,
+ni `hl_lines`. L'indentation est conservée et sert d'indice. Deux lignes au
+texte identique (deux `}` au même niveau) sont interchangeables. Les lignes
+vides sont ignorées.
+
+Quand plusieurs ordres sont justes (deux déclarations qui peuvent s'échanger,
+par exemple), écrire chaque autre ordre accepté dans un **bloc de code
+supplémentaire**, juste après le premier, avec exactement les mêmes lignes.
+Seul le premier bloc est affiché ; les suivants ne servent qu'à la
+vérification. Le dire aussi dans l'explication.
 
 ### La navigation
 
