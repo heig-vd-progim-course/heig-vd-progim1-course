@@ -110,6 +110,14 @@
   testing_, Memory & Cognition, 36(3), 2008, pour les quiz à choix multiple.
 - Porter, L., Bailey Lee, C. et Simon, B., _Halving Fail Rates using Peer
   Instruction_, SIGCSE 2013, pour les votes en classe.
+- Parsons, D. et Haden, P., _Parson's Programming Puzzles: A Fun and Effective
+  Learning Tool for First Programming Courses_, ACE 2006, pour les exercices de
+  remise en ordre de lignes de code (séance 07).
+- Soloway, E., Bonar, J. et Ehrlich, K., _Cognitive Strategies and Looping
+  Constructs: An Empirical Study_, Communications of the ACM, 26(11), 1983,
+  pour les difficultés des boucles à valeur sentinelle (séance 07).
+- Formation continue d'ESPAS, pour l'activité de regroupement par cartes
+  (définition, illustration, nom) qui a inspiré les trios de la séance 07.
 - [Java Visualizer](https://pythontutor.com/java.html) de Python Tutor, par
   Philip Guo, pour visualiser les appels de fonctions et la portée.
 - Piaget, J. et Illich, I., cités dans les

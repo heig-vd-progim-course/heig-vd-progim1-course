@@ -62,17 +62,6 @@ Mais vos programmes ne savent répéter que les valeurs écrites dedans.
 - traduire un diagramme en Java ;
 - repérer ce que l'énoncé ne couvre pas.
 
-## Le programme de la séance
-
-| Partie                         | Durée  |
-| :----------------------------- | -----: |
-| Les opérations arithmétiques   | 25 min |
-| Poser le problème              | 30 min |
-| Lire au clavier                | 30 min |
-| Afficher un résultat lisible   | 30 min |
-| Atelier - du diagramme au code | 45 min |
-| Discussion des solutions       | 10 min |
-
 ## Le fil rouge démarre
 
 <!-- _class: lead -->

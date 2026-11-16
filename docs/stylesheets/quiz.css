@@ -70,6 +70,13 @@
 	font-weight: 700;
 }
 
+.md-typeset .quiz-advice {
+	margin: 0.4rem 0 0;
+	padding: 0.4rem 0.6rem;
+	border-left: 0.2rem solid #f57c00;
+	background-color: rgba(245, 124, 0, 0.1);
+}
+
 .md-typeset .quiz-explanation {
 	padding-top: 0.2rem;
 	border-top: 0.05rem dashed var(--md-default-fg-color--lightest);

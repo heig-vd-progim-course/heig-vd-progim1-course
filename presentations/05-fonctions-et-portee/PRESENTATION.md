@@ -65,17 +65,6 @@ Puis : `IO.readln`, `Double.parseDouble`, `printf`, `Math.round`.
 - expliquer où une variable existe ;
 - diagnostiquer une erreur de portée.
 
-## Le programme de la séance
-
-| Partie                                       |  Durée |
-| :------------------------------------------- | -----: |
-| Rappel : entrées, traitement, sortie         | 15 min |
-| Écrire et appeler une fonction               | 45 min |
-| Une fonction en appelle une autre, la portée | 25 min |
-| Atelier - prédire et réparer                 | 30 min |
-| Atelier - le fil rouge en fonctions          | 50 min |
-| Discussion                                   | 15 min |
-
 ## Les trois colonnes deviennent une fonction
 
 <!-- _class: lead -->
@@ -529,14 +518,6 @@ public class Main {
 <!-- _class: lead -->
 
 **Une fonction de calcul ne lit rien au clavier et n'affiche rien.**
-
-## Le déroulé de l'atelier
-
-1. **Prédire** : quatre programmes, prédiction écrite avant d'exécuter.
-2. **Réparer** : trois bugs placés exprès.
-3. **Le fil rouge en fonctions** : tester les fonctions seules, brancher la
-   saisie, puis un groupe de trois personnes.
-4. **Provoquer** l'erreur de portée dans votre propre code.
 
 ## À vous de jouer !
 

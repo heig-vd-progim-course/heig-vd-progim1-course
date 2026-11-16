@@ -79,6 +79,8 @@ presentations/
   NN-nom-de-la-seance/
     PRESENTATION.md          source Marp
     images/                  diagrammes PlantUML (.puml) et SVG générés
+materiel/
+  NN-nom-de-la-seance/       sources du matériel à imprimer (script Python vers HTML)
 evaluations/
   questions-insecables.lua   filtre Pandoc : une question ne se coupe pas
   nom-de-levaluation/
@@ -235,10 +237,56 @@ fois la bonne réponse trouvée, avec des confettis :
 
 Le comportement est dans `docs/javascripts/quiz.js`, le style dans
 `docs/stylesheets/quiz.css`, les confettis viennent de `@tsparticles/confetti`
-comme dans UPInfo. Une seule bonne réponse par quiz, et chaque mauvaise
-réponse vise une idée fausse précise : un distracteur absurde ne mesure rien.
+comme dans UPInfo. Le quiz compte les essais : si la bonne réponse n'est pas
+trouvée du premier coup, il le dit et suggère de relire la section. Une seule
+bonne réponse par quiz, et chaque mauvaise réponse vise une idée fausse
+précise : un distracteur absurde ne mesure rien.
 Dans la présentation, le même quiz se pose en deux diapositives, la question
 avec les choix A à D, puis la réponse.
+
+### Les problèmes de Parsons
+
+Un problème de Parsons fait remettre dans l'ordre des lignes de code mélangées.
+Le code s'écrit **dans le bon ordre**, dans un bloc `parsons` ; le script le
+mélange à l'affichage. On déplace les lignes à la souris, au doigt ou avec les
+flèches du clavier, puis on clique sur _Valider ma solution_ : rien n'est
+vérifié avant, pour qu'on ne puisse pas gagner en déplaçant les lignes au
+hasard. Chaque validation est un essai compté. Au-delà de trois essais sans
+succès, un message suggère de retravailler la matière, sans bloquer la suite.
+`data-attempts="5"` sur le `<div>` change ce seuil. Les confettis partent au
+bon ordre :
+
+````markdown
+<div class="parsons" markdown>
+
+Ce programme affiche `3`, `2`, `1`, puis `Partez !`.
+
+```java
+public class Main {
+    ...
+}
+```
+
+<div class="parsons-explanation" markdown>
+
+Explication facultative, affichée une fois l'ordre trouvé.
+
+</div>
+
+</div>
+````
+
+Le comportement est dans `docs/javascripts/parsons.js`, le style dans
+`docs/stylesheets/parsons.css`. Le bloc de code n'a ni `title`, ni `linenums`,
+ni `hl_lines`. L'indentation est conservée et sert d'indice. Deux lignes au
+texte identique (deux `}` au même niveau) sont interchangeables. Les lignes
+vides sont ignorées.
+
+Quand plusieurs ordres sont justes (deux déclarations qui peuvent s'échanger,
+par exemple), écrire chaque autre ordre accepté dans un **bloc de code
+supplémentaire**, juste après le premier, avec exactement les mêmes lignes.
+Seul le premier bloc est affiché ; les suivants ne servent qu'à la
+vérification. Le dire aussi dans l'explication.
 
 ### La navigation
 
@@ -291,6 +339,9 @@ math: mathjax
 - Ordre des diapositives : titre, _"Retrouvez plus de détails dans le support de
   cours"_, rappel de la séance précédente, objectifs, contenu, _"À vous de jouer
   !"_, questions.
+- **Pas de diapositive de planning** : ni programme minuté de la séance, ni
+  déroulé d'un atelier ou d'une activité. Le déroulé vit dans le support ;
+  une diapositive d'atelier ne porte que sa règle.
 - **Pas d'illustrations** dans les présentations : ni photo, ni fond
   (`![bg]`), ni diapositive de sources. Le texte et le code suffisent.
 - Seule exception : les **diagrammes**, écrits en PlantUML. La source
@@ -331,6 +382,11 @@ de l'évaluation à blanc du cours MSCI de V. Guidoux : en-tête LaTeX avec
   et les ateliers : mêmes programmes, mêmes valeurs, mêmes erreurs.
 - Toute sortie et tout message d'erreur cités ont été obtenus en exécutant le
   programme avec le JDK du cours, comme pour les exemples du support.
+
+Le matériel à imprimer d'une séance (cartes d'activité, par exemple) suit la
+même logique : une source dans `materiel/NN-nom-de-la-seance/`, un PDF
+versionné dans `docs/98-equipe-enseignante/materiel/`, régénéré à chaque
+modification de la source.
 
 `./generate-evaluations.sh` produit les PDF dans `docs/00-organisation/`, d'où
 la page _Évaluation_ les publie. Le workflow GitHub n'a ni Pandoc ni LaTeX : les

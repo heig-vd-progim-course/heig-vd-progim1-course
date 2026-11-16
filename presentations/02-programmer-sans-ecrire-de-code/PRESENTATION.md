@@ -93,15 +93,6 @@ servira à la nommer, et cette limite sera le point de départ de la séance 03.
 **Ce n'est pas une récréation avant les choses sérieuses.** C'est la démarche
 de tout le semestre, en accéléré.
 
-## Le programme de la séance
-
-| Phase       | Durée  | Ce que vous faites                     |
-| :---------- | -----: | :------------------------------------- |
-| Observer    | 35 min | Lire un jeu qui fonctionne             |
-| Modifier    | 45 min | Le changer sans le casser              |
-| Créer       | 55 min | En faire un de toutes pièces           |
-| Restitution | 15 min | Jouer à celui de quelqu'un d'autre     |
-
 ## Phase 1 - Observer
 
 <!-- _class: lead -->

@@ -103,8 +103,9 @@ comprime si la séance déborde.
 |     04 | [Du diagramme au code](04-du-diagramme-au-code.md)            |
 |     05 | [Fonctions et portée des variables](05-fonctions-et-portee.md) |
 |     06 | [Conditions](06-conditions.md)                                |
+|     07 | [Boucles](07-boucles.md)                                      |
 
-Les séances 07 à 12 n'ont pas encore de notes : leur contenu est à l'état
+Les séances 08 à 12 n'ont pas encore de notes : leur contenu est à l'état
 d'esquisse.
 
 ## Contribuer
