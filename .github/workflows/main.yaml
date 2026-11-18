@@ -50,15 +50,6 @@ jobs:
       - name: Installer Zensical
         run: pip install zensical
 
-      # Fichiers de TeaVM, non versionnes (voir `.gitignore`). teavm.org ne
-      # permet pas de les charger depuis un autre site, il faut les copier.
-      - name: Telecharger TeaVM pour l'essai de Java executable
-        run: |
-          mkdir -p docs/vendor/teavm
-          for file in compiler.wasm compiler.wasm-runtime.js compile-classlib-teavm.bin runtime-classlib-teavm.bin; do
-            curl -sSfL -o "docs/vendor/teavm/$file" "https://teavm.org/playground/3/$file"
-          done
-
       - name: Construire le site
         run: zensical build --clean
 
