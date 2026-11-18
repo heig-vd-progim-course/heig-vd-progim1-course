@@ -9,6 +9,10 @@ on:
   push:
     branches:
       - main
+      # Essai temporaire : cette branche se deploie sur le site public, a la
+      # place de `main`, jusqu'au prochain push sur `main`. A retirer avant de
+      # fusionner.
+      - essai-java-executable
     tags:
       - "*"
   pull_request:
@@ -46,6 +50,15 @@ jobs:
       - name: Installer Zensical
         run: pip install zensical
 
+      # Fichiers de TeaVM, non versionnes (voir `.gitignore`). teavm.org ne
+      # permet pas de les charger depuis un autre site, il faut les copier.
+      - name: Telecharger TeaVM pour l'essai de Java executable
+        run: |
+          mkdir -p docs/vendor/teavm
+          for file in compiler.wasm compiler.wasm-runtime.js compile-classlib-teavm.bin runtime-classlib-teavm.bin; do
+            curl -sSfL -o "docs/vendor/teavm/$file" "https://teavm.org/playground/3/$file"
+          done
+
       - name: Construire le site
         run: zensical build --clean
 
@@ -58,7 +71,8 @@ jobs:
           retention-days: 1
 
   deploy:
-    # Ne deployer que sur `main` et sur les tags, pas sur les pull requests
+    # Ne deployer que sur les push (`main`, les tags et la branche d'essai),
+    # pas sur les pull requests
     if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-24.04

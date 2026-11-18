@@ -28,3 +28,7 @@ Thumbs.db
 
 # Folder config file
 [Dd]esktop.ini
+
+## Moteurs Java dans le navigateur
+# Copiés depuis leur site officiel pour l'essai, non versionnés
+docs/vendor/

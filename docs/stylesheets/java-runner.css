@@ -1,0 +1,169 @@
+/* Code Java exécutable, voir `docs/javascripts/java-runner.js`. */
+
+.md-typeset .java-run {
+	margin: 1.5em 0;
+}
+
+.md-typeset .java-run--exercise {
+	padding: 0.2rem 1rem 0.6rem;
+	border: 0.05rem solid var(--md-default-fg-color--lightest);
+	border-left: 0.2rem solid var(--md-accent-fg-color);
+	border-radius: 0.2rem;
+}
+
+.md-typeset .java-run--exercise::before {
+	content: "Exercice";
+	display: block;
+	margin-top: 0.6rem;
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--md-accent-fg-color);
+}
+
+.md-typeset .java-run-widget {
+	margin: 1em 0;
+}
+
+.md-typeset .java-run-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.4rem;
+}
+
+.md-typeset .java-run-filename {
+	font-family: var(--md-code-font-family);
+	font-size: 0.75rem;
+	font-weight: 700;
+	margin-right: auto;
+}
+
+.md-typeset .java-run-toolbar .md-button {
+	margin: 0;
+	padding: 0.3em 1em;
+	font-size: 0.7rem;
+}
+
+.md-typeset .java-run-toolbar .md-button:disabled {
+	opacity: 0.5;
+	cursor: wait;
+}
+
+.md-typeset .java-run-engine {
+	font: inherit;
+	font-size: 0.7rem;
+	padding: 0.25em 0.4em;
+	color: var(--md-default-fg-color);
+	background: var(--md-default-bg-color);
+	border: 0.05rem solid var(--md-default-fg-color--lighter);
+	border-radius: 0.1rem;
+}
+
+.md-typeset .java-run-status {
+	flex-basis: 100%;
+	font-size: 0.65rem;
+	color: var(--md-default-fg-color--light);
+	min-height: 1em;
+}
+
+.md-typeset .java-run-editor {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 6em;
+	padding: 0.8em 1.2em;
+	font-family: var(--md-code-font-family);
+	font-size: 0.85em;
+	line-height: 1.4;
+	tab-size: 4;
+	white-space: pre;
+	overflow-x: auto;
+	resize: vertical;
+	color: var(--md-code-fg-color);
+	background: var(--md-code-bg-color);
+	border: 0.05rem solid var(--md-default-fg-color--lightest);
+	border-radius: 0.1rem;
+}
+
+.md-typeset .java-run-editor:focus {
+	outline: 0.1rem solid var(--md-accent-fg-color);
+}
+
+.md-typeset .java-run-output-label {
+	margin: 0.8em 0 0.2em;
+	font-size: 0.7rem;
+	font-weight: 700;
+}
+
+.md-typeset .java-run-output {
+	margin: 0;
+	padding: 0.8em 1.2em;
+	font-size: 0.85em;
+	white-space: pre-wrap;
+	background: var(--md-code-bg-color);
+	border-radius: 0.1rem;
+}
+
+.md-typeset .java-run-output--error {
+	border-left: 0.2rem solid var(--md-typeset-del-color, #e53935);
+}
+
+.md-typeset .java-run-check {
+	margin-top: 0.8em;
+	padding: 0.4rem 0.8rem;
+	border-radius: 0.2rem;
+}
+
+.md-typeset .java-run-check--ok {
+	background: rgba(0, 200, 83, 0.12);
+}
+
+.md-typeset .java-run-check--ko {
+	background: rgba(255, 145, 0, 0.12);
+}
+
+.md-typeset .java-run-check-title {
+	margin: 0.2em 0;
+	font-weight: 700;
+}
+
+.md-typeset .java-run-check table {
+	margin: 0.4em 0;
+	font-size: 0.7rem;
+}
+
+.md-typeset .java-run-input-label {
+	display: block;
+	margin: 0.8em 0 0;
+	font-size: 0.7rem;
+	font-weight: 700;
+}
+
+.md-typeset .java-run-input-label[hidden] {
+	display: none;
+}
+
+.md-typeset .java-run-input {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	margin-top: 0.2em;
+	padding: 0.5em 1.2em;
+	font-family: var(--md-code-font-family);
+	/* Même taille que l'éditeur : 0,85 em du texte de la page */
+	font-size: 0.68rem;
+	font-weight: normal;
+	line-height: 1.4;
+	resize: vertical;
+	color: var(--md-code-fg-color);
+	background: var(--md-code-bg-color);
+	border: 0.05rem dashed var(--md-default-fg-color--lighter);
+	border-radius: 0.1rem;
+}
+
+.md-typeset .java-run-input:focus {
+	outline: 0.1rem solid var(--md-accent-fg-color);
+}
