@@ -52,14 +52,9 @@
 	cursor: wait;
 }
 
-.md-typeset .java-run-engine {
-	font: inherit;
-	font-size: 0.7rem;
-	padding: 0.25em 0.4em;
-	color: var(--md-default-fg-color);
-	background: var(--md-default-bg-color);
-	border: 0.05rem solid var(--md-default-fg-color--lighter);
-	border-radius: 0.1rem;
+/* `.md-button` impose un `display` qui l'emporterait sur `hidden` */
+.md-typeset .java-run-toolbar .md-button[hidden] {
+	display: none;
 }
 
 .md-typeset .java-run-status {
@@ -98,7 +93,10 @@
 	font-weight: 700;
 }
 
+/* Une boucle arrêtée peut avoir affiché beaucoup de texte : on fait défiler */
 .md-typeset .java-run-output {
+	max-height: 25em;
+	overflow-y: auto;
 	margin: 0;
 	padding: 0.8em 1.2em;
 	font-size: 0.85em;

@@ -1,37 +1,51 @@
 // Code Java exécutable dans le navigateur, à l'essai.
 //
-// Dans le Markdown, un bloc exécutable est un
-// `<div class="java-run" data-engine="cheerpj" markdown>` qui contient un bloc
-// de code ```java avec une méthode `main`. Le script remplace le bloc par un
-// éditeur, un bouton _Exécuter_ et une zone de sortie.
+// Utilisation dans le Markdown
+// ----------------------------
 //
-// Si le bloc contient aussi un bloc ```text, c'est un exercice : ce bloc est
-// la sortie attendue. Après l'exécution, la sortie obtenue lui est comparée
-// ligne par ligne, sans tenir compte des espaces en fin de ligne.
+// Un bloc exécutable est un `<div class="java-run" markdown>` qui contient un
+// bloc de code ```java avec une classe `Main` et sa méthode `main`. Le script
+// remplace le bloc par un éditeur, un bouton _Exécuter_ et une zone de sortie.
 //
-// Un bloc ```text title="Entrée" donne ce que la personne tape au clavier,
-// une ligne par réponse. Une zone _Entrée_ apparaît sous l'éditeur dès que le
-// code contient `IO.readln`, préremplie avec ce bloc s'il existe.
+// Deux blocs ```text facultatifs :
 //
-// `IO.readln` est remplacé, avant la compilation, par une classe générée qui
-// lit ces lignes et les réaffiche après la question, comme le ferait un
-// terminal : `Votre prénom : Camille`. Le remplacement se fait sur la même
-// ligne, les numéros de ligne des erreurs restent justes. Un vrai clavier
-// demanderait de suspendre le programme, ce qu'aucun des deux moteurs ne
-// permet simplement.
+// - `title="Entrée"` : ce que la personne tape au clavier, une ligne par
+//   réponse. Il préremplit la zone _Entrée_, qui apparaît dès que le code
+//   contient `IO.readln` ;
+// - tout autre titre, `"Sortie attendue"` par exemple : le bloc devient un
+//   exercice. La sortie obtenue lui est comparée ligne par ligne, sans tenir
+//   compte des espaces en fin de ligne.
 //
-// Deux moteurs, chargés seulement au premier clic sur _Exécuter_ :
+// Fonctionnement, et pourquoi
+// ---------------------------
 //
-// - `cheerpj` : une JVM OpenJDK compilée en WebAssembly, chargée depuis le CDN
-//   de Leaning Technologies. Le vrai `javac` 25 et la vraie bibliothèque Java.
-// - `teavm` : `javac` 25 et TeaVM compilés en WebAssembly. Le programme est
-//   traduit en WebAssembly puis exécuté. Les fichiers sont dans
-//   `docs/vendor/teavm/`, copiés depuis https://teavm.org/playground/3/.
+// 1. Compilation : `javac` 25 et TeaVM, compilés en WebAssembly, traduisent le
+//    programme en un module WebAssembly. Les fichiers sont dans
+//    `docs/vendor/teavm/`, voir le README.txt de ce dossier.
 //
-// Un menu dans la barre d'outils permet de changer de moteur, pour comparer.
+// 2. Saisie : on compile, à côté de `Main.java`, une classe `IO` maison. Une
+//    classe du même paquet masque `java.lang.IO` : le code de la personne
+//    n'est pas modifié, les erreurs de compilation restent exactes. Cette
+//    classe lit les lignes de la zone _Entrée_ et les réaffiche après la
+//    question, comme un terminal : `Votre prénom : Camille`.
+//
+//    Les lignes sont passées comme arguments à un petit lanceur, qui les
+//    donne à `IO` puis appelle `Main.main`. Changer les réponses ne demande
+//    donc pas de recompiler.
+//
+// 3. Exécution : dans un Web Worker (`java-runner-worker.js`), un fil séparé
+//    de la page. Une boucle infinie gèlerait sinon l'onglet entier. Le
+//    worker est tué après TIME_LIMIT_MS, au-delà de OUTPUT_LIMIT caractères
+//    de sortie, ou par le bouton _Arrêter_.
+//
+// Le moteur est chargé au premier clic sur _Exécuter_ : les pages sans bloc
+// exécutable ne téléchargent rien.
 
 (function () {
 	"use strict";
+
+	const TIME_LIMIT_MS = 5000;
+	const OUTPUT_LIMIT = 100000;
 
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -40,13 +54,72 @@
 		? document.currentScript.src
 		: window.location.href;
 	const teavmBase = new URL("../vendor/teavm/", scriptUrl).href;
+	const workerUrl = new URL("java-runner-worker.js", scriptUrl).href;
 
-	const CHEERPJ_LOADER = "https://cjrtnc.leaningtech.com/5.0/loader.js";
+	// --- Sources Java ajoutées au programme ----------------------------------
 
-	const ENGINES = {
-		cheerpj: { label: "CheerpJ (javac 25)", load: loadCheerpJ },
-		teavm: { label: "TeaVM (javac 25)", load: loadTeaVM },
-	};
+	// Message de fin d'entrée, reconnu par `java-runner-worker.js`
+	const NEED_INPUT = "__PROGIM_NEED_INPUT__";
+	const LAUNCHER = "__ProgimLauncher";
+
+	// Mêmes méthodes que `java.lang.IO` du JDK 25
+	const IO_SOURCE = `final class IO {
+    private static String[] input = new String[0];
+    private static int next = 0;
+
+    private IO() {
+    }
+
+    static void setInput(String[] lines) {
+        input = lines;
+        next = 0;
+    }
+
+    public static void print(Object obj) {
+        System.out.print(obj);
+    }
+
+    public static void println(Object obj) {
+        System.out.println(obj);
+    }
+
+    public static void println() {
+        System.out.println();
+    }
+
+    public static String readln(String prompt) {
+        System.out.print(prompt);
+        return readln();
+    }
+
+    public static String readln() {
+        if (next >= input.length) {
+            throw new IllegalStateException("${NEED_INPUT}");
+        }
+        String line = input[next];
+        next = next + 1;
+        System.out.println(line);
+        return line;
+    }
+}
+`;
+
+	// `catch (Exception e)` accepte aussi un `main` déclaré `throws Exception`
+	const LAUNCHER_SOURCE = `final class ${LAUNCHER} {
+    public static void main(String[] args) {
+        IO.setInput(args);
+        try {
+            Main.main(new String[0]);
+        } catch (RuntimeException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+`;
+
+	// --- Outils ----------------------------------------------------------------
 
 	function celebrate(element) {
 		if (typeof window.confetti !== "function" || reducedMotion.matches) {
@@ -70,157 +143,9 @@
 		return new Promise((resolve) => setTimeout(resolve, 30));
 	}
 
-	function loadScript(src) {
-		return new Promise((resolve, reject) => {
-			const script = document.createElement("script");
-			script.src = src;
-			script.onload = resolve;
-			script.onerror = () => reject(new Error("Impossible de charger " + src));
-			document.head.appendChild(script);
-		});
+	function seconds(ms) {
+		return (ms / 1000).toFixed(1).replace(".", ",") + " s";
 	}
-
-	// --- Saisie clavier --------------------------------------------------------
-
-	const INPUT_CLASS = "__ProgimIO";
-	const READLN_PATTERN = /\bIO\s*\.\s*readln\s*\(/g;
-
-	function usesReadln(source) {
-		return new RegExp(READLN_PATTERN.source).test(source);
-	}
-
-	// Littéral Java sûr. Les caractères non ASCII et de contrôle deviennent
-	// \uXXXX, sauf les fins de ligne : Java traduit les \u avant de lire le
-	// code, un \u000a couperait la chaîne. Pas d'échappement octal : le `javac`
-	// de TeaVM lit mal `\0115`.
-	const NAMED_ESCAPES = { 8: "\\b", 9: "\\t", 10: "\\n", 12: "\\f", 13: "\\r" };
-
-	function javaString(text) {
-		let result = '"';
-		for (let i = 0; i < text.length; i += 1) {
-			const ch = text[i];
-			const code = text.charCodeAt(i);
-			if (ch === '"' || ch === "\\") {
-				result += "\\" + ch;
-			} else if (NAMED_ESCAPES[code]) {
-				result += NAMED_ESCAPES[code];
-			} else if (code < 32 || code > 126) {
-				result += "\\u" + code.toString(16).padStart(4, "0");
-			} else {
-				result += ch;
-			}
-		}
-		return result + '"';
-	}
-
-	function inputClassSource(lines) {
-		return [
-			"final class " + INPUT_CLASS + " {",
-			"    private static final String[] LINES = {",
-			lines.map((line) => "        " + javaString(line) + ",").join("\n"),
-			"    };",
-			"    private static int next = 0;",
-			"",
-			"    static String readln(String prompt) {",
-			"        System.out.print(prompt);",
-			"        return readln();",
-			"    }",
-			"",
-			"    static String readln() {",
-			"        if (next >= LINES.length) {",
-			"            System.out.println();",
-			"            System.err.println(\"(Il n'y a plus de ligne dans l'entr\\u00e9e.)\");",
-			"            return null;",
-			"        }",
-			"        String line = LINES[next];",
-			"        next = next + 1;",
-			"        System.out.println(line);",
-			"        return line;",
-			"    }",
-			"}",
-			"",
-		].join("\n");
-	}
-
-	// Rend les fichiers à compiler : `Main.java`, et la classe de saisie si
-	// le programme utilise `IO.readln`
-	function prepareFiles(source, inputLines) {
-		if (!usesReadln(source)) {
-			return [{ name: "Main.java", content: source }];
-		}
-		return [
-			{
-				name: "Main.java",
-				content: source.replace(READLN_PATTERN, INPUT_CLASS + ".readln("),
-			},
-			{ name: INPUT_CLASS + ".java", content: inputClassSource(inputLines) },
-		];
-	}
-
-	// Les messages ne doivent pas trahir le remplacement
-	function hideInputClass(text) {
-		return text.replaceAll(INPUT_CLASS, "IO");
-	}
-
-	// --- CheerpJ -------------------------------------------------------------
-
-	// CheerpJ écrit `System.out` et `System.err` dans l'élément `#console`.
-	// Une seule JVM par page : les exécutions passent l'une après l'autre.
-	async function loadCheerpJ() {
-		await loadScript(CHEERPJ_LOADER);
-
-		let consoleElement = document.getElementById("console");
-		if (!consoleElement) {
-			consoleElement = document.createElement("pre");
-			consoleElement.id = "console";
-			consoleElement.hidden = true;
-			document.body.appendChild(consoleElement);
-		}
-
-		await window.cheerpjInit({ version: 25, status: "none" });
-
-		let runCount = 0;
-
-		return {
-			async run(files) {
-				// Un dossier par exécution : la JVM garde en mémoire les classes
-				// déjà chargées, un nouveau dossier force le rechargement
-				runCount += 1;
-				const dir = "/files/run-" + Date.now() + "-" + runCount + "/";
-
-				// En UTF-8, comme JavaFiddle : `javac` 25 lit l'UTF-8 par défaut
-				const encoder = new TextEncoder();
-				const paths = files.map((file) => {
-					const path = "/str/" + file.name;
-					window.cheerpjAddStringFile(path, encoder.encode(file.content));
-					return path;
-				});
-
-				consoleElement.textContent = "";
-				const compileCode = await window.cheerpjRunMain(
-					"com.sun.tools.javac.Main",
-					dir,
-					...paths,
-					"-d",
-					dir,
-				);
-				await nextFrame();
-				const compileLog = consoleElement.textContent.replaceAll("/str/", "");
-
-				if (compileCode !== 0) {
-					return { compileError: compileLog || "Erreur de compilation." };
-				}
-
-				consoleElement.textContent = "";
-				const exitCode = await window.cheerpjRunMain("Main", dir);
-				await nextFrame();
-
-				return { output: consoleElement.textContent, exitCode: exitCode };
-			},
-		};
-	}
-
-	// --- TeaVM ---------------------------------------------------------------
 
 	async function fetchBytes(url) {
 		const response = await fetch(url);
@@ -230,7 +155,26 @@
 		return new Int8Array(await response.arrayBuffer());
 	}
 
-	async function loadTeaVM() {
+	function usesReadln(source) {
+		return /\bIO\s*\.\s*readln\b/.test(source);
+	}
+
+	// --- Compilation -----------------------------------------------------------
+
+	let compilerPromise = null;
+
+	function getCompiler() {
+		if (!compilerPromise) {
+			compilerPromise = loadCompiler();
+			// Un échec de chargement doit pouvoir être retenté
+			compilerPromise.catch(() => {
+				compilerPromise = null;
+			});
+		}
+		return compilerPromise;
+	}
+
+	async function loadCompiler() {
 		const runtime = await import(teavmBase + "compiler.wasm-runtime.js");
 		// On passe les octets plutôt que l'URL : `load(url)` exige que le
 		// serveur envoie le type `application/wasm`, ce que `zensical serve`
@@ -250,141 +194,177 @@
 		const diagnostics = [];
 		compiler.onDiagnostic((d) => {
 			diagnostics.push({
-				type: d.type,
 				severity: d.severity,
-				fileName: d.fileName,
+				fileName: d.fileName ? String(d.fileName).split("/").pop() : "",
 				lineNumber: d.lineNumber,
 				columnNumber: d.columnNumber,
 				message: d.message,
 			});
 		});
 
-		// Même présentation que `javac` : fichier, ligne, message, puis la
-		// ligne fautive et un ^ sous la colonne
-		function formatDiagnostics(source) {
-			const lines = source.split("\n");
-			const errors = diagnostics.filter((d) => d.severity === "error");
-			const text = errors
-				.map((d) => {
-					const file = d.fileName
-						? String(d.fileName).split("/").pop()
-						: "Main.java";
-					let result = file + (d.lineNumber > 0 ? ":" + d.lineNumber : "");
-					result += ": error: " + d.message;
-					const line = lines[d.lineNumber - 1];
-					if (line !== undefined) {
-						result += "\n" + line;
-						if (d.columnNumber > 0) {
-							result += "\n" + " ".repeat(d.columnNumber - 1) + "^";
-						}
+		return { compiler, diagnostics };
+	}
+
+	// Même présentation que `javac` : fichier, ligne, message, puis la ligne
+	// fautive et un ^ sous la colonne
+	function formatDiagnostics(diagnostics, source) {
+		const errors = diagnostics.filter((d) => d.severity === "error");
+		if (errors.length === 0) {
+			return "";
+		}
+
+		// Une erreur dans le lanceur : `Main` ou sa méthode `main` manque
+		if (errors.some((d) => d.fileName === LAUNCHER + ".java")) {
+			return (
+				"Le programme doit contenir une classe Main avec sa méthode\n" +
+				"public static void main(String[] args)."
+			);
+		}
+
+		const lines = source.split("\n");
+		const text = errors
+			.map((d) => {
+				let result = d.fileName || "Main.java";
+				if (d.lineNumber > 0) {
+					result += ":" + d.lineNumber;
+				}
+				result += ": error: " + d.message;
+				const line = d.fileName === "Main.java" && lines[d.lineNumber - 1];
+				if (line !== undefined && line !== false) {
+					result += "\n" + line;
+					if (d.columnNumber > 0) {
+						result += "\n" + " ".repeat(d.columnNumber - 1) + "^";
 					}
-					return result;
-				})
-				.join("\n");
-			const count = errors.length === 1 ? "1 error" : errors.length + " errors";
-			return errors.length > 0 ? text + "\n" + count : "";
-		}
-
-		return {
-			async run(files) {
-				const source = files[0].content;
-				diagnostics.length = 0;
-				compiler.clearSourceFiles();
-				compiler.clearOutputFiles();
-				files.forEach((file) =>
-					compiler.addSourceFile(file.name, file.content),
-				);
-
-				let compiled;
-				try {
-					compiled = compiler.compile();
-				} catch (error) {
-					// Le compilateur est dans un état inconnu : on le recharge
-					delete loaded.teavm;
-					return {
-						compileError:
-							"Le compilateur TeaVM a planté (" +
-							error.message +
-							").\n" +
-							"Ce programme est probablement correct : essayez CheerpJ.",
-					};
 				}
-
-				if (!compiled) {
-					return {
-						compileError: formatDiagnostics(source) || "Erreur de compilation.",
-					};
-				}
-
-				const generated = await compiler.generateWebAssembly({
-					outputName: "app",
-					mainClass: "Main",
-				});
-				if (!generated) {
-					return {
-						compileError:
-							"TeaVM n'a pas pu traduire le programme :\n" +
-							formatDiagnostics(source),
-					};
-				}
-
-				const outputFiles = Array.from(compiler.listWebAssemblyOutputFiles());
-				const wasmName = outputFiles.find(
-					(name) => name.endsWith(".wasm") && !name.includes("deobfuscator"),
-				);
-				const bytes = compiler.getWebAssemblyOutputFile(wasmName);
-
-				let output = "";
-				const program = await runtime.load(bytes, {
-					installImports(imports) {
-						imports.teavmConsole.putcharStdout = (c) => {
-							output += String.fromCharCode(c);
-						};
-						imports.teavmConsole.putcharStderr = (c) => {
-							output += String.fromCharCode(c);
-						};
-					},
-				});
-
-				let exitCode = 0;
-				try {
-					await program.exports.main([]);
-				} catch (error) {
-					exitCode = 1;
-					output +=
-						"\n" + (error && error.message ? error.message : String(error));
-				}
-
-				return { output: output, exitCode: exitCode };
-			},
-		};
+				return result;
+			})
+			.join("\n");
+		return (
+			text +
+			"\n" +
+			(errors.length === 1 ? "1 error" : errors.length + " errors")
+		);
 	}
 
-	// --- Chargement partagé et file d'attente ---------------------------------
+	// Une compilation à la fois : le compilateur n'a qu'un jeu de fichiers
+	let compileQueue = Promise.resolve();
 
-	const loaded = {};
-	const queues = {};
-
-	function getEngine(name) {
-		if (!loaded[name]) {
-			loaded[name] = ENGINES[name].load();
-			// Un échec de chargement doit pouvoir être retenté
-			loaded[name].catch(() => delete loaded[name]);
-		}
-		return loaded[name];
-	}
-
-	// Une exécution à la fois par moteur. Un programme qui ne se termine pas
-	// (une boucle infinie) bloque son moteur jusqu'au
-	// rechargement de la page, mais pas l'autre moteur.
-	function enqueue(engineName, task) {
-		const previous = queues[engineName] || Promise.resolve();
-		const result = previous.then(task, task);
-		queues[engineName] = result.catch(() => {});
+	function compile(source) {
+		const task = () => compileNow(source);
+		const result = compileQueue.then(task, task);
+		compileQueue = result.catch(() => {});
 		return result;
 	}
 
-	// --- Comparaison de la sortie --------------------------------------------
+	async function compileNow(source) {
+		const { compiler, diagnostics } = await getCompiler();
+
+		diagnostics.length = 0;
+		compiler.clearSourceFiles();
+		compiler.clearOutputFiles();
+		compiler.addSourceFile("Main.java", source);
+		compiler.addSourceFile("IO.java", IO_SOURCE);
+		compiler.addSourceFile(LAUNCHER + ".java", LAUNCHER_SOURCE);
+
+		let compiled;
+		try {
+			compiled = compiler.compile();
+		} catch (error) {
+			// Le compilateur est dans un état inconnu : on le recharge
+			compilerPromise = null;
+			return {
+				compileError:
+					"Le compilateur a planté (" +
+					error.message +
+					").\n" +
+					"C'est un défaut connu du compilateur utilisé dans le navigateur,\n" +
+					"par exemple avec une division par zéro écrite en toutes lettres.\n" +
+					"Votre programme est peut-être correct : essayez-le dans IntelliJ.",
+			};
+		}
+
+		if (!compiled) {
+			return {
+				compileError:
+					formatDiagnostics(diagnostics, source) || "Erreur de compilation.",
+			};
+		}
+
+		const generated = await compiler.generateWebAssembly({
+			outputName: "app",
+			mainClass: LAUNCHER,
+		});
+		if (!generated) {
+			return {
+				compileError:
+					"Ce programme compile, mais ne peut pas s'exécuter dans le\n" +
+					"navigateur. Essayez-le dans IntelliJ.\n\n" +
+					formatDiagnostics(diagnostics, source),
+			};
+		}
+
+		const outputFiles = Array.from(compiler.listWebAssemblyOutputFiles());
+		const wasmName = outputFiles.find(
+			(name) => name.endsWith(".wasm") && !name.includes("deobfuscator"),
+		);
+		return { bytes: compiler.getWebAssemblyOutputFile(wasmName) };
+	}
+
+	// --- Exécution dans un worker ----------------------------------------------
+
+	// Lance le programme. `onOutput` reçoit la sortie au fil de l'eau. Rend une
+	// fonction `stop` et une promesse du résultat :
+	// { status: "done" | "error" | "need-input" | "timeout" | "too-much-output"
+	//   | "stopped", message? }
+	function execute(bytes, inputLines, onOutput) {
+		let finish;
+		const result = new Promise((resolve) => {
+			finish = resolve;
+		});
+
+		const worker = new Worker(workerUrl, { type: "module" });
+		let outputLength = 0;
+		let finished = false;
+
+		function end(value) {
+			if (!finished) {
+				finished = true;
+				clearTimeout(timer);
+				worker.terminate();
+				finish(value);
+			}
+		}
+
+		const timer = setTimeout(() => end({ status: "timeout" }), TIME_LIMIT_MS);
+
+		worker.onmessage = (event) => {
+			const data = event.data;
+			if (data.type === "output") {
+				outputLength += data.text.length;
+				onOutput(data.text);
+				if (outputLength > OUTPUT_LIMIT) {
+					end({ status: "too-much-output" });
+				}
+			} else {
+				end({ status: data.type, message: data.message });
+			}
+		};
+		worker.onerror = (event) => {
+			end({
+				status: "error",
+				message:
+					"le navigateur n'a pas pu lancer le programme (" +
+					(event.message || "erreur inconnue") +
+					")",
+			});
+		};
+
+		worker.postMessage({ bytes: bytes, args: inputLines });
+
+		return { stop: () => end({ status: "stopped" }), result: result };
+	}
+
+	// --- Comparaison de la sortie ----------------------------------------------
 
 	function normalize(text) {
 		return text
@@ -412,7 +392,7 @@
 		return { ok: rows.every((row) => row.ok), rows: rows };
 	}
 
-	// --- Interface -----------------------------------------------------------
+	// --- Interface -------------------------------------------------------------
 
 	function extractCode(block) {
 		const code =
@@ -422,7 +402,7 @@
 		return clone.textContent.replace(/\n+$/, "") + "\n";
 	}
 
-	function button(text, className) {
+	function createButton(text, className) {
 		const element = document.createElement("button");
 		element.type = "button";
 		element.className = "md-button " + className;
@@ -483,6 +463,20 @@
 		container.appendChild(table);
 	}
 
+	// Le message affiché quand le programme ne s'est pas terminé normalement
+	const ENDINGS = {
+		timeout:
+			"Arrêté : le programme tournait depuis plus de " +
+			TIME_LIMIT_MS / 1000 +
+			" secondes. Une boucle infinie ?",
+		"too-much-output":
+			"Arrêté : le programme a affiché trop de texte. Une boucle infinie ?",
+		stopped: "Arrêté.",
+		error: "Arrêté par une erreur à l'exécution.",
+		"need-input":
+			"Le programme attend une réponse de plus : ajoutez une ligne dans la zone Entrée.",
+	};
+
 	function setup(root) {
 		if (root.dataset.javaRunReady) {
 			return;
@@ -496,17 +490,17 @@
 
 		// Un bloc texte intitulé « Entrée » est la saisie, l'autre la sortie
 		// attendue
-		let textBlock = null;
+		let expectedBlock = null;
 		let inputBlock = null;
 		root.querySelectorAll(".language-text").forEach((block) => {
 			const title = block.querySelector(".filename");
 			if (title && /^entr[ée]e/i.test(title.textContent.trim())) {
 				inputBlock = inputBlock || block;
 			} else {
-				textBlock = textBlock || block;
+				expectedBlock = expectedBlock || block;
 			}
 		});
-		const expected = textBlock ? extractCode(textBlock) : null;
+		const expected = expectedBlock ? extractCode(expectedBlock) : null;
 		const originalInput = inputBlock
 			? extractCode(inputBlock).replace(/\n$/, "")
 			: "";
@@ -524,7 +518,6 @@
 		editor.setAttribute("aria-label", "Code Java de " + fileName);
 		editor.value = original;
 
-		editor.addEventListener("input", () => resizeEditor(editor));
 		editor.addEventListener("keydown", (event) => {
 			// Tab insère quatre espaces ; Échap puis Tab sort de l'éditeur
 			if (event.key === "Tab" && !event.shiftKey && !editor.dataset.escape) {
@@ -548,27 +541,19 @@
 		label.className = "java-run-filename";
 		label.textContent = fileName;
 
-		const runButton = button("Exécuter", "md-button--primary java-run-button");
-		const resetButton = button("Réinitialiser", "java-run-reset");
-
-		const engineSelect = document.createElement("select");
-		engineSelect.className = "java-run-engine";
-		engineSelect.setAttribute("aria-label", "Moteur d'exécution");
-		Object.keys(ENGINES).forEach((key) => {
-			const option = document.createElement("option");
-			option.value = key;
-			option.textContent = ENGINES[key].label;
-			engineSelect.appendChild(option);
-		});
-		engineSelect.value = ENGINES[root.dataset.engine]
-			? root.dataset.engine
-			: "cheerpj";
+		const runButton = createButton(
+			"Exécuter",
+			"md-button--primary java-run-button",
+		);
+		const stopButton = createButton("Arrêter", "java-run-stop");
+		stopButton.hidden = true;
+		const resetButton = createButton("Réinitialiser", "java-run-reset");
 
 		const status = document.createElement("span");
 		status.className = "java-run-status";
 		status.setAttribute("role", "status");
 
-		toolbar.append(label, runButton, resetButton, engineSelect, status);
+		toolbar.append(label, runButton, stopButton, resetButton, status);
 
 		// Entrée
 		const inputLabel = document.createElement("label");
@@ -590,7 +575,6 @@
 		// Sortie
 		const outputLabel = document.createElement("p");
 		outputLabel.className = "java-run-output-label";
-		outputLabel.textContent = "Sortie";
 		outputLabel.hidden = true;
 
 		const output = document.createElement("pre");
@@ -607,19 +591,21 @@
 		javaBlock.replaceWith(wrapper);
 
 		if (inputBlock) {
-			// Le contenu est repris dans la zone d'entrée
+			// Son contenu est repris dans la zone Entrée
 			inputBlock.remove();
 		}
-
-		if (textBlock) {
+		if (expectedBlock) {
 			root.classList.add("java-run--exercise");
 			// La sortie attendue reste affichée, entre l'entrée et la sortie
-			inputLabel.after(textBlock);
+			inputLabel.after(expectedBlock);
 		}
 
 		resizeEditor(editor);
 		updateInputVisibility();
-		editor.addEventListener("input", updateInputVisibility);
+		editor.addEventListener("input", () => {
+			resizeEditor(editor);
+			updateInputVisibility();
+		});
 
 		resetButton.addEventListener("click", () => {
 			editor.value = original;
@@ -628,80 +614,94 @@
 			updateInputVisibility();
 		});
 
-		runButton.addEventListener("click", () => {
-			const engineName = engineSelect.value;
+		let stopCurrent = null;
+		stopButton.addEventListener("click", () => {
+			if (stopCurrent) {
+				stopCurrent();
+			}
+		});
+
+		function setRunning(running) {
+			runButton.hidden = running;
+			stopButton.hidden = !running;
+		}
+
+		function showOutput(title, text, isError) {
+			outputLabel.hidden = false;
+			output.hidden = false;
+			outputLabel.textContent = title;
+			output.textContent = text;
+			output.classList.toggle("java-run-output--error", isError);
+		}
+
+		runButton.addEventListener("click", async () => {
+			const source = editor.value;
 			const inputText = inputArea.value.replace(/\r\n/g, "\n");
 			const inputLines =
 				inputText === "" ? [] : inputText.replace(/\n$/, "").split("\n");
-			const files = prepareFiles(editor.value, inputLines);
 
-			runButton.disabled = true;
-			status.textContent = "En attente...";
+			setRunning(true);
+			checkBox.hidden = true;
+			const started = performance.now();
 
-			enqueue(engineName, async () => {
-				const started = performance.now();
-				const firstLoad = !loaded[engineName];
-
-				status.textContent = firstLoad
-					? "Chargement de " + ENGINES[engineName].label + "..."
-					: "Compilation...";
+			try {
+				status.textContent = compilerPromise
+					? "Compilation..."
+					: "Chargement du compilateur (environ 7 Mo la première fois)...";
 				await nextFrame();
 
-				const engine = await getEngine(engineName);
-				const loadedAt = performance.now();
+				const compiled = await compile(source);
+				if (compiled.compileError) {
+					status.textContent = "";
+					showOutput("Erreur de compilation", compiled.compileError, true);
+					return;
+				}
 
-				status.textContent = "Compilation et exécution...";
-				await nextFrame();
-
-				const result = await engine.run(files);
-				const finished = performance.now();
-				return { result, firstLoad, started, loadedAt, finished };
-			})
-				.then(({ result, firstLoad, started, loadedAt, finished }) => {
-					const seconds = (ms) =>
-						(ms / 1000).toFixed(1).replace(".", ",") + " s";
-					status.textContent =
-						(firstLoad
-							? "Chargement " + seconds(loadedAt - started) + ", "
-							: "") +
-						"compilation et exécution " +
-						seconds(finished - loadedAt);
-
-					outputLabel.hidden = false;
-					output.hidden = false;
-					output.classList.toggle(
-						"java-run-output--error",
-						!!result.compileError,
-					);
-
-					if (result.compileError) {
-						outputLabel.textContent = "Erreur de compilation";
-						output.textContent = hideInputClass(result.compileError);
-						checkBox.hidden = true;
-						return;
-					}
-
-					const programOutput = hideInputClass(result.output);
-					outputLabel.textContent = "Sortie";
-					output.textContent =
-						programOutput === "" ? "(aucune sortie)" : programOutput;
-
-					if (expected !== null) {
-						const check = compare(expected, programOutput);
-						renderCheck(checkBox, check);
-						if (check.ok) {
-							celebrate(checkBox);
-						}
-					}
-				})
-				.catch((error) => {
-					status.textContent =
-						"Échec : " + (error && error.message ? error.message : error);
-					console.error(error);
-				})
-				.finally(() => {
-					runButton.disabled = false;
+				status.textContent = "Exécution...";
+				showOutput("Sortie", "", false);
+				let text = "";
+				const run = execute(compiled.bytes, inputLines, (chunk) => {
+					text += chunk;
+					output.textContent = text;
 				});
+				stopCurrent = run.stop;
+				const result = await run.result;
+				stopCurrent = null;
+
+				if (result.status === "error") {
+					text +=
+						(text === "" || text.endsWith("\n") ? "" : "\n") +
+						"Erreur à l'exécution : " +
+						result.message;
+				}
+				output.textContent = text === "" ? "(aucune sortie)" : text;
+				output.classList.toggle(
+					"java-run-output--error",
+					result.status !== "done",
+				);
+
+				status.textContent =
+					ENDINGS[result.status] ||
+					"Terminé en " + seconds(performance.now() - started) + ".";
+
+				if (
+					expected !== null &&
+					(result.status === "done" || result.status === "error")
+				) {
+					const check = compare(expected, text);
+					renderCheck(checkBox, check);
+					if (check.ok) {
+						celebrate(checkBox);
+					}
+				}
+			} catch (error) {
+				status.textContent =
+					"Échec : " + (error && error.message ? error.message : error);
+				console.error(error);
+			} finally {
+				stopCurrent = null;
+				setRunning(false);
+			}
 		});
 	}
 

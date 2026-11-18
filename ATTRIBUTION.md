@@ -72,14 +72,10 @@
   [Matteo Bruni](https://github.com/matteobruni) et ses contributrices et
   contributeurs, sous licence MIT, pour les confettis des quiz du site, comme
   dans le cours UPInfo.
-- [CheerpJ](https://cheerpj.com/) by
-  [Leaning Technologies](https://leaningtech.com/), sous
-  [licence communautaire](https://cheerpj.com/licensing/), pour l'essai de code
-  Java exécutable dans le navigateur.
 - [TeaVM](https://teavm.org/) et
   [teavm-javac](https://github.com/konsoletyper/teavm-javac) by
   [Alexey Andreev](https://github.com/konsoletyper), sous licence Apache 2.0,
-  pour le même essai.
+  pour l'essai de code Java exécutable dans le navigateur.
 
 ## Sources pédagogiques
 

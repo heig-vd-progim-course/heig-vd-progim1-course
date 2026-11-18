@@ -288,6 +288,58 @@ supplémentaire**, juste après le premier, avec exactement les mêmes lignes.
 Seul le premier bloc est affiché ; les suivants ne servent qu'à la
 vérification. Le dire aussi dans l'explication.
 
+### Le code exécutable (à l'essai)
+
+Un bloc `java-run` rend un exemple modifiable et exécutable dans le navigateur.
+Il n'est utilisé pour l'instant que sur la page
+`99-ressources/essai-java-executable.md`.
+
+````markdown
+<div class="java-run" markdown>
+
+Consigne facultative.
+
+```java title="Main.java"
+public class Main {
+    ...
+}
+```
+
+```text title="Entrée"
+Camille
+```
+
+```text title="Sortie attendue"
+Votre prénom : Camille
+Bonjour Camille
+```
+
+</div>
+````
+
+- Le bloc _Entrée_ est facultatif : ce que la personne taperait au clavier, une
+  ligne par réponse. La sortie réaffiche chaque réponse après la question, comme
+  un terminal, et comme les sorties du support.
+- Le bloc _Sortie attendue_ est facultatif : sa présence fait du bloc un
+  exercice, dont la sortie est vérifiée ligne par ligne.
+
+Le comportement est dans `docs/javascripts/java-runner.js`, dont l'en-tête
+explique les choix, et `docs/javascripts/java-runner-worker.js`, le style dans
+`docs/stylesheets/java-runner.css`. Le compilateur est teavm-javac, figé dans
+`docs/vendor/teavm/` avec sa licence et son origine.
+
+Limites connues, à vérifier avant d'utiliser un exemple :
+
+- le programme est traduit pour le navigateur, pas exécuté par la JVM : quelques
+  messages d'erreur à l'exécution diffèrent d'IntelliJ ;
+- `Scanner`, `System.in` et `BufferedReader` ne fonctionnent pas, seul
+  `IO.readln` est pris en charge ;
+- `10 / 0` écrit en toutes lettres fait planter le compilateur ;
+- un programme est arrêté après 5 secondes ou s'il affiche trop de texte.
+
+Une sortie montrée dans le support reste celle du JDK du cours : on ne la copie
+jamais depuis le navigateur.
+
 ### La navigation
 
 Elle est définie à la main dans `zensical.toml`, clé `nav`. **Une table en ligne
