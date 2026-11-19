@@ -393,18 +393,18 @@
 			else if (tok === "M") ctx.drawImage(IMG.bang, 0, 0, 14, 13, x - 7, y - CELL / 2 - 11 + bob, 14, 13);
 			else if (tok === "D") ctx.drawImage(IMG.heart, 0, 0, 14, 13, x - 7, y - CELL / 2 - 11 + bob, 14, 13);
 		}));
-		// Théa, en double taille ; dans une mare, seulement sa tête et les ondulations
+		// Théa à sa taille d'origine ; dans une mare, seulement sa tête et les ondulations
 		const t = game.thea;
 		const [x, y] = [(2 * t.c + MARGIN) * CELL + CELL / 2, (2 * t.r + MARGIN) * CELL + CELL / 2];
 		const col = { "1,0": 0, "-1,0": 1, "0,-1": 2, "0,1": 3 }[t.dir.join()];
 		const row = t.walking ? Math.floor(tick / 6) % 4 : 0;
 		if (game.fx === "swim") {
-			ctx.drawImage(IMG.ripples, (Math.floor(tick / 8) % 4) * 16, 0, 16, 16, x - 16, y - 8, 32, 32);
-			ctx.drawImage(IMG.thea, 0, 0, 16, 9, x - 16, y - 14, 32, 18);
+			ctx.drawImage(IMG.ripples, (Math.floor(tick / 8) % 4) * 16, 0, 16, 16, x - 8, y - 4, 16, 16);
+			ctx.drawImage(IMG.thea, 0, 0, 16, 9, x - 8, y - 7, 16, 9);
 		} else {
-			const k = 2 * t.scale;
+			const k = t.scale;
 			ctx.globalAlpha = Math.max(0, Math.min(1, t.scale * 1.3));
-			ctx.drawImage(IMG.thea, col * 16, row * 16, 16, 16, x - 8 * k, y - 8 * k - 4, 16 * k, 16 * k);
+			ctx.drawImage(IMG.thea, col * 16, row * 16, 16, 16, x - 8 * k, y - 8 * k, 16 * k, 16 * k);
 			ctx.globalAlpha = 1;
 		}
 		cv.style.width = displayWidth(bg) + "px";

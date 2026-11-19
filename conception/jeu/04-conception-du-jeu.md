@@ -441,7 +441,7 @@ novembre 2026 :
 
 | Élément    | Choix                                                                                            |
 | :--------- | :----------------------------------------------------------------------------------------------- |
-| Personnage | `Cavegirl`, qui incarne **Théa, la livreuse de thé**, en double taille (32 × 32)                 |
+| Personnage | `Cavegirl`, qui incarne **Théa, la livreuse de thé**, à sa taille d'origine (16 × 16)            |
 | Routes     | Terre sur herbe foncée                                                                           |
 | Maisons    | Au hasard parmi la boutique, la maison de pierre et le pignon orange                             |
 | Obstacles  | Au hasard : une mare, où Théa tombe et nage, ou un trou, où elle tombe                           |
@@ -477,8 +477,9 @@ Décisions qui suivent les images :
 - **Personnage** : Vincent a d'abord pensé à Circé et ses potions, puis est
   revenu à **Théa, la livreuse de thé**. Le nom du jeu, Thealivery, reste. Le
   sprite reste celui de `Cavegirl`.
-- **Taille** : Théa est dessinée en double taille, 32 × 32 pixels, centrée dans
-  sa case de 48 × 48. Le mélange d'échelles est assumé, pour la lisibilité.
+- **Taille** : Théa est dessinée à sa taille d'origine, 16 × 16 pixels, centrée
+  dans sa case de 48 × 48, à la même échelle que le reste du pack. La double
+  taille (32 × 32) a été essayée, puis abandonnée à la demande de Vincent.
 - **Nage** : `Cavegirl` n'a pas d'animation de nage. Quand elle tombe dans une
   mare, on ne montrera que sa tête, avec les ondulations animées du pack
   (`Backgrounds/Animated/Water Ripples`). Dans un trou, elle tombe.
