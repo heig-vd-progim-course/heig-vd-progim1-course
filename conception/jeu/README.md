@@ -14,16 +14,16 @@ n'est pas publié sur le site.
 
 Chaque étape produit un document, relu avant de passer à la suivante.
 
-| Étape | Document                                    | État      |
-| ----: | :------------------------------------------ | :-------- |
-|     1 | [Cadrage](01-cadrage.md)                    | À valider |
-|     2 | [État de l'art](02-etat-de-l-art.md)        | À valider |
-|     3 | Besoins : personas, récits utilisateur      | À faire   |
-|     4 | Conception du jeu : mécaniques, niveaux     | À faire   |
-|     5 | Maquettes : fil de fer, puis Penpot         | À faire   |
-|     6 | Architecture : UML (PlantUML) et décisions  | À faire   |
-|     7 | Code : moteur TypeScript testé, vue séparée | À faire   |
-|     8 | Tests avec des personnes qui étudient       | À faire   |
+| Étape | Document                                    | État    |
+| ----: | :------------------------------------------ | :------ |
+|     1 | [Cadrage](01-cadrage.md)                    | Validé  |
+|     2 | [État de l'art](02-etat-de-l-art.md)        | Validé  |
+|     3 | [Besoins](03-besoins.md)                    | Validé  |
+|     4 | Conception du jeu : mécaniques, niveaux     | À faire |
+|     5 | Maquettes : fil de fer, puis Penpot         | À faire |
+|     6 | Architecture : UML (PlantUML) et décisions  | À faire |
+|     7 | Code : moteur TypeScript testé, vue séparée | À faire |
+|     8 | Tests avec des personnes qui étudient       | À faire |
 
 Les décisions importantes seront consignées une par une dans `decisions/`, au
 format ADR (Architecture Decision Record) : le contexte, la décision, les
