@@ -52,9 +52,13 @@
 	cursor: wait;
 }
 
-/* `.md-button` impose un `display` qui l'emporterait sur `hidden` */
-.md-typeset .java-run-toolbar .md-button[hidden] {
-	display: none;
+/*
+ * Les règles `display` du thème et de cette feuille l'emporteraient sur
+ * l'attribut `hidden` : sans cette règle, un élément caché par le script
+ * resterait affiché.
+ */
+.md-typeset .java-run [hidden] {
+	display: none !important;
 }
 
 .md-typeset .java-run-status {
@@ -85,6 +89,97 @@
 
 .md-typeset .java-run-editor:focus {
 	outline: 0.1rem solid var(--md-accent-fg-color);
+}
+
+/*
+ * Éditeur CodeMirror. Les sélecteurs à trois classes l'emportent sur le thème
+ * de base de CodeMirror. Les couleurs reprennent les variables des blocs de
+ * code du site, en mode clair comme en mode sombre.
+ */
+.md-typeset .java-run .cm-editor {
+	font-size: 0.85em;
+	color: var(--md-code-fg-color);
+	background: var(--md-code-bg-color);
+	border: 0.05rem solid var(--md-default-fg-color--lightest);
+	border-radius: 0.1rem;
+}
+
+.md-typeset .java-run .cm-editor.cm-focused {
+	outline: 0.1rem solid var(--md-accent-fg-color);
+}
+
+.md-typeset .java-run .cm-scroller {
+	font-family: var(--md-code-font-family);
+	line-height: 1.4;
+}
+
+.md-typeset .java-run .cm-content {
+	padding: 0.8em 0;
+	caret-color: var(--md-code-fg-color);
+}
+
+.md-typeset .java-run .cm-gutters {
+	color: var(--md-default-fg-color--light);
+	background: var(--md-code-bg-color);
+	border-right: 0.05rem solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset .java-run .cm-activeLine,
+.md-typeset .java-run .cm-activeLineGutter {
+	background: var(--md-code-hl-color--light);
+}
+
+.md-typeset .java-run .cm-selectionBackground,
+.md-typeset .java-run .cm-focused .cm-selectionBackground {
+	background: var(--md-accent-fg-color--transparent);
+}
+
+.md-typeset .java-run .cm-matchingBracket {
+	background: var(--md-accent-fg-color--transparent);
+	outline: 0.05rem solid var(--md-accent-fg-color);
+}
+
+/* Coloration : mêmes correspondances que les blocs de code du site */
+.md-typeset .java-run .tok-keyword,
+.md-typeset .java-run .tok-typeName {
+	color: var(--md-code-hl-keyword-color);
+}
+
+.md-typeset .java-run .tok-string {
+	color: var(--md-code-hl-string-color);
+}
+
+.md-typeset .java-run .tok-number,
+.md-typeset .java-run .tok-bool,
+.md-typeset .java-run .tok-atom {
+	color: var(--md-code-hl-number-color);
+}
+
+.md-typeset .java-run .tok-comment {
+	color: var(--md-code-hl-comment-color);
+}
+
+.md-typeset .java-run .tok-className,
+.md-typeset .java-run .tok-variableName.tok-definition,
+.md-typeset .java-run .tok-propertyName.tok-definition {
+	color: var(--md-code-hl-function-color);
+}
+
+.md-typeset .java-run .tok-variableName,
+.md-typeset .java-run .tok-propertyName {
+	color: var(--md-code-hl-name-color);
+}
+
+.md-typeset .java-run .tok-operator {
+	color: var(--md-code-hl-operator-color);
+}
+
+.md-typeset .java-run .tok-punctuation {
+	color: var(--md-code-hl-punctuation-color);
+}
+
+.md-typeset .java-run .tok-meta {
+	color: var(--md-code-hl-special-color);
 }
 
 .md-typeset .java-run-output-label {
@@ -133,15 +228,16 @@
 	font-size: 0.7rem;
 }
 
+/* Une ligne de sortie reste sur une ligne : le tableau défile en largeur */
+.md-typeset .java-run-check code {
+	white-space: pre;
+}
+
 .md-typeset .java-run-input-label {
 	display: block;
 	margin: 0.8em 0 0;
 	font-size: 0.7rem;
 	font-weight: 700;
-}
-
-.md-typeset .java-run-input-label[hidden] {
-	display: none;
 }
 
 .md-typeset .java-run-input {

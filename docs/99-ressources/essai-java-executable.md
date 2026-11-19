@@ -125,8 +125,8 @@ public class Main {
 
 L'exemple de la
 [séance 04](../01-seances/04-du-diagramme-au-code/03-lire-au-clavier.md). Le
-navigateur ne peut pas attendre que vous tapiez pendant que le programme tourne
-: écrivez vos réponses à l'avance dans la zone _Entrée_, une par ligne. La
+navigateur ne peut pas attendre que vous tapiez pendant que le programme tourne.
+Écrivez donc vos réponses à l'avance dans la zone _Entrée_, une par ligne. La
 sortie les affiche après chaque question, comme dans un terminal.
 
 <div class="java-run" markdown>
@@ -213,6 +213,8 @@ public class Main {
 - [TeaVM](https://teavm.org/) et
   [teavm-javac](https://github.com/konsoletyper/teavm-javac), d'Alexey Andreev,
   sous licence Apache 2.0.
+- [CodeMirror](https://codemirror.net/), de Marijn Haverbeke, sous licence MIT,
+  pour l'éditeur.
 
 <!-- URLs -->
 

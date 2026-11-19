@@ -92,6 +92,7 @@ generate-presentations.sh    Marp vers docs/presentations/ (HTML et PDF)
 generate-diagrams.sh         PlantUML vers SVG, à côté des sources (docs/ et presentations/)
 generate-evaluations.sh      Pandoc vers docs/00-organisation/ (PDF versionnés)
 check-presentations.py       contrôle de débordement des diapositives
+outils/codemirror/           recette de construction de l'éditeur des blocs java-run
 ```
 
 `docs/presentations/` et `site/` sont **générés** : ne rien y écrire à la main,
@@ -326,7 +327,9 @@ Bonjour Camille
 Le comportement est dans `docs/javascripts/java-runner.js`, dont l'en-tête
 explique les choix, et `docs/javascripts/java-runner-worker.js`, le style dans
 `docs/stylesheets/java-runner.css`. Le compilateur est teavm-javac, figé dans
-`docs/vendor/teavm/` avec sa licence et son origine.
+`docs/vendor/teavm/` avec sa licence et son origine. L'éditeur est CodeMirror 6,
+construit en un seul fichier dans `docs/vendor/codemirror/` par la recette de
+`outils/codemirror/` : ne jamais modifier ce fichier à la main.
 
 Limites connues, à vérifier avant d'utiliser un exemple :
 

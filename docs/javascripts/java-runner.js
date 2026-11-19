@@ -38,8 +38,15 @@
 //    worker est tué après TIME_LIMIT_MS, au-delà de OUTPUT_LIMIT caractères
 //    de sortie, ou par le bouton _Arrêter_.
 //
-// Le moteur est chargé au premier clic sur _Exécuter_ : les pages sans bloc
-// exécutable ne téléchargent rien.
+// 4. Édition : CodeMirror 6, qui marche aussi au doigt sur un téléphone.
+//    Le paquet est construit une fois et figé dans `docs/vendor/codemirror/`,
+//    voir `outils/codemirror/`. La zone de texte d'origine reste la source de
+//    vérité : CodeMirror y recopie chaque modification, et si son chargement
+//    échoue, la zone de texte reste affichée et le reste fonctionne.
+//
+// Le compilateur est chargé au premier clic sur _Exécuter_, l'éditeur à
+// l'affichage d'une page qui contient un bloc : les autres pages ne
+// téléchargent rien.
 
 (function () {
 	"use strict";
@@ -55,6 +62,8 @@
 		: window.location.href;
 	const teavmBase = new URL("../vendor/teavm/", scriptUrl).href;
 	const workerUrl = new URL("java-runner-worker.js", scriptUrl).href;
+	const codemirrorUrl = new URL("../vendor/codemirror/codemirror.js", scriptUrl)
+		.href;
 
 	// --- Sources Java ajoutées au programme ----------------------------------
 
@@ -415,6 +424,82 @@
 		editor.style.height = editor.scrollHeight + 4 + "px";
 	}
 
+	// --- Éditeur CodeMirror ------------------------------------------------------
+
+	let codemirrorPromise = null;
+
+	function loadCodeMirror() {
+		if (!codemirrorPromise) {
+			codemirrorPromise = import(codemirrorUrl);
+			codemirrorPromise.catch(() => {
+				codemirrorPromise = null;
+			});
+		}
+		return codemirrorPromise;
+	}
+
+	// Remplace la zone de texte par CodeMirror. `onChange` est appelée après
+	// chaque modification. Rend une fonction qui remplace tout le code, ou
+	// `null` si CodeMirror n'a pas pu être chargé : la zone de texte reste alors
+	// en place.
+	async function enhanceEditor(textarea, onChange) {
+		let cm;
+		try {
+			cm = await loadCodeMirror();
+		} catch (error) {
+			console.warn("CodeMirror indisponible, zone de texte simple", error);
+			return null;
+		}
+
+		const view = new cm.EditorView({
+			state: cm.EditorState.create({
+				doc: textarea.value,
+				extensions: [
+					cm.lineNumbers(),
+					cm.highlightActiveLineGutter(),
+					cm.highlightActiveLine(),
+					cm.drawSelection(),
+					cm.history(),
+					cm.indentOnInput(),
+					cm.indentUnit.of("    "),
+					cm.EditorState.tabSize.of(4),
+					cm.bracketMatching(),
+					cm.closeBrackets(),
+					cm.java(),
+					cm.syntaxHighlighting(cm.classHighlighter),
+					// Tab indente ; Échap puis Tab sort de l'éditeur
+					cm.keymap.of([
+						...cm.closeBracketsKeymap,
+						...cm.defaultKeymap,
+						...cm.historyKeymap,
+						cm.indentWithTab,
+					]),
+					cm.EditorView.contentAttributes.of({
+						"aria-label": textarea.getAttribute("aria-label"),
+						autocapitalize: "off",
+						autocorrect: "off",
+						spellcheck: "false",
+					}),
+					cm.EditorView.updateListener.of((update) => {
+						if (update.docChanged) {
+							textarea.value = update.state.doc.toString();
+							onChange();
+						}
+					}),
+				],
+			}),
+		});
+
+		textarea.after(view.dom);
+		textarea.hidden = true;
+
+		return (text) => {
+			view.dispatch({
+				changes: { from: 0, to: view.state.doc.length, insert: text },
+			});
+		};
+	}
+
 	function renderCheck(container, check) {
 		container.innerHTML = "";
 		container.hidden = false;
@@ -607,11 +692,22 @@
 			updateInputVisibility();
 		});
 
-		resetButton.addEventListener("click", () => {
-			editor.value = original;
-			inputArea.value = originalInput;
+		// Remplace tout le code : dans CodeMirror s'il est chargé, sinon dans
+		// la zone de texte
+		let setCode = (text) => {
+			editor.value = text;
 			resizeEditor(editor);
 			updateInputVisibility();
+		};
+		enhanceEditor(editor, updateInputVisibility).then((setInEditor) => {
+			if (setInEditor) {
+				setCode = setInEditor;
+			}
+		});
+
+		resetButton.addEventListener("click", () => {
+			setCode(original);
+			inputArea.value = originalInput;
 		});
 
 		let stopCurrent = null;

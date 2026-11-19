@@ -76,6 +76,9 @@
   [teavm-javac](https://github.com/konsoletyper/teavm-javac) by
   [Alexey Andreev](https://github.com/konsoletyper), sous licence Apache 2.0,
   pour l'essai de code Java exécutable dans le navigateur.
+- [CodeMirror](https://codemirror.net/) by
+  [Marijn Haverbeke](https://marijnhaverbeke.nl/) et ses contributrices et
+  contributeurs, sous licence MIT, pour l'éditeur du même essai.
 
 ## Sources pédagogiques
 
