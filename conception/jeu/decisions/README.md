@@ -20,6 +20,7 @@ et le dit.
 | 0007 | [Un canevas et un atlas de tuiles](0007-rendu-canevas-et-atlas.md)                       | Acceptée |
 | 0008 | [Le pixel art de Ninja Adventure](0008-pixel-art-ninja-adventure.md)                     | Acceptée |
 | 0009 | [Des diagrammes Mermaid dans la conception](0009-diagrammes-mermaid.md)                  | Acceptée |
+| 0010 | [Deux glisser-déposer séparés](0010-deux-glisser-deposer-separes.md)                     | Acceptée |
 
 ## Modèle
 
