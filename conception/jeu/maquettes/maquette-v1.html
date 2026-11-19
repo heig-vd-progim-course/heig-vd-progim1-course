@@ -1,0 +1,864 @@
+<title>Maquette Thealivery</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Baloo+2:wght@600;800&display=swap">
+<!--
+	Maquette JETABLE de Thealivery, étape 5 de la conception (voir
+	conception/jeu/README.md). Elle teste l'interaction et les icônes ; son code
+	ne sera pas celui du jeu, conçu à l'étape d'architecture.
+
+	Icônes : Tabler Icons 3.35.0, licence MIT, https://tabler.io/icons
+-->
+<style>
+	/* Une seule colonne au téléphone ; au-delà, la grille à gauche et la tournée à droite */
+	:root {
+		--bg: #f1f5f1;
+		--surface: #ffffff;
+		--ink: #1c2621;
+		--muted: #59675f;
+		--line: #c9d4cc;
+		--street: #dce4de;
+		--accent: #2b7a5e;
+		--accent-ink: #ffffff;
+		--thea: #df9f17;
+		--water: #3683c4;
+		--leaf: #46963a;
+		--danger: #bf3f2b;
+		--ok: #2b7a5e;
+		--font-display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+		--font-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+		--radius: 0.6rem;
+	}
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) {
+			--bg: #111815;
+			--surface: #1a231e;
+			--ink: #e5ece7;
+			--muted: #9aa89f;
+			--line: #34413a;
+			--street: #27322c;
+			--accent: #5cba93;
+			--accent-ink: #0c1310;
+			--thea: #f0b63a;
+			--water: #62a6e0;
+			--leaf: #78c266;
+			--danger: #f07a63;
+			--ok: #5cba93;
+			color-scheme: dark;
+		}
+	}
+	:root[data-theme="dark"] {
+		--bg: #111815;
+		--surface: #1a231e;
+		--ink: #e5ece7;
+		--muted: #9aa89f;
+		--line: #34413a;
+		--street: #27322c;
+		--accent: #5cba93;
+		--accent-ink: #0c1310;
+		--thea: #f0b63a;
+		--water: #62a6e0;
+		--leaf: #78c266;
+		--danger: #f07a63;
+		--ok: #5cba93;
+		color-scheme: dark;
+	}
+
+	* { box-sizing: border-box; }
+	body {
+		background: var(--bg);
+		color: var(--ink);
+		font-family: var(--font-body);
+		font-size: 1rem;
+		line-height: 1.5;
+		padding-left: max(16px, env(safe-area-inset-left, 0px));
+		padding-right: max(16px, env(safe-area-inset-right, 0px));
+		padding-block: 1rem 3rem;
+	}
+	.wrap { max-width: 64rem; margin: 0 auto; display: grid; gap: 1.25rem; }
+
+	/* En-tête */
+	.top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
+	.brand { display: flex; align-items: center; gap: 0.6rem; margin-right: auto; }
+	.brand-mark {
+		width: 2.5rem; height: 2.5rem; border-radius: 50%;
+		background: var(--thea); color: #1c2621;
+		display: grid; place-items: center;
+	}
+	.brand h1 { font-family: var(--font-display); font-weight: 800; font-size: 1.7rem; line-height: 1; margin: 0; }
+	.brand p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--muted); }
+	.chip {
+		font: inherit; font-size: 0.85rem; color: var(--ink);
+		background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+		padding: 0.35rem 0.8rem; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;
+	}
+	.chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+
+	/* Choix du niveau */
+	.levels { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0; list-style: none; }
+	.levels button {
+		font: inherit; font-size: 0.9rem; color: var(--ink);
+		background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+		padding: 0.4rem 0.7rem; cursor: pointer; display: grid; gap: 0.1rem; text-align: left;
+	}
+	.levels button[aria-current="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+	.levels .num { font-family: var(--font-display); font-weight: 800; }
+	.stars { display: inline-flex; gap: 1px; color: var(--line); }
+	.stars .on { color: var(--thea); }
+
+	/* Niveau */
+	.level { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+	@media (min-width: 52rem) {
+		.level { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; }
+		.level-head { grid-column: 1 / -1; }
+	}
+	.level-head h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; margin: 0; text-wrap: balance; }
+	.level-head p { margin: 0.2rem 0 0; color: var(--muted); }
+
+	.stage { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 0.75rem; min-width: 0; }
+	.stage svg.grid { display: block; width: 100%; height: auto; max-height: 26rem; }
+	.bubble {
+		margin-top: 0.6rem; min-height: 2.6rem;
+		display: flex; align-items: center; gap: 0.6rem;
+		font-size: 0.98rem;
+	}
+	.bubble .who { flex: none; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--thea); color: #1c2621; display: grid; place-items: center; }
+	.bubble .say { background: var(--bg); border-radius: var(--radius); padding: 0.4rem 0.7rem; }
+	.bubble.fail .say { color: var(--danger); }
+	.bubble.win .say { color: var(--ok); font-weight: 700; }
+
+	.panel { display: grid; gap: 0.9rem; min-width: 0; }
+	.zone { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 0.75rem; }
+	.zone h3 { margin: 0 0 0.5rem; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 0.5rem; }
+	.cards { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.45rem; min-height: 3.6rem; }
+	.cards:empty::after { content: attr(data-empty); color: var(--muted); font-size: 0.88rem; align-self: center; }
+	.program { border-style: dashed; }
+
+	.card {
+		position: relative; width: 3.4rem; height: 3.4rem;
+		font: inherit; color: var(--ink);
+		background: var(--bg); border: 2px solid var(--line); border-radius: 0.55rem;
+		display: grid; place-items: center; cursor: pointer; touch-action: none; user-select: none;
+	}
+	.card svg { width: 1.8rem; height: 1.8rem; }
+	.card .n { position: absolute; top: 0.1rem; left: 0.3rem; font-size: 0.7rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+	.card .lock { position: absolute; bottom: 0.15rem; right: 0.2rem; width: 0.85rem; height: 0.85rem; color: var(--muted); }
+	.card[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+	.card.current { border-color: var(--thea); background: color-mix(in srgb, var(--thea) 22%, var(--bg)); }
+	.card.failed { border-color: var(--danger); background: color-mix(in srgb, var(--danger) 16%, var(--bg)); }
+	.card.locked { cursor: default; border-style: solid; opacity: 0.85; }
+	.card.dragging { opacity: 0.35; }
+	.card:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+	.drag-ghost { position: fixed; pointer-events: none; z-index: 20; box-shadow: 0 8px 20px rgb(0 0 0 / 0.2); }
+	.insert-mark { width: 4px; border-radius: 2px; background: var(--accent); align-self: stretch; }
+
+	.edit { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.55rem; }
+	.edit[hidden] { display: none; }
+	.small { font: inherit; font-size: 0.85rem; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 0.45rem; padding: 0.3rem 0.6rem; display: inline-flex; align-items: center; gap: 0.3rem; cursor: pointer; }
+	.small svg { width: 1rem; height: 1rem; }
+
+	.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+	.btn {
+		font: inherit; font-weight: 700; font-size: 1rem;
+		border-radius: 999px; padding: 0.55rem 1.1rem; cursor: pointer;
+		display: inline-flex; align-items: center; gap: 0.45rem;
+		border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+	}
+	.btn svg { width: 1.15rem; height: 1.15rem; }
+	.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+	.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+	.attempts { margin-left: auto; font-size: 0.88rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+	.hint { margin: 0; font-size: 0.92rem; color: var(--muted); }
+	.hint strong { color: var(--ink); }
+
+	.invalid { background: var(--surface); border: 2px solid var(--danger); border-radius: var(--radius); padding: 1rem; color: var(--danger); font-weight: 700; }
+
+	/* Notes de la maquette */
+	.notes { border-top: 1px solid var(--line); padding-top: 1rem; color: var(--muted); font-size: 0.92rem; display: grid; gap: 0.4rem; }
+	.notes h2 { font-family: var(--font-display); font-size: 1.1rem; color: var(--ink); margin: 0; }
+	.notes ul { margin: 0; padding-left: 1.2rem; }
+
+	.ic { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+	.icf { fill: currentColor; stroke: none; }
+	.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+	@media (prefers-reduced-motion: reduce) {
+		* { transition: none !important; animation: none !important; }
+	}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M5 12l14 0" /> <path d="M5 12l6 6" /> <path d="M5 12l6 -6" /></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></symbol>
+<symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 5l0 14" /> <path d="M18 11l-6 -6" /> <path d="M6 11l6 -6" /></symbol>
+<symbol id="i-bike" viewBox="0 0 24 24"><path d="M5 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /> <path d="M19 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /> <path d="M12 19l0 -4l-3 -3l5 -4l2 3l3 0" /> <path d="M17 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></symbol>
+<symbol id="i-corner-up-left" viewBox="0 0 24 24"><path d="M18 18v-6a3 3 0 0 0 -3 -3h-10l4 -4m0 8l-4 -4" /></symbol>
+<symbol id="i-corner-up-right" viewBox="0 0 24 24"><path d="M6 18v-6a3 3 0 0 1 3 -3h10l-4 -4m0 8l4 -4" /></symbol>
+<symbol id="i-cup" viewBox="0 0 24 24"><path d="M5 11h14v-3h-14z" /> <path d="M17.5 11l-1.5 10h-8l-1.5 -10" /> <path d="M6 8v-1a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v1" /> <path d="M15 5v-2" /></symbol>
+<symbol id="i-droplet" viewBox="0 0 24 24"><path d="M7.502 19.423c2.602 2.105 6.395 2.105 8.996 0c2.602 -2.105 3.262 -5.708 1.566 -8.546l-4.89 -7.26c-.42 -.625 -1.287 -.803 -1.936 -.397a1.376 1.376 0 0 0 -.41 .397l-4.893 7.26c-1.695 2.838 -1.035 6.441 1.567 8.546z" /></symbol>
+<symbol id="i-hand-grab" viewBox="0 0 24 24"><path d="M8 11v-3.5a1.5 1.5 0 0 1 3 0v2.5" /> <path d="M11 9.5v-3a1.5 1.5 0 0 1 3 0v3.5" /> <path d="M14 7.5a1.5 1.5 0 0 1 3 0v2.5" /> <path d="M17 9.5a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7l-.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47" /></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 21c.5 -4.5 2.5 -8 7 -10" /> <path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3z" /></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" /> <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" /> <path d="M8 11v-4a4 4 0 1 1 8 0v4" /></symbol>
+<symbol id="i-player-play" viewBox="0 0 24 24"><path d="M7 4v16l13 -8z" /></symbol>
+<symbol id="i-player-track-next" viewBox="0 0 24 24"><path d="M3 5v14l8 -7z" /> <path d="M14 5v14l8 -7z" /></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /> <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></symbol>
+<symbol id="i-star-filled" viewBox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" /></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></symbol>
+<symbol id="i-teapot" viewBox="0 0 24 24"><path d="M10.29 3h3.42a2 2 0 0 1 1.988 1.78l1.555 14a2 2 0 0 1 -1.988 2.22h-6.53a2 2 0 0 1 -1.988 -2.22l1.555 -14a2 2 0 0 1 1.988 -1.78z" /> <path d="M7.47 12.5l-4.257 -5.019a.899 .899 0 0 1 .69 -1.481h13.09a3 3 0 0 1 3.007 3v3c0 1.657 -1.346 3 -3.007 3" /> <path d="M7 17h10" /></symbol>
+<symbol id="i-volume-off" viewBox="0 0 24 24"><path d="M15 8a5 5 0 0 1 1.912 4.934m-1.377 2.602a5 5 0 0 1 -.535 .464" /> <path d="M17.7 5a9 9 0 0 1 2.362 11.086m-1.676 2.299a9 9 0 0 1 -.686 .615" /> <path d="M9.069 5.054l.431 -.554a.8 .8 0 0 1 1.5 .5v2m0 4v8a.8 .8 0 0 1 -1.5 .5l-3.5 -4.5h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l1.294 -1.664" /> <path d="M3 3l18 18" /></symbol>
+<symbol id="i-volume" viewBox="0 0 24 24"><path d="M15 8a5 5 0 0 1 0 8" /> <path d="M17.7 5a9 9 0 0 1 0 14" /> <path d="M6 15h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l3.5 -4.5a.8 .8 0 0 1 1.5 .5v14a.8 .8 0 0 1 -1.5 .5l-3.5 -4.5" /></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6l-12 12" /> <path d="M6 6l12 12" /></symbol>
+</svg>
+
+<div class="wrap">
+	<header class="top">
+		<div class="brand">
+			<div class="brand-mark" aria-hidden="true"><svg width="24" height="24"><use href="#i-bike" class="ic"/></svg></div>
+			<div>
+				<h1>Thealivery</h1>
+				<p>Maquette jetable · séance 01 · la tournée de Théa</p>
+			</div>
+		</div>
+		<button class="chip" id="sound" type="button" aria-pressed="false">
+			<svg width="18" height="18" aria-hidden="true"><use href="#i-volume-off" class="ic"/></svg>
+			<span>Son coupé</span>
+		</button>
+	</header>
+
+	<nav aria-label="Niveaux">
+		<ul class="levels" id="levels"></ul>
+	</nav>
+
+	<main id="level" class="level"></main>
+
+	<section class="notes" aria-label="À propos de cette maquette">
+		<h2>Ce que cette maquette sert à tester</h2>
+		<ul>
+			<li>Les icônes des cartes : se comprennent-elles sans explication ?</li>
+			<li>Ajouter, déplacer et retirer des cartes, au doigt, à la souris et au clavier.</li>
+			<li>Les messages de Théa quand une carte est impossible, l'aide après trois essais ratés, les étoiles.</li>
+		</ul>
+		<p>Pas encore : les illustrations définitives (packs Kenney), les vrais sons, les boucles et les conditions. Les sons de cette maquette sont de simples bips.</p>
+	</section>
+</div>
+
+<script>
+	"use strict";
+
+	// --- Niveaux : les cinq de la séance 01, vérifiés par simulation ----------
+
+	const LEVELS = [
+		{ id: "s01-premiere-livraison", title: "Première livraison", text: "Livrez le thé à la maison.",
+			grid: "T> . . M",
+			cards: ["avancer", "avancer", "avancer", "livrer"] },
+		{ id: "s01-coin-de-la-rue", title: "Le coin de la rue", text: "La maison est au coin de la rue. Une carte est en trop.",
+			grid: "T> . .\n. . .\n. . M",
+			cards: ["avancer", "avancer", "tourner-droite", "avancer", "avancer", "livrer", "piège : tourner-gauche"] },
+		{ id: "s01-flaques", title: "Attention aux flaques", text: "Contournez les flaques pour livrer la maison.",
+			grid: "T> . . .\n~ ~ . ~\n. . . M",
+			cards: ["avancer", "avancer", "tourner-droite", "avancer", "avancer", "tourner-gauche", "avancer", "livrer", "piège : ramasser"] },
+		{ id: "s01-deux-maisons", title: "Deux maisons", text: "Deux maisons attendent du thé, une seule tournée.",
+			grid: "T> . M\n~ ~ .\nM . .",
+			cards: ["avancer", "avancer", "livrer", "tourner-droite", "avancer", "avancer", "tourner-droite", "avancer", "avancer", "livrer", "piège : tourner-gauche"] },
+		{ id: "s01-feuilles", title: "Les feuilles sauvages", text: "Ramassez les feuilles de thé, puis livrez la maison.",
+			grid: "Tv ~ M\n. ~ .\nf . .",
+			cards: ["avancer", "avancer", "ramasser", "tourner-gauche", "avancer", "avancer", "tourner-gauche", "avancer", "avancer", "livrer", "piège : tourner-droite"] },
+	];
+
+	const CARD_TYPES = {
+		"avancer": { icon: "arrow-up", label: "avancer" },
+		"tourner-gauche": { icon: "corner-up-left", label: "tourner à gauche" },
+		"tourner-droite": { icon: "corner-up-right", label: "tourner à droite" },
+		"ramasser": { icon: "hand-grab", label: "ramasser" },
+		"livrer": { icon: "cup", label: "livrer" },
+	};
+
+	// --- Moteur : les règles du jeu, sans affichage ---------------------------
+
+	const DIRS = { ">": [0, 1], "v": [1, 0], "<": [0, -1], "^": [-1, 0] };
+	const ANGLE = { "0,1": 0, "1,0": 90, "0,-1": 180, "-1,0": 270 };
+
+	function parseGrid(text) {
+		const rows = text.trim().split("\n").map((line) => line.trim().split(/\s+/));
+		const width = rows[0].length;
+		let start = null;
+		rows.forEach((row, r) => {
+			if (row.length !== width) {
+				throw new Error(`la ligne ${r + 1} a ${row.length} cases au lieu de ${width}.`);
+			}
+			row.forEach((tok, c) => {
+				if (/^T[<>^v]$/.test(tok)) {
+					if (start) throw new Error("la grille doit contenir exactement une Théa.");
+					start = { r, c, dir: DIRS[tok[1]] };
+					row[c] = ".";
+				} else if (![".", "~", "M", "f"].includes(tok)) {
+					throw new Error(`symbole inconnu ${tok}, ligne ${r + 1}.`);
+				}
+			});
+		});
+		if (!start) throw new Error("la grille doit contenir exactement une Théa.");
+		return { cells: rows, start, rows: rows.length, cols: width };
+	}
+
+	const turnRight = ([dr, dc]) => [dc, -dr];
+	const turnLeft = ([dr, dc]) => [-dc, dr];
+
+	// Rend la liste des étapes et le résultat, sans rien dessiner
+	function simulate(grid, types) {
+		const cells = grid.cells.map((row) => row.slice());
+		let { r, c, dir } = grid.start;
+		const steps = [];
+		for (let i = 0; i < types.length; i += 1) {
+			const t = types[i];
+			let event = t, message = null, failed = false;
+			if (t === "avancer") {
+				const nr = r + dir[0], nc = c + dir[1];
+				if (nr < 0 || nc < 0 || nr >= grid.rows || nc >= grid.cols) {
+					failed = true; event = "edge"; message = "Je ne peux pas sortir du quartier.";
+				} else {
+					r = nr; c = nc;
+					if (cells[r][c] === "~") { failed = true; event = "fall"; message = "Plouf ! Je suis tombée dans une flaque."; }
+				}
+			} else if (t === "tourner-droite") {
+				dir = turnRight(dir);
+			} else if (t === "tourner-gauche") {
+				dir = turnLeft(dir);
+			} else if (t === "ramasser") {
+				if (cells[r][c] === "f") { cells[r][c] = "."; }
+				else { failed = true; event = "nothing"; message = "Je n'ai rien à ramasser."; }
+			} else if (t === "livrer") {
+				if (cells[r][c] === "M") { cells[r][c] = "D"; message = "Votre thé !"; }
+				else { failed = true; event = "nobody"; message = "Personne n'attend de thé ici."; }
+			}
+			steps.push({ index: i, r, c, dir, event, message, cells: cells.map((row) => row.slice()) });
+			if (failed) return { steps, ok: false, failIndex: i, message };
+		}
+		const houses = cells.flat().filter((x) => x === "M").length;
+		const leaves = cells.flat().filter((x) => x === "f").length;
+		if (houses + leaves === 0) return { steps, ok: true, message: "Tournée terminée !" };
+		const parts = [];
+		if (houses) parts.push(houses === 1 ? "une maison à livrer" : `${houses} maisons à livrer`);
+		if (leaves) parts.push("des feuilles à ramasser");
+		return { steps, ok: false, failIndex: null, message: `Ma tournée n'est pas finie : il reste ${parts.join(" et ")}.` };
+	}
+
+	// --- Stockage, toujours protégé ---------------------------------------------
+
+	const store = {
+		get(key) { try { return window.localStorage.getItem("thealivery:" + key); } catch { return null; } },
+		set(key, value) { try { window.localStorage.setItem("thealivery:" + key, value); } catch { /* sans stockage */ } },
+	};
+
+	// --- Sons provisoires : de simples bips -------------------------------------
+
+	let soundOn = store.get("sound") === "on";
+	let audio = null;
+	const TONES = { avancer: [520, 0.05], "tourner-droite": [660, 0.04], "tourner-gauche": [660, 0.04], ramasser: [740, 0.06],
+		livrer: [880, 0.12], fall: [180, 0.25], edge: [140, 0.2], nothing: [140, 0.2], nobody: [140, 0.2], win: [988, 0.3], lose: [220, 0.3] };
+	function beep(name) {
+		if (!soundOn || !TONES[name]) return;
+		try {
+			audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+			const [freq, dur] = TONES[name];
+			const osc = audio.createOscillator(), gain = audio.createGain();
+			osc.frequency.value = freq; gain.gain.value = 0.08;
+			gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + dur);
+			osc.connect(gain).connect(audio.destination); osc.start(); osc.stop(audio.currentTime + dur);
+		} catch { /* pas de son */ }
+	}
+	const soundBtn = document.getElementById("sound");
+	function renderSound() {
+		soundBtn.setAttribute("aria-pressed", String(soundOn));
+		soundBtn.querySelector("use").setAttribute("href", soundOn ? "#i-volume" : "#i-volume-off");
+		soundBtn.querySelector("span").textContent = soundOn ? "Son activé" : "Son coupé";
+	}
+	soundBtn.addEventListener("click", () => { soundOn = !soundOn; store.set("sound", soundOn ? "on" : "off"); renderSound(); beep("livrer"); });
+	renderSound();
+
+	// --- Outils d'affichage -------------------------------------------------------
+
+	const SVGNS = "http://www.w3.org/2000/svg";
+	function el(tag, attrs = {}, children = []) {
+		const node = document.createElement(tag);
+		for (const [k, v] of Object.entries(attrs)) {
+			if (k === "text") node.textContent = v; else if (v !== null && v !== false) node.setAttribute(k, v === true ? "" : v);
+		}
+		children.forEach((child) => node.append(child));
+		return node;
+	}
+	function svg(tag, attrs = {}) {
+		const node = document.createElementNS(SVGNS, tag);
+		for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+		return node;
+	}
+	function icon(name, size = 24, cls = "ic") {
+		const s = svg("svg", { width: size, height: size, viewBox: "0 0 24 24", "aria-hidden": "true" });
+		s.append(svg("use", { href: "#i-" + name, class: cls }));
+		return s;
+	}
+	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	const sleep = (ms) => new Promise((res) => setTimeout(res, reducedMotion.matches ? 0 : ms));
+	function shuffle(list) {
+		const a = list.slice();
+		for (let i = a.length - 1; i > 0; i -= 1) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+		return a;
+	}
+	function starsNode(n) {
+		const s = el("span", { class: "stars", "aria-label": n ? `${n} étoile${n > 1 ? "s" : ""} sur 3` : "pas encore réussi" });
+		for (let i = 1; i <= 3; i += 1) {
+			const star = icon(i <= n ? "star-filled" : "star", 14, i <= n ? "icf" : "ic");
+			if (i <= n) star.classList.add("on");
+			s.append(star);
+		}
+		return s;
+	}
+
+	// --- Liste des niveaux ----------------------------------------------------------
+
+	const levelsNav = document.getElementById("levels");
+	let currentLevel = 0;
+	function renderNav() {
+		levelsNav.replaceChildren(...LEVELS.map((lv, i) => {
+			const stars = Number(store.get("stars:" + lv.id) || 0);
+			const b = el("button", { type: "button", "aria-current": String(i === currentLevel) }, [
+				el("span", { class: "num", text: `${String(i + 1).padStart(2, "0")} · ${lv.title}` }),
+				starsNode(stars),
+			]);
+			b.addEventListener("click", () => openLevel(i));
+			return el("li", {}, [b]);
+		}));
+	}
+
+	// --- Un niveau ---------------------------------------------------------------------
+
+	const GAP = 72, PAD = 46;
+	const root = document.getElementById("level");
+	let game = null;
+
+	function openLevel(i) {
+		currentLevel = i;
+		renderNav();
+		const lv = LEVELS[i];
+		root.replaceChildren();
+		let grid;
+		try {
+			grid = parseGrid(lv.grid);
+			const solution = lv.cards.filter((c) => !c.startsWith("piège")).map((c) => c.trim());
+			lv.cards.forEach((c) => {
+				const t = c.replace(/^piège\s*:\s*/, "").trim();
+				if (!CARD_TYPES[t]) throw new Error(`carte inconnue ${t}.`);
+			});
+			const check = simulate(grid, solution);
+			if (!check.ok) throw new Error(`la solution échoue${check.failIndex !== null ? " à la carte " + (check.failIndex + 1) : ""}.`);
+		} catch (error) {
+			root.append(el("p", { class: "invalid", role: "alert", text: "Niveau invalide : " + error.message }));
+			return;
+		}
+		let uid = 0;
+		const deck = lv.cards.map((c) => ({ uid: ++uid, type: c.replace(/^piège\s*:\s*/, "").trim(), trap: c.startsWith("piège"), locked: false }));
+		game = {
+			lv, grid, solution: deck.filter((c) => !c.trap).map((c) => c.type),
+			reserve: shuffle(deck), program: [], selected: null,
+			attempts: 0, helped: 0, animating: false, run: null,
+		};
+		buildLevel();
+	}
+
+	let refs = {};
+	function buildLevel() {
+		const { lv, grid } = game;
+		const head = el("div", { class: "level-head" }, [
+			el("h2", { text: `${String(currentLevel + 1).padStart(2, "0")} · ${lv.title}` }),
+			el("p", { text: lv.text }),
+		]);
+
+		// La grille
+		const W = PAD * 2 + (grid.cols - 1) * GAP, H = PAD * 2 + (grid.rows - 1) * GAP;
+		const map = svg("svg", { class: "grid", viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": describe(grid) });
+		const x = (c) => PAD + c * GAP, y = (r) => PAD + r * GAP;
+		for (let r = 0; r < grid.rows; r += 1) {
+			map.append(svg("line", { x1: x(0), y1: y(r), x2: x(grid.cols - 1), y2: y(r), stroke: "var(--street)", "stroke-width": 16, "stroke-linecap": "round" }));
+		}
+		for (let c = 0; c < grid.cols; c += 1) {
+			map.append(svg("line", { x1: x(c), y1: y(0), x2: x(c), y2: y(grid.rows - 1), stroke: "var(--street)", "stroke-width": 16, "stroke-linecap": "round" }));
+		}
+		const items = svg("g");
+		map.append(items);
+		const thea = svg("g", { class: "thea" });
+		const pointer = svg("path", { d: "M 26 0 L 15 -8 L 15 8 Z", fill: "var(--thea)" });
+		const body = svg("circle", { r: 19, fill: "var(--thea)" });
+		const bike = svg("svg", { x: -12, y: -12, width: 24, height: 24, viewBox: "0 0 24 24" });
+		bike.append(svg("use", { href: "#i-bike", class: "ic", style: "color:#1c2621" }));
+		const turn = svg("g");
+		turn.append(pointer);
+		thea.append(turn, body, bike);
+		map.append(thea);
+		const stage = el("div", { class: "stage" }, [map]);
+		const bubble = el("div", { class: "bubble", "aria-live": "polite" }, [
+			el("span", { class: "who", "aria-hidden": "true" }, [icon("teapot", 18)]),
+			el("span", { class: "say", text: "Je suis prête. Composez ma tournée, puis Exécuter." }),
+		]);
+		stage.append(bubble);
+
+		// Les cartes
+		const program = el("ol", { class: "cards", id: "program", "data-empty": "Touchez une carte de la réserve pour l'ajouter ici.", "aria-label": "Tournée de Théa" });
+		const reserve = el("ul", { class: "cards", id: "reserve", "data-empty": "Toutes les cartes sont dans la tournée.", "aria-label": "Réserve de cartes" });
+		const edit = el("div", { class: "edit", hidden: true });
+		const left = el("button", { type: "button", class: "small" }, [icon("arrow-left", 16), "Avant"]);
+		const right = el("button", { type: "button", class: "small" }, [icon("arrow-right", 16), "Après"]);
+		const remove = el("button", { type: "button", class: "small" }, [icon("x", 16), "Retirer"]);
+		edit.append(left, right, remove);
+		left.addEventListener("click", () => moveSelected(-1));
+		right.addEventListener("click", () => moveSelected(1));
+		remove.addEventListener("click", () => removeSelected());
+
+		const zoneProgram = el("section", { class: "zone program" }, [
+			el("h3", {}, [el("span", { text: "Tournée de Théa" }), el("span", { class: "count" })]), program, edit,
+		]);
+		const zoneReserve = el("section", { class: "zone" }, [el("h3", { text: "Réserve" }), reserve]);
+
+		const run = el("button", { type: "button", class: "btn primary" }, [icon("player-play", 18), "Exécuter"]);
+		const step = el("button", { type: "button", class: "btn" }, [icon("player-track-next", 18), "Pas à pas"]);
+		const clear = el("button", { type: "button", class: "btn" }, [icon("refresh", 18), "Tout remettre"]);
+		const attempts = el("span", { class: "attempts", "aria-live": "polite" });
+		const controls = el("div", { class: "controls" }, [run, step, clear, attempts]);
+		const hint = el("p", { class: "hint", hidden: true });
+		run.addEventListener("click", () => play(false));
+		step.addEventListener("click", () => play(true));
+		clear.addEventListener("click", () => { if (game.animating) return; resetRun(); const keep = game.program.filter((c) => c.locked); game.reserve = shuffle(game.reserve.concat(game.program.filter((c) => !c.locked))); game.program = keep; game.selected = null; renderCards(); });
+
+		const panel = el("div", { class: "panel" }, [zoneProgram, zoneReserve, controls, hint]);
+		root.append(head, stage, panel);
+		refs = { map, items, thea, turn, bubble, program, reserve, edit, run, step, clear, attempts, hint, x, y, count: zoneProgram.querySelector(".count") };
+
+		setupDrag();
+		drawItems(grid.cells);
+		placeThea(grid.start.r, grid.start.c, grid.start.dir, false);
+		renderCards();
+		renderAttempts();
+	}
+
+	function describe(grid) {
+		const names = { ">": "la droite", "v": "le bas", "<": "la gauche", "^": "le haut" };
+		const d = Object.keys(DIRS).find((k) => DIRS[k].join() === grid.start.dir.join());
+		const count = (s) => grid.cells.flat().filter((x) => x === s).length;
+		return `Grille de ${grid.rows} lignes sur ${grid.cols} colonnes. Théa est ligne ${grid.start.r + 1}, colonne ${grid.start.c + 1}, tournée vers ${names[d]}. `
+			+ `${count("M")} maison(s), ${count("~")} flaque(s), ${count("f")} tas de feuilles.`;
+	}
+
+	function drawItems(cells) {
+		const { items, x, y } = refs;
+		items.replaceChildren();
+		cells.forEach((row, r) => row.forEach((tok, c) => {
+			if (tok === ".") { items.append(svg("circle", { cx: x(c), cy: y(r), r: 6, fill: "var(--line)" })); return; }
+			const g = svg("g", { transform: `translate(${x(c)} ${y(r)})` });
+			if (tok === "~") {
+				g.append(svg("ellipse", { rx: 26, ry: 17, fill: "var(--water)", opacity: 0.22 }));
+				const s = svg("svg", { x: -12, y: -12, width: 24, height: 24, viewBox: "0 0 24 24" }); s.append(svg("use", { href: "#i-droplet", class: "ic", style: "color:var(--water)" })); g.append(s);
+			} else if (tok === "M" || tok === "D") {
+				g.append(svg("rect", { x: -22, y: -22, width: 44, height: 44, rx: 10, fill: "var(--surface)", stroke: tok === "D" ? "var(--ok)" : "var(--ink)", "stroke-width": 2.5 }));
+				const s = svg("svg", { x: -13, y: -13, width: 26, height: 26, viewBox: "0 0 24 24" }); s.append(svg("use", { href: tok === "D" ? "#i-cup" : "#i-home", class: "ic", style: `color:${tok === "D" ? "var(--ok)" : "var(--ink)"}` })); g.append(s);
+			} else if (tok === "f") {
+				g.append(svg("circle", { r: 20, fill: "var(--leaf)", opacity: 0.18 }));
+				const s = svg("svg", { x: -13, y: -13, width: 26, height: 26, viewBox: "0 0 24 24" }); s.append(svg("use", { href: "#i-leaf", class: "ic", style: "color:var(--leaf)" })); g.append(s);
+			}
+			items.append(g);
+		}));
+	}
+
+	// Position et orientation de Théa, animées sobrement
+	let theaPos = { x: 0, y: 0, angle: 0, scale: 1 };
+	function applyThea() {
+		refs.thea.setAttribute("transform", `translate(${theaPos.x} ${theaPos.y}) scale(${theaPos.scale})`);
+		refs.turn.setAttribute("transform", `rotate(${theaPos.angle})`);
+	}
+	function placeThea(r, c, dir, animate, scale = 1) {
+		const target = { x: refs.x(c), y: refs.y(r), angle: ANGLE[dir.join()], scale };
+		let delta = target.angle - theaPos.angle;
+		if (delta > 180) delta -= 360; if (delta < -180) delta += 360;
+		target.angle = theaPos.angle + delta;
+		if (!animate || reducedMotion.matches) { theaPos = target; applyThea(); return Promise.resolve(); }
+		const from = { ...theaPos }, t0 = performance.now(), dur = 380;
+		return new Promise((res) => {
+			const tick = (now) => {
+				const k = Math.min(1, (now - t0) / dur), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+				for (const key of ["x", "y", "angle", "scale"]) theaPos[key] = from[key] + (target[key] - from[key]) * e;
+				applyThea();
+				if (k < 1) requestAnimationFrame(tick); else res();
+			};
+			requestAnimationFrame(tick);
+		});
+	}
+
+	function say(text, kind = "") {
+		refs.bubble.className = "bubble" + (kind ? " " + kind : "");
+		refs.bubble.querySelector(".say").textContent = text;
+	}
+
+	// --- Cartes : ajout, déplacement, retrait -----------------------------------------
+
+	function cardButton(card, index, inProgram) {
+		const type = CARD_TYPES[card.type];
+		const b = el("button", {
+			type: "button", class: "card" + (card.locked ? " locked" : ""), "data-uid": card.uid, title: type.label,
+			"aria-pressed": inProgram ? String(game.selected === card.uid) : null,
+			"aria-label": inProgram ? `${type.label}, carte ${index + 1} sur ${game.program.length}${card.locked ? ", verrouillée" : ""}` : `${type.label}, ajouter à la tournée`,
+		}, [icon(type.icon, 28)]);
+		if (inProgram) b.append(el("span", { class: "n", "aria-hidden": "true", text: String(index + 1) }));
+		if (card.locked) { const l = icon("lock", 14); l.classList.add("lock"); b.append(l); }
+		return b;
+	}
+
+	function renderCards() {
+		const { program, reserve, edit, count } = refs;
+		program.replaceChildren(...game.program.map((card, i) => el("li", {}, [cardButton(card, i, true)])));
+		reserve.replaceChildren(...game.reserve.map((card, i) => el("li", {}, [cardButton(card, i, false)])));
+		const sel = game.program.find((c) => c.uid === game.selected);
+		edit.hidden = !sel || sel.locked || game.animating;
+		count.textContent = `${game.program.length} carte${game.program.length > 1 ? "s" : ""}`;
+		updateButtons();
+	}
+
+	function updateButtons() {
+		const empty = game.program.length === 0;
+		refs.run.disabled = game.animating || empty;
+		refs.step.disabled = game.animating || empty;
+		refs.clear.disabled = game.animating;
+	}
+
+	function resetRun() {
+		game.run = null;
+		drawItems(game.grid.cells);
+		placeThea(game.grid.start.r, game.grid.start.c, game.grid.start.dir, false);
+		refs.program.querySelectorAll(".card").forEach((c) => c.classList.remove("current", "failed"));
+	}
+
+	function addCard(uid) {
+		if (game.animating) return;
+		const i = game.reserve.findIndex((c) => c.uid === uid);
+		if (i < 0) return;
+		resetRun();
+		game.program.push(game.reserve.splice(i, 1)[0]);
+		renderCards();
+		const again = refs.reserve.querySelector(".card");
+		(again || refs.program.querySelector(".card:last-of-type"))?.focus();
+	}
+	function selectCard(uid) {
+		if (game.animating) return;
+		game.selected = game.selected === uid ? null : uid;
+		renderCards();
+		refs.program.querySelector(`[data-uid="${uid}"]`)?.focus();
+	}
+	function moveSelected(delta) {
+		if (game.animating) return;
+		const i = game.program.findIndex((c) => c.uid === game.selected);
+		const j = i + delta;
+		if (i < 0 || j < 0 || j >= game.program.length || game.program[i].locked || game.program[j].locked) return;
+		resetRun();
+		[game.program[i], game.program[j]] = [game.program[j], game.program[i]];
+		renderCards();
+		refs.program.querySelector(`[data-uid="${game.selected}"]`)?.focus();
+	}
+	function removeSelected() {
+		if (game.animating) return;
+		const i = game.program.findIndex((c) => c.uid === game.selected);
+		if (i < 0 || game.program[i].locked) return;
+		resetRun();
+		game.reserve.push(game.program.splice(i, 1)[0]);
+		game.selected = null;
+		renderCards();
+		refs.program.querySelector(".card")?.focus();
+	}
+	function moveTo(uid, target) {
+		const i = game.program.findIndex((c) => c.uid === uid);
+		if (i < 0 || game.program[i].locked) return;
+		const lockedCount = game.program.filter((c) => c.locked).length;
+		const [card] = game.program.splice(i, 1);
+		const j = Math.max(lockedCount, Math.min(target > i ? target - 1 : target, game.program.length));
+		game.program.splice(j, 0, card);
+		resetRun();
+		renderCards();
+	}
+
+	// Clic et clavier
+	document.addEventListener("click", (event) => {
+		const card = event.target.closest(".card");
+		if (!card || !game || dragState.moved) return;
+		const uid = Number(card.dataset.uid);
+		if (card.closest("#reserve")) addCard(uid); else if (card.closest("#program") && !card.classList.contains("locked")) selectCard(uid);
+	});
+	document.addEventListener("keydown", (event) => {
+		const card = event.target.closest?.(".card");
+		if (!card || !card.closest("#program") || !game) return;
+		const uid = Number(card.dataset.uid);
+		if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+			event.preventDefault(); game.selected = uid; moveSelected(event.key === "ArrowLeft" ? -1 : 1);
+		} else if (event.key === "Delete" || event.key === "Backspace") {
+			event.preventDefault(); game.selected = uid; removeSelected();
+		}
+	});
+
+	// Glisser-déposer dans la tournée, souris et doigt
+	const dragState = { uid: null, ghost: null, startX: 0, startY: 0, moved: false, mark: null };
+	function setupDrag() {
+		refs.program.addEventListener("pointerdown", (event) => {
+			const card = event.target.closest(".card");
+			if (!card || card.classList.contains("locked") || game.animating) return;
+			dragState.uid = Number(card.dataset.uid); dragState.startX = event.clientX; dragState.startY = event.clientY; dragState.moved = false;
+			card.setPointerCapture(event.pointerId);
+		});
+		refs.program.addEventListener("pointermove", (event) => {
+			if (dragState.uid === null) return;
+			const dx = event.clientX - dragState.startX, dy = event.clientY - dragState.startY;
+			if (!dragState.moved && Math.hypot(dx, dy) < 8) return;
+			const card = refs.program.querySelector(`[data-uid="${dragState.uid}"]`);
+			if (!dragState.moved) {
+				dragState.moved = true;
+				dragState.ghost = card.cloneNode(true); dragState.ghost.classList.add("drag-ghost"); document.body.append(dragState.ghost);
+				card.classList.add("dragging");
+			}
+			dragState.ghost.style.left = event.clientX - 27 + "px"; dragState.ghost.style.top = event.clientY - 27 + "px";
+			dragState.target = dropIndex(event.clientX, event.clientY);
+			showMark(dragState.target);
+		});
+		const end = () => {
+			if (dragState.uid !== null && dragState.moved) { moveTo(dragState.uid, dragState.target); }
+			dragState.ghost?.remove(); dragState.mark?.remove();
+			dragState.ghost = null; dragState.mark = null; dragState.uid = null;
+			setTimeout(() => { dragState.moved = false; }, 0);
+		};
+		refs.program.addEventListener("pointerup", end);
+		refs.program.addEventListener("pointercancel", end);
+	}
+	function dropIndex(px, py) {
+		const items = [...refs.program.querySelectorAll("li")];
+		let best = items.length, bestDist = Infinity;
+		items.forEach((li, i) => {
+			const r = li.getBoundingClientRect();
+			const cy = r.top + r.height / 2;
+			if (Math.abs(py - cy) > r.height) return;
+			const d = Math.abs(px - r.left), d2 = Math.abs(px - r.right);
+			if (d < bestDist) { bestDist = d; best = i; }
+			if (d2 < bestDist) { bestDist = d2; best = i + 1; }
+		});
+		return best;
+	}
+	function showMark(index) {
+		dragState.mark?.remove();
+		dragState.mark = el("li", { class: "insert-mark", "aria-hidden": "true" });
+		const items = [...refs.program.querySelectorAll("li:not(.insert-mark)")];
+		if (index >= items.length) refs.program.append(dragState.mark); else items[index].before(dragState.mark);
+	}
+
+	// --- Exécution -----------------------------------------------------------------------
+
+	function renderAttempts() {
+		refs.attempts.textContent = game.attempts ? `Essai${game.attempts > 1 ? "s" : ""} : ${game.attempts}` : "";
+	}
+
+	// Une exécution précalcule toutes les étapes, puis les anime. En pas à pas,
+	// on s'arrête après chaque étape ; Exécuter reprend la suite d'un trait.
+	// Modifier la tournée annule l'exécution en cours (resetRun).
+	async function play(stepping) {
+		if (game.program.length === 0 || game.animating) return;
+		if (!game.run) {
+			resetRun();
+			game.run = { result: simulate(game.grid, game.program.map((c) => c.type)), next: 0 };
+			game.selected = null;
+			renderCards();
+			say("C'est parti.");
+		}
+		const run = game.run;
+		game.animating = true;
+		refs.edit.hidden = true;
+		updateButtons();
+		while (run.next < run.result.steps.length) {
+			await doStep(run.result.steps[run.next]);
+			run.next += 1;
+			if (game.run !== run) return;
+			if (stepping && run.next < run.result.steps.length) {
+				game.animating = false;
+				updateButtons();
+				return;
+			}
+			if (!stepping) await sleep(140);
+		}
+		finish(run.result);
+	}
+
+	async function doStep(step) {
+		const cards = refs.program.querySelectorAll(".card");
+		cards.forEach((c) => c.classList.remove("current"));
+		const card = cards[step.index];
+		card?.classList.add("current");
+		beep(step.event);
+		if (step.event === "fall") {
+			await placeThea(step.r, step.c, step.dir, true);
+			await placeThea(step.r, step.c, step.dir, true, 0.45);
+		} else if (step.event === "edge") {
+			const dir = step.dir;
+			await placeThea(step.r + dir[0] * 0.18, step.c + dir[1] * 0.18, dir, true);
+			await placeThea(step.r, step.c, dir, true);
+		} else {
+			await placeThea(step.r, step.c, step.dir, true);
+			drawItems(step.cells);
+		}
+		if (step.message && step.event !== "livrer") say(step.message, "fail");
+		else if (step.message) say(step.message);
+		await sleep(120);
+	}
+
+	function finish(result) {
+		game.animating = false;
+		game.run = null;
+		game.attempts += 1;
+		let helped = false;
+		if (result.ok) {
+			const stars = game.attempts === 1 ? 3 : (game.attempts <= 3 && game.helped === 0 ? 2 : 1);
+			const best = Math.max(stars, Number(store.get("stars:" + game.lv.id) || 0));
+			store.set("stars:" + game.lv.id, String(best));
+			say(`${result.message} ${"★".repeat(stars)}`, "win");
+			beep("win");
+			refs.hint.hidden = true;
+			renderNav();
+		} else {
+			say(result.message, "fail");
+			beep("lose");
+			if (game.attempts >= 3) { applyHelp(); helped = true; }
+		}
+		renderAttempts();
+		renderCards();
+		// La carte fautive reste signalée, sauf si l'aide vient de réordonner la tournée
+		if (!result.ok && result.failIndex !== null && !helped) {
+			refs.program.querySelectorAll(".card")[result.failIndex]?.classList.add("failed");
+		}
+	}
+
+	// Aide adaptative : après trois échecs, une carte de plus placée et verrouillée
+	function applyHelp() {
+		const k = Math.min(game.attempts - 2, game.solution.length);
+		const pool = game.program.concat(game.reserve);
+		const locked = [];
+		for (let i = 0; i < k; i += 1) {
+			const already = game.program[i];
+			if (already && already.locked) { locked.push(already); continue; }
+			const card = pool.find((c) => c.type === game.solution[i] && !locked.includes(c) && !c.trap)
+				|| pool.find((c) => c.type === game.solution[i] && !locked.includes(c));
+			if (!card) break;
+			card.locked = true;
+			locked.push(card);
+		}
+		const rest = game.program.filter((c) => !locked.includes(c));
+		game.reserve = game.reserve.filter((c) => !locked.includes(c));
+		game.program = locked.concat(rest);
+		game.helped = locked.length;
+		refs.hint.hidden = false;
+		refs.hint.replaceChildren(el("strong", { text: "Relisez la section juste au-dessus. " }),
+			`J'ai placé ${locked.length === 1 ? "la première carte" : `les ${locked.length} premières cartes`} pour vous, avec un cadenas.`);
+	}
+
+	renderNav();
+	openLevel(0);
+</script>

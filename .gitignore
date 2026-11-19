@@ -28,3 +28,7 @@ Thumbs.db
 
 # Folder config file
 [Dd]esktop.ini
+
+## Conception
+# Maquettes HTML jetables, versionnées
+!conception/**/*.html
