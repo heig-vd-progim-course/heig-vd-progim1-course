@@ -93,6 +93,12 @@ comprime si la séance déborde.
 - Envoyer un courriel de remerciement avec le lien vers l'étiquette, pour que
   les personnes retrouvent le cours tel qu'elles l'ont suivi.
 
+## Méthodes transversales
+
+- [Faire parler la classe](faire-parler-la-classe.md) : instruction par les
+  pairs, temps d'attente, prédictions ratées, quiz de début de séance, travail à
+  deux.
+
 ## Notes par séance
 
 | Séance | Notes                                                       |
