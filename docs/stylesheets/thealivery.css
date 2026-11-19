@@ -1,0 +1,508 @@
+/*
+ * Thealivery : le jeu d'apprentissage, dans les pages du support.
+ * Pixel art : Ninja Adventure (Pixel-boy et AAA), licence CC0.
+ * Les classes commencent par « tl- » pour ne pas croiser celles du thème.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap");
+
+.thealivery,
+.tl-preview,
+.thealivery-sandbox {
+	--tl-ink: #2b1f1f;
+	--tl-muted: #6b5d57;
+	--tl-line: #d8cfc3;
+	--tl-accent: #c8571f;
+	--tl-board: #26331f;
+	--tl-jump-1: #c8860c;
+	--tl-jump-2: #2f6fb5;
+	--tl-font: "Atkinson Hyperlegible", system-ui, sans-serif;
+	margin: 1.5em 0;
+	font-family: var(--tl-font);
+	color: var(--md-typeset-color, var(--tl-ink));
+}
+
+[data-md-color-scheme="slate"] .thealivery,
+[data-md-color-scheme="slate"] .tl-preview,
+[data-md-color-scheme="slate"] .thealivery-sandbox {
+	--tl-muted: #b3a597;
+	--tl-line: #4a4038;
+	--tl-accent: #f08a4b;
+	--tl-board: #10160d;
+	--tl-jump-1: #f0b63a;
+	--tl-jump-2: #79b4f0;
+}
+
+.tl-game {
+	display: grid;
+	gap: 0.8rem;
+	min-width: 0;
+}
+
+.tl-head {
+	display: flex;
+	align-items: baseline;
+	gap: 1rem;
+}
+
+.md-typeset .tl-head .tl-instruction {
+	margin: 0;
+	margin-right: auto;
+	font-weight: 700;
+}
+
+.tl-stars {
+	color: #d39a12;
+	letter-spacing: 0.1em;
+	white-space: nowrap;
+}
+
+/* Plateau */
+.tl-board {
+	display: grid;
+	justify-items: center;
+	gap: 0.5rem;
+	min-width: 0;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	background: var(--tl-board);
+}
+
+.tl-streets {
+	display: flex;
+	gap: 0.4rem;
+	justify-self: start;
+}
+
+.tl-street {
+	padding: 0.1rem 0.55rem;
+	border: 1px solid #5a6b4c;
+	border-radius: 0.3rem;
+	background: transparent;
+	color: #f3ead9;
+	font: inherit;
+	font-size: 0.85rem;
+	cursor: pointer;
+}
+
+.tl-street[aria-current="true"] {
+	background: #5a6b4c;
+}
+
+canvas.tl-map {
+	display: block;
+	width: min(100%, var(--tl-map-width, 100%));
+	height: auto;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+}
+
+/* Bulle de Théa : portrait, émotion, boîte de dialogue du pack */
+.tl-bubble {
+	display: flex;
+	align-items: stretch;
+	gap: 0.4rem;
+	min-height: 96px;
+}
+
+.tl-face {
+	position: relative;
+	display: grid;
+	flex: none;
+	place-items: center;
+	width: 96px;
+	height: 96px;
+	background: url("../vendor/thealivery/ui/faceset-box.png") center / 96px 96px no-repeat;
+	image-rendering: pixelated;
+}
+
+.tl-face .tl-portrait {
+	width: 76px;
+	height: 76px;
+	image-rendering: pixelated;
+}
+
+.tl-face .tl-mood {
+	position: absolute;
+	top: -10px;
+	right: -12px;
+	width: 42px;
+	height: 39px;
+	image-rendering: pixelated;
+}
+
+.tl-face.tl-shake {
+	animation: tl-shake 0.4s ease-in-out;
+}
+
+@keyframes tl-shake {
+	25% {
+		transform: translateX(-4px) rotate(-3deg);
+	}
+	75% {
+		transform: translateX(4px) rotate(3deg);
+	}
+}
+
+.tl-say {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	min-width: 0;
+	padding: 0.15rem 0.4rem;
+	border: 16px solid transparent;
+	border-image: url("../vendor/thealivery/ui/dialog.png") 8 fill / 16px stretch;
+	color: #3a2a2a;
+	font-size: 1rem;
+	image-rendering: pixelated;
+}
+
+.tl-bubble[data-tone="fail"] .tl-say {
+	color: #a3271a;
+	font-weight: 700;
+}
+
+.tl-bubble[data-tone="win"] .tl-say {
+	color: #23683c;
+	font-weight: 700;
+}
+
+@media (max-width: 30rem) {
+	.tl-face {
+		width: 64px;
+		height: 64px;
+		background-size: 64px 64px;
+	}
+	.tl-face .tl-portrait {
+		width: 50px;
+		height: 50px;
+	}
+	.tl-bubble {
+		min-height: 64px;
+	}
+}
+
+/* Tournée et mise de côté */
+.tl-zones {
+	display: grid;
+	gap: 0.8rem;
+}
+
+.md-typeset .tl-zone-head {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 0 0.4rem;
+	color: var(--tl-muted);
+	font-family: var(--tl-font);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+}
+
+.tl-listwrap {
+	position: relative;
+	padding-left: 2.8rem;
+}
+
+.tl-listwrap.tl-nojumps {
+	padding-left: 0;
+}
+
+svg.tl-arrows {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2.8rem;
+	height: 100%;
+	overflow: visible;
+	pointer-events: none;
+}
+
+.md-typeset ol.tl-cards {
+	display: grid;
+	gap: 0.35rem;
+	min-height: 3rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.md-typeset ol.tl-cards:empty::after {
+	content: attr(data-empty);
+	padding: 0.4rem 0;
+	color: var(--tl-muted);
+}
+
+.tl-aside ol.tl-cards {
+	min-height: 4.2rem;
+	padding: 0.4rem;
+	border: 2px dashed var(--tl-line);
+	border-radius: 0.5rem;
+}
+
+/* Le thème décale les éléments de liste : pas dans la tournée */
+[dir] .md-typeset ol.tl-cards > li {
+	margin: 0;
+}
+
+.md-typeset .tl-card,
+.tl-card {
+	display: grid;
+	grid-template-columns: 1.6rem 1.8rem 44px 1fr;
+	align-items: center;
+	gap: 0.5rem;
+	min-height: 4rem;
+	margin: 0;
+	padding: 0 0.3rem 0 0;
+	border: 12px solid transparent;
+	border-image: url("../vendor/thealivery/ui/panel.png") 6 fill / 12px stretch;
+	color: #2b1f1f;
+	image-rendering: pixelated;
+	user-select: none;
+	line-height: 1.3;
+}
+
+/* La carte en cours d'exécution : le cadre wood3 */
+.tl-card.tl-current {
+	border-image-source: url("../vendor/thealivery/ui/panel-active.png");
+}
+
+.tl-card.tl-failed {
+	box-shadow: inset 0 0 0 999px rgb(220 70 50 / 0.22);
+}
+
+.tl-card:focus-visible {
+	outline: 3px solid var(--tl-accent);
+	outline-offset: 2px;
+}
+
+.tl-grip {
+	display: grid;
+	place-items: center;
+	align-self: stretch;
+	color: #8a6d5d;
+	cursor: grab;
+	touch-action: none;
+}
+
+.tl-grip svg {
+	width: 0.8rem;
+	height: 1.2rem;
+}
+
+.tl-card.tl-locked .tl-grip {
+	cursor: not-allowed;
+}
+
+.tl-grip .tl-lock {
+	image-rendering: pixelated;
+}
+
+.tl-n {
+	font-size: 1.15rem;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	text-align: right;
+}
+
+.tl-ico {
+	display: grid;
+	place-items: center;
+	width: 44px;
+	height: 40px;
+}
+
+.tl-ico img {
+	image-rendering: pixelated;
+}
+
+.tl-txt {
+	font-size: 1.02rem;
+}
+
+.tl-card.tl-dragging {
+	opacity: 0.35;
+}
+
+.tl-ghost {
+	position: fixed;
+	z-index: 30;
+	opacity: 0.95;
+	filter: drop-shadow(0 8px 14px rgb(0 0 0 / 0.3));
+	pointer-events: none;
+}
+
+.md-typeset li.tl-mark {
+	height: 4px;
+	margin: 0;
+	border-radius: 2px;
+	background: var(--tl-accent);
+	list-style: none;
+}
+
+.tl-disabled .tl-grip {
+	cursor: not-allowed;
+}
+
+.md-typeset .tl-help {
+	margin: 0.3rem 0 0;
+	color: var(--tl-muted);
+	font-size: 0.8rem;
+}
+
+/* Boutons : ceux du pack, en bois */
+.tl-controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.tl-btn {
+	padding: 0.15rem 0.8rem;
+	border: 6px solid transparent;
+	border-image: url("../vendor/thealivery/ui/button.png") 3 fill / 6px stretch;
+	background: none;
+	color: #fff8ee;
+	font: inherit;
+	font-weight: 700;
+	text-shadow: 0 1px 0 rgb(0 0 0 / 0.35);
+	image-rendering: pixelated;
+	cursor: pointer;
+}
+
+.tl-btn:hover:not(:disabled) {
+	border-image-source: url("../vendor/thealivery/ui/button-hover.png");
+}
+
+.tl-btn:active:not(:disabled) {
+	border-image-source: url("../vendor/thealivery/ui/button-pressed.png");
+}
+
+.tl-btn:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+
+.tl-btn:focus-visible,
+.tl-chip:focus-visible {
+	outline: 3px solid var(--tl-accent);
+	outline-offset: 2px;
+}
+
+.tl-chip {
+	padding: 0.25rem 0.75rem;
+	border: 1px solid var(--tl-line);
+	border-radius: 999px;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	font-size: 0.85rem;
+	cursor: pointer;
+}
+
+.tl-chip[aria-pressed="true"] {
+	border-color: var(--tl-accent);
+	color: var(--tl-accent);
+}
+
+.tl-attempts {
+	margin-left: auto;
+	color: var(--tl-muted);
+	font-size: 0.9rem;
+	font-variant-numeric: tabular-nums;
+}
+
+.md-typeset .tl-hint {
+	margin: 0;
+	color: var(--tl-muted);
+}
+
+/* Niveau invalide : le message remplace le jeu */
+.tl-invalid {
+	padding: 0.6rem 0.9rem;
+	border-left: 4px solid #b3341f;
+	border-radius: 0.3rem;
+	background: rgb(179 52 31 / 0.08);
+	color: #b3341f;
+	font-weight: 700;
+}
+
+.md-typeset .tl-invalid ul {
+	margin: 0;
+	padding-left: 1rem;
+}
+
+/* Bac à sable : l'éditeur, puis le jeu */
+.thealivery-sandbox {
+	display: grid;
+	gap: 0.8rem;
+	margin: 1.5em 0;
+}
+
+.tl-sandbox-tools {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.tl-sandbox-editor .cm-editor {
+	max-height: 28rem;
+	border: 1px solid var(--md-default-fg-color--lightest);
+	border-radius: 0.3rem;
+	background: var(--md-code-bg-color);
+	color: var(--md-code-fg-color);
+	font-size: 0.85rem;
+}
+
+.tl-sandbox-editor .cm-scroller {
+	font-family: var(--md-code-font-family, monospace);
+}
+
+.tl-sandbox-editor .cm-gutters {
+	border-right: 1px solid var(--md-default-fg-color--lightest);
+	background: var(--md-code-bg-color);
+	color: var(--md-default-fg-color--light);
+}
+
+.tl-sandbox-editor .cm-activeLine,
+.tl-sandbox-editor .cm-activeLineGutter {
+	background: var(--md-accent-fg-color--transparent, rgb(0 0 0 / 0.04));
+}
+
+.tl-sandbox-editor .cm-cursor {
+	border-left-color: var(--md-code-fg-color);
+}
+
+.tl-sandbox-editor .tok-heading,
+.tl-sandbox-editor .tok-keyword {
+	color: var(--md-code-hl-keyword-color);
+	font-weight: 700;
+}
+
+.tl-sandbox-editor .tok-string,
+.tl-sandbox-editor .tok-monospace {
+	color: var(--md-code-hl-string-color);
+}
+
+.tl-sandbox-editor .tok-typeName,
+.tl-sandbox-editor .tok-propertyName,
+.tl-sandbox-editor .tok-attributeName {
+	color: var(--md-code-hl-name-color);
+}
+
+.tl-sandbox-editor .tok-meta,
+.tl-sandbox-editor .tok-punctuation,
+.tl-sandbox-editor .tok-comment {
+	color: var(--md-code-hl-comment-color);
+}
+
+.tl-sandbox-editor .tok-link,
+.tl-sandbox-editor .tok-url {
+	color: var(--md-code-hl-constant-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tl-face.tl-shake {
+		animation: none;
+	}
+}

@@ -72,6 +72,16 @@
   [Matteo Bruni](https://github.com/matteobruni) et ses contributrices et
   contributeurs, sous licence MIT, pour les confettis des quiz du site, comme
   dans le cours UPInfo.
+- [Ninja Adventure](https://pixel-boy.itch.io/ninja-adventure-asset-pack) by
+  [Pixel-boy](https://pixel-boy.itch.io/) et AAA, sous licence CC0, pour le
+  pixel art et les bruitages du jeu Thealivery.
+- [CodeMirror](https://codemirror.net/) by
+  [Marijn Haverbeke](https://marijnhaverbeke.nl/) et ses contributrices et
+  contributeurs, sous licence MIT, pour l'éditeur du bac à sable de Thealivery.
+- [esbuild](https://esbuild.github.io/) by
+  [Evan Wallace](https://github.com/evanw), sous licence MIT, et
+  [Vitest](https://vitest.dev/), sous licence MIT, pour construire et tester
+  Thealivery.
 
 ## Sources pédagogiques
 

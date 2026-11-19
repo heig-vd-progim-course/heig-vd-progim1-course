@@ -9,6 +9,10 @@ on:
   push:
     branches:
       - main
+      # Essai temporaire : cette branche se deploie sur le site public, a la
+      # place de `main`, jusqu'au prochain push sur `main`. A retirer avant de
+      # fusionner.
+      - jeu-apprentissage
     tags:
       - "*"
   pull_request:
@@ -58,7 +62,8 @@ jobs:
           retention-days: 1
 
   deploy:
-    # Ne deployer que sur `main` et sur les tags, pas sur les pull requests
+    # Ne deployer que sur les push (`main`, les tags et la branche d'essai),
+    # pas sur les pull requests
     if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-24.04

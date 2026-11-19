@@ -6,10 +6,11 @@ Il faut Pillow (pip install pillow).
 
 Une intersection ou une rue occupe 3 x 3 tuiles de 16 pixels. Les rues font
 toute la largeur de leur case ; entre elles, des pâtés d'herbe avec du décor.
-Les choix au hasard (maisons, obstacles, décor) dépendent du nom du niveau :
-une image se régénère toujours à l'identique.
+Les choix au hasard (maisons, obstacles, décor) dépendent du nom du niveau et
+de sa grille : une image se régénère toujours à l'identique, et le jeu dessine
+la même.
 """
-import os, random, sys
+import os, sys
 from PIL import Image, ImageDraw
 
 # Le dossier du pack : premier argument, ou variable d'environnement NINJA_PACK
@@ -61,17 +62,44 @@ HERO = Image.open(os.path.join(P, "Actor", "Character", "Cavegirl", "SpriteSheet
 HERO_COL = {">": 3, "<": 2, "^": 1, "v": 0}  # colonnes de la planche : bas, haut, gauche, droite
 
 def parse(text):
-    rows = [l.split() for l in text.strip().splitlines()]
+    rows = [l.split() for l in text.strip().splitlines() if l.strip()]
     return rows
+
+class SeededRandom:
+    """Générateur au hasard reproductible, identique à celui du jeu
+    (outils/thealivery/src/adaptateurs/random.ts) : FNV-1a pour la graine,
+    mulberry32 pour les tirages. Le jeu dessine ainsi les mêmes quartiers
+    que ce script, qui reste la référence du rendu."""
+    M = 0xFFFFFFFF
+    def __init__(self, seed_text):
+        h = 0x811C9DC5
+        for b in seed_text.encode("utf-8"):
+            h = ((h ^ b) * 0x01000193) & self.M
+        self.state = h
+    def random(self):
+        M = self.M
+        self.state = (self.state + 0x6D2B79F5) & M
+        t = self.state
+        t = ((t ^ (t >> 15)) * (t | 1)) & M
+        t = (t ^ ((t + (((t ^ (t >> 7)) * (t | 61)) & M)) & M)) & M
+        return ((t ^ (t >> 14)) & M) / 4294967296
+    def choice(self, items):
+        return items[int(self.random() * len(items))]
+    def randrange(self, start, stop):
+        return start + int(self.random() * (stop - start))
+
+def seed(level_id, rows):
+    """La graine : l'identifiant du niveau et la grille, espaces normalisés."""
+    return level_id + "\n" + "\n".join(" ".join(r) for r in rows)
 
 def render(level_id, grid_text, min_cells_w=0, moving_parts=True, meta=None):
     """Dessine une rue. Sans les parties mobiles (Théa, feuilles), l'image sert de
     fond à la maquette interactive ; `meta`, un dictionnaire, reçoit alors le type
     de chaque obstacle ("mare" ou "trou")."""
     # Deux tirages séparés : changer le décor ne déplace pas les objets
-    rnd = random.Random(level_id + grid_text)
-    rnd_objects = random.Random(level_id + grid_text + ":objets")
     rows = parse(grid_text)
+    rnd = SeededRandom(seed(level_id, rows))
+    rnd_objects = SeededRandom(seed(level_id, rows) + ":objets")
     R, C = len(rows), len(rows[0])
     cells_w, cells_h = max((2 * C - 1) + 2 * MARGIN, min_cells_w), (2 * R - 1) + 2 * MARGIN
     W, H = cells_w * CELL, cells_h * CELL          # en tuiles

@@ -2,7 +2,13 @@
 // un niveau est invalide. Le domaine rend des raisons ; elles sont mises en mots
 // ici, et seulement ici.
 
-import type { CardFailureReason, Outcome } from "../domaine/engine.ts";
+import type { CardSpec } from "../domaine/cards.ts";
+import type {
+	CardFailureReason,
+	FailureReason,
+	Outcome,
+	Step,
+} from "../domaine/engine.ts";
 import type { LevelError } from "../domaine/validation.ts";
 
 const CARD_FAILURES: Readonly<Record<CardFailureReason, string>> = {
@@ -117,4 +123,68 @@ function solutionFails(
 		default:
 			return `la solution échoue à la carte ${String((card ?? 0) + 1)} (${CARD_FAILURES_SHORT[outcome.reason]}).`;
 	}
+}
+
+/** Ce que dit Théa pendant une étape réussie, ou rien. */
+export function stepSays(
+	step: Step,
+	program: readonly CardSpec[],
+): string | null {
+	const card = program[step.cardIndex];
+	const target =
+		card?.target === undefined
+			? -1
+			: program.findIndex((c) => c.id === card.target);
+	switch (step.event) {
+		case "deliver":
+			return "Votre thé !";
+		case "pick-up":
+			return "Des feuilles de thé, parfait.";
+		case "jump":
+			return card?.type === "if-house"
+				? `Une maison attend ici : je saute à la carte ${String(target + 1)}.`
+				: `Je reprends à la carte ${String(target + 1)}.`;
+		case "no-jump":
+			return "Pas de maison ici, je continue.";
+		default:
+			return null;
+	}
+}
+
+/** Les émotions de Théa, une par sprite d'émotion du pack. */
+export type Mood =
+	| "ready"
+	| "happy"
+	| "love"
+	| "splash"
+	| "fall"
+	| "bump"
+	| "puzzled"
+	| "lost"
+	| "dizzy"
+	| "sad"
+	| "dots";
+
+const FAILURE_MOODS: Readonly<Record<FailureReason, Mood>> = {
+	FELL_IN_POND: "splash",
+	FELL_IN_HOLE: "fall",
+	LEFT_TOWN: "bump",
+	NOTHING_TO_PICK: "puzzled",
+	NOBODY_HERE: "lost",
+	TARGET_SET_ASIDE: "puzzled",
+	LOOPS_FOREVER: "dizzy",
+	ROUND_NOT_FINISHED: "sad",
+	EXTRA_CARD: "dots",
+};
+
+/** L'émotion de Théa à la fin d'une exécution. */
+export function moodOf(outcome: Outcome): Mood {
+	return outcome.kind === "success" ? "love" : FAILURE_MOODS[outcome.reason];
+}
+
+/** Le message de l'aide, après le troisième essai raté. */
+export function helpSays(locked: number): string {
+	return locked === 1
+		? "J'ai placé la première carte pour vous."
+		: `J'ai placé les ${String(locked)} premières cartes pour vous.`;
 }

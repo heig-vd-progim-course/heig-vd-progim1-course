@@ -525,6 +525,35 @@ de `niveaux/generer.py`, sans les parties mobiles, et tout est inséré dans un
 seul fichier. Les ondulations du pack sont peintes sur un fond d'eau opaque : le
 script rend ce fond transparent.
 
+## Retours sur la maquette v3
+
+Demandes de Vincent, le 19 novembre 2026, reprises dans le premier code du jeu :
+
+| Demande                                    | Réponse                                                                                                                       |
+| :----------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| La carte en cours dans un autre cadre      | Le cadre 17 des propositions, `wood3` (`Ui/Theme/Wip/ThemeWood3`), remplace le cadre 3 pendant que la carte s'exécute         |
+| _Mélanger_ devient _Mélanger/Recommencer_  | Le bouton mélange les cartes libres, remet Théa à son départ et sa bulle à sa phrase du début                                 |
+| Un cadenas sur une carte placée par l'aide | Pas de cadenas dans les icônes du pack ; le bloc verrouillé de `TilesetLogic`, en gris foncé, prend la place de la poignée    |
+| Des émotions pour Théa                     | Le portrait de `Cavegirl` n'existe qu'en une expression : les bulles d'émotion du pack (`Ui/Emote`) s'affichent à côté de lui |
+| Des bruitages                              | Le pack en contient : pas, clic, herbe, pièce, plouf, choc, refus, alerte et une petite mélodie de réussite                   |
+| Une page de test des six niveaux           | [Page d'essai](../../docs/99-ressources/thealivery/index.md) du site, dans la section _Ressources_                            |
+| Un bac à sable en Markdown                 | [Bac à sable](../../docs/99-ressources/thealivery/bac-a-sable.md) : un éditeur, et le jeu qui se met à jour en dessous        |
+
+Les émotions, une par situation : prête, contente (livraison, ramassage), cœur
+(réussite), éclaboussée (mare), yeux en croix (trou), agacée (bord du quartier),
+point d'interrogation (rien à ramasser, carte visée absente), point
+d'interrogation rouge (personne n'attend), étourdie (boucle infinie), triste
+(tournée pas finie), points de suspension (carte en trop). Le portrait sursaute
+quand Théa échoue.
+
+L'éditeur du bac à sable est **CodeMirror 6**, pas Monaco : c'est le choix déjà
+fait pour l'essai du code Java exécutable. Monaco pèse plusieurs mégaoctets et
+se comporte mal au doigt sur un téléphone.
+
+Le générateur au hasard de `niveaux/generer.py` est maintenant le même que celui
+du jeu (FNV-1a et mulberry32) : le jeu dessine exactement les mêmes quartiers,
+au pixel près, et les images fixes ont été régénérées.
+
 ## Sources
 
 - Ihantola, P. et Karavirta, V., _Two-Dimensional Parson's Puzzles: The Concept,

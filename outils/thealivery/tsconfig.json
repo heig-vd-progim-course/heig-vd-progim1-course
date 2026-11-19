@@ -16,5 +16,5 @@
 		"allowImportingTsExtensions": true,
 		"types": []
 	},
-	"include": ["src", "tests", "*.ts"]
+	"include": ["src", "tests", "scripts", "*.ts"]
 }

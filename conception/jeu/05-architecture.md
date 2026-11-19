@@ -339,28 +339,37 @@ outils/thealivery/
     domaine/                 sans navigateur
       street.ts              rue, cases, positions, directions
       cards.ts               types de cartes, fabrique depuis le mot
+      level.ts               niveau validé, solution sans les pièges
       engine.ts              moteur, compteur de programme, trace
       validation.ts          validation d'un niveau
     application/
       session.ts             machine à états, essais, aide, étoiles
       animator.ts            rejoue une trace
-      messages.ts            raisons d'échec vers phrases de Théa
+      messages.ts            raisons d'échec vers phrases et émotions de Théa
     adaptateurs/
-      level-reader.ts        HTML de Zensical vers LevelSpec
+      level-reader.ts        HTML de Zensical vers RawLevel
+      markdown-reader.ts     source Markdown vers RawLevel (bac à sable)
+      random.ts              hasard reproductible, le même que generer.py
+      board-layout.ts        mise en page d'une rue : ordres de dessin
       board-view.ts          canevas, atlas, animation de Théa
       cards-view.ts          liste, glisser-déposer, clavier, flèches des sauts
                              (indépendant de parsons.js, voir l'ADR 0010)
-      bubble-view.ts         bulle de Théa, région annoncée
+      bubble-view.ts         bulle de Théa, émotion, région annoncée
       progress-store.ts      localStorage, protégé
       sound-player.ts        sons, désactivés par défaut
+      game-view.ts           relie les vues, la session et l'animateur
+      mount.ts               valide un niveau, monte le jeu ou ses erreurs
     main.ts                  trouve les niveaux de la page et les démarre
+    sandbox.ts               bac à sable : CodeMirror et aperçu du jeu
   tests/                     un fichier de test par module
-  atlas/construire-atlas.py  pack Ninja Adventure vers l'atlas
-  verifier-niveaux.ts        valide tous les niveaux du site
+  atlas/construire-atlas.py  pack Ninja Adventure vers l'atlas, l'interface, les sons
+  atlas/comparer-rendu.py    rendu du jeu comparé à niveaux/generer.py
+  scripts/build.mjs          esbuild vers docs/javascripts/
 
-docs/javascripts/thealivery.js     construit, figé, ne pas modifier à la main
+docs/javascripts/thealivery.js          construit, figé, ne pas modifier à la main
+docs/javascripts/thealivery-sandbox.js  idem, chargé seulement par le bac à sable
 docs/stylesheets/thealivery.css
-docs/vendor/thealivery/            atlas.png, atlas.json, sons, LICENSE.txt
+docs/vendor/thealivery/                 atlas.png, atlas.json, ui/, sons/, LICENSE.txt
 ```
 
 Identifiants en anglais, commentaires en français, comme le reste du dépôt.
@@ -398,6 +407,22 @@ toutes les reprises du code.
 | Le glisser-déposer marche mal sur un téléphone précis             | Poignée dédiée, clavier, test sur deux téléphones avant usage |
 | Le fichier construit n'est pas reconstruit après une modification | Vérification dans `npm run check`, puis dans le workflow      |
 | Une seule personne connaît le code                                | Ce document, les ADR, des tests lisibles                      |
+
+## Premier code : ce qui a changé
+
+Le code a précisé quelques points du modèle :
+
+- **Les cases** : `free`, `pond`, `hole`, `house`, `delivered`, `leaves`. La
+  sorte d'un obstacle est une case à part entière, choisie par le rendu ; une
+  maison livrée reste une maison, avec son cœur.
+- **Une raison d'échec de plus**, `TARGET_SET_ASIDE` : un saut dont la carte
+  visée a été mise de côté.
+- **Le hasard est partagé** : `random.ts` et `niveaux/generer.py` utilisent le
+  même générateur (FNV-1a pour la graine, mulberry32 pour les tirages).
+  `npm run compare-rendu` vérifie que le jeu dessine les rues de référence au
+  pixel près.
+- **Le bac à sable** lit la source Markdown, pas le HTML : le même lecteur
+  servira à vérifier tous les niveaux du site sans navigateur.
 
 ## Décisions de validation
 
