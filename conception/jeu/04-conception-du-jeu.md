@@ -413,6 +413,67 @@ niveau bonus à sauts, joué sur deux rues. Deux enseignements :
   Elle reste pour les titres ; les numéros des cartes, essentiels pour les
   sauts, prennent la police du texte, Atkinson Hyperlegible.
 
+## Après la maquette v2
+
+Décisions du 19 novembre 2026 :
+
+| Point             | Décision                                                                                                                         |
+| :---------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| Personnage        | Théa devient une **ninja du thé**                                                                                                |
+| Pixel art         | [Ninja Adventure](https://pixel-boy.itch.io/ninja-adventure-asset-pack) (Pixel-boy et AAA), CC0, à la place du 1-Bit Pack        |
+| Taille d'une case | Une intersection ou une rue occupe **3 × 3 tuiles** de 16 pixels : de la place pour dessiner, et pour la charrette derrière Théa |
+| Étape suivante    | Pas de nouvelle maquette jouable : des **images fixes** des six niveaux                                                          |
+| Sauts             | La présentation des sauts du niveau 06 plaît : on la garde                                                                       |
+
+Le pack contient une feuille de thé (`Items/Food/TeaLeaf.png`), une vingtaine de
+ninjas animés dans les quatre directions, et deux charrettes dans
+`TilesetElement`. Il n'a pas de véhicule à pédales : Théa tire une charrette.
+
+Les planches de propositions numérotées sont dans
+[`propositions/`](propositions/), une par élément : Théa, routes, maisons,
+flaques, feuilles, charrette, décor. Vincent choisit un numéro par élément avant
+la génération des images.
+
+## Images fixes des six niveaux
+
+Choix de Vincent sur les [planches de propositions](propositions/), le 19
+novembre 2026 :
+
+| Élément    | Choix                                                                   |
+| :--------- | :---------------------------------------------------------------------- |
+| Personnage | `Cavegirl` : elle devient **Circé, qui fait des potions**               |
+| Routes     | Terre sur herbe foncée                                                  |
+| Maisons    | Au hasard parmi la boutique, la maison de pierre et le pignon orange    |
+| Obstacles  | Au hasard : une mare, où Circé tombe et nage, ou un trou, où elle tombe |
+| Feuilles   | `TeaLeaf`                                                               |
+| Charrette  | **Abandonnée** : le pack ne la dessine que d'un seul côté               |
+| Décor      | Au hasard parmi les huit éléments proposés                              |
+
+Les images sont dans [`niveaux/`](niveaux/), produites par
+[`niveaux/generer.py`](niveaux/generer.py) à partir du pack. Les rues font trois
+tuiles de large, toute leur case ; les pâtés d'herbe entre elles reçoivent le
+décor. Les choix au hasard dépendent du nom du niveau : une image se régénère à
+l'identique.
+
+Deux ajustements techniques :
+
+- **la mare** n'existe dans le pack que sur herbe claire : sa bordure reçoit la
+  palette de l'herbe foncée, déduite des deux versions du même dessin dans
+  `TilesetFloor` ;
+- **les coins intérieurs** des rues utilisent les quatre tuiles prévues par le
+  pack, pour que l'herbe des pâtés ait des bords nets.
+
+Points ouverts :
+
+- **La nage** : seul `NinjaGreen`, le personnage entièrement animé du pack, a
+  une animation de nage. `Cavegirl` a la marche, le saut et la chute, pas la
+  nage. Options : garder `Cavegirl` et montrer seulement sa tête dans l'eau avec
+  les ondulations animées du pack, ou prendre `NinjaGreen`.
+- **La taille de Circé** : 16 pixels dans une case de 48. Lisible, mais petite ;
+  on pourrait l'agrandir deux fois, au prix d'un mélange d'échelles.
+- **Le nom du jeu** : « Thealivery » venait du thé. Avec Circé et ses potions,
+  le garde-t-on ? Que livre-t-elle, et que ramasse-t-elle ?
+
 ## Sources
 
 - Ihantola, P. et Karavirta, V., _Two-Dimensional Parson's Puzzles: The Concept,
