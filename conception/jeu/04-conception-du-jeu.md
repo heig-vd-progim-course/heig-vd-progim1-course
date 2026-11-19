@@ -301,6 +301,118 @@ l'étape d'architecture.
 | Prototype papier  | Non : directement une maquette interactive, jetable |
 | Icônes des cartes | Validées sur la maquette interactive                |
 
+## Retours sur la maquette v1
+
+Retours de Vincent après avoir joué à la
+[maquette v1](maquettes/maquette-v1.html), le 19 novembre 2026.
+
+| Point               | Maquette v1                      | Décision pour la suite                                                                           |
+| :------------------ | :------------------------------- | :----------------------------------------------------------------------------------------------- |
+| Plateau de jeu      | Icônes au trait (Tabler)         | **Pixel art libre** (CC0)                                                                        |
+| Disposition         | Grille à gauche, cartes à droite | **Plateau en haut, actions en bas**, sur tous les écrans                                         |
+| Cartes              | Icône seule, en ligne            | **Liste verticale**, chaque carte avec **icône et phrase**                                       |
+| Composer la tournée | Réserve, puis tournée            | **Une seule liste à remettre en ordre**, glisser-déposer, comme les problèmes de Parsons du site |
+| Pièges              | Dès le niveau 02                 | **Aucun dans les premiers niveaux**                                                              |
+| Numéros des cartes  | Affichés                         | **Gardés** : ils servent aux sauts                                                               |
+
+Les icônes de Tabler restent utiles hors du plateau : boutons, cartes. Le
+plateau, lui, passe en pixel art.
+
+### Des sauts, à la manière de l'assembleur
+
+Proposition de Vincent : puisque chaque carte a un numéro, les conditions et les
+boucles peuvent s'écrire comme en assembleur, avec des **sauts** :
+
+```text
+1. Avancer
+2. Si flaque devant, aller à 5
+3. Avancer
+4. Aller à 2
+5. Livrer
+```
+
+**Ce que dit la littérature.**
+
+- **Le compteur de programme est au cœur de la machine notionnelle.** Pour du
+  Boulay, la machine notionnelle d'un langage impératif se compose des variables
+  et d'un compteur de programme qui fixe l'ordre d'exécution. Des cartes
+  numérotées et des sauts rendent ce compteur visible : on voit quelle carte
+  s'exécute, et pourquoi la suivante est celle-là.
+- **C'est le langage des diagrammes d'activité de la séance 01.** Une flèche qui
+  revient en arrière est une boucle, une flèche qui saute par-dessus des actions
+  est une condition. Les sauts prolongent directement ce que les personnes ont
+  dessiné.
+- **Des jeux le font avec succès** : _Human Resource Machine_ (Tomorrow
+  Corporation, 2015) fait programmer en pseudo-assembleur avec des sauts, et les
+  jeux de Zachtronics (_TIS-100_) poussent l'idée plus loin. Je n'ai pas trouvé
+  d'étude qui évalue précisément l'apprentissage des sauts avec ces jeux. Des
+  travaux récents enseignent l'assembleur par une machine notionnelle
+  (ASEE 2024) ou par des blocs (Worister et Knobelsdorf, 2025), avec des
+  résultats encourageants mais sur de petits effectifs.
+- **La tension à connaître** : Java n'a pas de saut, et Dijkstra (1968) a
+  justement plaidé pour les remplacer par des boucles et des conditions
+  structurées. Le jeu montre la mécanique, la page de la séance fait le lien : «
+  un saut en arrière, c'est un `while` », « un saut par-dessus, c'est un `if` ».
+
+**Ce que les sauts changent à la conception.**
+
+- **Plus de cartes imbriquées** : la tournée reste une liste plate, numérotée.
+  Le glisser-déposer reste celui des problèmes de Parsons, à une dimension.
+  C'est une simplification importante, pour le jeu comme pour le code.
+- **Une boucle infinie devient possible** : le moteur arrête Théa après un
+  nombre maximal de cartes exécutées, et elle le dit : « Je tourne en rond ! ».
+- **Un saut désigne une carte** : par son numéro, ou par une flèche qui la suit
+  quand on la déplace. À trancher sur maquette.
+- **Le plan de livraison change** : les versions 2 (boucles) et 3 (conditions)
+  deviennent une seule mécanique, les sauts, avec des capteurs.
+
+### Des phrases et des icônes
+
+Chaque carte porte une icône et une phrase courte en français : « Avancer », «
+Tourner à gauche », « Si flaque devant, aller à 5 ». Les phrases décrivent une
+action du jeu, sans syntaxe : ce ne sont pas des lignes de pseudo-code à
+recopier en Java. La limite reste à surveiller, puisque le cours n'a pas de
+pseudo-code.
+
+### Le pixel art
+
+Candidats sous licence CC0, sans aucune condition, à départager en les voyant :
+
+| Pack                                                                    | Contenu                                                         | Taille |
+| :---------------------------------------------------------------------- | :-------------------------------------------------------------- | :----- |
+| [Kenney Tiny Town](https://kenney.nl/assets/tiny-town)                  | 130 tuiles de 16 × 16 : un village vu de dessus                 | Petit  |
+| [Kenney 1-Bit Pack](https://kenney.nl/assets/1-bit-pack)                | Tuiles de 16 × 16 en une couleur, très variées                  | Moyen  |
+| [Ninja Adventure](https://pixel-boy.itch.io/ninja-adventure-asset-pack) | Personnages, décors, animations, sons et musiques, vu de dessus | 82 Mo  |
+
+Aucun ne contient sans doute une moine à vélo-roulotte. Il faudra composer Théa
+(un personnage et une charrette), ou la dessiner en pixel art simple.
+
+### Décisions après la maquette v1
+
+| Question        | Décision                                                                                                              |
+| :-------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| Pixel art       | [Kenney 1-Bit Pack](https://kenney.nl/assets/1-bit-pack), version 1.1, CC0                                            |
+| Cible d'un saut | Une flèche qui relie le saut à sa carte, comme dans _Human Resource Machine_ ; elle suit la carte quand on la déplace |
+| Pièges          | Dans les derniers niveaux de chaque séance seulement                                                                  |
+
+Pour la séance 01, les niveaux 01 à 03 n'ont donc plus de piège ; les niveaux 04
+et 05 gardent le leur.
+
+### Ce que la maquette v2 a appris
+
+La [maquette v2](maquettes/maquette-v2.html) applique ces décisions et ajoute un
+niveau bonus à sauts, joué sur deux rues. Deux enseignements :
+
+- **Une carte inutile passe inaperçue.** Juger à l'exécution a une limite : une
+  carte piège laissée à la fin de la tournée (« Tourner à gauche » après la
+  dernière livraison) ne gêne rien, et l'objectif est atteint. Proposition **[à
+  valider]** : dans un niveau avec piège, la tournée doit compter exactement le
+  nombre de cartes de la solution. Sinon : « Ma tournée est faite, mais une
+  carte est en trop : mettez-la de côté. »
+- **La police en pixel art rend les chiffres ambigus** : « 02 » se lit « 08 ».
+  Elle reste pour les titres ; les numéros des cartes, essentiels pour les
+  sauts, prennent la police du texte, Atkinson Hyperlegible.
+
 ## Sources
 
 - Ihantola, P. et Karavirta, V., _Two-Dimensional Parson's Puzzles: The Concept,
