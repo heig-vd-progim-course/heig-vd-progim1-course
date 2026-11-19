@@ -455,6 +455,15 @@ tuiles de large, toute leur case ; les pâtés d'herbe entre elles reçoivent le
 décor. Les choix au hasard dépendent du nom du niveau : une image se régénère à
 l'identique.
 
+Règles de dessin :
+
+- **une intersection qui porte un obstacle reste en herbe** : les rues qui y
+  mènent finissent avant lui, par un bout de chemin arrondi, et le trou ou la
+  mare est posé sur l'herbe. Une rue entre deux obstacles ne mène nulle part :
+  elle disparaît ;
+- **deux tirages au hasard séparés**, un pour les objets (maisons, obstacles),
+  un pour le décor : modifier le décor ne change plus les obstacles.
+
 Deux ajustements techniques :
 
 - **la mare** n'existe dans le pack que sur herbe claire : sa bordure reçoit la

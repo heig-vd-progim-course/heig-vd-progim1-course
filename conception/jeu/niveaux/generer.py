@@ -63,19 +63,33 @@ def parse(text):
     return rows
 
 def render(level_id, grid_text, min_cells_w=0):
+    # Deux tirages séparés : changer le décor ne déplace pas les objets
     rnd = random.Random(level_id + grid_text)
+    rnd_objects = random.Random(level_id + grid_text + ":objets")
     rows = parse(grid_text)
     R, C = len(rows), len(rows[0])
     cells_w, cells_h = max((2 * C - 1) + 2 * MARGIN, min_cells_w), (2 * R - 1) + 2 * MARGIN
     W, H = cells_w * CELL, cells_h * CELL          # en tuiles
     img = Image.new("RGBA", (W * T, H * T))
 
-    # Masque de terre, en tuiles : intersections et rues
+    # Les obstacles sont tirés d'abord : leur case n'a pas de terre
+    obstacles = {(r, c): rnd_objects.choice([POND, PIT]) for r, row in enumerate(rows) for c, tok in enumerate(row) if tok == "~"}
+    houses = {(r, c): rnd_objects.choice(HOUSES) for r, row in enumerate(rows) for c, tok in enumerate(row) if tok == "M"}
+
+    # Masque de terre, en tuiles : intersections et rues. Une intersection qui
+    # porte un obstacle reste en herbe : les rues qui y mènent finissent avant
+    # lui, par un bout de chemin arrondi.
     dirt = [[0] * W for _ in range(H)]
     for gr in range(2 * R - 1):
         for gc in range(2 * C - 1):
             if gr % 2 == 1 and gc % 2 == 1:
                 continue   # pâté d'herbe entre les rues
+            if gr % 2 == 0 and gc % 2 == 0 and (gr // 2, gc // 2) in obstacles:
+                continue   # obstacle : de l'herbe, pas de terre
+            if gr % 2 != gc % 2:   # une rue : ses deux extrémités
+                ends = [(gr // 2, (gc - 1) // 2), (gr // 2, (gc + 1) // 2)] if gr % 2 == 0 else [((gr - 1) // 2, gc // 2), ((gr + 1) // 2, gc // 2)]
+                if all(e in obstacles for e in ends):
+                    continue   # rue entre deux obstacles : elle ne mène nulle part
             for ty in range(CELL):
                 for tx in range(CELL):
                     dirt[(gr + MARGIN) * CELL + ty][(gc + MARGIN) * CELL + tx] = 1
@@ -105,7 +119,11 @@ def render(level_id, grid_text, min_cells_w=0):
     # Décor dans les pâtés et dans la marge, sans toucher la terre
     def free(x, y, w, h):
         return all(0 <= y + j < H and 0 <= x + i < W and not dirt[y + j][x + i] for j in range(h) for i in range(w))
+    # Les cases des obstacles sont réservées : pas de décor dessous
     taken = set()
+    for (r, c) in obstacles:
+        x0, y0 = (2 * c + MARGIN) * CELL, (2 * r + MARGIN) * CELL
+        taken |= {(x0 + i, y0 + j) for i in range(CELL) for j in range(CELL)}
     for _ in range(W * H // 6):
         d = rnd.choice(DECOR)
         w, h = d.width // T, d.height // T
@@ -120,9 +138,9 @@ def render(level_id, grid_text, min_cells_w=0):
         for c, tok in enumerate(row):
             px, py = cell_px(2 * r, 2 * c)
             if tok == "M":
-                img.alpha_composite(rnd.choice(HOUSES), (px, py))
+                img.alpha_composite(houses[(r, c)], (px, py))
             elif tok == "~":
-                img.alpha_composite(rnd.choice([POND, PIT]), (px, py))
+                img.alpha_composite(obstacles[(r, c)], (px, py))
             elif tok == "f":
                 img.alpha_composite(LEAF, (px + T, py + T))
             elif tok.startswith("T"):
