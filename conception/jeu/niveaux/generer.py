@@ -12,7 +12,9 @@ une image se régénère toujours à l'identique.
 import os, random, sys
 from PIL import Image, ImageDraw
 
-P, OUT = sys.argv[1], sys.argv[2]
+# Le dossier du pack : premier argument, ou variable d'environnement NINJA_PACK
+# quand le module est importé par un autre script
+P = sys.argv[1] if __name__ == "__main__" else os.environ["NINJA_PACK"]
 TS = os.path.join(P, "Backgrounds", "Tilesets")
 T, CELL, MARGIN, ZOOM = 16, 3, 1, 3   # tuile, tuiles par case, cases de marge, agrandissement
 
@@ -158,8 +160,8 @@ LEVELS = [
     ("05-les-feuilles", "Les feuilles", ["Tv ~ M\n. ~ .\nf . ."]),
     ("06-la-rue-qui-s-allonge", "La rue qui s'allonge", ["T> . . M", "T> . . . . M"]),
 ]
-for slug, title, grids in LEVELS:
-    # Toutes les rues d'un niveau à la même largeur
+def render_level(slug, grids):
+    """Toutes les rues d'un niveau, l'une sous l'autre, à la même largeur."""
     widest = max(2 * len(g.split("\n")[0].split()) - 1 + 2 * MARGIN for g in grids)
     parts = [render(slug, g, widest) for g in grids]
     gap = 8 if len(parts) > 1 else 0
@@ -169,7 +171,14 @@ for slug, title, grids in LEVELS:
     y = 0
     for p in parts:
         out.alpha_composite(p, (0, y)); y += p.height + gap
-    big = out.resize((W * ZOOM, H * ZOOM), Image.NEAREST)
-    path = os.path.join(OUT, f"niveau-{slug}.png")
-    big.save(path)
-    print(path.split("/")[-1], big.size)
+    return out
+
+
+if __name__ == "__main__":
+    OUT = sys.argv[2]
+    for slug, title, grids in LEVELS:
+        out = render_level(slug, grids)
+        big = out.resize((out.width * ZOOM, out.height * ZOOM), Image.NEAREST)
+        path = os.path.join(OUT, f"niveau-{slug}.png")
+        big.save(path)
+        print(path.split("/")[-1], big.size)

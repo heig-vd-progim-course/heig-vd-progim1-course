@@ -483,6 +483,32 @@ Décisions qui suivent les images :
   mare, on ne montrera que sa tête, avec les ondulations animées du pack
   (`Backgrounds/Animated/Water Ripples`). Dans un trou, elle tombe.
 
+## Écrans complets
+
+Choix de Vincent sur les planches [7](propositions/7-cartes.png) et
+[8](propositions/8-interface.png) :
+
+| Élément          | Choix                                                                                                             |
+| :--------------- | :---------------------------------------------------------------------------------------------------------------- |
+| Avancer          | Touche haut (`Ui/Input/Keyboard/KeyUp.png`)                                                                       |
+| Tourner          | Touches gauche et droite (`KeyLeft.png`, `KeyRight.png`)                                                          |
+| Ramasser         | Main « interagir » (`Ui/Skill Icon/Job & Action/Interact.png`)                                                    |
+| Livrer le thé    | Lettre (`Items/Other/Letter.png`)                                                                                 |
+| Aller à          | Flèche en bois (`Ui/Theme/Theme Wood/arrow_right.png`)                                                            |
+| Si…              | Bulle « ? » (`Ui/Emote/emote23.png`)                                                                              |
+| Cadre des cartes | Bois à fond blanc (`nine_path_panel_3.png`), découpé en neuf avec une marge de 6 pixels                           |
+| Bulle de Théa    | Boîte avec son portrait (`DialogBoxFaceset.png` et le `Faceset` de `Cavegirl`)                                    |
+| Texte            | Atkinson Hyperlegible ; la police du pack est écartée (espaces presque nulles, « i » mal rendu, 3 et 8 confondus) |
+
+**Point de vigilance** : les touches gauche et droite peuvent faire croire que
+Théa va à gauche, alors qu'elle tourne sur place. Choix assumé ; les premiers
+tests en classe diront s'il faut une flèche courbe à la place.
+
+Les six écrans sont dans [`ecrans/`](ecrans/), produits par
+[`ecrans/generer.py`](ecrans/generer.py), qui réutilise le plateau de
+`niveaux/generer.py`. Les icônes sont agrandies d'un facteur entier, pour que le
+pixel art reste net.
+
 ## Sources
 
 - Ihantola, P. et Karavirta, V., _Two-Dimensional Parson's Puzzles: The Concept,
