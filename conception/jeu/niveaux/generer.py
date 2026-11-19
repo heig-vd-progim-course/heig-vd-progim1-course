@@ -113,7 +113,7 @@ def render(level_id, grid_text, min_cells_w=0):
             img.alpha_composite(d, (x * T, y * T))
             taken |= spots
 
-    # Objets et Théa (Circé) sur les intersections
+    # Objets et Théa sur les intersections
     for r, row in enumerate(rows):
         for c, tok in enumerate(row):
             px, py = cell_px(2 * r, 2 * c)
@@ -124,8 +124,10 @@ def render(level_id, grid_text, min_cells_w=0):
             elif tok == "f":
                 img.alpha_composite(LEAF, (px + T, py + T))
             elif tok.startswith("T"):
+                # Théa en double taille (32 x 32), centrée dans sa case de 48 x 48
                 frame = HERO.crop((HERO_COL[tok[1]] * T, 0, HERO_COL[tok[1]] * T + T, T))
-                img.alpha_composite(frame, (px + T, py + T))
+                frame = frame.resize((2 * T, 2 * T), Image.NEAREST)
+                img.alpha_composite(frame, (px + T // 2, py + T // 2))
     return img
 
 LEVELS = [

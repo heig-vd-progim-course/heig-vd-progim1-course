@@ -439,15 +439,15 @@ la génération des images.
 Choix de Vincent sur les [planches de propositions](propositions/), le 19
 novembre 2026 :
 
-| Élément    | Choix                                                                   |
-| :--------- | :---------------------------------------------------------------------- |
-| Personnage | `Cavegirl` : elle devient **Circé, qui fait des potions**               |
-| Routes     | Terre sur herbe foncée                                                  |
-| Maisons    | Au hasard parmi la boutique, la maison de pierre et le pignon orange    |
-| Obstacles  | Au hasard : une mare, où Circé tombe et nage, ou un trou, où elle tombe |
-| Feuilles   | `TeaLeaf`                                                               |
-| Charrette  | **Abandonnée** : le pack ne la dessine que d'un seul côté               |
-| Décor      | Au hasard parmi les huit éléments proposés                              |
+| Élément    | Choix                                                                            |
+| :--------- | :------------------------------------------------------------------------------- |
+| Personnage | `Cavegirl`, qui incarne **Théa, la livreuse de thé**, en double taille (32 × 32) |
+| Routes     | Terre sur herbe foncée                                                           |
+| Maisons    | Au hasard parmi la boutique, la maison de pierre et le pignon orange             |
+| Obstacles  | Au hasard : une mare, où Théa tombe et nage, ou un trou, où elle tombe           |
+| Feuilles   | `TeaLeaf`                                                                        |
+| Charrette  | **Abandonnée** : le pack ne la dessine que d'un seul côté                        |
+| Décor      | Au hasard parmi les huit éléments proposés                                       |
 
 Les images sont dans [`niveaux/`](niveaux/), produites par
 [`niveaux/generer.py`](niveaux/generer.py) à partir du pack. Les rues font trois
@@ -463,16 +463,16 @@ Deux ajustements techniques :
 - **les coins intérieurs** des rues utilisent les quatre tuiles prévues par le
   pack, pour que l'herbe des pâtés ait des bords nets.
 
-Points ouverts :
+Décisions qui suivent les images :
 
-- **La nage** : seul `NinjaGreen`, le personnage entièrement animé du pack, a
-  une animation de nage. `Cavegirl` a la marche, le saut et la chute, pas la
-  nage. Options : garder `Cavegirl` et montrer seulement sa tête dans l'eau avec
-  les ondulations animées du pack, ou prendre `NinjaGreen`.
-- **La taille de Circé** : 16 pixels dans une case de 48. Lisible, mais petite ;
-  on pourrait l'agrandir deux fois, au prix d'un mélange d'échelles.
-- **Le nom du jeu** : « Thealivery » venait du thé. Avec Circé et ses potions,
-  le garde-t-on ? Que livre-t-elle, et que ramasse-t-elle ?
+- **Personnage** : Vincent a d'abord pensé à Circé et ses potions, puis est
+  revenu à **Théa, la livreuse de thé**. Le nom du jeu, Thealivery, reste. Le
+  sprite reste celui de `Cavegirl`.
+- **Taille** : Théa est dessinée en double taille, 32 × 32 pixels, centrée dans
+  sa case de 48 × 48. Le mélange d'échelles est assumé, pour la lisibilité.
+- **Nage** : `Cavegirl` n'a pas d'animation de nage. Quand elle tombe dans une
+  mare, on ne montrera que sa tête, avec les ondulations animées du pack
+  (`Backgrounds/Animated/Water Ripples`). Dans un trou, elle tombe.
 
 ## Sources
 

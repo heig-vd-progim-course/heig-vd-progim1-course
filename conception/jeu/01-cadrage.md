@@ -30,10 +30,9 @@ l'état restent visibles.
 
 ## La vision
 
-> **Thealivery.** Théa, ninja du thé, livre ses infusions avec sa charrette dans
-> les rues d'un quartier en grille. On remet dans l'ordre les cartes de sa
-> tournée, des icônes, puis on la regarde exécuter le programme, carte après
-> carte.
+> **Thealivery.** Théa, livreuse de thé, apporte ses infusions dans les rues
+> d'un quartier en grille. On remet dans l'ordre les cartes de sa tournée, des
+> icônes, puis on la regarde exécuter le programme, carte après carte.
 
 Le jeu est une **machine notionnelle** (voir
 l'[état de l'art](02-etat-de-l-art.md)) : une représentation simplifiée de ce
@@ -133,15 +132,15 @@ Critères de réussite, à préciser à l'étape des besoins :
 
 ## Décisions prises
 
-| Question                       | Décision                                                  |
-| :----------------------------- | :-------------------------------------------------------- |
-| Quand joue-t-on ?              | En autonomie et en classe                                 |
-| Qui écrit les niveaux, et où ? | L'enseignant, dans le Markdown des pages                  |
-| Cartes                         | Des icônes uniquement, ni Java ni pseudo-code             |
-| Langage                        | TypeScript, construit avec esbuild et figé dans le dépôt  |
-| Où vit le jeu ?                | Dans les pages des séances                                |
-| Personnage                     | Théa, ninja du thé avec sa charrette, personnage original |
-| Nom du jeu                     | Thealivery                                                |
+| Question                       | Décision                                                 |
+| :----------------------------- | :------------------------------------------------------- |
+| Quand joue-t-on ?              | En autonomie et en classe                                |
+| Qui écrit les niveaux, et où ? | L'enseignant, dans le Markdown des pages                 |
+| Cartes                         | Des icônes uniquement, ni Java ni pseudo-code            |
+| Langage                        | TypeScript, construit avec esbuild et figé dans le dépôt |
+| Où vit le jeu ?                | Dans les pages des séances                               |
+| Personnage                     | Théa, livreuse de thé, personnage original               |
+| Nom du jeu                     | Thealivery                                               |
 
 ### Pourquoi un personnage original
 
