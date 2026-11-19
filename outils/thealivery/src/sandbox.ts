@@ -22,31 +22,7 @@ import {
 import { classHighlighter } from "@lezer/highlight";
 import { readMarkdownLevel } from "./adaptateurs/markdown-reader.ts";
 import { mountLevel, type Mounted } from "./adaptateurs/mount.ts";
-
-const EXAMPLE = `<div class="thealivery" data-id="bac-a-sable" markdown>
-
-Ramassez les feuilles, puis livrez. Une carte est en trop.
-
-\`\`\`text
-Tv ~  M
-.  ~  .
-f  .  .
-\`\`\`
-
-1. avancer
-2. avancer
-3. ramasser
-4. tourner-gauche
-5. avancer
-6. avancer
-7. tourner-gauche
-8. avancer
-9. avancer
-10. livrer
-11. piège : tourner-droite
-
-</div>
-`;
+import { EXAMPLE } from "./sandbox-example.ts";
 
 const DRAFT = "thealivery:bac-a-sable";
 
