@@ -37,6 +37,15 @@ PATH = {  # clé : (haut, droite, bas, gauche) ont-ils de la terre ?
 INNER = {"br": (16, 8), "bl": (17, 8), "tr": (16, 9), "tl": (17, 9)}  # coin d'herbe dans la terre
 
 HOUSES = [tile(HOUSE, 16, 0, 3, 3), tile(HOUSE, 23, 0, 3, 3), tile(HOUSE, 26, 0, 3, 3)]  # boutique, pierre, pignon orange
+# Les maisons sont remontées de deux tuiles : elles bordent la rue, leur porte
+# ouvre sur l'intersection, où une dalle marque l'endroit où livrer
+HOUSE_SHIFT = 2
+def _doorstep():
+    """La dalle 3/15 du sol d'intérieur, sans son fond brun clair."""
+    img = tile(sheet(os.path.join("Interior", "TilesetInteriorFloor.png")), 3, 15)
+    img.putdata([(0, 0, 0, 0) if px[:3] == (200, 150, 107) else px for px in img.getdata()])
+    return img
+DOORSTEP = _doorstep()
 # La mare n'existe que sur herbe claire : on lui applique la palette de l'herbe
 # foncée, déduite des deux versions du même dessin dans TilesetFloor
 def palette_swap():
@@ -161,6 +170,10 @@ def render(level_id, grid_text, min_cells_w=0, moving_parts=True, meta=None):
     for (r, c) in obstacles:
         x0, y0 = (2 * c + MARGIN) * CELL, (2 * r + MARGIN) * CELL
         taken |= {(x0 + i, y0 + j) for i in range(CELL) for j in range(CELL)}
+    # Et la place au-dessus des maisons, qui débordent de leur case
+    for (r, c) in houses:
+        x0, y0 = (2 * c + MARGIN) * CELL, (2 * r + MARGIN) * CELL - HOUSE_SHIFT
+        taken |= {(x0 + i, y0 + j) for i in range(CELL) for j in range(HOUSE_SHIFT)}
     for _ in range(W * H // 6):
         d = rnd.choice(DECOR)
         w, h = d.width // T, d.height // T
@@ -175,7 +188,8 @@ def render(level_id, grid_text, min_cells_w=0, moving_parts=True, meta=None):
         for c, tok in enumerate(row):
             px, py = cell_px(2 * r, 2 * c)
             if is_house(tok):
-                img.alpha_composite(houses[(r, c)], (px, py))
+                img.alpha_composite(houses[(r, c)], (px, py - HOUSE_SHIFT * T))
+                img.alpha_composite(DOORSTEP, (px + T, py + T))
             elif tok == "~":
                 img.alpha_composite(obstacles[(r, c)], (px, py))
             elif tok == "f" and moving_parts:

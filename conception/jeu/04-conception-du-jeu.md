@@ -560,6 +560,13 @@ Le générateur au hasard de `niveaux/generer.py` est maintenant le même que ce
 du jeu (FNV-1a et mulberry32) : le jeu dessine exactement les mêmes quartiers,
 au pixel près, et les images fixes ont été régénérées.
 
+Le 20 novembre 2026, après les maquettes `maquettes/maisons-*.png`, les maisons
+sont **remontées de deux tuiles** : elles bordent la rue au lieu d'être posées
+dessus, et leur porte ouvre sur l'intersection. Une **dalle** (tuile 3/15 de
+`Interior/TilesetInteriorFloor`, sans son fond brun clair) marque devant la
+porte l'endroit où Théa livre. La place au-dessus de chaque maison est réservée
+pour qu'aucun arbre ne pousse dans le toit.
+
 ## Fonctions et variables avec les sauts
 
 Proposition du 19 novembre 2026, codée le même jour (voir

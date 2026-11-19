@@ -50,6 +50,12 @@ def recolor(img):
     out.putdata([GRASS_MAP.get(px, px) for px in img.getdata()])
     return out
 
+def without_background(img, color=(200, 150, 107)):
+    """Rend transparents les pixels d'une couleur : le fond d'une tuile."""
+    img = img.copy()
+    img.putdata([(0, 0, 0, 0) if px[:3] == color else px for px in img.getdata()])
+    return img
+
 def ripples_without_water():
     """Les ondulations sont peintes sur un fond d'eau opaque : on rend
     transparente sa couleur dominante, pour les poser sur la mare."""
@@ -79,6 +85,9 @@ sprites = {
     # Théa : quatre colonnes (bas, haut, gauche, droite), la marche en lignes
     "thea": load("Actor", "Character", "Cavegirl", "SpriteSheet.png"),
     "ripples": ripples_without_water(),
+    # La dalle devant chaque porte, sans son fond brun clair
+    "doorstep": without_background(tile(
+        load("Backgrounds", "Tilesets", "Interior", "TilesetInteriorFloor.png"), 3, 15)),
     "bang": load("Ui", "Emote", "emote21.png"),
     "heart": load("Ui", "Emote", "emote27.png"),
 }

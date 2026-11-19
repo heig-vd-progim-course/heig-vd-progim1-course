@@ -41,6 +41,11 @@ const DECOR: readonly { name: string; w: number; h: number }[] = [
 const GRASS_DETAILS = [0, 1, 2, 3].map((i) => `grass-detail-${String(i)}`);
 const HOUSES = ["house-0", "house-1", "house-2"];
 const OBSTACLES: readonly ObstacleKind[] = ["pond", "hole"];
+/**
+ * Les maisons sont remontées de deux tuiles : elles bordent la rue, leur porte
+ * ouvre sur l'intersection, où une dalle marque l'endroit où livrer.
+ */
+export const HOUSE_SHIFT = 2;
 
 /** Tuile de route selon que ses voisines (haut, droite, bas, gauche) sont en terre. */
 const PATH: Readonly<Record<string, string>> = {
@@ -228,6 +233,17 @@ export function layoutStreet(
 			}
 		}
 	}
+	// Et la place au-dessus des maisons, qui débordent de leur case
+	for (const position of houses.keys()) {
+		const [r = 0, c = 0] = position.split(",").map(Number);
+		const x0 = (2 * c + MARGIN) * CELL;
+		const y0 = (2 * r + MARGIN) * CELL - HOUSE_SHIFT;
+		for (let i = 0; i < CELL; i += 1) {
+			for (let j = 0; j < HOUSE_SHIFT; j += 1) {
+				taken.add(key(x0 + i, y0 + j));
+			}
+		}
+	}
 	for (let n = 0; n < Math.floor((W * H) / 6); n += 1) {
 		const d = rnd.choice(DECOR);
 		const x = rnd.randrange(0, W - d.w + 1);
@@ -248,7 +264,7 @@ export function layoutStreet(
 		}
 	}
 
-	// Maisons et obstacles sur les intersections
+	// Maisons, avec leur dalle, et obstacles sur les intersections
 	rows.forEach((row, r) => {
 		row.forEach((_symbol, c) => {
 			const tx = (2 * c + MARGIN) * CELL;
@@ -256,7 +272,8 @@ export function layoutStreet(
 			const house = houses.get(key(r, c));
 			const obstacle = obstacles.get(key(r, c));
 			if (house !== undefined) {
-				put(house, tx, ty);
+				put(house, tx, ty - HOUSE_SHIFT);
+				put("doorstep", tx + 1, ty + 1);
 			} else if (obstacle !== undefined) {
 				put(obstacle, tx, ty);
 			}

@@ -1,4 +1,4 @@
-// Exporte la mise en page des six rues de référence, pour que
+// Exporte la mise en page des rues de référence, pour que
 // atlas/comparer-rendu.py la compare au rendu de generer.py.
 import { layoutStreet, widestCells } from "../src/adaptateurs/board-layout.ts";
 
@@ -9,6 +9,8 @@ const LEVELS: [string, string[]][] = [
 	["04-deux-maisons", ["T> . M\n~ ~ .\nM . ."]],
 	["05-les-feuilles", ["Tv ~ M\n. ~ .\nf . ."]],
 	["06-la-rue-qui-s-allonge", ["T> . . M", "T> . . . . M"]],
+	["essai-07-deux-commandes", ["T> .  M2 .  M1"]],
+	["essai-08-le-demi-tour", ["M  .  T> .  M"]],
 ];
 
 const out = LEVELS.flatMap(([id, grids]) =>

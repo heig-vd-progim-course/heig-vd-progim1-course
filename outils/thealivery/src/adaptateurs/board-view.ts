@@ -5,7 +5,13 @@
 import type { Mood } from "../application/messages.ts";
 import type { Cells, Direction, Street, TheaState } from "../domaine/street.ts";
 import type { Atlas } from "./assets.ts";
-import { CELL, TILE, cellCenter, type StreetLayout } from "./board-layout.ts";
+import {
+	CELL,
+	HOUSE_SHIFT,
+	TILE,
+	cellCenter,
+	type StreetLayout,
+} from "./board-layout.ts";
 
 /** Agrandissement du dessin interne ; l'affichage est réglé par le CSS. */
 const SCALE = 3;
@@ -239,10 +245,12 @@ export class BoardView {
 					this.sprite(ctx, "leaf", x - 8, y - 8);
 				} else if (cell === "house" || cell === "delivered") {
 					const mark = cell === "house" ? "bang" : "heart";
-					this.sprite(ctx, mark, x - 7, y - half - 11 + bob);
+					// Au-dessus du toit : la maison est remontée de HOUSE_SHIFT tuiles
+					const roof = y - half - HOUSE_SHIFT * TILE;
+					this.sprite(ctx, mark, x - 7, roof - 11 + bob);
 					const order = this.streets[this.index]?.orders[row]?.[col] ?? 0;
 					if (cell === "house" && order > 0) {
-						this.order(ctx, order, x + 11, y - half - 4 + bob);
+						this.order(ctx, order, x + 11, roof - 4 + bob);
 					}
 				}
 			});

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
 	CELL,
+	HOUSE_SHIFT,
 	MARGIN,
 	TILE,
 	cellCenter,
@@ -47,6 +48,43 @@ describe("layoutStreet", () => {
 		);
 		expect(objects).toHaveLength(2);
 		expect(layout.obstacles.size).toBe(1);
+	});
+
+	it("remonte la maison de deux tuiles, avec sa dalle au centre de l'intersection", () => {
+		const layout = layoutStreet("s01", "T> . M");
+		const house = layout.background.find((op) =>
+			op.sprite.startsWith("house-"),
+		);
+		const step = layout.background.find((op) => op.sprite === "doorstep");
+		const size = CELL * TILE;
+		const cellX = (2 * 2 + MARGIN) * size;
+		const cellY = MARGIN * size;
+		expect(house).toMatchObject({ x: cellX, y: cellY - HOUSE_SHIFT * TILE });
+		expect(step).toMatchObject({ x: cellX + TILE, y: cellY + TILE });
+	});
+
+	it("ne pose aucun décor sous le toit d'une maison remontée", () => {
+		for (const id of ["a", "b", "c", "d", "e"]) {
+			const layout = layoutStreet(id, "T> . M\n. . .\nM . M");
+			const roofs = layout.background
+				.filter((op) => op.sprite.startsWith("house-"))
+				.map((op) => ({ x: op.x, y: op.y }));
+			const decor = layout.background.filter((op) =>
+				op.sprite.startsWith("decor-"),
+			);
+			for (const roof of roofs) {
+				for (const d of decor) {
+					// decor-0 à decor-3 sont des arbres de 2 tuiles sur 2
+					const size = Number(d.sprite.slice(6)) < 4 ? 2 * TILE : TILE;
+					const overlaps =
+						d.x < roof.x + CELL * TILE &&
+						d.x + size > roof.x &&
+						d.y < roof.y + HOUSE_SHIFT * TILE &&
+						d.y + size > roof.y;
+					expect(overlaps).toBe(false);
+				}
+			}
+		}
 	});
 
 	it("tire les obstacles comme le domaine les voit", () => {
