@@ -51,8 +51,10 @@ def recolor(img):
 POND = recolor(tile(WATER, 0, 6, 3, 3))
 PIT = tile(HOLE, 0, 0, 3, 3)
 LEAF = Image.open(os.path.join(P, "Items", "Food", "TeaLeaf.png")).convert("RGBA")
+# Décor : quatre arbres (2 x 2), deux fleurs, une souche et deux touffes d'herbe
+# haute, chacune sur une seule tuile. Les rochers ont été retirés.
 DECOR = [tile(NATURE, 0, 0, 2, 2), tile(NATURE, 2, 0, 2, 2), tile(NATURE, 14, 0, 2, 2), tile(NATURE, 6, 8, 2, 2),
-         tile(NATURE, 0, 11, 2, 1), tile(NATURE, 15, 9, 2, 1), tile(NATURE, 4, 8, 1, 1), tile(NATURE, 4, 10, 2, 1)]
+         tile(NATURE, 0, 11), tile(NATURE, 1, 11), tile(NATURE, 4, 8), tile(NATURE, 4, 10), tile(NATURE, 5, 10)]
 HERO = Image.open(os.path.join(P, "Actor", "Character", "Cavegirl", "SpriteSheet.png")).convert("RGBA")
 HERO_COL = {">": 3, "<": 2, "^": 1, "v": 0}  # colonnes de la planche : bas, haut, gauche, droite
 

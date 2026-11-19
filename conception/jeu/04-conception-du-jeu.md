@@ -439,15 +439,15 @@ la génération des images.
 Choix de Vincent sur les [planches de propositions](propositions/), le 19
 novembre 2026 :
 
-| Élément    | Choix                                                                            |
-| :--------- | :------------------------------------------------------------------------------- |
-| Personnage | `Cavegirl`, qui incarne **Théa, la livreuse de thé**, en double taille (32 × 32) |
-| Routes     | Terre sur herbe foncée                                                           |
-| Maisons    | Au hasard parmi la boutique, la maison de pierre et le pignon orange             |
-| Obstacles  | Au hasard : une mare, où Théa tombe et nage, ou un trou, où elle tombe           |
-| Feuilles   | `TeaLeaf`                                                                        |
-| Charrette  | **Abandonnée** : le pack ne la dessine que d'un seul côté                        |
-| Décor      | Au hasard parmi les huit éléments proposés                                       |
+| Élément    | Choix                                                                                            |
+| :--------- | :----------------------------------------------------------------------------------------------- |
+| Personnage | `Cavegirl`, qui incarne **Théa, la livreuse de thé**, en double taille (32 × 32)                 |
+| Routes     | Terre sur herbe foncée                                                                           |
+| Maisons    | Au hasard parmi la boutique, la maison de pierre et le pignon orange                             |
+| Obstacles  | Au hasard : une mare, où Théa tombe et nage, ou un trou, où elle tombe                           |
+| Feuilles   | `TeaLeaf`                                                                                        |
+| Charrette  | **Abandonnée** : le pack ne la dessine que d'un seul côté                                        |
+| Décor      | Au hasard : quatre arbres, une souche, et fleurs et herbes hautes tuile par tuile ; sans rochers |
 
 Les images sont dans [`niveaux/`](niveaux/), produites par
 [`niveaux/generer.py`](niveaux/generer.py) à partir du pack. Les rues font trois
