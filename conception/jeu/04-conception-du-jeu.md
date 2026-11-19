@@ -509,6 +509,21 @@ Les six écrans sont dans [`ecrans/`](ecrans/), produits par
 `niveaux/generer.py`. Les icônes sont agrandies d'un facteur entier, pour que le
 pixel art reste net.
 
+## Maquette v3
+
+La [maquette v3](maquettes/maquette-v3.html) reprend tous les choix précédents
+dans une page jouable : le plateau des images fixes, Théa animée (marche, nage
+dans les mares avec seulement sa tête et les ondulations du pack, chute dans les
+trous), un « ! » au-dessus des maisons qui attendent et un cœur une fois
+livrées, les cartes et la bulle aux couleurs du pack.
+
+Elle est produite par [`maquettes/construire-v3.py`](maquettes/construire-v3.py)
+à partir du modèle
+[`maquette-v3.modele.html`](maquettes/maquette-v3.modele.html) : le décor vient
+de `niveaux/generer.py`, sans les parties mobiles, et tout est inséré dans un
+seul fichier. Les ondulations du pack sont peintes sur un fond d'eau opaque : le
+script rend ce fond transparent.
+
 ## Sources
 
 - Ihantola, P. et Karavirta, V., _Two-Dimensional Parson's Puzzles: The Concept,

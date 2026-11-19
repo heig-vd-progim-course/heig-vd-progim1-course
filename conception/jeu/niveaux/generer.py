@@ -64,7 +64,10 @@ def parse(text):
     rows = [l.split() for l in text.strip().splitlines()]
     return rows
 
-def render(level_id, grid_text, min_cells_w=0):
+def render(level_id, grid_text, min_cells_w=0, moving_parts=True, meta=None):
+    """Dessine une rue. Sans les parties mobiles (Théa, feuilles), l'image sert de
+    fond à la maquette interactive ; `meta`, un dictionnaire, reçoit alors le type
+    de chaque obstacle ("mare" ou "trou")."""
     # Deux tirages séparés : changer le décor ne déplace pas les objets
     rnd = random.Random(level_id + grid_text)
     rnd_objects = random.Random(level_id + grid_text + ":objets")
@@ -143,13 +146,16 @@ def render(level_id, grid_text, min_cells_w=0):
                 img.alpha_composite(houses[(r, c)], (px, py))
             elif tok == "~":
                 img.alpha_composite(obstacles[(r, c)], (px, py))
-            elif tok == "f":
+            elif tok == "f" and moving_parts:
                 img.alpha_composite(LEAF, (px + T, py + T))
-            elif tok.startswith("T"):
+            elif tok.startswith("T") and moving_parts:
                 # Théa en double taille (32 x 32), centrée dans sa case de 48 x 48
                 frame = HERO.crop((HERO_COL[tok[1]] * T, 0, HERO_COL[tok[1]] * T + T, T))
                 frame = frame.resize((2 * T, 2 * T), Image.NEAREST)
                 img.alpha_composite(frame, (px + T // 2, py + T // 2))
+    if meta is not None:
+        meta["obstacles"] = {f"{r},{c}": ("mare" if o is POND else "trou") for (r, c), o in obstacles.items()}
+        meta["cells_w"], meta["cells_h"] = cells_w, cells_h
     return img
 
 LEVELS = [

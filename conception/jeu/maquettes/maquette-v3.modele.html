@@ -1,0 +1,689 @@
+<title>Maquette Thealivery v3</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<!--
+	Maquette JETABLE de Thealivery, version 3 (voir conception/jeu/README.md).
+	Ce fichier est le MODÈLE : maquette-v3.html est produit par construire-v3.py,
+	qui y insère le décor et les sprites. Son code n'est pas celui du jeu.
+
+	Pixel art : Ninja Adventure (Pixel-boy et AAA), licence CC0,
+	https://pixel-boy.itch.io/ninja-adventure-asset-pack
+-->
+<style>
+	/* Une colonne : le plateau, la bulle de Théa, la tournée, les boutons */
+	:root {
+		--bg: #f1eee7;
+		--surface: #fbfaf6;
+		--ink: #2b1f1f;
+		--muted: #6b5d57;
+		--line: #d8cfc3;
+		--accent: #c8571f;
+		--board: #26331f;
+		--danger: #b3341f;
+		--ok: #2f7a4a;
+		--jump-1: #c8860c;
+		--jump-2: #2f6fb5;
+		--font: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+	}
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) {
+			--bg: #1b1714; --surface: #24201c; --ink: #efe7dc; --muted: #b3a597; --line: #3d352e;
+			--accent: #f08a4b; --board: #10160d; --danger: #ff8d76; --ok: #7fd39c; --jump-1: #f0b63a; --jump-2: #79b4f0;
+			color-scheme: dark;
+		}
+	}
+	:root[data-theme="dark"] {
+		--bg: #1b1714; --surface: #24201c; --ink: #efe7dc; --muted: #b3a597; --line: #3d352e;
+		--accent: #f08a4b; --board: #10160d; --danger: #ff8d76; --ok: #7fd39c; --jump-1: #f0b63a; --jump-2: #79b4f0;
+		color-scheme: dark;
+	}
+	* { box-sizing: border-box; }
+	body {
+		background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem; line-height: 1.45;
+		padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+		padding-block: 1rem 3rem;
+	}
+	.wrap { max-width: 46rem; margin: 0 auto; display: grid; gap: 1rem; }
+	.level { display: grid; gap: 0.9rem; min-width: 0; }
+	.top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1rem; }
+	.top h1 { font-size: 1.8rem; margin: 0; margin-right: auto; }
+	.top small { color: var(--muted); }
+	.chip { font: inherit; font-size: 0.85rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 0.3rem 0.8rem; cursor: pointer; }
+	.chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+
+	.levels { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+	.levels button { font: inherit; font-size: 0.85rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 0.4rem; padding: 0.3rem 0.6rem; cursor: pointer; text-align: left; display: grid; }
+	.levels button[aria-current="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+	.levels b { font-weight: 700; }
+	.stars { color: #d39a12; letter-spacing: 0.1em; font-size: 0.8rem; min-height: 1.1em; }
+	.stars .off { color: var(--line); }
+
+	.head h2 { font-size: 1.45rem; margin: 0; text-wrap: balance; }
+	.head p { margin: 0.1rem 0 0; color: var(--muted); }
+	.tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+
+	/* Plateau */
+	.board { background: var(--board); border-radius: 0.5rem; padding: 0.5rem; display: grid; gap: 0.5rem; justify-items: center; min-width: 0; }
+	.streets { justify-self: start; display: flex; gap: 0.4rem; }
+	.streets button { font: inherit; font-size: 0.85rem; color: #f3ead9; background: transparent; border: 1px solid #5a6b4c; border-radius: 0.3rem; padding: 0.1rem 0.55rem; cursor: pointer; }
+	.streets button[aria-current="true"] { background: #5a6b4c; }
+	canvas.map { display: block; max-width: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
+
+	/* Bulle de Théa : portrait et boîte de dialogue du pack */
+	.bubble { display: flex; align-items: stretch; gap: 0.4rem; min-height: 96px; }
+	.face { flex: none; width: 96px; height: 96px; background: var(--fbox) center / 96px 96px no-repeat; image-rendering: pixelated; display: grid; place-items: center; }
+	.face img { width: 76px; height: 76px; image-rendering: pixelated; }
+	.say { flex: 1; min-width: 0; border: 16px solid transparent; border-image: var(--dlg) 8 fill / 16px stretch; image-rendering: pixelated; color: #3a2a2a; padding: 0.15rem 0.4rem; display: flex; align-items: center; font-size: 1.02rem; }
+	.bubble.fail .say { color: #a3271a; font-weight: 700; }
+	.bubble.win .say { color: #23683c; font-weight: 700; }
+	@media (max-width: 30rem) { .face { width: 64px; height: 64px; background-size: 64px 64px; } .face img { width: 50px; height: 50px; } .bubble { min-height: 64px; } }
+
+	/* Tournée */
+	.zone h3 { margin: 0 0 0.4rem; font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; }
+	.listwrap { position: relative; padding-left: 2.8rem; }
+	.listwrap.nojumps { padding-left: 0; }
+	svg.arrows { position: absolute; left: 0; top: 0; width: 2.8rem; height: 100%; overflow: visible; pointer-events: none; }
+	.cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; min-height: 3rem; }
+	.cards:empty::after { content: attr(data-empty); color: var(--muted); padding: 0.4rem 0; }
+	.card {
+		display: grid; grid-template-columns: 1.4rem 1.8rem 48px 1fr; align-items: center; gap: 0.5rem;
+		border: 12px solid transparent; border-image: var(--panel) 6 fill / 12px stretch; image-rendering: pixelated;
+		color: #2b1f1f; padding: 0 0.3rem 0 0; min-height: 4rem; user-select: none;
+	}
+	.card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+	.grip { align-self: stretch; display: grid; place-items: center; color: #8a6d5d; cursor: grab; touch-action: none; }
+	.grip svg { width: 0.8rem; height: 1.2rem; }
+	.card .n { font-weight: 700; font-size: 1.15rem; text-align: right; font-variant-numeric: tabular-nums; }
+	.card .ico { display: grid; place-items: center; width: 48px; height: 40px; }
+	.card .ico img { image-rendering: pixelated; }
+	.card .txt { font-size: 1.05rem; }
+	.card.current { filter: drop-shadow(0 0 0 #000) brightness(1.04); box-shadow: inset 0 0 0 999px rgb(255 214 120 / 0.35); }
+	.card.failed { box-shadow: inset 0 0 0 999px rgb(220 70 50 / 0.22); }
+	.card.locked .grip { visibility: hidden; }
+	.card .lock { color: #8a6d5d; font-size: 0.8rem; }
+	.card.dragging { opacity: 0.35; }
+	.ghost { position: fixed; z-index: 30; pointer-events: none; opacity: 0.95; filter: drop-shadow(0 8px 14px rgb(0 0 0 / 0.3)); }
+	.mark { height: 4px; border-radius: 2px; background: var(--accent); list-style: none; }
+	.aside .cards { border: 2px dashed var(--line); border-radius: 0.5rem; padding: 0.4rem; min-height: 4.2rem; }
+
+	.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
+	.btn { font: inherit; font-weight: 700; color: #fff8ee; cursor: pointer; background: none; padding: 0.15rem 0.8rem; border: 6px solid transparent; border-image: var(--btn) 3 fill / 6px stretch; image-rendering: pixelated; text-shadow: 0 1px 0 rgb(0 0 0 / 0.35); }
+	.btn:hover:not(:disabled) { border-image-source: var(--btn-hover); }
+	.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+	.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+	.attempts { margin-left: auto; color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+	.hint { margin: 0; color: var(--muted); }
+	.hint strong { color: var(--ink); }
+	.help { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.88rem; }
+	.notes { border-top: 1px solid var(--line); padding-top: 1rem; color: var(--muted); font-size: 0.92rem; }
+	.notes h2 { font-size: 1.05rem; color: var(--ink); margin: 0 0 0.3rem; }
+	.notes ul { margin: 0; padding-left: 1.2rem; }
+	@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+	<header class="top">
+		<h1>Thealivery</h1>
+		<small>Maquette jetable, version 3 · pixel art Ninja Adventure (CC0)</small>
+		<button class="chip" id="sound" type="button" aria-pressed="false">Son coupé</button>
+	</header>
+	<nav aria-label="Niveaux"><ul class="levels" id="levels"></ul></nav>
+	<main id="level" class="level"></main>
+	<section class="notes" aria-label="À propos de cette maquette">
+		<h2>Ce que la version 3 sert à tester</h2>
+		<ul>
+			<li>Le plateau Ninja Adventure, Théa qui marche, qui nage dans les mares et tombe dans les trous.</li>
+			<li>Les cartes avec leurs icônes et leurs cadres de bois, la bulle avec le portrait de Théa.</li>
+			<li>Les maisons : un « ! » tant qu'elles attendent, un cœur une fois livrées.</li>
+		</ul>
+	</section>
+</div>
+
+<script>
+	"use strict";
+	const ASSETS = /*ASSETS*/null;
+	const CELL = ASSETS.geometry.cell, MARGIN = ASSETS.geometry.margin;
+
+	// Images partagées par le CSS (cadres, boutons, bulle)
+	const css = document.documentElement.style;
+	css.setProperty("--panel", `url(${ASSETS.panel})`);
+	css.setProperty("--btn", `url(${ASSETS.button})`);
+	css.setProperty("--btn-hover", `url(${ASSETS.buttonHover})`);
+	css.setProperty("--dlg", `url(${ASSETS.dialog})`);
+	css.setProperty("--fbox", `url(${ASSETS.facesetBox})`);
+
+	const IMG = {};
+	function loadImage(key, src) { return new Promise((res) => { const i = new Image(); i.onload = () => { IMG[key] = i; res(); }; i.src = src; }); }
+
+	// --- Cartes et niveaux ---------------------------------------------------
+
+	const CARD_TYPES = {
+		"avancer": { icon: "avancer", scale: 2, text: () => "Avancer" },
+		"tourner-gauche": { icon: "tourner-gauche", scale: 2, text: () => "Tourner à gauche" },
+		"tourner-droite": { icon: "tourner-droite", scale: 2, text: () => "Tourner à droite" },
+		"ramasser": { icon: "ramasser", scale: 1.5, text: () => "Ramasser les feuilles" },
+		"livrer": { icon: "livrer", scale: 3, text: () => "Livrer le thé" },
+		"aller": { icon: "aller", scale: 2, text: (n) => `Aller à <b>${n}</b>`, jump: true },
+		"si-maison": { icon: "si", scale: 2, text: (n) => `Si une maison attend ici, aller à <b>${n}</b>`, jump: true },
+	};
+	const simple = (list) => list.map((t, i) => ({ id: "c" + i, type: t.replace(/^piège\s*:\s*/, ""), trap: t.startsWith("piège") }));
+	const LEVELS = [
+		{ slug: "01-premiere-livraison", title: "Première livraison", tag: "Séance 01", text: "Livrez le thé à la maison.",
+			grids: ["T> . . M"], cards: simple(["avancer", "avancer", "avancer", "livrer"]) },
+		{ slug: "02-coin-de-la-rue", title: "Le coin de la rue", tag: "Séance 01", text: "La maison est au coin de la rue.",
+			grids: ["T> . .\n. . .\n. . M"], cards: simple(["avancer", "avancer", "tourner-droite", "avancer", "avancer", "livrer"]) },
+		{ slug: "03-attention-aux-flaques", title: "Attention aux flaques", tag: "Séance 01", text: "Contournez les trous et les mares.",
+			grids: ["T> . . .\n~ ~ . ~\n. . . M"], cards: simple(["avancer", "avancer", "tourner-droite", "avancer", "avancer", "tourner-gauche", "avancer", "livrer"]) },
+		{ slug: "04-deux-maisons", title: "Deux maisons", tag: "Séance 01", text: "Deux maisons, une seule tournée. Une carte est en trop.",
+			grids: ["T> . M\n~ ~ .\nM . ."], cards: simple(["avancer", "avancer", "livrer", "tourner-droite", "avancer", "avancer", "tourner-droite", "avancer", "avancer", "livrer", "piège : tourner-gauche"]) },
+		{ slug: "05-les-feuilles", title: "Les feuilles", tag: "Séance 01", text: "Ramassez les feuilles, puis livrez. Une carte est en trop.",
+			grids: ["Tv ~ M\n. ~ .\nf . ."], cards: simple(["avancer", "avancer", "ramasser", "tourner-gauche", "avancer", "avancer", "tourner-gauche", "avancer", "avancer", "livrer", "piège : tourner-droite"]) },
+		{ slug: "06-la-rue-qui-s-allonge", title: "La rue qui s'allonge", tag: "Bonus · séance 07, les sauts", text: "Le même programme doit livrer les deux rues.",
+			grids: ["T> . . M", "T> . . . . M"],
+			cards: [{ id: "a", type: "avancer" }, { id: "b", type: "si-maison", target: "d" }, { id: "c", type: "aller", target: "a" }, { id: "d", type: "livrer" }] },
+	];
+
+	// --- Moteur : règles, compteur de programme, sans affichage ---------------
+
+	const DIRS = { ">": [0, 1], "v": [1, 0], "<": [0, -1], "^": [-1, 0] };
+	const MAX_STEPS = 100;
+	const turnRight = ([dr, dc]) => [dc, -dr];
+	const turnLeft = ([dr, dc]) => [-dc, dr];
+	function parseGrid(text, obstacles) {
+		const rows = text.trim().split("\n").map((l) => l.trim().split(/\s+/));
+		let start = null;
+		rows.forEach((row, r) => row.forEach((tok, c) => {
+			if (/^T[<>^v]$/.test(tok)) { start = { r, c, dir: DIRS[tok[1]] }; row[c] = "."; }
+		}));
+		return { cells: rows, start, rows: rows.length, cols: rows[0].length, obstacles };
+	}
+	function simulate(grid, program) {
+		const cells = grid.cells.map((row) => row.slice());
+		let { r, c, dir } = grid.start;
+		const index = new Map(program.map((card, i) => [card.id, i]));
+		const inside = (rr, cc) => rr >= 0 && cc >= 0 && rr < grid.rows && cc < grid.cols;
+		const steps = [];
+		let pc = 0, count = 0;
+		const snap = (extra) => steps.push({ pc, r, c, dir, cells: cells.map((row) => row.slice()), ...extra });
+		while (pc < program.length) {
+			if (++count > MAX_STEPS) return { steps, ok: false, failIndex: pc, message: "Je tourne en rond ! Ma tournée ne finit jamais." };
+			const card = program[pc];
+			let next = pc + 1, message = null;
+			if (card.type === "avancer") {
+				const nr = r + dir[0], nc = c + dir[1];
+				if (!inside(nr, nc)) { snap({ event: "edge" }); return { steps, ok: false, failIndex: pc, message: "Je ne peux pas sortir du quartier." }; }
+				r = nr; c = nc;
+				if (cells[r][c] === "~") {
+					const kind = grid.obstacles[`${r},${c}`];
+					snap({ event: kind === "mare" ? "swim" : "fall" });
+					return { steps, ok: false, failIndex: pc, message: kind === "mare" ? "Plouf ! Je suis tombée dans une mare." : "Aïe ! Je suis tombée dans un trou." };
+				}
+			} else if (card.type === "tourner-droite") dir = turnRight(dir);
+			else if (card.type === "tourner-gauche") dir = turnLeft(dir);
+			else if (card.type === "ramasser") {
+				if (cells[r][c] !== "f") { snap({ event: "nothing" }); return { steps, ok: false, failIndex: pc, message: "Je n'ai rien à ramasser." }; }
+				cells[r][c] = "."; message = "Des feuilles de thé, parfait.";
+			} else if (card.type === "livrer") {
+				if (cells[r][c] !== "M") { snap({ event: "nobody" }); return { steps, ok: false, failIndex: pc, message: "Personne n'attend de thé ici." }; }
+				cells[r][c] = "D"; message = "Votre thé !";
+			} else if (card.type === "aller") { next = index.get(card.target); message = `Je reprends à la carte ${next + 1}.`; }
+			else if (card.type === "si-maison") {
+				if (cells[r][c] === "M") { next = index.get(card.target); message = `Une maison attend ici : je saute à la carte ${next + 1}.`; }
+				else message = "Pas de maison ici, je continue.";
+			}
+			snap({ event: card.type, message, jumped: next !== pc + 1 });
+			pc = next;
+		}
+		const houses = cells.flat().filter((x) => x === "M").length, leaves = cells.flat().filter((x) => x === "f").length;
+		if (!houses && !leaves) return { steps, ok: true, message: "Tournée terminée !" };
+		const parts = [];
+		if (houses) parts.push(houses === 1 ? "une maison à livrer" : `${houses} maisons à livrer`);
+		if (leaves) parts.push("des feuilles à ramasser");
+		return { steps, ok: false, failIndex: null, message: `Ma tournée n'est pas finie : il reste ${parts.join(" et ")}.` };
+	}
+
+	// --- Stockage protégé, sons provisoires ------------------------------------
+
+	const store = {
+		get(k) { try { return localStorage.getItem("thealivery-v3:" + k); } catch { return null; } },
+		set(k, v) { try { localStorage.setItem("thealivery-v3:" + k, v); } catch { /* sans stockage */ } },
+	};
+	let soundOn = store.get("sound") === "on", audio = null;
+	const TONES = { avancer: [520, 0.05], "tourner-droite": [660, 0.04], "tourner-gauche": [660, 0.04], ramasser: [740, 0.06], livrer: [880, 0.12],
+		aller: [600, 0.05], "si-maison": [600, 0.05], swim: [300, 0.3], fall: [160, 0.3], edge: [140, 0.2], nothing: [140, 0.2], nobody: [140, 0.2], win: [988, 0.3], lose: [220, 0.3] };
+	function beep(name) {
+		if (!soundOn || !TONES[name]) return;
+		try {
+			audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+			const [f, d] = TONES[name], o = audio.createOscillator(), g = audio.createGain();
+			o.frequency.value = f; g.gain.value = 0.07; g.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + d);
+			o.connect(g).connect(audio.destination); o.start(); o.stop(audio.currentTime + d);
+		} catch { /* pas de son */ }
+	}
+	const soundBtn = document.getElementById("sound");
+	const renderSound = () => { soundBtn.setAttribute("aria-pressed", String(soundOn)); soundBtn.textContent = soundOn ? "Son activé" : "Son coupé"; };
+	soundBtn.addEventListener("click", () => { soundOn = !soundOn; store.set("sound", soundOn ? "on" : "off"); renderSound(); beep("livrer"); });
+	renderSound();
+
+	// --- Outils -------------------------------------------------------------------
+
+	function el(tag, attrs = {}, children = []) {
+		const n = document.createElement(tag);
+		for (const [k, v] of Object.entries(attrs)) {
+			if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v;
+			else if (v !== null && v !== false) n.setAttribute(k, v === true ? "" : v);
+		}
+		children.forEach((c) => n.append(c));
+		return n;
+	}
+	const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+	const sleep = (ms) => new Promise((res) => setTimeout(res, reduced.matches ? 0 : ms));
+	function shuffleApart(list, solution) {
+		for (let t = 0; t < 20; t += 1) {
+			const a = list.slice();
+			for (let i = a.length - 1; i > 0; i -= 1) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+			if (a.length < 2 || a.map((c) => c.type).join() !== solution.map((c) => c.type).join()) return a;
+		}
+		return list.slice().reverse();
+	}
+
+	// --- Niveaux --------------------------------------------------------------------
+
+	const nav = document.getElementById("levels");
+	const root = document.getElementById("level");
+	let current = 0, game = null, R = {};
+
+	function renderNav() {
+		nav.replaceChildren(...LEVELS.map((lv, i) => {
+			const stars = Number(store.get("stars:" + lv.slug) || 0);
+			const s = el("span", { class: "stars", "aria-label": stars ? `${stars} étoile${stars > 1 ? "s" : ""} sur 3` : "pas encore réussi" });
+			s.innerHTML = "★".repeat(stars) + `<span class="off">${"★".repeat(3 - stars)}</span>`;
+			const b = el("button", { type: "button", "aria-current": String(i === current) }, [el("b", { text: `${String(i + 1).padStart(2, "0")} · ${lv.title}` }), s]);
+			b.addEventListener("click", () => openLevel(i));
+			return el("li", {}, [b]);
+		}));
+	}
+
+	function openLevel(i) {
+		current = i; renderNav();
+		const lv = LEVELS[i];
+		const streets = ASSETS.backgrounds[lv.slug];
+		const grids = lv.grids.map((g, k) => parseGrid(g, streets[k].obstacles));
+		const cards = lv.cards.map((c) => ({ ...c, locked: false }));
+		const solution = cards.filter((c) => !c.trap);
+		game = { lv, grids, gridIndex: 0, solution, program: shuffleApart(cards, solution), aside: [],
+			attempts: 0, helped: 0, animating: false, run: null, view: null, thea: null, fx: null };
+		build();
+	}
+
+	function build() {
+		const { lv } = game;
+		const head = el("div", { class: "head" }, [el("span", { class: "tag", text: lv.tag }), el("h2", { text: lv.title }), el("p", { text: lv.text })]);
+		const board = el("section", { class: "board", "aria-label": "Plateau" });
+		const streets = el("div", { class: "streets" });
+		const canvas = el("canvas", { class: "map", role: "img" });
+		if (game.grids.length > 1) board.append(streets);
+		board.append(canvas);
+		const bubble = el("div", { class: "bubble", "aria-live": "polite" }, [
+			el("div", { class: "face", "aria-hidden": "true" }, [el("img", { src: ASSETS.faceset, alt: "" })]),
+			el("div", { class: "say", text: "Je suis prête. Remettez ma tournée dans l'ordre, puis Exécuter." }),
+		]);
+		const hasJumps = lv.cards.some((c) => CARD_TYPES[c.type].jump);
+		const list = el("ol", { class: "cards", id: "program", "aria-label": "Tournée de Théa", "data-empty": "Glissez des cartes ici." });
+		const arrows = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		arrows.setAttribute("class", "arrows"); arrows.setAttribute("aria-hidden", "true");
+		const listwrap = el("div", { class: "listwrap" + (hasJumps ? "" : " nojumps") }, [list]);
+		if (hasJumps) listwrap.prepend(arrows);
+		const zone = el("section", { class: "zone" }, [el("h3", {}, [el("span", { text: "Tournée de Théa" }), el("span", { class: "count" })]), listwrap,
+			el("p", { class: "help", text: "Glissez une carte par sa poignée. Au clavier : flèches haut et bas pour la déplacer." })]);
+		const hasTraps = lv.cards.some((c) => c.trap);
+		const aside = el("ol", { class: "cards", id: "aside", "aria-label": "Mise de côté", "data-empty": "Glissez ici la carte en trop." });
+		const asideZone = el("section", { class: "zone aside" }, [el("h3", { text: "Mise de côté" }), aside,
+			el("p", { class: "help", text: "Au clavier : Suppr met la carte de côté, Entrée la remet dans la tournée." })]);
+		const run = el("button", { type: "button", class: "btn", text: "Exécuter" });
+		const step = el("button", { type: "button", class: "btn", text: "Pas à pas" });
+		const shuffle = el("button", { type: "button", class: "btn", text: "Mélanger" });
+		const attempts = el("span", { class: "attempts", "aria-live": "polite" });
+		const hint = el("p", { class: "hint", hidden: true });
+		run.addEventListener("click", () => play(false));
+		step.addEventListener("click", () => play(true));
+		shuffle.addEventListener("click", () => {
+			if (game.animating) return;
+			resetRun();
+			const locked = game.program.filter((c) => c.locked);
+			const free = game.program.filter((c) => !c.locked).concat(game.aside);
+			game.program = locked.concat(shuffleApart(free, game.solution.slice(locked.length)));
+			game.aside = [];
+			renderCards();
+		});
+		root.replaceChildren(head, board, bubble, zone);
+		if (hasTraps) root.append(asideZone);
+		root.append(el("div", { class: "controls" }, [run, step, shuffle, attempts]), hint);
+		R = { canvas, bubble, streets, list, arrows, aside, run, step, shuffle, attempts, hint, count: zone.querySelector(".count"), hasJumps, board };
+		setupDrag();
+		resetRun();
+		renderCards();
+		renderAttempts();
+		new ResizeObserver(() => { drawBoard(); drawArrows(); }).observe(board);
+	}
+
+	// --- Plateau : le décor du pack, puis Théa, les feuilles et les marques -----
+
+	// Dessin en triple résolution, puis affichage à la largeur de la colonne (au
+	// plus le double de la taille du pack) : net sur ordinateur comme au téléphone
+	const S = 3;
+	function displayWidth(bg) { return Math.min(R.board.clientWidth - 16, bg.width * 2); }
+	let tick = 0;
+	function drawBoard() {
+		if (!R.canvas || !game.view) return;
+		const bg = IMG["bg:" + game.lv.slug + ":" + game.gridIndex];
+		const cv = R.canvas;
+		if (cv.width !== bg.width * S) { cv.width = bg.width * S; cv.height = bg.height * S; }
+		const ctx = cv.getContext("2d");
+		ctx.imageSmoothingEnabled = false;
+		ctx.setTransform(S, 0, 0, S, 0, 0);
+		ctx.drawImage(bg, 0, 0);
+		const center = (r, c) => [(2 * c + MARGIN) * CELL + CELL / 2, (2 * r + MARGIN) * CELL + CELL / 2];
+		const bob = Math.round(Math.sin(tick / 9) * 1.5);
+		game.view.cells.forEach((row, r) => row.forEach((tok, c) => {
+			const [x, y] = center(r, c);
+			if (tok === "f") ctx.drawImage(IMG.leaf, x - 8, y - 8);
+			else if (tok === "M") ctx.drawImage(IMG.bang, 0, 0, 14, 13, x - 7, y - CELL / 2 - 11 + bob, 14, 13);
+			else if (tok === "D") ctx.drawImage(IMG.heart, 0, 0, 14, 13, x - 7, y - CELL / 2 - 11 + bob, 14, 13);
+		}));
+		// Théa, en double taille ; dans une mare, seulement sa tête et les ondulations
+		const t = game.thea;
+		const [x, y] = [(2 * t.c + MARGIN) * CELL + CELL / 2, (2 * t.r + MARGIN) * CELL + CELL / 2];
+		const col = { "1,0": 0, "-1,0": 1, "0,-1": 2, "0,1": 3 }[t.dir.join()];
+		const row = t.walking ? Math.floor(tick / 6) % 4 : 0;
+		if (game.fx === "swim") {
+			ctx.drawImage(IMG.ripples, (Math.floor(tick / 8) % 4) * 16, 0, 16, 16, x - 16, y - 8, 32, 32);
+			ctx.drawImage(IMG.thea, 0, 0, 16, 9, x - 16, y - 14, 32, 18);
+		} else {
+			const k = 2 * t.scale;
+			ctx.globalAlpha = Math.max(0, Math.min(1, t.scale * 1.3));
+			ctx.drawImage(IMG.thea, col * 16, row * 16, 16, 16, x - 8 * k, y - 8 * k - 4, 16 * k, 16 * k);
+			ctx.globalAlpha = 1;
+		}
+		cv.style.width = displayWidth(bg) + "px";
+	}
+	(function loop() { tick += 1; if (game && (game.animating || game.view)) drawBoard(); requestAnimationFrame(loop); })();
+
+	function setThea(r, c, dir) { game.thea = { r, c, dir, scale: 1, walking: false }; }
+	function moveThea(r, c, dir, scale = 1) {
+		const from = { ...game.thea };
+		game.thea.dir = dir;
+		const dur = reduced.matches ? 0 : 340, t0 = performance.now();
+		return new Promise((res) => {
+			const step = (now) => {
+				const k = dur ? Math.min(1, (now - t0) / dur) : 1;
+				game.thea.r = from.r + (r - from.r) * k; game.thea.c = from.c + (c - from.c) * k;
+				game.thea.scale = from.scale + (scale - from.scale) * k;
+				game.thea.walking = k < 1 && (r !== from.r || c !== from.c);
+				if (k < 1) requestAnimationFrame(step); else { game.thea.walking = false; res(); }
+			};
+			requestAnimationFrame(step);
+		});
+	}
+	function renderStreets() {
+		if (game.grids.length < 2) return;
+		R.streets.replaceChildren(...game.grids.map((g, k) => {
+			const b = el("button", { type: "button", "aria-current": String(k === game.gridIndex), text: `Rue ${k + 1}` + (game.gridState[k] === "done" ? " ✓" : game.gridState[k] === "fail" ? " ✗" : "") });
+			b.addEventListener("click", () => { if (!game.animating) showGrid(k); });
+			return b;
+		}));
+	}
+	function showGrid(k) {
+		game.gridIndex = k;
+		const g = game.grids[k];
+		game.view = { cells: g.cells.map((row) => row.slice()) };
+		game.fx = null;
+		setThea(g.start.r, g.start.c, g.start.dir);
+		R.canvas.setAttribute("aria-label", `Rue ${k + 1} : grille de ${g.rows} sur ${g.cols}, Théa ligne ${g.start.r + 1}, colonne ${g.start.c + 1}.`);
+		renderStreets(); drawBoard();
+	}
+	function say(text, kind = "") { R.bubble.className = "bubble" + (kind ? " " + kind : ""); R.bubble.querySelector(".say").textContent = text; }
+
+	// --- Cartes -----------------------------------------------------------------------
+
+	const GRIP = '<svg viewBox="0 0 10 16" aria-hidden="true"><g fill="currentColor"><circle cx="3" cy="3" r="1.4"/><circle cx="7" cy="3" r="1.4"/><circle cx="3" cy="8" r="1.4"/><circle cx="7" cy="8" r="1.4"/><circle cx="3" cy="13" r="1.4"/><circle cx="7" cy="13" r="1.4"/></g></svg>';
+	function cardText(card) {
+		const t = CARD_TYPES[card.type];
+		if (!t.jump) return t.text();
+		const target = game.program.findIndex((c) => c.id === card.target);
+		return t.text(target >= 0 ? target + 1 : "?");
+	}
+	const plain = (html) => { const d = document.createElement("div"); d.innerHTML = html; return d.textContent; };
+	function jumpColor(card) {
+		const jumps = game.lv.cards.filter((c) => CARD_TYPES[c.type].jump).map((c) => c.id);
+		return `var(--jump-${(jumps.indexOf(card.id) % 2) + 1})`;
+	}
+	function cardNode(card, i, inProgram) {
+		const t = CARD_TYPES[card.type];
+		const li = el("li", { class: "card" + (card.locked ? " locked" : ""), tabindex: "0", "data-id": card.id,
+			"aria-label": `${inProgram ? "Carte " + (i + 1) + " : " : ""}${plain(cardText(card))}${card.locked ? ", verrouillée" : ""}` });
+		const icon = IMG["icon:" + t.icon];
+		const img = el("img", { src: icon.src, alt: "", width: Math.round(icon.width * t.scale), height: Math.round(icon.height * t.scale) });
+		const txt = el("span", { class: "txt", html: cardText(card) + (card.locked ? ' <span class="lock">· placée par l\'aide</span>' : "") });
+		li.append(el("span", { class: "grip", html: GRIP, title: "Glisser pour déplacer" }), el("span", { class: "n", "aria-hidden": "true", text: inProgram ? String(i + 1) : "–" }),
+			el("span", { class: "ico", "aria-hidden": "true" }, [img]), txt);
+		if (t.jump) txt.querySelector("b").style.color = jumpColor(card);
+		return li;
+	}
+	function renderCards(focusId = null) {
+		R.list.replaceChildren(...game.program.map((c, i) => cardNode(c, i, true)));
+		R.aside.replaceChildren(...game.aside.map((c, i) => cardNode(c, i, false)));
+		R.count.textContent = `${game.program.length} carte${game.program.length > 1 ? "s" : ""}`;
+		updateButtons();
+		requestAnimationFrame(drawArrows);
+		if (focusId) document.querySelector(`.card[data-id="${focusId}"]`)?.focus();
+	}
+	function updateButtons() {
+		R.run.disabled = game.animating || !game.program.length;
+		R.step.disabled = game.animating || !game.program.length;
+		R.shuffle.disabled = game.animating;
+	}
+	function drawArrows() {
+		if (!R.hasJumps || !R.list.isConnected) return;
+		const svg = R.arrows, base = svg.getBoundingClientRect(), ns = "http://www.w3.org/2000/svg";
+		svg.replaceChildren();
+		let lane = 0;
+		game.program.forEach((card, i) => {
+			if (!CARD_TYPES[card.type].jump) return;
+			const from = R.list.children[i], to = R.list.children[game.program.findIndex((c) => c.id === card.target)];
+			if (!from || !to) return;
+			const fr = from.getBoundingClientRect(), tr = to.getBoundingClientRect();
+			const y1 = fr.top + fr.height / 2 - base.top, y2 = tr.top + tr.height / 2 - base.top;
+			const xr = base.width - 2, xl = 8 + (lane++ % 2) * 13, color = jumpColor(card), up = y2 > y1 ? 6 : -6;
+			const path = document.createElementNS(ns, "path");
+			path.setAttribute("d", `M ${xr} ${y1} H ${xl + 6} Q ${xl} ${y1} ${xl} ${y1 + up} V ${y2 - up} Q ${xl} ${y2} ${xl + 6} ${y2} H ${xr - 6}`);
+			path.setAttribute("fill", "none"); path.setAttribute("stroke", color); path.setAttribute("stroke-width", game.activeJump === card.id ? 5 : 3);
+			path.setAttribute("stroke-linecap", "round"); path.setAttribute("stroke-linejoin", "round");
+			const head = document.createElementNS(ns, "path");
+			head.setAttribute("d", `M ${xr - 9} ${y2 - 6} L ${xr} ${y2} L ${xr - 9} ${y2 + 6} Z`); head.setAttribute("fill", color);
+			svg.append(path, head);
+		});
+	}
+	function resetRun() {
+		game.run = null; game.activeJump = null;
+		game.gridState = game.grids.map(() => "");
+		showGrid(0);
+		document.querySelectorAll(".card.current, .card.failed").forEach((c) => c.classList.remove("current", "failed"));
+	}
+
+	// Déplacements : poignée ou clavier
+	function locate(id) {
+		let i = game.program.findIndex((c) => c.id === id);
+		if (i >= 0) return { list: game.program, i, name: "program" };
+		i = game.aside.findIndex((c) => c.id === id);
+		return i >= 0 ? { list: game.aside, i, name: "aside" } : null;
+	}
+	function moveCard(id, toName, toIndex) {
+		const from = locate(id);
+		if (!from || from.list[from.i].locked) return;
+		const [card] = from.list.splice(from.i, 1);
+		const target = toName === "aside" ? game.aside : game.program;
+		const lockedCount = target === game.program ? game.program.filter((c) => c.locked).length : 0;
+		let j = toIndex;
+		if (from.list === target && toIndex > from.i) j -= 1;
+		j = Math.max(lockedCount, Math.min(j, target.length));
+		target.splice(j, 0, card);
+		resetRun(); renderCards(id);
+	}
+	document.addEventListener("keydown", (e) => {
+		const li = e.target.closest?.(".card");
+		if (!li || !game || game.animating) return;
+		const id = li.dataset.id, where = locate(id);
+		if (!where) return;
+		if (where.name === "program" && (e.key === "ArrowUp" || e.key === "ArrowDown")) {
+			e.preventDefault();
+			if (e.key === "ArrowUp" && where.i === 0) return;
+			moveCard(id, "program", where.i + (e.key === "ArrowUp" ? -1 : 2));
+		} else if (where.name === "program" && (e.key === "Delete" || e.key === "Backspace") && R.aside.isConnected) {
+			e.preventDefault(); moveCard(id, "aside", game.aside.length);
+		} else if (where.name === "aside" && e.key === "Enter") {
+			e.preventDefault(); moveCard(id, "program", game.program.length);
+		}
+	});
+	const drag = { id: null, ghost: null, mark: null, target: null, sx: 0, sy: 0, moved: false, dx: 0, dy: 0 };
+	function setupDrag() {
+		root.addEventListener("pointerdown", (e) => {
+			const grip = e.target.closest(".grip");
+			if (!grip || game.animating) return;
+			const li = grip.closest(".card");
+			if (li.classList.contains("locked")) return;
+			drag.id = li.dataset.id; drag.sx = e.clientX; drag.sy = e.clientY; drag.moved = false;
+			const r = li.getBoundingClientRect(); drag.dx = e.clientX - r.left; drag.dy = e.clientY - r.top;
+			grip.setPointerCapture(e.pointerId); e.preventDefault();
+		});
+		root.addEventListener("pointermove", (e) => {
+			if (drag.id === null) return;
+			if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6) return;
+			const li = document.querySelector(`.card[data-id="${drag.id}"]`);
+			if (!drag.moved) {
+				drag.moved = true;
+				drag.ghost = li.cloneNode(true); drag.ghost.classList.add("ghost"); drag.ghost.style.width = li.getBoundingClientRect().width + "px";
+				document.body.append(drag.ghost); li.classList.add("dragging");
+			}
+			drag.ghost.style.left = e.clientX - drag.dx + "px"; drag.ghost.style.top = e.clientY - drag.dy + "px";
+			drag.target = dropTarget(e.clientX, e.clientY);
+			drag.mark?.remove();
+			if (drag.target) { drag.mark = el("li", { class: "mark", "aria-hidden": "true" }); if (drag.target.before) drag.target.before.before(drag.mark); else drag.target.list.append(drag.mark); }
+		});
+		const up = () => {
+			if (drag.id !== null && drag.moved && drag.target) moveCard(drag.id, drag.target.name, drag.target.index);
+			drag.ghost?.remove(); drag.mark?.remove();
+			Object.assign(drag, { id: null, ghost: null, mark: null, target: null, moved: false });
+			document.querySelectorAll(".card.dragging").forEach((c) => c.classList.remove("dragging"));
+		};
+		root.addEventListener("pointerup", up);
+		root.addEventListener("pointercancel", up);
+	}
+	function dropTarget(x, y) {
+		for (const list of [R.list, R.aside]) {
+			if (!list.isConnected) continue;
+			const box = list.getBoundingClientRect();
+			if (y < box.top - 30 || y > box.bottom + 30 || x < box.left - 60 || x > box.right + 30) continue;
+			const items = [...list.querySelectorAll(".card:not(.dragging)")];
+			let index = items.length;
+			for (let k = 0; k < items.length; k += 1) { const r = items[k].getBoundingClientRect(); if (y < r.top + r.height / 2) { index = k; break; } }
+			const all = [...list.querySelectorAll(".card")];
+			return { name: list.id === "aside" ? "aside" : "program", index: index < items.length ? all.indexOf(items[index]) : all.length, list, before: items[index] || null };
+		}
+		return null;
+	}
+
+	// --- Exécution ------------------------------------------------------------------------
+
+	function renderAttempts() { R.attempts.textContent = game.attempts ? `Essai${game.attempts > 1 ? "s" : ""} : ${game.attempts}` : ""; }
+	async function play(stepping) {
+		if (!game.program.length || game.animating) return;
+		if (!game.run) {
+			resetRun();
+			game.run = { results: game.grids.map((g) => simulate(g, game.program)), grid: 0, next: 0 };
+			say("C'est parti.");
+		}
+		const run = game.run;
+		game.animating = true; updateButtons();
+		while (run.grid < game.grids.length) {
+			if (game.gridIndex !== run.grid) { showGrid(run.grid); await sleep(350); }
+			const res = run.results[run.grid];
+			while (run.next < res.steps.length) {
+				await doStep(res.steps[run.next]);
+				run.next += 1;
+				if (game.run !== run) return;
+				if (stepping && (run.next < res.steps.length || run.grid < game.grids.length - 1)) {
+					game.animating = false; updateButtons();
+					if (run.next >= res.steps.length) endGrid(run, res);
+					return;
+				}
+				if (!stepping) await sleep(90);
+			}
+			if (!endGrid(run, res)) return;
+		}
+	}
+	function endGrid(run, res) {
+		if (run.ended === run.grid) return true;
+		run.ended = run.grid;
+		if (!res.ok || run.grid === game.grids.length - 1) { finish(res, run.grid); return false; }
+		game.gridState[run.grid] = "done"; renderStreets();
+		say(`Rue ${run.grid + 1} livrée. Rue suivante.`, "win");
+		run.grid += 1; run.next = 0;
+		return true;
+	}
+	async function doStep(step) {
+		const cards = R.list.querySelectorAll(".card");
+		cards.forEach((c) => c.classList.remove("current"));
+		cards[step.pc]?.classList.add("current");
+		const card = game.program[step.pc];
+		game.activeJump = CARD_TYPES[card.type].jump && step.jumped ? card.id : null;
+		drawArrows();
+		beep(step.event);
+		if (step.event === "swim") { await moveThea(step.r, step.c, step.dir); game.fx = "swim"; }
+		else if (step.event === "fall") { await moveThea(step.r, step.c, step.dir); await moveThea(step.r, step.c, step.dir, 0.15); }
+		else if (step.event === "edge") { const d = step.dir; await moveThea(step.r + d[0] * 0.2, step.c + d[1] * 0.2, d); await moveThea(step.r, step.c, d); }
+		else { await moveThea(step.r, step.c, step.dir); game.view = { cells: step.cells }; }
+		if (step.message) say(step.message);
+		const fail = { swim: "Plouf ! Je suis tombée dans une mare.", fall: "Aïe ! Je suis tombée dans un trou.", edge: "Je ne peux pas sortir du quartier.", nothing: "Je n'ai rien à ramasser.", nobody: "Personne n'attend de thé ici." }[step.event];
+		if (fail) say(fail, "fail");
+		await sleep(110);
+	}
+	function finish(res, gridIndex) {
+		game.animating = false; game.run = null; game.activeJump = null;
+		if (res.ok && game.lv.cards.some((c) => c.trap) && game.program.length > game.solution.length) {
+			res = { ok: false, failIndex: null, message: "Ma tournée est faite, mais une carte est en trop : mettez-la de côté." };
+		}
+		game.attempts += 1;
+		let helped = false;
+		if (res.ok) {
+			game.gridState[gridIndex] = "done";
+			const stars = game.attempts === 1 ? 3 : (game.attempts <= 3 && !game.helped ? 2 : 1);
+			store.set("stars:" + game.lv.slug, String(Math.max(stars, Number(store.get("stars:" + game.lv.slug) || 0))));
+			say(`${res.message} ${"★".repeat(stars)}`, "win"); beep("win"); R.hint.hidden = true; renderNav();
+		} else {
+			game.gridState[gridIndex] = "fail";
+			say((game.grids.length > 1 ? `Rue ${gridIndex + 1} : ` : "") + res.message, "fail"); beep("lose");
+			if (game.attempts >= 3) { applyHelp(); helped = true; }
+		}
+		renderStreets(); renderAttempts(); renderCards();
+		if (!res.ok && res.failIndex !== null && !helped) R.list.querySelectorAll(".card")[res.failIndex]?.classList.add("failed");
+	}
+	function applyHelp() {
+		const k = Math.min(game.attempts - 2, game.solution.length);
+		const locked = game.solution.slice(0, k);
+		locked.forEach((c) => { c.locked = true; });
+		game.program = locked.concat(game.program.filter((c) => !locked.includes(c)));
+		game.aside = game.aside.filter((c) => !locked.includes(c));
+		game.helped = k;
+		R.hint.hidden = false;
+		R.hint.replaceChildren(el("strong", { text: "Relisez la section juste au-dessus. " }), `J'ai placé ${k === 1 ? "la première carte" : `les ${k} premières cartes`} pour vous.`);
+	}
+
+	// --- Démarrage : toutes les images chargées ---------------------------------------
+	const loads = [loadImage("thea", ASSETS.thea), loadImage("leaf", ASSETS.leaf), loadImage("bang", ASSETS.bang), loadImage("heart", ASSETS.heart), loadImage("ripples", ASSETS.ripples)];
+	for (const [k, src] of Object.entries(ASSETS.icons)) loads.push(loadImage("icon:" + k, src));
+	for (const [slug, streets] of Object.entries(ASSETS.backgrounds)) streets.forEach((s, i) => loads.push(loadImage(`bg:${slug}:${i}`, s.src)));
+	Promise.all(loads).then(() => { renderNav(); openLevel(0); });
+</script>
