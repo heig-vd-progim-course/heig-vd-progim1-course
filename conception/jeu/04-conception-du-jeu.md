@@ -124,6 +124,9 @@ places que de cartes.
 Les paramètres et les valeurs de retour ne s'y prêtent pas bien en icônes : ils
 restent hors de la première version des fonctions.
 
+Proposition reprise après le choix des sauts : voir
+[Fonctions et variables avec les sauts](#fonctions-et-variables-avec-les-sauts).
+
 ### Variables (séance 03)
 
 Une **ardoise** à côté de la grille, qui affiche les tasses dans la roulotte et
@@ -134,6 +137,9 @@ change à chaque carte. Les maisons affichent le nombre de tasses voulues.
 
 L'idée fausse visée : confondre « mettre à 3 » et « ajouter 3 ». C'est la plus
 difficile à rendre en icônes : prototype papier indispensable.
+
+Proposition reprise après le choix des sauts : voir
+[Fonctions et variables avec les sauts](#fonctions-et-variables-avec-les-sauts).
 
 ### Plus tard
 
@@ -554,11 +560,154 @@ Le générateur au hasard de `niveaux/generer.py` est maintenant le même que ce
 du jeu (FNV-1a et mulberry32) : le jeu dessine exactement les mêmes quartiers,
 au pixel près, et les images fixes ont été régénérées.
 
+## Fonctions et variables avec les sauts
+
+Proposition du 19 novembre 2026, **[à valider]**. Les sections
+[Fonctions](#fonctions-séance-05) et [Variables](#variables-séance-03) plus haut
+datent d'avant les sauts : elles supposaient des cartes imbriquées. Cette
+section les adapte au moteur actuel, une liste plate avec un compteur de
+programme.
+
+### Fonctions : une routine dans sa propre zone
+
+Chaque liste qui suit la première est une **routine**. Sa première carte est un
+**en-tête fixe**, l'équivalent de la signature d'une méthode Java : elle ne se
+mélange pas et ne se déplace pas.
+
+````markdown
+<div class="thealivery" data-id="s05-demi-tour" markdown>
+
+Livrez les deux maisons. Théa ne sait faire demi-tour qu'en deux fois.
+
+```text
+M  .  T> .  M
+```
+
+1. avancer
+2. avancer
+3. livrer
+4. appeler -> demi-tour
+5. avancer
+6. avancer
+7. avancer
+8. avancer
+9. livrer
+
+- routine demi-tour
+- tourner-gauche
+- tourner-gauche
+
+</div>
+````
+
+- **À l'écran** : la routine occupe une deuxième zone, sous le programme. On
+  remet en ordre les cartes de chaque zone ; une carte ne change pas de zone.
+- **À l'exécution** : sur `appeler`, la carte en cours passe dans la routine. À
+  la fin de la routine, l'exécution reprend juste après l'appel. Pas de carte «
+  retour » : une méthode `void` se termine à son accolade fermante.
+- **En _Pas à pas_** : on voit la carte en cours partir dans la routine et en
+  revenir. C'est le compteur de programme des sauts, avec une adresse de retour.
+- **L'idée fausse visée** : croire qu'une routine s'exécute là où elle est
+  écrite. Dans sa propre zone, elle n'est jamais « traversée » par le programme.
+- **Une routine qui s'appelle elle-même** : la première version garde une seule
+  adresse de retour et refuse ce niveau à la validation. La récursion
+  demanderait une vraie pile d'appels.
+
+**La limite des problèmes de Parsons.** Toutes les cartes sont données : on lit
+une routine, on ne l'invente pas. Lightbot fait sentir le besoin d'une routine
+en limitant les places du programme principal ; ici, ce besoin ne se ressent
+pas. Une variante plus difficile mélangerait les cartes des deux zones, et il
+faudrait décider soi-même ce qui va dans la routine.
+
+**Pas de paramètres ni de valeur de retour.** Ils deviendraient artificiels en
+cartes. Le code Java exécutable dans le support, essayé sur la branche
+`essai-java-executable`, s'y prête mieux.
+
+### Ce que dit l'assembleur
+
+La question s'est posée : la notion de fonction existe-t-elle en assembleur ?
+Oui pour le mécanisme, non pour le reste.
+
+- **Le processeur fournit l'appel et le retour.** Sur x86, `call` empile
+  l'adresse de l'instruction suivante et saute ; `ret` la dépile et y retourne.
+  ARM (`bl`) et RISC-V (`jal`) rangent cette adresse dans un registre.
+- **Le reste est une convention.** Paramètres, valeur de retour, variables
+  locales et portée sont fixés par une convention d'appel (sous Linux en 64
+  bits, les arguments dans `rdi`, `rsi`, `rdx`, le résultat dans `rax`), que le
+  processeur ne vérifie pas.
+- **Une routine ne sait pas où elle finit.** Sans `ret`, l'exécution continue
+  sur ce qui suit. La zone séparée écarte cette erreur.
+- **L'histoire** : les routines de l'EDSAC (Wilkes, Wheeler et Gill, 1951)
+  réécrivaient leur propre dernière instruction pour revenir à l'appelant. Le
+  PDP-8 rangeait l'adresse de retour dans le premier mot de la routine. Ni l'un
+  ni l'autre ne permettait la récursion.
+
+Deux choix en sortent confirmés : l'appel avec retour implicite est le cœur de
+la notion, pas une simplification arbitraire ; et les paramètres relèvent du
+langage, c'est en Java qu'on les apprend.
+
+### Variables : l'ardoise de la charrette
+
+Une **ardoise** à côté de la grille affiche les tasses dans la charrette de
+Théa. Elle change à chaque carte. Les maisons affichent le nombre de tasses
+voulues sur leur enseigne.
+
+````markdown
+<div class="thealivery" data-id="s03-deux-commandes" markdown>
+
+Remplissez la charrette, puis livrez les deux commandes.
+
+```text
+T> .  M2 .  M1
+```
+
+1. remplir 3
+2. avancer
+3. avancer
+4. livrer
+5. avancer
+6. avancer
+7. livrer
+8. piège : ajouter 1
+
+</div>
+````
+
+- **Dans la grille** : `M2` est une maison qui veut deux tasses. Le symbole
+  tient sur deux caractères, comme `T>`, et ne change pas la grammaire des
+  grilles.
+- **`remplir 3`** met la charrette à exactement 3 tasses : une affectation.
+- **`ajouter 1`** ajoute une tasse. En carte piège, il vise l'idée fausse prévue
+  depuis le début : confondre « mettre à » et « ajouter ».
+- **`livrer`** retire les tasses commandées. S'il en manque : « Ma charrette est
+  vide. »
+- **En _Pas à pas_** : l'ardoise montre la valeur avant et après chaque carte.
+  C'est le tableau de traçage de la séance 03, dessiné par le jeu.
+
+Avec les sauts, un capteur `si-charrette-vide -> recharger` combinerait plus
+tard variables et conditions.
+
+### Ce que cela change
+
+| Partie     | Fonctions                                                      | Variables                                     |
+| :--------- | :------------------------------------------------------------- | :-------------------------------------------- |
+| Format     | Plusieurs listes, en-tête `routine nom`                        | Symbole `M1` à `M9`, cartes avec un nombre    |
+| Cartes     | `appeler -> nom`                                               | `remplir n`, `ajouter n`                      |
+| Moteur     | Une adresse de retour ; l'appel et la fin de routine           | Un compteur de tasses dans l'état de Théa     |
+| Validation | Routine inconnue, routine jamais appelée, routine récursive    | Nombre manquant, commande impossible à livrer |
+| Vues       | Une deuxième zone de cartes, la flèche d'appel entre les zones | L'ardoise, le chiffre sur l'enseigne          |
+
+Les fonctions demandent plus de travail, à cause de la deuxième zone : le
+glisser-déposer et le clavier doivent rester dans leur zone, et la flèche
+d'appel traverse d'une zone à l'autre.
+
 ## Sources
 
 - Ihantola, P. et Karavirta, V., _Two-Dimensional Parson's Puzzles: The Concept,
   Tools, and First Observations_, Journal of Information Technology Education:
   Innovations in Practice, 10, 2011.
+- Wilkes, M. V., Wheeler, D. J. et Gill, S., _The Preparation of Programs for an
+  Electronic Digital Computer_, Addison-Wesley, 1951.
 - Brilliant,
   [Thinking in Code](https://brilliant.org/courses/thinking-in-code/), plan du
   cours consulté le 19 novembre 2026.
