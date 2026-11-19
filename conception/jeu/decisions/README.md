@@ -11,15 +11,15 @@ et le dit.
 
 | N°   | Décision                                                                                 | Statut   |
 | :--- | :--------------------------------------------------------------------------------------- | :------- |
-| 0001 | [Construire notre propre jeu](0001-construire-notre-propre-jeu.md)                       | Proposée |
-| 0002 | [TypeScript, esbuild et un fichier figé](0002-typescript-esbuild-fichier-fige.md)        | Proposée |
-| 0003 | [Un cœur pur, des adaptateurs autour](0003-coeur-pur-et-adaptateurs.md)                  | Proposée |
-| 0004 | [Des sauts plutôt que des cartes imbriquées](0004-sauts-plutot-que-cartes-imbriquees.md) | Proposée |
-| 0005 | [Une exécution calculée, puis animée](0005-execution-precalculee.md)                     | Proposée |
-| 0006 | [Le format des niveaux en Markdown](0006-format-des-niveaux-en-markdown.md)              | Proposée |
-| 0007 | [Un canevas et un atlas de tuiles](0007-rendu-canevas-et-atlas.md)                       | Proposée |
-| 0008 | [Le pixel art de Ninja Adventure](0008-pixel-art-ninja-adventure.md)                     | Proposée |
-| 0009 | [Des diagrammes Mermaid dans la conception](0009-diagrammes-mermaid.md)                  | Proposée |
+| 0001 | [Construire notre propre jeu](0001-construire-notre-propre-jeu.md)                       | Acceptée |
+| 0002 | [TypeScript, esbuild et un fichier figé](0002-typescript-esbuild-fichier-fige.md)        | Acceptée |
+| 0003 | [Un cœur pur, des adaptateurs autour](0003-coeur-pur-et-adaptateurs.md)                  | Acceptée |
+| 0004 | [Des sauts plutôt que des cartes imbriquées](0004-sauts-plutot-que-cartes-imbriquees.md) | Acceptée |
+| 0005 | [Une exécution calculée, puis animée](0005-execution-precalculee.md)                     | Acceptée |
+| 0006 | [Le format des niveaux en Markdown](0006-format-des-niveaux-en-markdown.md)              | Acceptée |
+| 0007 | [Un canevas et un atlas de tuiles](0007-rendu-canevas-et-atlas.md)                       | Acceptée |
+| 0008 | [Le pixel art de Ninja Adventure](0008-pixel-art-ninja-adventure.md)                     | Acceptée |
+| 0009 | [Des diagrammes Mermaid dans la conception](0009-diagrammes-mermaid.md)                  | Acceptée |
 
 ## Modèle
 

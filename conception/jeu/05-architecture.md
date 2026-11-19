@@ -284,8 +284,8 @@ T> .  .  .  .  M
 ```
 
 1. avancer {#debut}
-2. si-maison → fin
-3. aller → debut
+2. si-maison -> fin
+3. aller -> debut
 4. livrer {#fin}
 
 </div>
@@ -297,9 +297,8 @@ T> .  .  .  .  M
   `avancer`, `tourner-gauche`, `tourner-droite`, `ramasser`, `livrer`, `aller`,
   `si-maison`.
 - **Pièges** : préfixe `piège :`.
-- **Sauts** : une carte cible porte une étiquette `{#nom}`, le saut la désigne
-  avec `→ nom`. Proposition **[à valider]** : c'est la seule nouveauté par
-  rapport au format de la conception du jeu.
+- **Sauts** : la carte visée porte une étiquette `{#nom}`, et le saut la désigne
+  avec `-> nom`, en caractères simples, faciles à taper sur tous les claviers.
 - **Validation** : les sept erreurs de la conception du jeu, plus deux pour les
   sauts (étiquette inconnue, étiquette en double), et la boucle infinie de la
   solution. Le niveau invalide est remplacé par son message, dans la page et
@@ -350,6 +349,7 @@ outils/thealivery/
       level-reader.ts        HTML de Zensical vers LevelSpec
       board-view.ts          canevas, atlas, animation de Théa
       cards-view.ts          liste, glisser-déposer, clavier, flèches des sauts
+                             (indépendant de parsons.js, voir l'ADR 0010)
       bubble-view.ts         bulle de Théa, région annoncée
       progress-store.ts      localStorage, protégé
       sound-player.ts        sons, désactivés par défaut
@@ -399,14 +399,15 @@ toutes les reprises du code.
 | Le fichier construit n'est pas reconstruit après une modification | Vérification dans `npm run check`, puis dans le workflow      |
 | Une seule personne connaît le code                                | Ce document, les ADR, des tests lisibles                      |
 
-## Questions ouvertes
+## Décisions de validation
 
-1. **Les étiquettes des sauts** dans le Markdown, `{#nom}` et `→ nom` : ce
-   format vous convient-il ?
-2. **Mermaid plutôt que PlantUML** pour ces diagrammes
-   ([ADR 0009](decisions/0009-diagrammes-mermaid.md)) : d'accord ?
-3. **Le module de glisser-déposer** : l'écrire en TypeScript pour le jeu, puis y
-   faire migrer `parsons.js` plus tard, ou garder deux implémentations ?
+Réponses de Vincent, le 19 novembre 2026 :
+
+| Question                    | Décision                                                                                   |
+| :-------------------------- | :----------------------------------------------------------------------------------------- |
+| Étiquettes des sauts        | `{#nom}` sur la carte visée, `-> nom` sur le saut                                          |
+| Mermaid plutôt que PlantUML | D'accord ([ADR 0009](decisions/0009-diagrammes-mermaid.md))                                |
+| Glisser-déposer             | Deux implémentations séparées ([ADR 0010](decisions/0010-deux-glisser-deposer-separes.md)) |
 
 <!-- URLs -->
 

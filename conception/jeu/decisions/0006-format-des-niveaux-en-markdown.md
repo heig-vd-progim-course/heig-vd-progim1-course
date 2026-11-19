@@ -4,7 +4,7 @@ V. Guidoux, avec l'aide de Claude.
 
 Ce travail est sous licence [CC BY-SA 4.0][licence].
 
-**Statut** : proposée, 19 novembre 2026.
+**Statut** : acceptée, 19 novembre 2026.
 
 ## Contexte
 
@@ -15,8 +15,9 @@ problèmes de Parsons (US-20). Le format est donc une interface publique.
 
 Un niveau est un bloc `<div class="thealivery" data-id="…" markdown>` : une
 consigne, un bloc `text` par rue, et la liste des cartes dans un ordre qui
-réussit. Les sauts désignent leur cible par une étiquette `{#nom}`. Le script
-lit le **HTML produit par Zensical**, pas le Markdown brut.
+réussit. La carte visée par un saut porte une étiquette `{#nom}`, et le saut la
+désigne avec `-> nom`. Le script lit le **HTML produit par Zensical**, pas le
+Markdown brut.
 
 ## Options écartées
 

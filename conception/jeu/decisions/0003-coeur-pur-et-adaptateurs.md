@@ -4,7 +4,7 @@ V. Guidoux, avec l'aide de Claude.
 
 Ce travail est sous licence [CC BY-SA 4.0][licence].
 
-**Statut** : proposée, 19 novembre 2026.
+**Statut** : acceptée, 19 novembre 2026.
 
 ## Contexte
 
