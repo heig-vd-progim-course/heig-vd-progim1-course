@@ -562,7 +562,8 @@ au pixel près, et les images fixes ont été régénérées.
 
 ## Fonctions et variables avec les sauts
 
-Proposition du 19 novembre 2026, **[à valider]**. Les sections
+Proposition du 19 novembre 2026, codée le même jour (voir
+[05-architecture.md](05-architecture.md)). Les sections
 [Fonctions](#fonctions-séance-05) et [Variables](#variables-séance-03) plus haut
 datent d'avant les sauts : elles supposaient des cartes imbriquées. Cette
 section les adapte au moteur actuel, une liste plate avec un compteur de
@@ -609,9 +610,11 @@ M  .  T> .  M
   revenir. C'est le compteur de programme des sauts, avec une adresse de retour.
 - **L'idée fausse visée** : croire qu'une routine s'exécute là où elle est
   écrite. Dans sa propre zone, elle n'est jamais « traversée » par le programme.
-- **Une routine qui s'appelle elle-même** : la première version garde une seule
-  adresse de retour et refuse ce niveau à la validation. La récursion
-  demanderait une vraie pile d'appels.
+- **Une routine qui s'appelle elle-même** : le moteur garde une pile d'adresses
+  de retour, comme un processeur. Une routine peut en appeler une autre ; une
+  récursion sans fin s'arrête aux 100 cartes, comme une boucle infinie. (D'abord
+  prévue avec une seule adresse, la pile s'est révélée plus simple à coder
+  qu'une règle de validation de plus.)
 
 **La limite des problèmes de Parsons.** Toutes les cartes sont données : on lit
 une routine, on ne l'invente pas. Lightbot fait sentir le besoin d'une routine

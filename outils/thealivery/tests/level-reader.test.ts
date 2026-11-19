@@ -47,4 +47,17 @@ describe("readLevel", () => {
 			cards: [],
 		});
 	});
+
+	it("met bout à bout la liste principale et celles des routines", () => {
+		document.body.innerHTML = `<div class="thealivery" data-id="r">
+<ol><li>appeler -&gt; a</li></ol>
+<ul><li>routine a</li><li>avancer</li></ul>
+</div>`;
+		const element = document.querySelector<HTMLElement>("div.thealivery");
+		expect(element === null ? null : readLevel(element).cards).toEqual([
+			"appeler -> a",
+			"routine a",
+			"avancer",
+		]);
+	});
 });

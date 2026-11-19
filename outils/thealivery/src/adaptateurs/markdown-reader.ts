@@ -1,6 +1,7 @@
 // Lecture d'un niveau dans sa source Markdown, telle que l'enseignant l'écrit.
-// Sert au bac à sable, et plus tard à vérifier tous les niveaux du site sans
-// navigateur. Le format est celui de conception/jeu/05-architecture.md.
+// Toutes les listes sont lues, routines comprises. Sert au bac à sable, et plus
+// tard à vérifier tous les niveaux du site sans navigateur. Le format est
+// celui de conception/jeu/05-architecture.md.
 
 import type { RawLevel } from "../domaine/validation.ts";
 

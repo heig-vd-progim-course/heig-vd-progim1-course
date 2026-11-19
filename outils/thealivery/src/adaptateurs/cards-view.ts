@@ -1,16 +1,29 @@
-// La tournée de Théa : les cartes numérotées, la zone « Mise de côté », les
-// flèches des sauts. On déplace une carte par sa poignée (souris, doigt) ou au
-// clavier. Indépendant de parsons.js (voir l'ADR 0010).
+// La tournée de Théa : les cartes numérotées, une liste par routine, la zone
+// « Mise de côté », les flèches des sauts et des appels. On déplace une carte
+// par sa poignée (souris, doigt) ou au clavier, sans jamais la sortir de sa
+// routine. Indépendant de parsons.js (voir l'ADR 0010).
 
 import type { GameSession, Zone } from "../application/session.ts";
-import { isJump, type CardSpec, type CardType } from "../domaine/cards.ts";
+import {
+	isHeader,
+	isJump,
+	type CardSpec,
+	type CardType,
+} from "../domaine/cards.ts";
+import { cardCount, cardNumbers, zonesOf } from "../domaine/program.ts";
 import { vendorUrl } from "./assets.ts";
 
 interface CardLook {
 	readonly icon: string;
 	readonly width: number;
 	readonly height: number;
-	readonly text: (target: string) => string;
+	/** La phrase, avec la cible du saut (son numéro, ou le nom de la routine). */
+	readonly text: (target: string, card: CardSpec) => string;
+}
+
+function cups(card: CardSpec): string {
+	const n = card.amount ?? 0;
+	return `${String(n)} tasse${n > 1 ? "s" : ""}`;
 }
 
 /** L'icône (taille d'affichage en pixels) et la phrase de chaque carte. */
@@ -52,6 +65,30 @@ const LOOKS: Readonly<Record<CardType, CardLook>> = {
 		height: 26,
 		text: (n) => `Si une maison attend ici, aller à ${n}`,
 	},
+	call: {
+		icon: "appeler",
+		width: 28,
+		height: 28,
+		text: (name) => `Appeler la routine ${name}`,
+	},
+	routine: {
+		icon: "routine",
+		width: 32,
+		height: 32,
+		text: (_target, card) => `Routine ${card.id}`,
+	},
+	fill: {
+		icon: "remplir",
+		width: 18,
+		height: 22,
+		text: (_target, card) => `Remplir la charrette : ${cups(card)}`,
+	},
+	add: {
+		icon: "ajouter",
+		width: 24,
+		height: 24,
+		text: (_target, card) => `Ajouter ${cups(card)}`,
+	},
 };
 
 const GRIP =
@@ -86,7 +123,9 @@ interface Drag {
 export class CardsView {
 	readonly element: HTMLElement;
 	private readonly session: GameSession;
-	private readonly program: HTMLOListElement;
+	/** Le programme principal, puis une liste par routine. */
+	private readonly lists: HTMLOListElement[];
+	private readonly wrap: HTMLElement;
 	private readonly aside: HTMLOListElement | null;
 	private readonly arrows: SVGSVGElement | null;
 	private readonly count: HTMLElement;
@@ -113,18 +152,26 @@ export class CardsView {
 		head.append(el("span", "", "Tournée de Théa"));
 		this.count = el("span", "tl-count");
 		head.append(this.count);
-		this.program = el("ol", "tl-cards");
-		this.program.dataset.zone = "program";
-		this.program.dataset.empty = "Glissez des cartes ici.";
-		this.program.setAttribute("aria-label", "Tournée de Théa");
+		this.lists = zonesOf(cards).map((zone, z) => {
+			const list = el("ol", z === 0 ? "tl-cards" : "tl-cards tl-routine");
+			list.dataset.zone = "program";
+			list.dataset.home = String(z);
+			list.dataset.empty = "Glissez des cartes ici.";
+			list.setAttribute(
+				"aria-label",
+				zone.header === null ? "Tournée de Théa" : `Routine ${zone.header.id}`,
+			);
+			return list;
+		});
 		const wrap = el("div", hasJumps ? "tl-listwrap" : "tl-listwrap tl-nojumps");
+		this.wrap = wrap;
 		this.arrows = hasJumps ? document.createElementNS(SVG, "svg") : null;
 		if (this.arrows !== null) {
 			this.arrows.setAttribute("class", "tl-arrows");
 			this.arrows.setAttribute("aria-hidden", "true");
 			wrap.append(this.arrows);
 		}
-		wrap.append(this.program);
+		wrap.append(...this.lists);
 		zone.append(
 			head,
 			wrap,
@@ -202,22 +249,52 @@ export class CardsView {
 	private cardText(card: CardSpec): string {
 		const look = LOOKS[card.type];
 		if (card.target === undefined) {
-			return look.text("");
+			return look.text("", card);
 		}
-		const target = this.session.program.findIndex((c) => c.id === card.target);
-		return look.text(target >= 0 ? String(target + 1) : "?");
+		if (card.type === "call") {
+			return look.text(card.target, card);
+		}
+		const program = this.session.program;
+		const target = program.findIndex((c) => c.id === card.target);
+		return look.text(String(cardNumbers(program)[target] ?? "?"), card);
 	}
 
 	private jumpColor(card: CardSpec): string {
 		return `var(--tl-jump-${String((this.jumpIds.indexOf(card.id) % 2) + 1)})`;
 	}
 
+	private headerNode(card: CardSpec): HTMLLIElement {
+		const look = LOOKS[card.type];
+		const li = el("li", "tl-card tl-header");
+		li.dataset.id = card.id;
+		const icon = el("span", "tl-ico");
+		icon.setAttribute("aria-hidden", "true");
+		const img = el("img", "");
+		img.src = vendorUrl(`ui/icon-${look.icon}.png`);
+		img.alt = "";
+		img.width = look.width;
+		img.height = look.height;
+		icon.append(img);
+		const label = el("span", "tl-txt");
+		label.append("Routine ", el("b", "", card.id));
+		li.append(el("span", "tl-grip"), el("span", "tl-n"), icon, label);
+		return li;
+	}
+
+	/**
+	 * Une carte. `index` est sa position dans la tournée, `number` son numéro
+	 * affiché ; les deux valent null dans la zone « Mise de côté ».
+	 */
 	private cardNode(
 		card: CardSpec,
-		index: number,
-		inProgram: boolean,
+		index: number | null,
+		number: number | null,
 	): HTMLLIElement {
+		if (isHeader(card)) {
+			return this.headerNode(card);
+		}
 		const look = LOOKS[card.type];
+		const inProgram = index !== null;
 		const locked = this.session.isLocked(card.id);
 		const li = el("li", "tl-card");
 		li.classList.toggle("tl-locked", locked);
@@ -228,7 +305,7 @@ export class CardsView {
 		const text = this.cardText(card);
 		li.setAttribute(
 			"aria-label",
-			`${inProgram ? `Carte ${String(index + 1)} : ` : ""}${text}${locked ? ", verrouillée par l'aide" : ""}`,
+			`${number !== null ? `Carte ${String(number)} : ` : ""}${text}${locked ? ", verrouillée par l'aide" : ""}`,
 		);
 
 		const grip = el("span", "tl-grip");
@@ -244,8 +321,8 @@ export class CardsView {
 			grip.innerHTML = GRIP;
 			grip.title = "Glisser pour déplacer";
 		}
-		const number = el("span", "tl-n", inProgram ? String(index + 1) : "–");
-		number.setAttribute("aria-hidden", "true");
+		const shown = el("span", "tl-n", number === null ? "–" : String(number));
+		shown.setAttribute("aria-hidden", "true");
 		const icon = el("span", "tl-ico");
 		icon.setAttribute("aria-hidden", "true");
 		const img = el("img", "");
@@ -265,19 +342,33 @@ export class CardsView {
 		} else {
 			label.textContent = text;
 		}
-		li.append(grip, number, icon, label);
+		li.append(grip, shown, icon, label);
 		return li;
 	}
 
 	render(focusId: string | null = null): void {
 		const { program, aside } = this.session;
-		this.program.replaceChildren(
-			...program.map((c, i) => this.cardNode(c, i, true)),
-		);
+		const numbers = cardNumbers(program);
+		zonesOf(program).forEach((zone, z) => {
+			const list = this.lists[z];
+			if (list === undefined) {
+				return;
+			}
+			const first = zone.header === null ? zone.start : zone.start - 1;
+			list.dataset.offset = String(first);
+			list.replaceChildren(
+				...program
+					.slice(first, zone.end)
+					.map((c, k) =>
+						this.cardNode(c, first + k, numbers[first + k] ?? null),
+					),
+			);
+		});
 		this.aside?.replaceChildren(
-			...aside.map((c, i) => this.cardNode(c, i, false)),
+			...aside.map((c) => this.cardNode(c, null, null)),
 		);
-		this.count.textContent = `${String(program.length)} carte${program.length > 1 ? "s" : ""}`;
+		const count = cardCount(program);
+		this.count.textContent = `${String(count)} carte${count > 1 ? "s" : ""}`;
 		requestAnimationFrame(() => {
 			this.drawArrows();
 		});
@@ -292,21 +383,24 @@ export class CardsView {
 
 	private drawArrows(): void {
 		const svg = this.arrows;
-		if (svg === null || !this.program.isConnected) {
+		if (svg === null || !this.wrap.isConnected) {
 			return;
 		}
 		const base = svg.getBoundingClientRect();
 		svg.replaceChildren();
 		const program = this.session.program;
 		let lane = 0;
-		program.forEach((card, i) => {
+		program.forEach((card) => {
 			if (card.target === undefined) {
 				return;
 			}
-			const from = this.program.children[i];
-			const to =
-				this.program.children[program.findIndex((c) => c.id === card.target)];
-			if (from === undefined || to === undefined) {
+			const find = (id: string): HTMLElement | null =>
+				this.wrap.querySelector<HTMLElement>(
+					`.tl-card[data-id="${CSS.escape(id)}"]`,
+				);
+			const from = find(card.id);
+			const to = find(card.target);
+			if (from === null || to === null) {
 				return;
 			}
 			const fr = from.getBoundingClientRect();
@@ -439,8 +533,13 @@ export class CardsView {
 		drag.mark?.remove();
 		drag.mark = null;
 		drag.target = null;
-		for (const list of [this.program, this.aside]) {
-			if (list === null) {
+		const home = String(this.session.zoneOf(drag.id));
+		for (const list of [...this.lists, this.aside]) {
+			// Une carte ne quitte pas sa routine : seule sa liste l'accueille
+			if (
+				list === null ||
+				(list !== this.aside && list.dataset.home !== home)
+			) {
 				continue;
 			}
 			const box = list.getBoundingClientRect();
@@ -460,9 +559,12 @@ export class CardsView {
 				const r = item.getBoundingClientRect();
 				return e.clientY < r.top + r.height / 2;
 			});
+			const offset = Number(list.dataset.offset ?? 0);
 			drag.target = {
 				zone: list.dataset.zone === "aside" ? "aside" : "program",
-				index: before === undefined ? all.length : all.indexOf(before),
+				index:
+					(list === this.aside ? 0 : offset) +
+					(before === undefined ? all.length : all.indexOf(before)),
 			};
 			drag.mark = el("li", "tl-mark");
 			drag.mark.setAttribute("aria-hidden", "true");

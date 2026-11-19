@@ -137,6 +137,10 @@ UI = {
     "icon-livrer.png": load("Items", "Other", "Letter.png"),
     "icon-aller.png": load("Ui", "Theme", "Theme Wood", "arrow_right.png"),
     "icon-si.png": load("Ui", "Emote", "emote23.png").crop((0, 0, 14, 13)),
+    "icon-appeler.png": load("Items", "Scroll", "Scroll.png"),
+    "icon-routine.png": load("Items", "Scroll", "ScrollEmpty.png"),
+    "icon-remplir.png": load("Items", "Potion", "MilkPot.png"),
+    "icon-ajouter.png": load("Ui", "Skill Icon", "Spell", "Upgrade.png"),
     **{f"mood-{name}.png": load("Ui", "Emote", f"emote{n}.png") for name, n in MOODS.items()},
 }
 for name, img in UI.items():

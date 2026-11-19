@@ -48,8 +48,8 @@ describe("run, les cartes une à une", () => {
 			program("tourner-droite", "tourner-gauche"),
 		);
 		expect(trace.steps.map((s) => s.thea)).toEqual([
-			{ position: { row: 0, col: 0 }, direction: "south" },
-			{ position: { row: 0, col: 0 }, direction: "east" },
+			{ position: { row: 0, col: 0 }, direction: "south", cups: 0 },
+			{ position: { row: 0, col: 0 }, direction: "east", cups: 0 },
 		]);
 	});
 

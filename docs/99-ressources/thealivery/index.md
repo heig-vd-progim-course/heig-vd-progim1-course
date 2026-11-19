@@ -148,6 +148,53 @@ T> .  .  .  .  M
 
 </div>
 
+## 07 - Deux commandes
+
+<div class="thealivery" data-id="essai-07-deux-commandes" markdown>
+
+Remplissez la charrette, puis livrez les deux commandes. Une carte est en trop.
+
+```text
+T> .  M2 .  M1
+```
+
+1. remplir 3
+2. avancer
+3. avancer
+4. livrer
+5. avancer
+6. avancer
+7. livrer
+8. piège : ajouter 1
+
+</div>
+
+## 08 - Le demi-tour
+
+<div class="thealivery" data-id="essai-08-le-demi-tour" markdown>
+
+Livrez les deux maisons. La routine fait faire demi-tour à Théa.
+
+```text
+M  .  T> .  M
+```
+
+1. avancer
+2. avancer
+3. livrer
+4. appeler -> demi-tour
+5. avancer
+6. avancer
+7. avancer
+8. avancer
+9. livrer
+
+- routine demi-tour
+- tourner-gauche
+- tourner-gauche
+
+</div>
+
 <!-- URLs -->
 
 [licence]:

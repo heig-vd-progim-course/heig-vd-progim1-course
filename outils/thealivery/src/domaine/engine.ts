@@ -1,6 +1,7 @@
 // Le moteur : il exécute un programme sur une rue, carte par carte, avec un
-// compteur de programme, et rend la trace complète de l'exécution. Il ne
-// connaît ni le temps ni l'affichage : l'animateur rejoue la trace ensuite.
+// compteur de programme et une pile d'adresses de retour pour les routines, et
+// rend la trace complète de l'exécution. Il ne connaît ni le temps ni
+// l'affichage : l'animateur rejoue la trace ensuite.
 
 import type { CardSpec, CardType } from "./cards.ts";
 import { hasTraps, solutionOf, type LevelSpec } from "./level.ts";
@@ -9,6 +10,7 @@ import {
 	cellAt,
 	count,
 	isInside,
+	orderAt,
 	turnLeft,
 	turnRight,
 	type Cell,
@@ -36,7 +38,12 @@ export type StepEvent =
 	| "bump-edge"
 	| "nothing-to-pick"
 	| "nobody-here"
-	| "target-missing";
+	| "target-missing"
+	| "call"
+	| "return"
+	| "fill"
+	| "add"
+	| "cart-empty";
 
 export interface Step {
 	/** La carte exécutée, par sa position dans le programme. */
@@ -47,6 +54,11 @@ export interface Step {
 	readonly cells: Cells;
 	/** Vrai si la carte suivante n'est pas celle du dessous. */
 	readonly jumped: boolean;
+	/**
+	 * Pour la fin d'une routine (son en-tête, `cardIndex`) : la position où
+	 * l'exécution reprend, juste après l'appel.
+	 */
+	readonly returnTo?: number;
 }
 
 /** Une carte qui arrête Théa. */
@@ -57,7 +69,8 @@ export type CardFailureReason =
 	| "NOTHING_TO_PICK"
 	| "NOBODY_HERE"
 	| "TARGET_SET_ASIDE"
-	| "LOOPS_FOREVER";
+	| "LOOPS_FOREVER"
+	| "CART_EMPTY";
 
 export type FailureReason =
 	CardFailureReason | "ROUND_NOT_FINISHED" | "EXTRA_CARD";
@@ -89,6 +102,14 @@ interface Effect {
 	readonly cell?: Cell;
 	readonly next: number;
 	readonly failure?: CardFailureReason;
+	/** Pour un appel : où reprendre à la fin de la routine. */
+	readonly call?: Frame;
+}
+
+/** Un appel en cours : l'en-tête de la routine, et où reprendre ensuite. */
+interface Frame {
+	readonly header: number;
+	readonly returnTo: number;
 }
 
 interface Machine {
@@ -106,7 +127,9 @@ const FALLS: Readonly<Record<string, CardFailureReason | undefined>> = {
 };
 
 /** L'effet de chaque type de carte. Ajouter une carte, c'est ajouter une ligne ici. */
-const EFFECTS: Readonly<Record<CardType, (m: Machine) => Effect>> = {
+type Executable = Exclude<CardType, "routine">;
+
+const EFFECTS: Readonly<Record<Executable, (m: Machine) => Effect>> = {
 	move: ({ street, thea, cells, pc }) => {
 		const position = ahead(thea.position, thea.direction);
 		if (!isInside(street, position)) {
@@ -140,16 +163,48 @@ const EFFECTS: Readonly<Record<CardType, (m: Machine) => Effect>> = {
 					next: pc,
 					failure: "NOTHING_TO_PICK",
 				},
-	deliver: ({ thea, cells, pc }) =>
-		cellAt(cells, thea.position) === "house"
-			? { event: "deliver", thea, cell: "delivered", next: pc + 1 }
-			: { event: "nobody-here", thea, next: pc, failure: "NOBODY_HERE" },
+	deliver: ({ street, thea, cells, pc }) => {
+		if (cellAt(cells, thea.position) !== "house") {
+			return { event: "nobody-here", thea, next: pc, failure: "NOBODY_HERE" };
+		}
+		const order = orderAt(street, thea.position);
+		if (thea.cups < order) {
+			return { event: "cart-empty", thea, next: pc, failure: "CART_EMPTY" };
+		}
+		return {
+			event: "deliver",
+			thea: { ...thea, cups: thea.cups - order },
+			cell: "delivered",
+			next: pc + 1,
+		};
+	},
 	"go-to": ({ thea, pc, card, indexOf }) =>
 		jump(thea, pc, indexOf(card.target)),
 	"if-house": ({ thea, cells, pc, card, indexOf }) =>
 		cellAt(cells, thea.position) === "house"
 			? jump(thea, pc, indexOf(card.target))
 			: { event: "no-jump", thea, next: pc + 1 },
+	call: ({ thea, pc, card, indexOf }) => {
+		const header = indexOf(card.target);
+		const effect = jump(
+			thea,
+			pc,
+			header === undefined ? undefined : header + 1,
+		);
+		return header === undefined
+			? effect
+			: { ...effect, event: "call", call: { header, returnTo: pc + 1 } };
+	},
+	fill: ({ thea, pc, card }) => ({
+		event: "fill",
+		thea: { ...thea, cups: card.amount ?? 0 },
+		next: pc + 1,
+	}),
+	add: ({ thea, pc, card }) => ({
+		event: "add",
+		thea: { ...thea, cups: thea.cups + (card.amount ?? 0) },
+		next: pc + 1,
+	}),
 };
 
 function jump(thea: TheaState, pc: number, target: number | undefined): Effect {
@@ -178,27 +233,51 @@ function withCell(
 	);
 }
 
-/** Exécute un programme sur une rue, depuis le départ de Théa. */
+/**
+ * Exécute un programme sur une rue, depuis le départ de Théa. Le programme
+ * principal s'arrête au premier en-tête de routine ; une routine se termine au
+ * prochain en-tête ou à la fin de la liste, et l'exécution reprend après
+ * l'appel.
+ */
 export function run(street: Street, program: Program): Trace {
 	const positions = new Map(program.map((card, i) => [card.id, i]));
 	const indexOf = (id: string | undefined): number | undefined =>
 		id === undefined ? undefined : positions.get(id);
 
 	const steps: Step[] = [];
+	const calls: Frame[] = [];
 	let thea = street.start;
 	let cells = street.cells;
 	let pc = 0;
 
-	while (pc < program.length) {
+	for (;;) {
 		const card = program[pc];
-		if (card === undefined) {
-			break;
-		}
 		if (steps.length >= MAX_STEPS) {
 			return {
 				steps,
-				outcome: { kind: "failure", reason: "LOOPS_FOREVER", cardIndex: pc },
+				outcome: {
+					kind: "failure",
+					reason: "LOOPS_FOREVER",
+					cardIndex: calls.at(-1)?.header ?? pc,
+				},
 			};
+		}
+		if (card === undefined || card.type === "routine") {
+			// Fin de zone : retour de routine, ou fin du programme principal
+			const frame = calls.pop();
+			if (frame === undefined) {
+				break;
+			}
+			steps.push({
+				cardIndex: frame.header,
+				event: "return",
+				thea,
+				cells,
+				jumped: true,
+				returnTo: frame.returnTo,
+			});
+			pc = frame.returnTo;
+			continue;
 		}
 		const effect = EFFECTS[card.type]({
 			street,
@@ -222,6 +301,9 @@ export function run(street: Street, program: Program): Trace {
 				steps,
 				outcome: { kind: "failure", reason: effect.failure, cardIndex: pc },
 			};
+		}
+		if (effect.call !== undefined) {
+			calls.push(effect.call);
 		}
 		pc = effect.next;
 	}

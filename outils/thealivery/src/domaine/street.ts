@@ -11,6 +11,8 @@ export interface Position {
 export interface TheaState {
 	readonly position: Position;
 	readonly direction: Direction;
+	/** Les tasses dans la charrette : la variable des niveaux de la séance 03. */
+	readonly cups: number;
 }
 
 /** Une mare, où Théa nage, ou un trou, où elle tombe. */
@@ -20,10 +22,14 @@ export type Cell = "free" | ObstacleKind | "house" | "delivered" | "leaves";
 
 export type Cells = readonly (readonly Cell[])[];
 
+/** Le nombre de tasses commandées par chaque maison, 0 si elle n'en dit rien. */
+export type Orders = readonly (readonly number[])[];
+
 export interface Street {
 	readonly rows: number;
 	readonly cols: number;
 	readonly cells: Cells;
+	readonly orders: Orders;
 	readonly start: TheaState;
 }
 
@@ -62,6 +68,9 @@ const SYMBOLS: Readonly<Record<string, Cell | undefined>> = {
 	f: "leaves",
 };
 
+/** Une maison qui commande des tasses : M1 à M9. */
+const ORDER = /^M([1-9])$/u;
+
 const OFFSETS: Readonly<Record<Direction, Position>> = {
 	north: { row: -1, col: 0 },
 	east: { row: 0, col: 1 },
@@ -98,6 +107,10 @@ export function cellAt(cells: Cells, position: Position): Cell {
 	return cells[position.row]?.[position.col] ?? "free";
 }
 
+export function orderAt(street: Street, position: Position): number {
+	return street.orders[position.row]?.[position.col] ?? 0;
+}
+
 /** Combien de cases d'une sorte donnée restent dans la grille. */
 export function count(cells: Cells, cell: Cell): number {
 	return cells.flat().filter((c) => c === cell).length;
@@ -123,6 +136,9 @@ export function parseStreet(
 	const errors: GridError[] = [];
 	const theas: TheaState[] = [];
 	const tokens = lines.map((line) => line.split(/\s+/));
+	const orders = tokens.map((row) =>
+		row.map((symbol) => Number(ORDER.exec(symbol)?.[1] ?? 0)),
+	);
 	const expected = tokens[0]?.length ?? 0;
 
 	const cells = tokens.map((row, r) => {
@@ -138,11 +154,14 @@ export function parseStreet(
 			const position = { row: r, col: c };
 			const direction = THEA[symbol];
 			if (direction !== undefined) {
-				theas.push({ position, direction });
+				theas.push({ position, direction, cups: 0 });
 				return "free";
 			}
 			if (symbol === "~") {
 				return chooseObstacle(position);
+			}
+			if (ORDER.test(symbol)) {
+				return "house";
 			}
 			const cell = SYMBOLS[symbol];
 			if (cell === undefined) {
@@ -162,6 +181,6 @@ export function parseStreet(
 	}
 	return {
 		ok: true,
-		street: { rows: cells.length, cols: expected, cells, start },
+		street: { rows: cells.length, cols: expected, cells, orders, start },
 	};
 }

@@ -1,9 +1,10 @@
 // La validation d'un niveau écrit par l'enseignant. Un niveau invalide n'est
 // jamais montré : il est remplacé par la liste de ses erreurs.
 
-import { parseCard, type CardError, type CardSpec } from "./cards.ts";
+import { isHeader, parseCard, type CardError, type CardSpec } from "./cards.ts";
 import { runLevel, type Outcome } from "./engine.ts";
 import { solutionOf, type LevelSpec } from "./level.ts";
+import { homeZones } from "./program.ts";
 import {
 	parseStreet,
 	type GridError,
@@ -29,6 +30,12 @@ export type LevelError =
 	| (CardError & { readonly card: number })
 	| { readonly code: "DUPLICATE_LABEL"; readonly label: string }
 	| { readonly code: "UNKNOWN_LABEL"; readonly label: string }
+	| { readonly code: "ROUTINE_FIRST" }
+	| { readonly code: "EMPTY_ROUTINE"; readonly name: string }
+	| { readonly code: "ROUTINE_TRAP"; readonly name: string }
+	| { readonly code: "CALL_NOT_ROUTINE"; readonly label: string }
+	| { readonly code: "JUMP_TO_ROUTINE"; readonly label: string }
+	| { readonly code: "JUMP_OTHER_ZONE"; readonly label: string }
 	| {
 			readonly code: "SOLUTION_FAILS";
 			readonly street: number;
@@ -72,6 +79,7 @@ export function validateLevel(
 	const streets = parseStreets(raw.grids, options, errors);
 	const cards = parseCards(raw.cards, errors);
 	checkLabels(cards, errors);
+	checkRoutines(cards, errors);
 
 	if (errors.length > 0) {
 		return { ok: false, errors };
@@ -161,6 +169,45 @@ function checkLabels(cards: readonly CardSpec[], errors: LevelError[]): void {
 	for (const card of cards) {
 		if (card.target !== undefined && !seen.has(card.target)) {
 			errors.push({ code: "UNKNOWN_LABEL", label: card.target });
+		}
+	}
+}
+
+/**
+ * Les routines : le programme principal vient d'abord, une routine a au moins
+ * une carte, « appeler » vise une routine, et un saut reste dans sa zone.
+ */
+function checkRoutines(cards: readonly CardSpec[], errors: LevelError[]): void {
+	if (cards[0] !== undefined && isHeader(cards[0])) {
+		errors.push({ code: "ROUTINE_FIRST" });
+	}
+	cards.forEach((card, i) => {
+		if (!isHeader(card)) {
+			return;
+		}
+		if (card.trap) {
+			errors.push({ code: "ROUTINE_TRAP", name: card.id });
+		}
+		const next = cards[i + 1];
+		if (next === undefined || isHeader(next)) {
+			errors.push({ code: "EMPTY_ROUTINE", name: card.id });
+		}
+	});
+	const homes = homeZones(cards);
+	for (const card of cards) {
+		const target = cards.find((c) => c.id === card.target);
+		if (target === undefined) {
+			continue;
+		}
+		if (card.type === "call" && !isHeader(target)) {
+			errors.push({ code: "CALL_NOT_ROUTINE", label: target.id });
+		} else if (card.type !== "call" && isHeader(target)) {
+			errors.push({ code: "JUMP_TO_ROUTINE", label: target.id });
+		} else if (
+			card.type !== "call" &&
+			homes.get(card.id) !== homes.get(target.id)
+		) {
+			errors.push({ code: "JUMP_OTHER_ZONE", label: target.id });
 		}
 	}
 }

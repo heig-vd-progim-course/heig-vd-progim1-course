@@ -67,6 +67,35 @@
 	background: var(--tl-board);
 }
 
+/* L'ardoise : les tasses dans la charrette */
+.md-typeset .tl-slate {
+	justify-self: start;
+	margin: 0;
+	padding: 0.15rem 0.6rem;
+	border: 2px solid #5a6b4c;
+	border-radius: 0.3rem;
+	color: #f4e4c1;
+	font-family: var(--tl-font);
+	font-variant-numeric: tabular-nums;
+	font-weight: 700;
+}
+
+.tl-slate.tl-changed {
+	animation: tl-slate 0.5s ease-out;
+}
+
+@keyframes tl-slate {
+	from {
+		background: rgb(244 228 193 / 0.35);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tl-slate.tl-changed {
+		animation: none;
+	}
+}
+
 .tl-streets {
 	display: flex;
 	gap: 0.4rem;
@@ -111,7 +140,8 @@ canvas.tl-map {
 	place-items: center;
 	width: 96px;
 	height: 96px;
-	background: url("../vendor/thealivery/ui/faceset-box.png") center / 96px 96px no-repeat;
+	background: url("../vendor/thealivery/ui/faceset-box.png") center / 96px 96px
+		no-repeat;
 	image-rendering: pixelated;
 }
 
@@ -238,6 +268,22 @@ svg.tl-arrows {
 	padding: 0.4rem;
 	border: 2px dashed var(--tl-line);
 	border-radius: 0.5rem;
+}
+
+/* Une routine : sa propre liste, sous le programme principal */
+.md-typeset ol.tl-cards.tl-routine {
+	margin-top: 0.9rem;
+	padding-left: 0.6rem;
+	border-left: 3px solid var(--tl-line);
+}
+
+/* L'en-tête d'une routine : fixe, sans numéro ni poignée */
+.md-typeset .tl-card.tl-header,
+.tl-card.tl-header {
+	min-height: 3rem;
+	border-image: none;
+	background: transparent;
+	color: inherit;
 }
 
 /* Le thème décale les éléments de liste : pas dans la tournée */

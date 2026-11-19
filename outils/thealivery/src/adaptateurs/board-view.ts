@@ -193,6 +193,24 @@ export class BoardView {
 		});
 	}
 
+	/** La commande d'une maison : le nombre de tasses, sur une petite étiquette. */
+	private order(
+		ctx: CanvasRenderingContext2D,
+		n: number,
+		x: number,
+		y: number,
+	): void {
+		ctx.fillStyle = "#2b1f1f";
+		ctx.fillRect(x - 7, y - 7, 14, 14);
+		ctx.fillStyle = "#f4e4c1";
+		ctx.fillRect(x - 6, y - 6, 12, 12);
+		ctx.fillStyle = "#2b1f1f";
+		ctx.font = "bold 11px Atkinson Hyperlegible, sans-serif";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.fillText(String(n), x, y);
+	}
+
 	private draw(): void {
 		const background = this.backgrounds[this.index];
 		const ctx = this.canvas.getContext("2d");
@@ -222,6 +240,10 @@ export class BoardView {
 				} else if (cell === "house" || cell === "delivered") {
 					const mark = cell === "house" ? "bang" : "heart";
 					this.sprite(ctx, mark, x - 7, y - half - 11 + bob);
+					const order = this.streets[this.index]?.orders[row]?.[col] ?? 0;
+					if (cell === "house" && order > 0) {
+						this.order(ctx, order, x + 11, y - half - 4 + bob);
+					}
 				}
 			});
 		});

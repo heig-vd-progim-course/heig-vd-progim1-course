@@ -12,7 +12,8 @@ import {
 } from "../application/messages.ts";
 import { GameSession } from "../application/session.ts";
 import type { Step, StepEvent } from "../domaine/engine.ts";
-import type { LevelSpec } from "../domaine/level.ts";
+import { usesCups, type LevelSpec } from "../domaine/level.ts";
+import { cardCount } from "../domaine/program.ts";
 import type { Atlas } from "./assets.ts";
 import { layoutStreet, widestCells } from "./board-layout.ts";
 import { BoardView } from "./board-view.ts";
@@ -40,6 +41,11 @@ const SOUNDS: Partial<Record<StepEvent, Sound>> = {
 	"nothing-to-pick": "bump",
 	"nobody-here": "bump",
 	"target-missing": "bump",
+	call: "jump",
+	return: "jump",
+	fill: "turn",
+	add: "turn",
+	"cart-empty": "bump",
 };
 
 const STEP_MOODS: Partial<Record<StepEvent, Mood>> = {
@@ -51,6 +57,7 @@ const STEP_MOODS: Partial<Record<StepEvent, Mood>> = {
 	"nothing-to-pick": "puzzled",
 	"nobody-here": "lost",
 	"target-missing": "puzzled",
+	"cart-empty": "sad",
 };
 
 const reducedMotion = (): boolean =>
@@ -80,6 +87,8 @@ export class GameView {
 	private readonly attempts = document.createElement("span");
 	private readonly stars = document.createElement("span");
 	private readonly hint = document.createElement("p");
+	/** L'ardoise : les tasses dans la charrette, pour les niveaux à tasses. */
+	private readonly slate: HTMLElement | null;
 	private animator: Animator | null = null;
 	private animating = false;
 	private streetState: ("" | "done" | "fail")[];
@@ -112,6 +121,14 @@ export class GameView {
 			boardBox.append(this.streetButtons);
 		}
 		boardBox.append(this.board.canvas);
+		this.slate = null;
+		if (usesCups(level)) {
+			this.slate = document.createElement("p");
+			this.slate.className = "tl-slate";
+			this.slate.setAttribute("aria-live", "polite");
+			boardBox.append(this.slate);
+			this.renderSlate(level.streets[0]?.start.cups ?? 0);
+		}
 
 		this.cards = new CardsView(this.session, () => {
 			this.reset(false);
@@ -212,10 +229,24 @@ export class GameView {
 		this.board.canvas.dataset.street = String(index);
 		this.board.show(index);
 		this.renderStreets();
+		this.renderSlate(this.session.level.streets[index]?.start.cups ?? 0);
+	}
+
+	private renderSlate(cups: number, changed = false): void {
+		if (this.slate === null) {
+			return;
+		}
+		this.slate.textContent = `Charrette : ${String(cups)} tasse${cups > 1 ? "s" : ""}`;
+		if (changed) {
+			this.slate.classList.remove("tl-changed");
+			// Relance l'animation, même si la valeur change deux fois de suite
+			this.slate.getBoundingClientRect();
+			this.slate.classList.add("tl-changed");
+		}
 	}
 
 	private updateButtons(): void {
-		const empty = this.session.program.length === 0;
+		const empty = cardCount(this.session.program) === 0;
 		this.runButton.disabled = this.animating || empty;
 		this.stepButton.disabled = this.animating || empty;
 		this.resetButton.disabled = this.animating;
@@ -315,7 +346,13 @@ export class GameView {
 				await this.board.move(row, col, direction);
 				this.board.setCells(step.cells);
 		}
-		const message = stepSays(step, this.session.program);
+		this.renderSlate(
+			step.thea.cups,
+			step.event === "fill" ||
+				step.event === "add" ||
+				(step.event === "deliver" && this.slate !== null),
+		);
+		const message = stepSays(step, this.session.program, this.slate !== null);
 		if (message !== null) {
 			this.bubble.say(message, "neutral", STEP_MOODS[step.event] ?? null);
 		}

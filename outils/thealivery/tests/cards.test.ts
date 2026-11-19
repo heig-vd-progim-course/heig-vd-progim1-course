@@ -2,15 +2,16 @@ import { describe, expect, it } from "vitest";
 import { isJump, parseCard, WORDS } from "../src/domaine/cards.ts";
 
 describe("parseCard", () => {
-	it.each(Object.entries(WORDS).filter(([, type]) => !isJump(type)))(
-		"lit le mot %s",
-		(word, type) => {
-			expect(parseCard(word, 0)).toEqual({
-				ok: true,
-				card: { id: "@0", type, trap: false },
-			});
-		},
-	);
+	it.each(
+		Object.entries(WORDS).filter(
+			([, type]) => !isJump(type) && type !== "fill" && type !== "add",
+		),
+	)("lit le mot %s", (word, type) => {
+		expect(parseCard(word, 0)).toEqual({
+			ok: true,
+			card: { id: "@0", type, trap: false },
+		});
+	});
 
 	it("donne à une carte sans étiquette un identifiant tiré de sa position", () => {
 		expect(parseCard("avancer", 3)).toMatchObject({ card: { id: "@3" } });

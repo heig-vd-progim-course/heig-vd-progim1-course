@@ -97,7 +97,7 @@ function drawObjects(levelId: string, rows: readonly (readonly string[])[]) {
 	});
 	rows.forEach((row, r) => {
 		row.forEach((symbol, c) => {
-			if (symbol === "M") {
+			if (/^M[1-9]?$/u.test(symbol)) {
 				houses.set(key(r, c), rnd.choice(HOUSES));
 			}
 		});

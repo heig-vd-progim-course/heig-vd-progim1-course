@@ -340,7 +340,8 @@ outils/thealivery/
       street.ts              rue, cases, positions, directions
       cards.ts               types de cartes, fabrique depuis le mot
       level.ts               niveau validé, solution sans les pièges
-      engine.ts              moteur, compteur de programme, trace
+      program.ts             zones : programme principal, routines, numéros
+      engine.ts              moteur, compteur de programme, pile d'appels, trace
       validation.ts          validation d'un niveau
     application/
       session.ts             machine à états, essais, aide, étoiles
@@ -423,6 +424,30 @@ Le code a précisé quelques points du modèle :
   pixel près.
 - **Le bac à sable** lit la source Markdown, pas le HTML : le même lecteur
   servira à vérifier tous les niveaux du site sans navigateur.
+
+## Routines et tasses : ce qui a changé
+
+La proposition de [04-conception-du-jeu.md](04-conception-du-jeu.md), section «
+Fonctions et variables avec les sauts », est codée ainsi :
+
+- **Une seule liste** : la tournée reste une liste plate. Une carte d'en-tête,
+  `routine nom`, ouvre chaque routine ; `program.ts` découpe la liste en zones.
+  Le moteur, la session et les vues partagent ce découpage, ce qui évite un
+  second modèle de programme.
+- **Une pile d'appels** plutôt qu'une seule adresse de retour : c'est plus
+  simple à coder qu'une règle de validation de plus, et une routine peut en
+  appeler une autre. Une récursion sans fin s'arrête aux 100 cartes, comme une
+  boucle infinie.
+- **La fin d'une routine est une étape** de la trace (`return`), jouée sur son
+  en-tête : en _Pas à pas_, on voit l'exécution revenir après l'appel.
+- **Les numéros** continuent d'une zone à l'autre, comme des adresses ; les
+  en-têtes n'en ont pas.
+- **La session** garde chaque carte dans sa zone, y compris quand elle revient
+  de la zone « Mise de côté ». L'aide verrouille les cartes de la solution dans
+  l'ordre, chacune en tête de sa zone.
+- **Les tasses** sont une valeur de l'état de Théa (`cups`), et la commande de
+  chaque maison une grille à part (`orders`), lue depuis `M1` à `M9`. Une maison
+  `M` ne commande rien : les niveaux sans tasses ne changent pas.
 
 ## Décisions de validation
 

@@ -65,6 +65,10 @@ def parse(text):
     rows = [l.split() for l in text.strip().splitlines() if l.strip()]
     return rows
 
+def is_house(tok):
+    """Une maison : M, ou M1 à M9 quand elle commande des tasses."""
+    return tok == "M" or (len(tok) == 2 and tok[0] == "M" and tok[1] in "123456789")
+
 class SeededRandom:
     """Générateur au hasard reproductible, identique à celui du jeu
     (outils/thealivery/src/adaptateurs/random.ts) : FNV-1a pour la graine,
@@ -107,7 +111,7 @@ def render(level_id, grid_text, min_cells_w=0, moving_parts=True, meta=None):
 
     # Les obstacles sont tirés d'abord : leur case n'a pas de terre
     obstacles = {(r, c): rnd_objects.choice([POND, PIT]) for r, row in enumerate(rows) for c, tok in enumerate(row) if tok == "~"}
-    houses = {(r, c): rnd_objects.choice(HOUSES) for r, row in enumerate(rows) for c, tok in enumerate(row) if tok == "M"}
+    houses = {(r, c): rnd_objects.choice(HOUSES) for r, row in enumerate(rows) for c, tok in enumerate(row) if is_house(tok)}
 
     # Masque de terre, en tuiles : intersections et rues. Une intersection qui
     # porte un obstacle reste en herbe : les rues qui y mènent finissent avant
@@ -170,7 +174,7 @@ def render(level_id, grid_text, min_cells_w=0, moving_parts=True, meta=None):
     for r, row in enumerate(rows):
         for c, tok in enumerate(row):
             px, py = cell_px(2 * r, 2 * c)
-            if tok == "M":
+            if is_house(tok):
                 img.alpha_composite(houses[(r, c)], (px, py))
             elif tok == "~":
                 img.alpha_composite(obstacles[(r, c)], (px, py))

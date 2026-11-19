@@ -18,6 +18,7 @@ describe("parseStreet", () => {
 		expect(s.start).toEqual({
 			position: { row: 0, col: 0 },
 			direction: "east",
+			cups: 0,
 		});
 		expect(s.cells).toEqual([
 			["free", "free", "house"],

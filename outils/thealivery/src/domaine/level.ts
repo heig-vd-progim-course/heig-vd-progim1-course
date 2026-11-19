@@ -17,6 +17,14 @@ export function solutionOf(level: LevelSpec): readonly CardSpec[] {
 	return level.cards.filter((card) => !card.trap);
 }
 
+/** Un niveau à tasses : une maison en commande, ou une carte qui en remplit. */
+export function usesCups(level: LevelSpec): boolean {
+	return (
+		level.cards.some((card) => card.type === "fill" || card.type === "add") ||
+		level.streets.some((street) => street.orders.flat().some((n) => n > 0))
+	);
+}
+
 export function hasTraps(level: LevelSpec): boolean {
 	return level.cards.some((card) => card.trap);
 }

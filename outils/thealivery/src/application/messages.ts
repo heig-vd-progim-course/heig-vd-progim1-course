@@ -3,6 +3,7 @@
 // ici, et seulement ici.
 
 import type { CardSpec } from "../domaine/cards.ts";
+import { cardNumbers } from "../domaine/program.ts";
 import type {
 	CardFailureReason,
 	FailureReason,
@@ -20,6 +21,7 @@ const CARD_FAILURES: Readonly<Record<CardFailureReason, string>> = {
 	TARGET_SET_ASIDE:
 		"Je ne trouve pas la carte où aller : elle est mise de côté.",
 	LOOPS_FOREVER: "Je tourne en rond ! Ma tournée ne finit jamais.",
+	CART_EMPTY: "Il me manque des tasses pour cette commande.",
 };
 
 /** Une description courte, entre parenthèses, pour l'enseignant. */
@@ -31,6 +33,7 @@ const CARD_FAILURES_SHORT: Readonly<Record<CardFailureReason, string>> = {
 	NOBODY_HERE: "personne à livrer",
 	TARGET_SET_ASIDE: "carte visée absente",
 	LOOPS_FOREVER: "boucle infinie",
+	CART_EMPTY: "tasses manquantes",
 };
 
 function remaining(houses: number, leaves: number): string {
@@ -102,6 +105,24 @@ function describe(error: LevelError): string {
 			return `la carte ${String(error.card + 1)} (${error.word}) doit viser une carte, avec -> nom.`;
 		case "UNEXPECTED_TARGET":
 			return `la carte ${String(error.card + 1)} (${error.word}) n'est pas un saut : retirez -> nom.`;
+		case "MISSING_AMOUNT":
+			return `la carte ${String(error.card + 1)} (${error.word}) doit donner un nombre de tasses, par exemple ${error.word} 3.`;
+		case "UNEXPECTED_AMOUNT":
+			return `la carte ${String(error.card + 1)} (${error.word}) ne prend pas de nombre.`;
+		case "MISSING_NAME":
+			return `la carte ${String(error.card + 1)} doit nommer sa routine, par exemple routine demi-tour.`;
+		case "ROUTINE_FIRST":
+			return "la liste commence par une routine : écrivez d'abord le programme principal.";
+		case "EMPTY_ROUTINE":
+			return `la routine ${error.name} n'a aucune carte.`;
+		case "ROUTINE_TRAP":
+			return `la routine ${error.name} ne peut pas être un piège.`;
+		case "CALL_NOT_ROUTINE":
+			return `appeler -> ${error.label} doit viser une routine.`;
+		case "JUMP_TO_ROUTINE":
+			return `un saut ne peut pas viser la routine ${error.label} : utilisez appeler -> ${error.label}.`;
+		case "JUMP_OTHER_ZONE":
+			return `le saut vers {#${error.label}} sort de sa liste : un saut reste dans le programme principal, ou dans sa routine.`;
 		case "DUPLICATE_LABEL":
 			return `l'étiquette {#${error.label}} est utilisée deux fois.`;
 		case "UNKNOWN_LABEL":
@@ -125,27 +146,53 @@ function solutionFails(
 	}
 }
 
-/** Ce que dit Théa pendant une étape réussie, ou rien. */
+function cups(n: number): string {
+	return `${String(n)} tasse${n > 1 ? "s" : ""}`;
+}
+
+/**
+ * Ce que dit Théa pendant une étape réussie, ou rien. Avec `withCups`, elle
+ * dit aussi combien de tasses il lui reste après une livraison.
+ */
 export function stepSays(
 	step: Step,
 	program: readonly CardSpec[],
+	withCups = false,
 ): string | null {
 	const card = program[step.cardIndex];
+	const numbers = cardNumbers(program);
+	const numberAt = (index: number): string => String(numbers[index] ?? "?");
 	const target =
 		card?.target === undefined
 			? -1
 			: program.findIndex((c) => c.id === card.target);
+	const left = step.thea.cups;
 	switch (step.event) {
 		case "deliver":
-			return "Votre thé !";
+			return withCups
+				? `Votre thé ! Il me reste ${cups(left)}.`
+				: "Votre thé !";
 		case "pick-up":
 			return "Des feuilles de thé, parfait.";
 		case "jump":
 			return card?.type === "if-house"
-				? `Une maison attend ici : je saute à la carte ${String(target + 1)}.`
-				: `Je reprends à la carte ${String(target + 1)}.`;
+				? `Une maison attend ici : je saute à la carte ${numberAt(target)}.`
+				: `Je reprends à la carte ${numberAt(target)}.`;
 		case "no-jump":
 			return "Pas de maison ici, je continue.";
+		case "call":
+			return `J'appelle la routine ${card?.target ?? ""}.`;
+		case "return": {
+			const back = step.returnTo ?? -1;
+			const next = program[back];
+			return next === undefined || next.type === "routine"
+				? `Fin de la routine ${card?.id ?? ""} : ma tournée est finie.`
+				: `Fin de la routine ${card?.id ?? ""} : je reprends à la carte ${numberAt(back)}.`;
+		}
+		case "fill":
+			return `Ma charrette contient ${cups(left)}.`;
+		case "add":
+			return `${card?.amount === 1 ? "Une tasse" : cups(card?.amount ?? 0)} de plus : j'en ai ${String(left)}.`;
 		default:
 			return null;
 	}
@@ -173,6 +220,7 @@ const FAILURE_MOODS: Readonly<Record<FailureReason, Mood>> = {
 	NOBODY_HERE: "lost",
 	TARGET_SET_ASIDE: "puzzled",
 	LOOPS_FOREVER: "dizzy",
+	CART_EMPTY: "sad",
 	ROUND_NOT_FINISHED: "sad",
 	EXTRA_CARD: "dots",
 };

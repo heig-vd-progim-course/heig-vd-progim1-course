@@ -16,14 +16,16 @@ Le texte reste dans votre navigateur, d'une visite à l'autre.
 Le format, en bref :
 
 - **la grille** : un bloc `text` par rue. `T>` `T<` `T^` `Tv` pour Théa et sa
-  direction, `.` une intersection libre, `~` un obstacle, `M` une maison, `f`
-  des feuilles ;
+  direction, `.` une intersection libre, `~` un obstacle, `M` une maison, `M1` à
+  `M9` une maison qui commande des tasses, `f` des feuilles ;
 - **les cartes** : une liste, dans un ordre qui réussit. `avancer`,
   `tourner-gauche`, `tourner-droite`, `ramasser`, `livrer`, `aller`,
-  `si-maison` ;
+  `si-maison`, `appeler`, `remplir 3`, `ajouter 1` ;
 - **un piège** : le préfixe `piège :` ;
-- **un saut** : la carte visée porte `{#nom}`, le saut la désigne avec
-  `-> nom`.
+- **un saut** : la carte visée porte `{#nom}`, le saut la désigne avec `-> nom`
+  ;
+- **une routine** : une liste de plus, sous la première, qui commence par
+  `routine nom` ; le programme l'appelle avec `appeler -> nom`.
 
 Une fois le niveau au point, copiez le bloc entier dans une page de séance.
 

@@ -3,9 +3,10 @@
 // pas de sens dans l'état courant (déplacer une carte pendant l'exécution, par
 // exemple). Elle ne connaît ni le DOM ni le canevas.
 
-import type { CardSpec } from "../domaine/cards.ts";
+import { isHeader, type CardSpec } from "../domaine/cards.ts";
 import { runLevel, type LevelRun, type Outcome } from "../domaine/engine.ts";
 import { solutionOf, type LevelSpec } from "../domaine/level.ts";
+import { cardCount, homeZones, zonesOf } from "../domaine/program.ts";
 
 export type Zone = "program" | "aside";
 export type SessionState = "preparation" | "running";
@@ -70,14 +71,19 @@ export class GameSession {
 	private readonly solution: readonly CardSpec[];
 	private readonly random: () => number;
 	private readonly store: ProgressStore | null;
+	/** La zone de chaque carte : 0 pour le programme principal. */
+	private readonly homes: ReadonlyMap<string, number>;
+	/** L'en-tête de chaque zone, null pour le programme principal. */
+	private readonly headers: readonly (CardSpec | null)[];
 	private listeners: (() => void)[] = [];
 
-	private _program: CardSpec[];
+	/** La tournée : programme principal, puis chaque routine avec son en-tête. */
+	private _program: CardSpec[] = [];
 	private _aside: CardSpec[] = [];
 	private _state: SessionState = "preparation";
 	private _attempts = 0;
-	/** Les premières cartes de la tournée, placées et verrouillées par l'aide. */
-	private _locked = 0;
+	/** Les cartes placées et verrouillées par l'aide, en tête de leur zone. */
+	private _locked = new Set<string>();
 	private lastRun: LevelRun | null = null;
 
 	constructor(
@@ -88,7 +94,17 @@ export class GameSession {
 		this.solution = solutionOf(level);
 		this.random = options.random ?? Math.random;
 		this.store = options.store ?? null;
-		this._program = shuffleApart(level.cards, this.solution, this.random);
+		this.homes = homeZones(level.cards);
+		this.headers = zonesOf(level.cards).map((zone) => zone.header);
+		this.assemble(
+			this.headers.map((_header, z) =>
+				shuffleApart(
+					this.inZone(level.cards, z),
+					this.inZone(this.solution, z),
+					this.random,
+				),
+			),
+		);
 	}
 
 	get program(): readonly CardSpec[] {
@@ -104,14 +120,23 @@ export class GameSession {
 		return this._attempts;
 	}
 	get locked(): number {
-		return this._locked;
+		return this._locked.size;
 	}
 	get stars(): number {
 		return this.store?.getStars(this.level.id) ?? 0;
 	}
 
+	/** Une carte qu'on ne déplace pas : placée par l'aide, ou un en-tête. */
 	isLocked(id: string): boolean {
-		return this._program.slice(0, this._locked).some((card) => card.id === id);
+		return (
+			this._locked.has(id) ||
+			this._program.some((card) => card.id === id && isHeader(card))
+		);
+	}
+
+	/** La zone d'une carte : 0 pour le programme principal, puis une par routine. */
+	zoneOf(id: string): number {
+		return this.homes.get(id) ?? 0;
 	}
 
 	subscribe(listener: () => void): () => void {
@@ -127,9 +152,24 @@ export class GameSession {
 		});
 	}
 
+	/** Les cartes d'une zone, en-têtes exclus, dans l'ordre de la liste. */
+	private inZone(list: readonly CardSpec[], zone: number): CardSpec[] {
+		return list.filter((c) => !isHeader(c) && this.zoneOf(c.id) === zone);
+	}
+
+	/** Recompose la tournée à partir des cartes de chaque zone. */
+	private assemble(bodies: readonly (readonly CardSpec[])[]): void {
+		this._program = bodies.flatMap((body, z) => {
+			const header = this.headers[z] ?? null;
+			return header === null ? [...body] : [header, ...body];
+		});
+	}
+
 	/**
-	 * Déplace une carte vers une zone, à une position. Une carte verrouillée ne
-	 * bouge pas, et rien ne se glisse au-dessus des cartes verrouillées.
+	 * Déplace une carte vers une zone, à une position dans la tournée. Une
+	 * carte reste dans sa routine ou dans le programme principal ; une carte
+	 * verrouillée ne bouge pas, et rien ne se glisse au-dessus des cartes
+	 * verrouillées.
 	 */
 	move(id: string, zone: Zone, index: number): boolean {
 		if (this._state !== "preparation" || this.isLocked(id)) {
@@ -146,31 +186,49 @@ export class GameSession {
 		source.splice(from, 1);
 		const target = zone === "program" ? this._program : this._aside;
 		let to = source === target && index > from ? index - 1 : index;
-		const floor = zone === "program" ? this._locked : 0;
-		to = Math.max(floor, Math.min(to, target.length));
+		if (zone === "program") {
+			const home = this.zoneOf(id);
+			const bounds = zonesOf(this._program)[home];
+			const start = bounds?.start ?? 0;
+			const floor =
+				start +
+				this.inZone(this._program, home).filter((c) => this._locked.has(c.id))
+					.length;
+			to = Math.max(floor, Math.min(to, bounds?.end ?? target.length));
+		} else {
+			to = Math.max(0, Math.min(to, target.length));
+		}
 		target.splice(to, 0, card);
 		this.changed();
 		return true;
 	}
 
-	/** Mélanger/Recommencer : les cartes libres et mises de côté, mélangées. */
+	/** Mélanger/Recommencer : dans chaque zone, les cartes libres mélangées. */
 	shuffle(): void {
 		if (this._state !== "preparation") {
 			return;
 		}
-		const locked = this._program.slice(0, this._locked);
-		const free = [...this._program.slice(this._locked), ...this._aside];
-		this._program = [
-			...locked,
-			...shuffleApart(free, this.solution.slice(this._locked), this.random),
-		];
+		const all = [...this._program, ...this._aside];
+		this.assemble(
+			this.headers.map((_header, z) => {
+				const cards = this.inZone(all, z);
+				const locked = this.inZone(this._program, z).filter((c) =>
+					this._locked.has(c.id),
+				);
+				const free = cards.filter((c) => !this._locked.has(c.id));
+				const rest = this.inZone(this.solution, z).filter(
+					(c) => !this._locked.has(c.id),
+				);
+				return [...locked, ...shuffleApart(free, rest, this.random)];
+			}),
+		);
 		this._aside = [];
 		this.changed();
 	}
 
 	/** Exécuter : calcule toute l'exécution d'un coup, que la vue animera. */
 	start(): LevelRun | null {
-		if (this._state !== "preparation" || this._program.length === 0) {
+		if (this._state !== "preparation" || cardCount(this._program) === 0) {
 			return null;
 		}
 		this._state = "running";
@@ -200,7 +258,7 @@ export class GameSession {
 		const { outcome, streetIndex } = run;
 
 		if (outcome.kind === "success") {
-			const stars = starsFor(this._attempts, this._locked > 0);
+			const stars = starsFor(this._attempts, this._locked.size > 0);
 			if (this.store !== null && stars > this.store.getStars(this.level.id)) {
 				this.store.setStars(this.level.id, stars);
 			}
@@ -228,18 +286,25 @@ export class GameSession {
 		};
 	}
 
-	/** Verrouille les k premières cartes de la solution, en tête de tournée. */
+	/**
+	 * Verrouille les k premières cartes de la solution, en-têtes exclus.
+	 * Chacune va en tête de sa zone, dans l'ordre de la solution.
+	 */
 	private help(): boolean {
-		const k = Math.min(this._attempts - (HELP_AFTER - 1), this.solution.length);
-		if (k <= this._locked) {
+		const cards = this.solution.filter((c) => !isHeader(c));
+		const k = Math.min(this._attempts - (HELP_AFTER - 1), cards.length);
+		if (k <= this._locked.size) {
 			return false;
 		}
-		const placed = this.solution.slice(0, k);
-		const rest = (list: readonly CardSpec[]): CardSpec[] =>
-			list.filter((card) => !placed.includes(card));
-		this._program = [...placed, ...rest(this._program)];
-		this._aside = rest(this._aside);
-		this._locked = k;
+		const placed = new Set(cards.slice(0, k).map((c) => c.id));
+		this._locked = placed;
+		this.assemble(
+			this.headers.map((_header, z) => [
+				...this.inZone(this.solution, z).filter((c) => placed.has(c.id)),
+				...this.inZone(this._program, z).filter((c) => !placed.has(c.id)),
+			]),
+		);
+		this._aside = this._aside.filter((c) => !placed.has(c.id));
 		return true;
 	}
 }
