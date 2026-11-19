@@ -36,3 +36,7 @@ Thumbs.db
 ## Python
 # Caches de compilation
 __pycache__/
+
+# Dépendances des outils construits avec Node
+node_modules/
+coverage/
