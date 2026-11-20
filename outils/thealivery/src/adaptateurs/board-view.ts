@@ -31,6 +31,7 @@ interface Sprite {
 	col: number;
 	direction: Direction;
 	scale: number;
+	alpha: number;
 	walking: boolean;
 }
 
@@ -47,6 +48,7 @@ export class BoardView {
 		col: 0,
 		direction: "east",
 		scale: 1,
+		alpha: 1,
 		walking: false,
 	};
 	private fx: "swim" | null = null;
@@ -153,8 +155,14 @@ export class BoardView {
 			col: state.position.col,
 			direction: state.direction,
 			scale: 1,
+			alpha: 1,
 			walking: false,
 		};
+	}
+
+	/** Tourne Théa sur place, sans délai. */
+	face(direction: Direction): void {
+		this.thea.direction = direction;
 	}
 
 	setCells(cells: Cells): void {
@@ -170,12 +178,16 @@ export class BoardView {
 		this.mood = mood;
 	}
 
-	/** Déplace Théa, en marchant, vers une position (fractionnaire pour un sursaut). */
+	/**
+	 * Déplace Théa, en marchant, vers une position (fractionnaire pour un
+	 * sursaut). Elle s'efface quand elle rapetisse, sauf opacité donnée.
+	 */
 	move(
 		row: number,
 		col: number,
 		direction: Direction,
 		scale = 1,
+		alpha = Math.min(1, scale * 1.3),
 	): Promise<void> {
 		const from = { ...this.thea };
 		this.thea.direction = direction;
@@ -187,6 +199,7 @@ export class BoardView {
 				this.thea.row = from.row + (row - from.row) * k;
 				this.thea.col = from.col + (col - from.col) * k;
 				this.thea.scale = from.scale + (scale - from.scale) * k;
+				this.thea.alpha = from.alpha + (alpha - from.alpha) * k;
 				this.thea.walking = k < 1 && (row !== from.row || col !== from.col);
 				if (k < 1) {
 					requestAnimationFrame(step);
@@ -271,7 +284,7 @@ export class BoardView {
 			this.sprite(ctx, "thea", x - 8, y - 7, [0, 0, 16, 9]);
 		} else {
 			const k = t.scale;
-			ctx.globalAlpha = Math.max(0, Math.min(1, k * 1.3));
+			ctx.globalAlpha = Math.max(0, Math.min(1, t.alpha));
 			this.sprite(
 				ctx,
 				"thea",

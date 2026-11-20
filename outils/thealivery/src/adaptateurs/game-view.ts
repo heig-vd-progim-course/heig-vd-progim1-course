@@ -14,6 +14,7 @@ import { GameSession } from "../application/session.ts";
 import type { Step, StepEvent } from "../domaine/engine.ts";
 import { usesCups, type LevelSpec } from "../domaine/level.ts";
 import { cardCount } from "../domaine/program.ts";
+import type { Cells, Direction } from "../domaine/street.ts";
 import type { Atlas } from "./assets.ts";
 import { layoutStreet, widestCells } from "./board-layout.ts";
 import { BoardView } from "./board-view.ts";
@@ -148,13 +149,15 @@ export class GameView {
 		this.hint.className = "tl-hint";
 		this.hint.hidden = true;
 
+		// Les boutons entre la bulle et la tournée : on les voit sans faire
+		// défiler, même quand la tournée est longue
 		this.element.append(
 			head,
 			boardBox,
 			this.bubble.element,
-			this.cards.element,
 			controls,
 			this.hint,
+			this.cards.element,
 		);
 
 		this.runButton.addEventListener("click", () => {
@@ -312,6 +315,32 @@ export class GameView {
 		this.updateButtons();
 	}
 
+	/**
+	 * Livraison : Théa monte sur la dalle, se tourne vers la porte et entre en
+	 * rapetissant et en s'effaçant dans l'ombre, puis ressort et reprend sa
+	 * direction. La maison passe au cœur pendant qu'elle est dedans.
+	 */
+	private async enterHouse(
+		row: number,
+		col: number,
+		direction: Direction,
+		cells: Cells,
+	): Promise<void> {
+		// La porte est une tuile au-dessus de la dalle ; une intersection en fait six
+		const door = row - 1 / 6;
+		this.board.setMood(null);
+		await this.board.move(row, col, direction);
+		this.board.face("north");
+		await wait(120);
+		await this.board.move(door, col, "north", 0.6, 0);
+		this.board.setCells(cells);
+		await wait(250);
+		this.board.face("south");
+		await this.board.move(row, col, "south", 1, 1);
+		this.board.face(direction);
+		this.board.setMood("happy");
+	}
+
 	private async playStep(step: Step): Promise<void> {
 		const card = this.session.program[step.cardIndex];
 		this.cards.setCurrent(
@@ -333,6 +362,9 @@ export class GameView {
 			case "fall-in-hole":
 				await this.board.move(row, col, direction);
 				await this.board.move(row, col, direction, 0.15);
+				break;
+			case "deliver":
+				await this.enterHouse(row, col, direction, step.cells);
 				break;
 			case "bump-edge": {
 				const dr =
@@ -357,7 +389,7 @@ export class GameView {
 			this.bubble.say(message, "neutral", STEP_MOODS[step.event] ?? null);
 		}
 		await wait(
-			step.event === "deliver" || step.event === "pick-up" ? 350 : 110,
+			step.event === "pick-up" ? 350 : step.event === "deliver" ? 200 : 110,
 		);
 		if (STEP_MOODS[step.event] === "happy") {
 			this.board.setMood(null);
