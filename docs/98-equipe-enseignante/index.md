@@ -104,8 +104,9 @@ comprime si la séance déborde.
 |     05 | [Fonctions et portée des variables](05-fonctions-et-portee.md) |
 |     06 | [Conditions](06-conditions.md)                                |
 |     07 | [Boucles](07-boucles.md)                                      |
+|     08 | [Tableaux et lancement du mini-projet](08-tableaux-et-lancement-du-mini-projet.md) |
 
-Les séances 08 à 12 n'ont pas encore de notes : leur contenu est à l'état
+Les séances 09 à 12 n'ont pas encore de notes : leur contenu est à l'état
 d'esquisse.
 
 ## Contribuer

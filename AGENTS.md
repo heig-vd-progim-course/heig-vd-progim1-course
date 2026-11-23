@@ -469,21 +469,37 @@ qui précède.
 |     06 | Conditions, opérateurs logiques, `switch`, ternaire        |
 |      — | Évaluation écrite (50 %), entre les séances 06 et 07       |
 |     07 | Boucles                                                    |
-|     08 | Tableaux. Lancement du mini-projet                         |
-|     09 | Chaînes de caractères et formatage                         |
-|     10 | Débogage et tests                                          |
-|     11 | Git                                                        |
-|     12 | Présentations orales                                       |
-|      — | Évaluation finale, après le semestre                       |
+|     08 | Tableaux à une dimension, `Arrays.toString`, `String[] args`. Lancement du mini-projet |
+|     09 | Tableaux à deux dimensions, tableau en paramètre de fonction |
+|     10 | Exceptions                                                 |
+|     11 | Hasard et tri                                              |
+|     12 | Git, rendu du mini-projet, bilan du cours                  |
+|      — | Oral (40 %), pendant la session d'examens                  |
+
+Ce qui n'est **pas** au programme : les méthodes de `String` (`length()`,
+`charAt()`, etc.), la boucle `for each`, le débogueur et les tests. Un exemple
+ne les utilise pas.
 
 Deux points qui surprennent et qui sont volontaires : **les fonctions arrivent
 avant les conditions et les boucles**, selon l'ordre du cours Java
 d'OpenClassrooms, et **il n'y a pas de pseudo-code** dans ce cours. On passe du
 diagramme d'activité directement au Java.
 
-Un **fil rouge** traverse les séances 04 à 09 : calculer la moyenne des notes
+Un **fil rouge** traverse les séances 04 à 08 : calculer la moyenne des notes
 d'un groupe et dire qui a réussi. À chaque séance, il est repris avec l'outil du
 jour et la version précédente est réécrite.
+
+Le **mini-projet** prend le relais des séances 08 à 11 : un jeu guidé, _Code
+secret_ (deviner une combinaison de quatre chiffres, sur le principe de _Bulls
+and Cows_). Chaque séance ajoute une étape qui utilise la notion du jour. Le
+nom _Mastermind_ est une marque : ne pas l'employer pour le projet.
+
+Les **questionnaires** du mini-projet sont distribués en fin de séance (08 à
+11) et rendus, remplis à la main, au début de la suivante. Ils ne demandent
+jamais ce que fait une ligne précise : ils font raisonner sur un cas (_"que se
+passe-t-il si la personne tape 9 ?"_) et revenir sur sa manière de travailler.
+Les sources vivent dans `evaluations/questionnaire-NN/`, le PDF est publié
+comme les autres évaluations et lié depuis la page de la séance.
 
 ## Avant de livrer
 

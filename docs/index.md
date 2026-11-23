@@ -24,11 +24,10 @@ de :
 - traduire ce diagramme en un programme Java correct et lisible ;
 - utiliser les variables, les constantes, les types de base, les structures de
   contrôle, les fonctions et les tableaux ;
-- tester et déboguer un programme simple ;
+- lire et rattraper les erreurs d'un programme à l'exécution ;
 - expliquer ce que fait son propre code et pourquoi elle l'a écrit ainsi.
 
-La dernière ligne n'est pas un ornement : c'est le critère qui décide de la
-note du mini-projet.
+La dernière ligne n'est pas un ornement : c'est ce que vérifie l'oral final.
 
 ## Par où commencer
 
@@ -52,12 +51,12 @@ Le programme complet, séance par séance, est disponible sur la page
 |     06 | Conditions                                     | Prêt        |
 |      — | **Évaluation écrite**                          | À faire     |
 |     07 | Boucles                                        | En cours    |
-|     08 | Tableaux et lancement du mini-projet           | À faire     |
-|     09 | Chaînes de caractères                          | À faire     |
-|     10 | Déboguer et tester                             | À faire     |
-|     11 | Git et finalisation                            | À faire     |
-|     12 | Présentations orales                           | À faire     |
-|      — | **Évaluation finale**                          | À faire     |
+|     08 | Tableaux et lancement du mini-projet           | En cours    |
+|     09 | Tableaux à deux dimensions                     | À faire     |
+|     10 | Exceptions                                     | À faire     |
+|     11 | Hasard et tri                                  | À faire     |
+|     12 | Git et bilan                                   | À faire     |
+|      — | **Oral**                                       | À faire     |
 
 ## Licence et attribution
 

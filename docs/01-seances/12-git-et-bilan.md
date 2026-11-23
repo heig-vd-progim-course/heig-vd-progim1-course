@@ -1,4 +1,4 @@
-# Séance 11 - Git et finalisation
+# Séance 12 - Git et bilan
 
 V. Guidoux, avec l'aide de Claude.
 
@@ -12,8 +12,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Intention
 
-Versionner son travail sur un besoin réel : garder une version qui marche avant
-de tout casser. Introduction minimale à Git et à GitHub.
+Rendre son code secret sur un dépôt Git, revenir sur ce qui a été appris
+pendant le semestre, et donner son avis sur le cours.
 
 ## Objectifs pressentis
 
@@ -22,18 +22,20 @@ de tout casser. Introduction minimale à Git et à GitHub.
 - expliquer à quoi sert un système de gestion de versions ;
 - initialiser un dépôt, enregistrer des modifications et consulter
   l'historique ;
-- publier son dépôt et revenir à une version antérieure.
+- publier son travail sur un dépôt distant.
 
 ## Activité pressentie
 
-Atelier mini-projet. Rendu du jalon 4 : une version qui traite le cas normal,
-plus la liste des cas non traités.
+- Rendu du code secret sur un dépôt, avec Classroom50.
+- Rappels de ce qui a été vu pendant le semestre, sous forme de jeu
+  collaboratif.
+- Évaluation du cours par les personnes qui l'ont suivi.
 
 ## Point d'attention
 
-Git est introduit ici et pas plus tôt parce que la notion n'a de sens qu'une
-fois qu'on a déjà perdu du travail. Se limiter à `init`, `add`, `commit`,
-`log`, `push`. Pas de branches, pas de fusion, pas de résolution de conflits.
+Git arrive quand il y a quelque chose à rendre, pas avant. Se limiter à
+`init`, `add`, `commit`, `log`, `push`. Pas de branches, pas de fusion,
+pas de résolution de conflits.
 
 <!-- URLs -->
 

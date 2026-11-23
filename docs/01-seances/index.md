@@ -14,9 +14,10 @@ descend jusqu'à la machine qui l'exécute. À chaque séance, une activité pr�
 la théorie : on manipule l'idée avant de lui donner un nom. Une évaluation
 écrite a lieu entre les séances 06 et 07.
 
-**Séances 08 à 12 : faire.** Vous avez tous les éléments de base. Vous les
-appliquez à un problème que vous avez choisi, en autonomie encadrée par des
-jalons. Le cours devient un atelier.
+**Séances 08 à 12 : construire.** Chaque séance apporte encore une notion,
+mais la moitié du temps passe à l'appliquer dans un mini-projet guidé : un jeu,
+_Code secret_, construit étape par étape. Un questionnaire, rendu au début de
+chaque séance, vous fait revenir sur ce que vous avez programmé.
 
 ## Les séances
 
@@ -30,21 +31,21 @@ jalons. Le cours devient un atelier.
 |     06 | [Conditions](06-conditions/index.md)                                       | `if`, `else`, opérateurs de comparaison et logiques, `switch`, ternaire |
 |      — | **Évaluation écrite** (50 %)                                               | Papier et crayon, sans ressources |
 |     07 | [Boucles](07-boucles/index.md)                                             | `while`, `for`, `do-while`, trois ingrédients d'une boucle |
-|     08 | [Tableaux et lancement du mini-projet](08-tableaux-et-lancement-du-mini-projet.md) | Collections de données, parcours. Jalon 1 |
-|     09 | [Chaînes de caractères](09-chaines-de-caracteres.md)                       | Manipuler du texte, formater une sortie. Jalon 2 |
-|     10 | [Déboguer et tester](10-deboguer-et-tester.md)                             | Lire une erreur, isoler un bogue, vérifier. Jalon 3 |
-|     11 | [Git et finalisation](11-git-et-finalisation.md)                           | Versionner son travail, le publier. Jalon 4 |
-|     12 | [Présentations orales](12-presentations-orales.md)                         | Rendu final et soutenance. Jalon 5 |
-|      — | **Évaluation finale**                                                      | Après le semestre, sur l'ensemble du cours |
+|     08 | [Tableaux et lancement du mini-projet](08-tableaux-et-lancement-du-mini-projet/index.md) | Ranger plusieurs valeurs, les parcourir. Code secret, étape 1 |
+|     09 | [Tableaux à deux dimensions](09-tableaux-a-deux-dimensions.md)             | Grilles, tableau en paramètre. Code secret, étape 2 |
+|     10 | [Exceptions](10-exceptions.md)                                             | Lire une exception, la rattraper. Code secret, étape 3 |
+|     11 | [Hasard et tri](11-hasard-et-tri.md)                                       | Tirer au hasard, trier. Code secret, étape 4 |
+|     12 | [Git et bilan](12-git-et-bilan.md)                                         | Rendre son jeu, rappels, évaluation du cours |
+|      — | **Oral**                                                                   | Pendant la session d'examens |
 
 ## Le fil rouge
 
-Un même problème traverse les séances 04 à 09 : **calculer la moyenne des notes
+Un même problème traverse les séances 04 à 08 : **calculer la moyenne des notes
 d'un groupe de personnes et dire qui a réussi**.
 
 Il est assez simple pour être posé en séance 04 avec les seules variables, et
-assez riche pour mobiliser ensuite les fonctions, les conditions, les boucles,
-les tableaux et le formatage du texte.
+assez riche pour mobiliser ensuite les fonctions, les conditions, les boucles
+et les tableaux. À partir de la séance 08, le mini-projet prend le relais.
 
 Sa forme évolue à chaque séance :
 
@@ -54,8 +55,7 @@ Sa forme évolue à chaque séance :
 |     05 | La moyenne devient une **fonction** qui prend des notes et rend un résultat, appelée pour trois personnes |
 |     06 | Le programme **décide** si la moyenne est suffisante              |
 |     07 | Il **redemande** une note invalide, et accepte un nombre quelconque de notes et de personnes |
-|     08 | Les notes sont rangées dans un **tableau** et parcourues          |
-|     09 | La sortie est **formatée** proprement et les noms sont gérés      |
+|     08 | Les notes sont rangées dans un **tableau**, et celles en dessous de la moyenne sont signalées |
 
 À chaque fois, la version précédente est réécrite plutôt que rallongée. C'est
 la manière la plus directe de rendre visible qu'un programme n'est pas écrit
@@ -93,11 +93,12 @@ qui étudient :
   abandonné : une étape intermédiaire de plus entre le diagramme et le code
   n'apportait rien.
 - Les fonctions passent avant les conditions et les boucles.
-- La portée des variables et les chaînes de caractères deviennent des sujets à
-  part entière.
+- La portée des variables devient un sujet à part entière.
 - L'évaluation est passée d'un examen final unique à une évaluation écrite à
-  mi-semestre et un mini-projet à jalons avec soutenance orale.
-- Git est introduit sur un besoin réel plutôt qu'en théorie.
+  mi-semestre, des questionnaires pendant le mini-projet et un oral en session.
+- Le mini-projet est un jeu guidé, construit sur quatre séances, sur le modèle
+  du mini-projet du cours ProgServ1 de L. Delafontaine.
+- Git est introduit sur un besoin réel, le rendu du jeu, plutôt qu'en théorie.
 - L'apprentissage de l'apprentissage et la gestion de l'attention font partie
   du programme, pas des recommandations en passant.
 
