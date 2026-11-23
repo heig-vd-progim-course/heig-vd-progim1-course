@@ -19,6 +19,11 @@
   under a
   [Creative Commons Attribution-ShareAlike 4.0 International](https://github.com/heig-vd-progserv-course/heig-vd-progserv2-course/blob/main/LICENSE.md)
   license.
+- [HEIG-VD ProgServ3 Course](https://github.com/heig-vd-progserv-course/heig-vd-progserv3-course)
+  by Ludovic Delafontaine [@ludelafo](https://github.com/ludelafo/) is licensed
+  under a
+  [Creative Commons Attribution-ShareAlike 4.0 International](https://github.com/heig-vd-progserv-course/heig-vd-progserv3-course/blob/main/LICENSE.md)
+  license.
 - [HEIG-VD DevProdMed Course](https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course)
   by Ludovic Delafontaine [@ludelafo](https://github.com/ludelafo/) is licensed
   under a
