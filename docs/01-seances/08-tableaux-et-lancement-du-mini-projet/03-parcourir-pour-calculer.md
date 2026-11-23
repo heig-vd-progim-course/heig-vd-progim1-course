@@ -39,13 +39,13 @@ public class Main {
                 passedCount++;
             }
         }
-        System.out.println("Notes suffisantes : " + passedCount + " sur " + grades.length);
+        System.out.println("Suffisantes : " + passedCount + " sur " + grades.length);
     }
 }
 ```
 
 ```text
-Notes suffisantes : 3 sur 5
+Suffisantes : 3 sur 5
 ```
 
 ## Le minimum et le maximum
