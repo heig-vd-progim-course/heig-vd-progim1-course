@@ -1,0 +1,15 @@
+@startuml t12
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 22
+
+start
+:sum = 0;
+:i = 1;
+while (i <= 4 ?) is ([oui])
+  :sum = sum + i;
+  :i++;
+endwhile ([non])
+:Afficher sum;
+stop
+@enduml

@@ -1,0 +1,13 @@
+@startuml t04
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 22
+
+start
+:i = 0;
+while (i <= 5 ?) is ([oui])
+  :i++;
+  :Afficher i;
+endwhile ([non])
+stop
+@enduml

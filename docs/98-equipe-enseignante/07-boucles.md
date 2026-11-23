@@ -59,25 +59,11 @@ traite conditions **et** boucles. Pour les boucles, dans cet ordre :
 
 Même critère qu'en séance 06 : publication évaluée par les pairs, résultat
 reproduit par des équipes indépendantes. Ce qui suit est classé du plus solide
-au moins solide, et dit ce qui est solide et ce qui ne l'est pas, y compris sur
-l'activité en mouvement.
+au moins solide.
 
 - **L'effet de test** et le **feedback immédiat** : voir la séance 06. Ils
   justifient les quiz, et la consigne de refaire quiz et problèmes de Parsons
   une semaine plus tard.
-- **L'effet d'_enactment_** (Engelkamp ; Cohen, 1981). On retient mieux une
-  consigne d'action qu'on a exécutée que celle qu'on a seulement entendue.
-  C'est l'un des effets les plus reproduits de la psychologie de la mémoire.
-  **Mais il porte sur la mémoire de l'action elle-même** (_"lever le bras"_),
-  pas sur un concept abstrait. Il ne prouve pas qu'une boucle jouée sera mieux
-  comprise.
-- **Les styles d'apprentissage sont un mythe.** Il n'existe pas de personnes
-  « kinesthésiques » qui apprendraient mieux en bougeant (Pashler et al.,
-  2008). Ne pas justifier l'activité ainsi, ni devant la classe, ni ailleurs.
-- **L'activité physique en classe** (méta-analyse de Norris et al., 2020).
-  Elle augmente l'activité physique et l'attention en classe. Ses effets sur
-  les résultats scolaires sont faibles et incertains, et les études portent
-  surtout sur des enfants.
 - **Les problèmes de Parsons** (Parsons et Haden, 2006). Ericson, Margulieux et
   Rick (2017) trouvent que les résoudre fait autant progresser qu'écrire ou
   corriger le même code, en nettement moins de temps. Un résultat sur un seul
@@ -85,26 +71,22 @@ l'activité en mouvement.
   preuve définitive.
 - **Les activités « débranchées »** (_CS Unplugged_). Les comparaisons
   disponibles, par exemple Thies et Vahrenhold (2013), concluent à des
-  résultats **comparables** à un enseignement classique, pas supérieurs.
-
-Ce qui agit probablement dans l'activité des trios, c'est donc moins le fait
-de se lever que **l'effort de récupération** (décider si sa carte va avec une
-autre), et **l'explication entre pairs** (_"pourquoi tu penses qu'on va
-ensemble ?"_). Le mouvement apporte de l'énergie au milieu d'une séance de
-quatre périodes. C'est déjà quelque chose, à condition de ne pas lui prêter
-plus.
+  résultats **comparables** à un enseignement classique, pas supérieurs. Ne pas
+  attendre de l'activité des quatuors plus qu'un support à l'effort de
+  récupération et à l'explication entre pairs.
 
 **Le test pour ne pas faire de l'_activité-washing_** : cette activité vaudrait-elle
-encore la peine, faite assis, sur papier ? Oui : associer énoncé, code et
-sortie entre des cartes quasi identiques oblige à dérouler la boucle. Le
-mouvement s'ajoute à une tâche qui tient seule.
+encore la peine, faite assis, sur papier ? Oui : associer énoncé, diagramme,
+code et sortie entre des cartes quasi identiques oblige à dérouler la boucle.
+Le mouvement de circuler dans la salle s'ajoute à une tâche qui tient seule.
 
 ### Les idées fausses visées
 
 - **La condition surveillée en permanence.** La boucle s'arrêterait au moment
   précis où la condition devient fausse, au milieu du corps. C'est le quiz
   _"La condition n'est posée qu'au début du tour"_, la carte T04 de l'activité,
-  et tout l'intérêt de la partie _Jouer une boucle_.
+  et tout l'intérêt de la carte **Diagramme** : la condition n'y apparaît
+  qu'une fois, à un seul endroit du chemin.
 - **_IfIsLoop_** ([progmiscon.org](https://progmiscon.org/misconceptions/Java/IfIsLoop/)) :
   le corps d'un `if` se répéterait tant que sa condition est vraie. C'est le
   rappel d'ouverture.
@@ -123,18 +105,6 @@ mouvement s'ajoute à une tâche qui tient seule.
 
 ### Sources
 
-- R. L. Cohen, _On the generality of some memory laws_, Scandinavian Journal
-  of Psychology 22(1), 1981.
-- J. Engelkamp, _Memory for actions_, Psychology Press, 1998. La synthèse sur
-  les _subject-performed tasks_.
-- H. Pashler, M. McDaniel, D. Rohrer et R. Bjork, _Learning styles: concepts
-  and evidence_, Psychological Science in the Public Interest 9(3), 2008.
-  [DOI](https://doi.org/10.1111/j.1539-6053.2009.01038.x).
-- E. Norris, T. van Steen, A. Direito et E. Stamatakis, _Physically active
-  lessons in schools and their impact on physical activity, educational,
-  health and cognition outcomes: a systematic review and meta-analysis_,
-  British Journal of Sports Medicine 54(14), 2020.
-  [DOI](https://doi.org/10.1136/bjsports-2018-100502).
 - D. Parsons et P. Haden, _Parson's programming puzzles: a fun and effective
   learning tool for first programming courses_, ACE 2006.
 - B. Ericson, L. Margulieux et J. Rick, _Solving Parsons problems versus fixing
@@ -163,25 +133,22 @@ mouvement s'ajoute à une tâche qui tient seule.
 | Quoi                                     | Détail                                                                                                     |
 | :--------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
 | Imprimer les cartes                      | [Le PDF des cartes](materiel/07-boucles-cartes.pdf), voir la section suivante. **En couleur**              |
-| Trier les cartes                         | 36 cartes de trios, plus 8 cartes pour jouer la boucle. Une carte par page : aucune découpe              |
-| Prévoir un objet pour l'exécution        | Une balle, une craie, un feutre géant : un objet qui se passe de main en main et se voit du fond de la salle |
-| Prévoir deux feutres et une feuille blanche | Pour la personne `i`, qui efface et réécrit sa valeur                                                    |
-| Libérer un espace devant le tableau      | Huit personnes debout, en ligne, face à la classe                                                          |
+| Trier les cartes                         | 48 cartes de quatuors. Une carte par page : aucune découpe                                                 |
 | Tester les quiz et les problèmes de Parsons | Sur le site publié, depuis le réseau de l'école : les confettis viennent d'un CDN                       |
 | Récupérer deux ou trois fils rouges      | Ceux de la séance 06, version avec le ternaire. Ils servent de point de départ au premier atelier         |
 | Avoir le diagramme des fiches au tableau | Celui de la séance 01, avec la flèche qui remonte. Il reste affiché pendant la première théorie            |
 
 ### Ce qu'il faut imprimer
 
-Le PDF tient sur **45 pages A4**, à imprimer en **couleur**, recto seul. Une carte par page, en paysage, pour qu'elle se lise de loin.
+Le PDF tient sur **49 pages A4**, à imprimer en **couleur**, recto seul. Une carte par page, en paysage, pour qu'elle se lise de loin.
 
 | Pages | Contenu                                                 | Quantité          | Format                      |
 | :---: | :------------------------------------------------------ | :---------------- | :-------------------------- |
-|   1   | Solutions des trios, pour vous                          | 1 exemplaire      | A4 portrait                 |
+|   1   | Solutions des quatuors, pour vous                       | 1 exemplaire      | A4 portrait                 |
 | 2-13  | Cartes **Énoncé**, bandeau vert                         | 12 cartes         | A4 paysage                  |
-| 14-25 | Cartes **Code**, bandeau bleu                           | 12 cartes         | A4 paysage                  |
-| 26-37 | Cartes **Sortie**, bandeau gris                         | 12 cartes         | A4 paysage                  |
-| 38-45 | Cartes de la boucle jouée                               | 8 cartes          | A4 paysage                  |
+| 14-25 | Cartes **Diagramme**, bandeau violet                    | 12 cartes         | A4 paysage                  |
+| 26-37 | Cartes **Code**, bandeau bleu                           | 12 cartes         | A4 paysage                  |
+| 38-49 | Cartes **Sortie**, bandeau gris                         | 12 cartes         | A4 paysage                  |
 
 Le nombre exact de pages est indiqué en tête du PDF ; il fait foi si ce tableau
 a pris du retard.
@@ -193,21 +160,29 @@ cartes est coloré comme dans l'éditeur, et le bandeau de chaque sorte de carte
 en reprend la logique :
 
 - **Énoncé**, en vert : c'est du texte en français, comme une chaîne ;
+- **Diagramme**, en violet : une quatrième couleur de l'éditeur ;
 - **Code**, en bleu : la couleur des mots-clés ;
 - **Sortie**, en gris foncé : la console.
 
-Chaque carte de trio porte, en petit, un identifiant (T01 à T12) qui permet de
-vérifier un trio d'un coup d'œil. Il est imprimé dans un coin du recto, en gris clair :
-les personnes ne le cherchent pas si on ne leur en parle pas.
+Chaque carte de diagramme, de code et de sortie porte, en petit, un
+identifiant (T01 à T12) qui permet de vérifier un quatuor d'un coup d'œil. Il
+est imprimé dans un coin du recto, en gris clair. **La carte Énoncé n'en porte
+pas** : c'est la seule que la personne regarde avant de bouger, et lui donner
+l'identifiant reviendrait à lui dire directement qui chercher.
 
-Le PDF se régénère depuis `materiel/07-boucles/generer-cartes.py`, à la racine
-du dépôt. Toute modification d'une carte se fait là, pas dans le PDF.
+Si vous avez encore un ancien jeu de trios imprimé (énoncé, code, sortie), [le
+PDF des diagrammes seuls](materiel/07-boucles-diagrammes.pdf) le complète : 12
+pages, mêmes identifiants T01 à T12.
 
-### Les trios
+Les deux PDF se régénèrent depuis `materiel/07-boucles/generer-cartes.py`, à la
+racine du dépôt. Toute modification d'une carte se fait là, pas dans le PDF.
+
+### Les quatuors
 
 Tous les codes ont été exécutés avec `eclipse-temurin:25-jdk`, dans un `main`.
+Le diagramme de chaque quatuor est dans `materiel/07-boucles/diagrammes/`.
 
-| Trio | Énoncé                                      | Code (condition, mise à jour)       | Sortie            | Piège visé                               |
+| Quatuor | Énoncé                                      | Code (condition, mise à jour)       | Sortie            | Piège visé                               |
 | :--: | :------------------------------------------ | :---------------------------------- | :---------------- | :--------------------------------------- |
 | T01  | Afficher les nombres de 0 à 5               | `i = 0`, `i <= 5`, `i++` après      | `0 1 2 3 4 5`     | La référence                             |
 | T02  | Afficher les nombres de 0 à 4               | `i = 0`, `i < 5`, `i++` après       | `0 1 2 3 4`       | `<` ou `<=`                              |
@@ -226,25 +201,24 @@ Sur les cartes **Sortie**, les nombres sont affichés un par ligne, comme dans
 la console. Celle de T10 montre six `0` suivis de points de suspension, et
 celle de T11 un cadre de console vide.
 
-### Combien de trios distribuer
+### Combien de quatuors distribuer
 
-Une personne, une carte. Avec 35 personnes : **11 trios** (33 cartes), et les
-deux personnes restantes deviennent **arbitres** : elles reçoivent la page de
-solutions et valident les trios formés. Elles joueront ensuite `i` et la
-console dans la partie 2.
+Une personne, une carte. Avec 35 personnes : **8 quatuors** (32 cartes), et les
+trois personnes restantes deviennent **arbitres** : elles reçoivent la page de
+solutions et valident les quatuors formés.
 
-Si la salle est moins remplie, retirez les trios dans cet ordre, du premier à
-retirer au dernier :
+Si la salle est moins remplie, retirez les quatuors dans cet ordre, du premier
+à retirer au dernier :
 
 > T09, T08, T07, T12, T06, T05, T11, T10, T04, T03, T02, T01
 
 T01 à T04 forment le cœur de l'activité : quatre codes presque identiques. Ne
-descendez pas en dessous de six trios. En dessous de 18 personnes, gardez T01
-à T04, T10 et T11.
+descendez pas en dessous de six quatuors. En dessous de 24 personnes, gardez
+T01 à T04, T10 et T11.
 
 Une alternative si la salle ne permet pas de circuler : une moitié de la classe
 joue, l'autre moitié reçoit la liste des énoncés et prédit, sur papier, les
-trios qui vont se former. Les rôles s'échangent pour la partie 2.
+quatuors qui vont se former. Échanger les rôles à mi-parcours.
 
 ## Rappel - Un `if` ne se répète pas
 
@@ -288,82 +262,55 @@ l'essentiel.
 
 ## Activité - Des boucles en chair et en os
 
-Vingt-cinq minutes : douze pour les trios, huit pour la boucle jouée, cinq pour
-le débriefing.
+Vingt minutes : douze pour les quatuors, trois pour la clôture de cette
+partie, cinq pour le débriefing.
 
-### Partie 1 - Les trios
+### Retrouver son quatuor
 
 1. **Avant de distribuer**, lire la règle à voix haute : on déroule sa boucle
    dans sa tête avant de bouger. Donner une minute de silence, cartes en main,
    pour cela. Sans cette minute, les gens se lèvent et cherchent au hasard.
-2. **Distribuer au hasard**, faces cachées, en mélangeant les trois sortes.
-3. **Lancer.** Les trios se forment en cinq à huit minutes. Circuler, ne pas
-   valider : renvoyer aux arbitres.
+2. **Distribuer au hasard**, faces cachées, en mélangeant les quatre sortes.
+3. **Lancer.** Les quatuors se forment en cinq à huit minutes. Circuler, ne
+   pas valider : renvoyer aux arbitres.
 4. **Les erreurs attendues** :
     - T01, T03 et T04 se disputent les sorties `1 2 3 4 5` et
       `1 2 3 4 5 6`. C'est voulu ;
     - T10 est souvent associée à l'énoncé de T11, _"ne rien afficher"_, parce
       que _"la boucle est cassée"_. Faire dérouler : elle affiche bien `0` ;
-    - T05 et T06 se confondent sur `>=`.
-5. **Clôture de la partie** : chaque trio lit son code à voix haute, en une
-   phrase. Pour T04 et T10, demander à la salle si elle est d'accord avant de
-   confirmer.
-
-### Partie 2 - Jouer une boucle
-
-Huit personnes devant la classe : six en ligne, dans l'ordre du programme,
-tiennent chacune une carte de code ; les deux arbitres jouent `i` et la
-console, un peu à l'écart.
-
-| Carte                         | Ce que fait la personne quand elle a l'objet                                     |
-| :---------------------------- | :------------------------------------------------------------------------------- |
-| `int i = 0;`                  | Dit _"i vaut 0"_. La personne `i` écrit 0. Passe l'objet au `while`              |
-| `while (i <= 2) {`            | Regarde la feuille de `i`, dit _"0 plus petit ou égal à 2 : vrai"_, passe l'objet à la ligne suivante. Si c'est faux, le passe directement à `Fin` |
-| `System.out.println(i);`      | Lit la valeur de `i`, la dicte à la console, qui l'écrit au tableau              |
-| `i++;`                        | Demande à `i` d'ajouter 1. `i` efface et réécrit                                 |
-| `}`                           | Rend l'objet au `while`. Ne dit rien d'autre                                     |
-| `System.out.println("Fin");`  | Dicte _"Fin"_ à la console                                                       |
-
-Plus deux cartes portées autour du cou ou tenues en main : **`i`** et
-**Console**.
-
-Ce qu'il faut faire :
-
-- **Jouer lentement.** L'intérêt est dans le moment où l'objet revient au
-  `while`.
-- **Au dernier tour, provoquer** : quand `i` vient de passer à 3, avant que
-  l'objet n'arrive au `}`, demander à la salle : _"`i` vaut 3, la condition est
-  fausse. Est-ce qu'on s'arrête ?"_. La personne `}` doit encore rendre l'objet
-  au `while`. C'est le quiz de la théorie, joué.
-- **Faire compter** combien de fois le `while` a parlé : quatre, pour trois
-  tours.
-- **Rejouer en retirant `i++`**, si le temps le permet : la personne s'assoit,
-  et la salle voit la boucle tourner sans fin. Arrêter au troisième tour, sous
-  les rires.
+    - T05 et T06 se confondent sur `>=` ;
+    - sur le diagramme de T10, l'absence de la case `i++` est le seul indice
+      visible sans dérouler. Si un quatuor s'appuie dessus pour se former,
+      très bien ; sinon, ne pas le signaler avant la clôture.
+5. **Clôture de la partie** : chaque quatuor lit son code à voix haute, en
+   une phrase, puis montre son diagramme à la salle. Pour T04 et T10, demander
+   à la salle si elle est d'accord avant de confirmer.
 
 ### Débriefing
 
 Cinq minutes, jamais coupées : c'est là que se fixe ce que l'activité a fait
-vivre. Les quatre questions du support, dans l'ordre. Faire dire, avec les
-mots de la salle :
+vivre. Les trois questions du support, dans l'ordre. Faire dire, avec les mots
+de la salle :
 
-- la condition est une porte à l'entrée du tour ;
-- la condition est posée une fois de plus qu'il n'y a de tours ;
-- sans mise à jour, rien ne change, et la porte reste ouverte.
+- la condition n'apparaît qu'une fois sur le diagramme, toujours au même
+  endroit : elle est posée à l'identique à chaque tour, jamais au milieu du
+  corps ;
+- sans mise à jour, le chemin du diagramme revient exactement au même point :
+  rien ne peut faire sortir de la boucle.
 
-Puis demander : _"Qu'est-ce que ça vous a apporté de plus que de lire le
-support ?"_. Noter les réponses : c'est le retour sur l'essai.
+Puis demander : _"Qu'est-ce que le diagramme vous a montré que le code seul ne
+disait pas ?"_. Noter les réponses : c'est le retour sur l'essai.
 
 ### Ce qui rate habituellement
 
 - **Le bruit.** 35 personnes qui se cherchent, c'est bruyant. Annoncer un
   signal de fin (lever la main, les gens se taisent) avant de lancer.
-- **Les trios formés par élimination**, en fin de partie, sans dérouler. Le
-  dernier trio formé est souvent juste par défaut. Lui demander quand même de
-  lire son code.
-- **Personne ne veut venir devant** pour la partie 2. Les arbitres sont déjà
-  désignés ; pour les six autres, prendre le trio T01, qui connaît déjà ce
-  code, et trois volontaires.
+- **Les quatuors formés par élimination**, en fin de partie, sans dérouler. Le
+  dernier quatuor formé est souvent juste par défaut. Lui demander quand même
+  de lire son code.
+- **Le diagramme laissé de côté.** Certaines personnes valident leur quatuor
+  par le code seul, sans regarder le diagramme avant la clôture. Le demander
+  explicitement à ce moment-là.
 
 ## Pendant le premier atelier
 
@@ -464,15 +411,15 @@ seule variable. C'est la séance 08, les tableaux.
 
 | Ce qui se comprime                                          | Ce qui ne se comprime jamais                      |
 | :---------------------------------------------------------- | :------------------------------------------------ |
-| La partie _Jouer une boucle_ de l'activité, réduite à un tour | Le débriefing de l'activité                      |
+| La clôture de l'activité, réduite à deux ou trois quatuors  | Le débriefing de l'activité                      |
 | La partie _Écrire_ du premier atelier, à finir à la maison   | La partie _Dérouler_ du premier atelier          |
 | `do-while`, réduit à la lecture du bloc repliable            | FizzBuzz                                         |
 | Les étapes 3 et 4 du fil rouge, dans le second atelier       | Le quiz de la condition posée au début du tour   |
 | La correction finale en live coding                          | L'étape 1 du fil rouge : redemander la note      |
 
 Si l'activité elle-même doit sauter, la remplacer par le même exercice sur
-papier : la liste des énoncés, des codes et des sorties, à associer seul ou
-seule en cinq minutes.
+papier : la liste des énoncés, des diagrammes, des codes et des sorties, à
+associer seul ou seule en cinq minutes.
 
 ## La contrainte de progression
 

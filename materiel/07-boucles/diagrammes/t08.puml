@@ -1,0 +1,13 @@
+@startuml t08
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 22
+
+start
+:i = 1;
+while (i <= 9 ?) is ([oui])
+  :Afficher i;
+  :i += 2;
+endwhile ([non])
+stop
+@enduml

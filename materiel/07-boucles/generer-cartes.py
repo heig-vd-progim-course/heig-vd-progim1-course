@@ -2,10 +2,11 @@
 """Cartes à imprimer pour l'activité de la séance 07, Des boucles en chair et
 en os.
 
-Produit `cartes.html` à côté de ce script, puis le PDF publié dans
-`docs/98-equipe-enseignante/materiel/07-boucles-cartes.pdf`, avec Chrome ou
-Chromium en mode headless. La mise en page et la coloration du code sont dans
-`materiel/cartes.py`.
+Chaque quatuor réunit un énoncé, un diagramme d'activité, un code et la sortie
+de ce code. Les diagrammes sont écrits en PlantUML dans `diagrammes/` ; ce
+script produit leurs SVG à côté des sources, puis `cartes.html` et le PDF
+publié dans `docs/98-equipe-enseignante/materiel/07-boucles-cartes.pdf`. La
+mise en page et la coloration du code sont dans `materiel/cartes.py`.
 
     python3 materiel/07-boucles/generer-cartes.py
 
@@ -21,14 +22,18 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 
 from cartes import (  # noqa: E402
-    BAND_OUTPUT, ROOT, card, code_body, document, highlight, output_body,
-    statement_body, one_per_page, write,
+    ROOT, card, code_body, diagram_body, document, highlight, output_body,
+    render_plantuml, scale_svgs, statement_body, one_per_page, write,
 )
 
 HTML_OUT = HERE / "cartes.html"
 PDF_OUT = ROOT / "docs" / "98-equipe-enseignante" / "materiel" / "07-boucles-cartes.pdf"
+DIAGRAMS = HERE / "diagrammes"
+DIAGRAMS_HTML_OUT = HERE / "cartes-diagrammes.html"
+DIAGRAMS_PDF_OUT = ROOT / "docs" / "98-equipe-enseignante" / "materiel" / "07-boucles-diagrammes.pdf"
 
-TRIOS = [
+# Identifiant, énoncé, code, sortie. Le diagramme est `diagrammes/<id>.puml`.
+QUATUORS = [
     ("T01", "Afficher les nombres de 0 à 5",
      "int i = 0;\nwhile (i <= 5) {\n    System.out.println(i);\n    i++;\n}",
      "0\n1\n2\n3\n4\n5"),
@@ -67,78 +72,52 @@ TRIOS = [
      "10"),
 ]
 
-# Le programme joué devant la classe : une ligne par personne
-PLAYED = [
-    ("int i = 0;", "Situation initiale"),
-    ("while (i <= 2) {", "Condition"),
-    ("System.out.println(i);", "Corps"),
-    ("i++;", "Mise à jour"),
-    ("}", "Retour à la condition"),
-    ('System.out.println("Fin");', "Après la boucle"),
-]
+REMOVAL_ORDER = "T09, T08, T07, T12, T06, T05, T11, T10, T04, T03, T02, T01"
+
 
 def solutions_page():
     rows = []
-    for trio_id, statement, code, output in TRIOS:
+    for quatuor_id, statement, code, output in QUATUORS:
         shown = output.replace("\n", " ") if output else "(rien)"
         rows.append(
-            f"<tr><td>{trio_id}</td><td>{html.escape(statement)}</td>"
+            f"<tr><td>{quatuor_id}</td><td>{html.escape(statement)}</td>"
             f'<td><pre class="mini">{highlight(code)}</pre></td>'
             f"<td><code>{html.escape(shown)}</code></td></tr>"
         )
     return f"""
 <div class="page portrait solutions">
   <h1>Séance 07 - Des boucles en chair et en os</h1>
-  <p>Solutions des trios, pour l'équipe enseignante et les arbitres.
-  {{pages}} pages A4 en tout, à imprimer en couleur, recto seul.
-  Pages 2 à 37 : cartes de trios, une par page.
-  Pages 38 à 45 : cartes de la boucle jouée.</p>
-  <p>Ordre de retrait si la salle compte moins de 36 personnes :
-  T09, T08, T07, T12, T06, T05, T11, T10, T04, T03, T02, T01.</p>
+  <p>Solutions des quatuors, pour l'équipe enseignante et les arbitres.
+  {{pages}} pages A4 en tout, à imprimer en couleur, recto seul : une carte
+  par page, en paysage.</p>
+  <p>Ordre de retrait si la salle compte moins de 48 personnes :
+  {REMOVAL_ORDER}.</p>
   <table>
-    <thead><tr><th>Trio</th><th>Énoncé</th><th>Code</th><th>Sortie</th></tr></thead>
+    <thead><tr><th>Quatuor</th><th>Énoncé</th><th>Code</th><th>Sortie</th></tr></thead>
     <tbody>{"".join(rows)}</tbody>
   </table>
 </div>"""
 
 
-def played_pages():
-    pages = []
-    for line, role in PLAYED:
-        pages.append(f"""
-<div class="page landscape played">
-  <pre class="played-line">{highlight(line)}</pre>
-  <p class="played-role">{html.escape(role)}</p>
-</div>""")
-    pages.append("""
-<div class="page landscape played">
-  <pre class="played-line played-variable"><span style="color:#080808">i</span></pre>
-  <p class="played-role">La variable : vous seule ou vous seul changez sa valeur</p>
-</div>""")
-    pages.append(f"""
-<div class="page landscape played">
-  <pre class="played-line" style="color:{BAND_OUTPUT}">Console</pre>
-  <p class="played-role">Vous écrivez au tableau ce qu'on vous dicte, rien d'autre</p>
-</div>""")
-    return pages
-
-
-EXTRA_CSS = """
-.played { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.played-line { font-size: 54pt; }
-.played-variable { font-size: 160pt; }
-.played-role { font-size: 20pt; color: #777; margin-top: 14mm; }
-"""
-
-
 def main():
-    statements = [card("statement", t, statement_body(s)) for t, s, _, _ in TRIOS]
-    codes = [card("code", t, code_body(c)) for t, _, c, _ in TRIOS]
-    outputs = [card("output", t, output_body(o)) for t, _, _, o in TRIOS]
+    svgs = {q[0]: render_plantuml(DIAGRAMS / f"{q[0].lower()}.puml") for q in QUATUORS}
+    svgs = scale_svgs(svgs, 262, 168)
+    statements = [
+        card("statement", t, statement_body(s), show_footer=False)
+        for t, s, _, _ in QUATUORS
+    ]
+    diagrams = [card("diagram", t, diagram_body(svgs[t])) for t, _, _, _ in QUATUORS]
+    codes = [card("code", t, code_body(c)) for t, _, c, _ in QUATUORS]
+    outputs = [card("output", t, output_body(o)) for t, _, _, o in QUATUORS]
     pages = [solutions_page()]
-    pages += one_per_page(statements) + one_per_page(codes) + one_per_page(outputs)
-    pages += played_pages()
-    write(document("Séance 07 - Cartes de l'activité", pages, EXTRA_CSS), HTML_OUT, PDF_OUT)
+    for group in (statements, diagrams, codes, outputs):
+        pages += one_per_page(group)
+    write(document("Séance 07 - Cartes de l'activité", pages), HTML_OUT, PDF_OUT)
+    # Les diagrammes seuls, pour compléter un jeu de trios déjà imprimé
+    write(
+        document("Séance 07 - Cartes Diagramme", one_per_page(diagrams)),
+        DIAGRAMS_HTML_OUT, DIAGRAMS_PDF_OUT,
+    )
 
 
 if __name__ == "__main__":

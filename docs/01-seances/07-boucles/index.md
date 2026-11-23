@@ -58,8 +58,8 @@ de pause.
 | :---------- | -----: | :----------------------------------------------------------------------------------------------- |
 | 00:00-00:10 | 10 min | [Rappel de la séance 06 : un `if` ne se répète pas](01-repeter-avec-while.md#rappel-un-if-ne-se-repete-pas) |
 | 00:10-00:30 | 20 min | [Théorie - Répéter avec `while`](01-repeter-avec-while.md#remplacer-if-par-while)                 |
-| 00:30-00:55 | 25 min | [Activité - Des boucles en chair et en os](02-activite-boucles-en-chair-et-en-os.md)              |
-| 00:55-01:30 | 35 min | [Atelier - Dérouler et réparer](03-atelier-derouler-et-reparer.md)                                |
+| 00:30-00:50 | 20 min | [Activité - Des boucles en chair et en os](02-activite-boucles-en-chair-et-en-os.md)              |
+| 00:50-01:30 | 40 min | [Atelier - Dérouler et réparer](03-atelier-derouler-et-reparer.md)                                |
 | 01:30-01:45 | 15 min | Pause                                                                                            |
 | 01:45-02:00 | 15 min | Correction au tableau, en live coding                                                            |
 | 02:00-02:20 | 20 min | [Théorie - `for` et `do-while`](04-for-et-do-while.md)                                            |
@@ -69,10 +69,9 @@ de pause.
 
 ### Note sur la gestion du temps
 
-Si la séance déborde, ce sont la partie _Écrire_ du premier atelier, les
-étapes 3 et 4 du fil rouge dans le second, et la partie _Jouer une boucle_ de
-l'activité qui sautent. Les deux premières se terminent à la maison. La boucle
-`do-while` peut se réduire à la lecture de la page.
+Si la séance déborde, ce sont la partie _Écrire_ du premier atelier et les
+étapes 3 et 4 du fil rouge dans le second qui sautent. Elles se terminent à la
+maison. La boucle `do-while` peut se réduire à la lecture de la page.
 
 Ce qui ne se coupe jamais : la partie _Dérouler_ du premier atelier, avec ses
 tableaux de trace, et FizzBuzz. Savoir dérouler une boucle à la main, c'est ce
@@ -82,8 +81,8 @@ que la séance doit produire.
 
 - Présentation magistrale courte, entrecoupée de prédictions et de quiz à
   choix multiple, à faire en classe.
-- Activité en mouvement : retrouver les trois cartes qui vont ensemble, puis
-  jouer une boucle devant la classe.
+- Activité en mouvement : retrouver les quatre cartes qui vont ensemble, en
+  circulant dans la salle.
 - Ateliers individuels : dérouler sur papier, remettre des lignes dans l'ordre,
   réparer, puis écrire.
 - Correction au tableau, en live coding, à partir des questions de la classe.

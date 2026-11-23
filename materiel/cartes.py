@@ -82,13 +82,14 @@ def highlight(code):
     return "".join(out)
 
 
-def card(kind, card_id, body):
+def card(kind, card_id, body, show_footer=True):
     label, color = KINDS[kind]
+    footer = f"<footer>{card_id}</footer>" if show_footer else ""
     return f"""
 <section class="card card-{kind}">
   <header style="background:{color}">{label}</header>
   <div class="card-body">{body}</div>
-  <footer>{card_id}</footer>
+  {footer}
 </section>"""
 
 
