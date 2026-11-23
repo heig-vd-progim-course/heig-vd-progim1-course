@@ -336,8 +336,8 @@ ne vérifie qu'une fois : c'était le rappel du début de séance.
 ## Pour aller plus loin
 
 - [The for Statement](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html) -
-  tutoriel officiel de Java, en anglais. Sa deuxième partie, la boucle sur un
-  tableau, sera pour la séance 08.
+  tutoriel officiel de Java, en anglais. Sa deuxième partie, la boucle `for`
+  améliorée sur un tableau, n'est pas au programme de ce cours.
 - [The while and do-while Statements](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/while.html) -
   même tutoriel.
 - [Manipulez vos données](https://openclassrooms.com/fr/courses/8383791-apprenez-a-programmer-en-java/8439941-manipulez-vos-donnees) -
