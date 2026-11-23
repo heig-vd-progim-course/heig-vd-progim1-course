@@ -1,0 +1,17 @@
+@startuml a11
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 22
+!pragma useVerticalIf on
+
+start
+:values = {3, 8, 2, 7, 5};
+:sum = 0;
+:i = 0;
+while (i < values.length ?) is ([oui])
+  :sum = sum + values[i];
+  :i += 2;
+endwhile ([non])
+:Afficher sum;
+stop
+@enduml

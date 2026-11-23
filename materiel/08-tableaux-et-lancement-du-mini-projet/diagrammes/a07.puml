@@ -1,0 +1,21 @@
+@startuml a07
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 22
+!pragma useVerticalIf on
+
+start
+:values = {3, 8, 2, 7, 5};
+:count = 0;
+:i = 0;
+while (i < values.length ?) is ([oui])
+  if (values[i] > 4 ?) then ([oui])
+    :values[i] = 0;
+    :count++;
+  else ([non])
+  endif
+  :i++;
+endwhile ([non])
+:Afficher count;
+stop
+@enduml

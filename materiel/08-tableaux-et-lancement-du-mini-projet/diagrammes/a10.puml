@@ -1,0 +1,13 @@
+@startuml a10
+skinparam backgroundColor transparent
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 22
+!pragma useVerticalIf on
+
+start
+:values = {3, 8, 2, 7, 5};
+:values[0] = values[4];
+:values[4] = values[0];
+:Afficher values[0];
+stop
+@enduml
