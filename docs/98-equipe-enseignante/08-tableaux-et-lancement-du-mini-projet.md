@@ -14,22 +14,22 @@ tableau, et sait que la dernière case a l'indice `length - 1`. Elle repart avec
 l'étape 1 du code secret, qui compare deux tableaux et compte les bien placés,
 et avec le premier questionnaire à rendre.**
 
-Si une seule chose reste : un tableau, c'est des cases numérotées à partir de
-0, et l'indice de trop ne se voit qu'à l'exécution.
+Si une seule chose reste : un tableau, c'est des cases numérotées à partir de 0,
+et l'indice de trop ne se voit qu'à l'exécution.
 
 ## Pourquoi cette approche
 
-| Choix                                                    | Raison                                                                                                              |
-| :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
-| Partir de cinq variables `grade1` à `grade5`             | Le tableau répond à une gêne vécue : trois endroits à modifier pour une note de plus, cinq `if` pour les comparer    |
-| La théorie en tutoriel, un programme réécrit sept fois   | Repris de l'archive de l'édition précédente (`archive/09.01-methodologies-de-resolution-de-problemes/`), qui avait bien fonctionné |
-| Le besoin du second parcours comme fil conducteur        | _"Afficher les notes en dessous de la moyenne"_ est impossible sans garder les notes. Sans ce besoin, le tableau ne sert à rien dans le fil rouge, qui additionne déjà au vol |
-| L'indice de trop montré, exécuté, lu                     | C'est l'erreur de la séance. Mieux vaut l'avoir vue avec son message complet que la découvrir seul dans le mini-projet |
-| Pas de tableau en paramètre de fonction                  | Demande explicite : il arrive en séance 09. Le `main` du code secret grandit exprès, pour motiver le découpage      |
-| Pas de `for each`                                        | Retiré du programme. Une boucle de plus à choisir, pour un gain faible                                              |
-| Une carte **Tableau** dans les quatuors                   | Demande explicite : l'état du tableau au début et à la fin oblige à dérouler la boucle case par case                |
-| Le fil rouge s'arrête ici                                | Deux fils (le fil rouge et le mini-projet) dans la même séance chargeraient trop. Le code secret prend le relais     |
-| Un mini-projet guidé, le même pour tout le monde         | Sur le modèle du mini-projet de ProgServ1 de L. Delafontaine. Un projet libre, choisi en séance 08 à quatre séances de la fin, est trop risqué pour des personnes qui débutent |
+| Choix                                                  | Raison                                                                                                                                                                         |
+| :----------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Partir de cinq variables `grade1` à `grade5`           | Le tableau répond à une gêne vécue : trois endroits à modifier pour une note de plus, cinq `if` pour les comparer                                                              |
+| La théorie en tutoriel, un programme réécrit sept fois | Repris de l'archive de l'édition précédente (`archive/09.01-methodologies-de-resolution-de-problemes/`), qui avait bien fonctionné                                             |
+| Le besoin du second parcours comme fil conducteur      | _"Afficher les notes en dessous de la moyenne"_ est impossible sans garder les notes. Sans ce besoin, le tableau ne sert à rien dans le fil rouge, qui additionne déjà au vol  |
+| L'indice de trop montré, exécuté, lu                   | C'est l'erreur de la séance. Mieux vaut l'avoir vue avec son message complet que la découvrir seul dans le mini-projet                                                         |
+| Pas de tableau en paramètre de fonction                | Demande explicite : il arrive en séance 09. Le `main` du code secret grandit exprès, pour motiver le découpage                                                                 |
+| Pas de `for each`                                      | Retiré du programme. Une boucle de plus à choisir, pour un gain faible                                                                                                         |
+| Une carte **Tableau** dans les quatuors                | Demande explicite : l'état du tableau au début et à la fin oblige à dérouler la boucle case par case                                                                           |
+| Le fil rouge s'arrête ici                              | Deux fils (le fil rouge et le mini-projet) dans la même séance chargeraient trop. Le code secret prend le relais                                                               |
+| Un mini-projet guidé, le même pour tout le monde       | Sur le modèle du mini-projet de ProgServ1 de L. Delafontaine. Un projet libre, choisi en séance 08 à quatre séances de la fin, est trop risqué pour des personnes qui débutent |
 
 ### Le mini-projet guidé de ProgServ1
 
@@ -48,51 +48,51 @@ version du cours.
 
 ### Ce que dit la recherche sur les questionnaires
 
-| Source | Ce qu'elle établit | Ce qu'on en tire |
-| :----- | :----------------- | :--------------- |
-| Murphy, Fitzgerald, Lister et McCauley (2012) | Chez les novices, savoir expliquer du code avec ses mots va de pair avec savoir l'écrire | Les questions 1 à 4 font expliquer, pas réciter |
-| Loksa et al. (2016) | Guider explicitement la réflexion sur sa manière de résoudre un problème améliore la productivité et la confiance en soi | La question 5 demande ce qui a été essayé, dans quel ordre, et ce qui a débloqué |
-| Soicher et Gurung (2017) | Des questionnaires de réflexion après examen, utilisés dans un seul cours, n'ont amélioré ni les notes ni la métacognition | Demander _"quelles difficultés ?"_ ne suffit pas. Il faut des questions précises, et un retour |
-| Agarwal, Nunes et Blunt (2021) | Se remémorer sans notes a un effet moyen à grand dans 57% des expériences en classe | Les questionnaires sont remplis à la maison, avec le support : cet effet-là est perdu. C'est l'oral qui le porte |
+| Source                                        | Ce qu'elle établit                                                                                                         | Ce qu'on en tire                                                                                                 |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| Murphy, Fitzgerald, Lister et McCauley (2012) | Chez les novices, savoir expliquer du code avec ses mots va de pair avec savoir l'écrire                                   | Les questions 1 à 4 font expliquer, pas réciter                                                                  |
+| Loksa et al. (2016)                           | Guider explicitement la réflexion sur sa manière de résoudre un problème améliore la productivité et la confiance en soi   | La question 5 demande ce qui a été essayé, dans quel ordre, et ce qui a débloqué                                 |
+| Soicher et Gurung (2017)                      | Des questionnaires de réflexion après examen, utilisés dans un seul cours, n'ont amélioré ni les notes ni la métacognition | Demander _"quelles difficultés ?"_ ne suffit pas. Il faut des questions précises, et un retour                   |
+| Agarwal, Nunes et Blunt (2021)                | Se remémorer sans notes a un effet moyen à grand dans 57% des expériences en classe                                        | Les questionnaires sont remplis à la maison, avec le support : cet effet-là est perdu. C'est l'oral qui le porte |
 
 Le choix de faire remplir les questionnaires à la maison est assumé : il ne
-prend pas de temps de séance. L'écriture à la main garde une part de
-réflexion, même si une partie des réponses vient d'une aide extérieure.
+prend pas de temps de séance. L'écriture à la main garde une part de réflexion,
+même si une partie des réponses vient d'une aide extérieure.
 
 ## Avant la séance
 
-| Quoi                                  | Détail                                                                                                  |
-| :------------------------------------ | :------------------------------------------------------------------------------------------------------ |
-| Imprimer les cartes                   | [Le PDF des cartes](materiel/08-tableaux-cartes.pdf), 49 pages, **en couleur**, recto seul              |
-| Imprimer les questionnaires           | [Le questionnaire 08](../00-organisation/questionnaire-08.pdf), 3 pages, un par personne, recto verso   |
-| Tester les quiz                       | Sur le site publié, depuis le réseau de l'école : les confettis viennent d'un CDN                       |
-| Exécuter l'étape 1 du code secret     | Les trois solutions de la page, avec le JDK du cours, pour avoir le jeu prêt à montrer                  |
-| Préparer Classroom50                  | Pas pour cette séance, mais le rendu de la séance 12 en dépend : créer la classe et le dépôt modèle à l'avance |
+| Quoi                              | Détail                                                                                                         |
+| :-------------------------------- | :------------------------------------------------------------------------------------------------------------- |
+| Imprimer les cartes               | [Le PDF des cartes](materiel/08-tableaux-cartes.pdf), 49 pages, **en couleur**, recto seul                     |
+| Imprimer les questionnaires       | [Le questionnaire 08](../00-organisation/questionnaire-08.pdf), 3 pages, un par personne, recto verso          |
+| Tester les quiz                   | Sur le site publié, depuis le réseau de l'école : les confettis viennent d'un CDN                              |
+| Exécuter l'étape 1 du code secret | Les trois solutions de la page, avec le JDK du cours, pour avoir le jeu prêt à montrer                         |
+| Préparer Classroom50              | Pas pour cette séance, mais le rendu de la séance 12 en dépend : créer la classe et le dépôt modèle à l'avance |
 
 ### Ce qu'il faut imprimer
 
-| Pages | Contenu                                     | Quantité     |
-| :---: | :------------------------------------------ | :----------- |
-|   1   | Solutions des quatuors, pour vous           | 1 exemplaire |
-| 2-13  | Cartes **Code**, bandeau bleu               | 12 cartes    |
-| 14-25 | Cartes **Diagramme**, bandeau violet        | 12 cartes    |
-| 26-37 | Cartes **Sortie**, bandeau gris             | 12 cartes    |
-| 38-49 | Cartes **Tableau**, bandeau orange          | 12 cartes    |
+| Pages | Contenu                              | Quantité     |
+| :---: | :----------------------------------- | :----------- |
+|   1   | Solutions des quatuors, pour vous    | 1 exemplaire |
+| 2-13  | Cartes **Code**, bandeau bleu        | 12 cartes    |
+| 14-25 | Cartes **Diagramme**, bandeau violet | 12 cartes    |
+| 26-37 | Cartes **Sortie**, bandeau gris      | 12 cartes    |
+| 38-49 | Cartes **Tableau**, bandeau orange   | 12 cartes    |
 
 La carte **Tableau** ne porte pas d'identifiant, comme la carte Énoncé des
 séances 06 et 07 : c'est elle qui sert de point de départ.
 
 Avec moins de 48 personnes, retirer des quatuors dans l'ordre indiqué sur la
-page de solutions. **Retirer les paires ensemble** : A03 et A04 laissent le
-même tableau, A05 et A06 affichent la même chose, A09 et A10 aussi. Un jumeau
-sans l'autre perd son intérêt.
+page de solutions. **Retirer les paires ensemble** : A03 et A04 laissent le même
+tableau, A05 et A06 affichent la même chose, A09 et A10 aussi. Un jumeau sans
+l'autre perd son intérêt.
 
 ## Rappel - Le fil rouge oublie les notes
 
 Projeter le fil rouge de la séance 07 et poser la question : _"comment afficher
-les notes en dessous de la moyenne ?"_ Laisser chercher deux minutes. La
-réponse attendue n'est pas une solution, mais le constat : au moment où la
-moyenne est connue, les notes ont disparu.
+les notes en dessous de la moyenne ?"_ Laisser chercher deux minutes. La réponse
+attendue n'est pas une solution, mais le constat : au moment où la moyenne est
+connue, les notes ont disparu.
 
 ## Théorie - Ranger dans un tableau
 
@@ -140,20 +140,20 @@ Ce qu'il faut faire émerger :
 
 - Les personnes cherchent leur quatuor par la sortie seule, et se trompent de
   jumeau. Le rappeler : il faut deux cartes concordantes.
-- Sur A04, certaines personnes pensent que le tableau reste au début, puisque
-  le programme plante. Les quatre premiers tours ont bien eu lieu.
+- Sur A04, certaines personnes pensent que le tableau reste au début, puisque le
+  programme plante. Les quatre premiers tours ont bien eu lieu.
 
 ## Théorie - Parcourir pour calculer
 
 Aller vite sur la somme et le compte, déjà vus en séance 07 sous forme
 d'accumulateur. Passer le temps sur le maximum : dérouler le tableau de trace,
-puis poser le quiz des températures négatives **avant** de montrer la
-solution. La section `String[] args` se fait en deux minutes, ou se lit.
+puis poser le quiz des températures négatives **avant** de montrer la solution.
+La section `String[] args` se fait en deux minutes, ou se lit.
 
 ## Pendant l'atelier
 
-- La partie _Prédire_ est la plus courte. Si le temps manque, passer
-  directement à _Réparer_.
+- La partie _Prédire_ est la plus courte. Si le temps manque, passer directement
+  à _Réparer_.
 - Pour le programme D, ne pas donner la correction : demander _"quel tableau
   ferait que ce programme marche ?"_. Un tableau qui contient au moins une
   valeur positive. C'est ce qui rend le bug sournois.
@@ -164,9 +164,8 @@ solution. La section `String[] args` se fait en deux minutes, ou se lit.
 En 15 minutes, avec la page
 [Mini-projet - Code secret](../00-organisation/02-mini-projet.md) projetée :
 
-1. **Le jeu** : jouer une partie au tableau, avec la classe, sur un code
-   choisi par une personne volontaire. Faire dire les bien placés et les mal
-   placés.
+1. **Le jeu** : jouer une partie au tableau, avec la classe, sur un code choisi
+   par une personne volontaire. Faire dire les bien placés et les mal placés.
 2. **Les étapes** : une par séance, chacune avec la notion du jour. Pas de
    partie libre.
 3. **Les questionnaires** : distribués en fin de séance, rendus remplis à la
@@ -175,42 +174,42 @@ En 15 minutes, avec la page
 4. **L'oral** : deux questions tirées au sort, en session. Les questions des
    questionnaires y ressemblent.
 5. **L'intelligence artificielle** : permise pour le projet et pour les
-   questionnaires, à condition de la déclarer (question 8). Interdite à
-   l'oral, où se voit ce qui a été appris.
+   questionnaires, à condition de la déclarer (question 8). Interdite à l'oral,
+   où se voit ce qui a été appris.
 
 ## Pendant l'étape 1 du code secret
 
 ### Ce qui rate habituellement
 
 - **Lire les quatre chiffres d'un coup.** La personne tape `1234`, qui devient
-  le nombre mille deux cent trente-quatre dans `guess[0]`. Montrer que la
-  page demande un chiffre par question.
+  le nombre mille deux cent trente-quatre dans `guess[0]`. Montrer que la page
+  demande un chiffre par question.
 - **`guess` de taille 4 écrite en dur.** Ce n'est pas faux, mais renvoyer au
   coup de pouce : `new int[secret.length]`.
 - **Le compteur qui ne repart pas de 0.** La page le montre en détail ; le
   laisser découvrir avant de renvoyer à la section.
-- **La condition du `while`** avec `||` au lieu de `&&`. La partie ne
-  s'arrête alors qu'avec quatre bien placés **et** dix essais. Faire lire la
-  condition à voix haute : _"tant que pas trouvé **et** il reste des essais"_.
-- **Le secret affiché** pour tester, puis oublié. C'est sans importance
-  jusqu'en séance 11.
+- **La condition du `while`** avec `||` au lieu de `&&`. La partie ne s'arrête
+  alors qu'avec quatre bien placés **et** dix essais. Faire lire la condition à
+  voix haute : _"tant que pas trouvé **et** il reste des essais"_.
+- **Le secret affiché** pour tester, puis oublié. C'est sans importance jusqu'en
+  séance 11.
 
 ### Ce qu'il ne faut pas donner tout de suite
 
 Les mal placés. La partie 4 de l'étape les pose comme question, sans code :
-elles sont l'objet de l'étape 2, avec le tableau en paramètre. Si une personne
-a fini en avance, la laisser chercher, et lui demander ce que répond sa méthode
+elles sont l'objet de l'étape 2, avec le tableau en paramètre. Si une personne a
+fini en avance, la laisser chercher, et lui demander ce que répond sa méthode
 pour `3 3 3 3`.
 
 ## Bilan et questionnaire
 
 Dans les 10 dernières minutes :
 
-1. Demander à main levée qui a terminé chaque partie de l'étape 1. Ce qui
-   n'est pas fini se termine à la maison : la séance 09 part de la partie 3.
-2. Distribuer le questionnaire, et lire les consignes à voix haute. Insister
-   sur deux points : on ne demande pas des réponses justes, mais réfléchies ;
-   et la question 8 est obligatoire, même pour répondre _"aucune aide"_.
+1. Demander à main levée qui a terminé chaque partie de l'étape 1. Ce qui n'est
+   pas fini se termine à la maison : la séance 09 part de la partie 3.
+2. Distribuer le questionnaire, et lire les consignes à voix haute. Insister sur
+   deux points : on ne demande pas des réponses justes, mais réfléchies ; et la
+   question 8 est obligatoire, même pour répondre _"aucune aide"_.
 3. Rappeler que le PDF est en ligne, pour les personnes absentes.
 
 ## Corriger les questionnaires
@@ -219,16 +218,16 @@ Un questionnaire est **validé** s'il est rendu au début de la séance 09 et si
 chaque question a une réponse qui montre une réflexion. On ne note pas la
 justesse.
 
-| Question | Ce qui montre une réflexion | Ce qui n'en montre pas |
-| :------- | :-------------------------- | :--------------------- |
-| 1 | La personne a essayé de taper 9, ou a lu son code pour le savoir, et dit si c'est voulu | _"Ça marche"_ |
-| 2 | Les quatre comparaisons sont décrites, une par case | Le nombre seul |
-| 3 | Le moment est situé (au cinquième chiffre demandé, ou à la lecture de `guess[4]`) | _"Ça plante"_ |
-| 4 | L'explication parle de la moyenne connue trop tard | Une définition du tableau recopiée |
-| 5 | Un moment précis, au moins deux choses essayées | _"Je n'ai pas eu de difficulté"_ sans rien d'autre |
-| 6 | Les cases cochées, et une description si une partie ne marche pas | Rien |
-| 7 | Une question qu'on pourrait poser en classe | _"Rien"_ |
-| 8 | Une réponse, même _"aucune"_ | Vide |
+| Question | Ce qui montre une réflexion                                                             | Ce qui n'en montre pas                             |
+| :------- | :-------------------------------------------------------------------------------------- | :------------------------------------------------- |
+| 1        | La personne a essayé de taper 9, ou a lu son code pour le savoir, et dit si c'est voulu | _"Ça marche"_                                      |
+| 2        | Les quatre comparaisons sont décrites, une par case                                     | Le nombre seul                                     |
+| 3        | Le moment est situé (au cinquième chiffre demandé, ou à la lecture de `guess[4]`)       | _"Ça plante"_                                      |
+| 4        | L'explication parle de la moyenne connue trop tard                                      | Une définition du tableau recopiée                 |
+| 5        | Un moment précis, au moins deux choses essayées                                         | _"Je n'ai pas eu de difficulté"_ sans rien d'autre |
+| 6        | Les cases cochées, et une description si une partie ne marche pas                       | Rien                                               |
+| 7        | Une question qu'on pourrait poser en classe                                             | _"Rien"_                                           |
+| 8        | Une réponse, même _"aucune"_                                                            | Vide                                               |
 
 Annoter brièvement, rendre les feuilles en séance 10. Relever deux ou trois
 réponses à la question 7, anonymisées, et y répondre en début de séance 09 :
@@ -254,11 +253,11 @@ Ce qui ne se comprime jamais :
 ## Points ouverts
 
 - **Les modalités de l'oral** : durée de préparation, durée de passage,
-  ressources autorisées, grille. La page _Évaluation_ les annonce comme
-  _"à préciser"_.
+  ressources autorisées, grille. La page _Évaluation_ les annonce comme _"à
+  préciser"_.
 - **Le lien Classroom50** pour le rendu de la séance 12.
-- **Le rôle du dépôt rendu en séance 12** : il n'est pas noté. Dire s'il sert
-  de base aux questions de l'oral, ou s'il est seulement une condition.
+- **Le rôle du dépôt rendu en séance 12** : il n'est pas noté. Dire s'il sert de
+  base aux questions de l'oral, ou s'il est seulement une condition.
 
 ## Sources
 
@@ -266,8 +265,8 @@ Ce qui ne se comprime jamais :
   consistently benefits student learning: a systematic review of applied
   research in schools and classrooms_. Educational Psychology Review, 33,
   1409-1453.
-- Loksa, D., Ko, A. J., Jernigan, W., Oleson, A., Mendez, C. J. et Burnett,
-  M. M. (2016). _Programming, problem solving, and self-awareness: effects of
+- Loksa, D., Ko, A. J., Jernigan, W., Oleson, A., Mendez, C. J. et Burnett, M.
+  M. (2016). _Programming, problem solving, and self-awareness: effects of
   explicit guidance_. CHI 2016, 1449-1461.
 - Murphy, L., Fitzgerald, S., Lister, R. et McCauley, R. (2012). _Ability to
   "explain in plain English" linked to proficiency in computer-based

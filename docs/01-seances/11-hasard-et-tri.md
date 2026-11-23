@@ -12,9 +12,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Intention
 
-Mélanger, puis ranger. Le code secret est enfin secret : l'ordinateur le tire
-au hasard. Et le jeu garde le classement des parties, trié du meilleur score
-au moins bon.
+Mélanger, puis ranger. Le code secret est enfin secret : l'ordinateur le tire au
+hasard. Et le jeu garde le classement des parties, trié du meilleur score au
+moins bon.
 
 ## Objectifs pressentis
 
@@ -28,8 +28,8 @@ au moins bon.
 
 ## Le code secret à cette séance
 
-Le code est tiré au hasard. Après chaque partie, le nombre d'essais est
-ajouté au classement, qui s'affiche trié.
+Le code est tiré au hasard. Après chaque partie, le nombre d'essais est ajouté
+au classement, qui s'affiche trié.
 
 ## Activité pressentie
 

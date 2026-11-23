@@ -11,8 +11,8 @@ relier quatre façons de voir le même programme : le code, le diagramme
 d'activité, ce que la console affiche, et ce que devient le tableau.
 
 **Règle de l'activité : avant de rejoindre qui que ce soit, faites tourner le
-programme de votre carte dans votre tête, tour par tour, en notant au crayon
-ce que devient chaque case.**
+programme de votre carte dans votre tête, tour par tour, en notant au crayon ce
+que devient chaque case.**
 
 Pas de téléphone, pas d'ordinateur. Un crayon pour annoter le dos de votre
 carte.
@@ -21,12 +21,12 @@ carte.
 
 Chaque personne reçoit **une carte**. Il en existe quatre sortes :
 
-| Carte         | Ce qu'elle porte                                                  |
-| :------------ | :---------------------------------------------------------------- |
-| **Code**      | Un programme qui part du tableau `{3, 8, 2, 7, 5}`                |
-| **Diagramme** | Le diagramme d'activité du même programme                         |
-| **Sortie**    | Ce que la console affiche quand on exécute ce programme           |
-| **Tableau**   | Le tableau au début du programme, et le même tableau à la fin     |
+| Carte         | Ce qu'elle porte                                              |
+| :------------ | :------------------------------------------------------------ |
+| **Code**      | Un programme qui part du tableau `{3, 8, 2, 7, 5}`            |
+| **Diagramme** | Le diagramme d'activité du même programme                     |
+| **Sortie**    | Ce que la console affiche quand on exécute ce programme       |
+| **Tableau**   | Le tableau au début du programme, et le même tableau à la fin |
 
 Votre but : retrouver les trois personnes qui complètent votre carte. Un
 quatuor, c'est un code, le diagramme qui le dessine, la sortie qu'il produit et

@@ -6,9 +6,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Objectif
 
-Poser les fondations du jeu : ranger le code secret et la proposition dans
-deux tableaux, puis les comparer case par case. À la fin de cette étape, votre
-jeu se joue déjà, mais il ne répond encore que les chiffres bien placés.
+Poser les fondations du jeu : ranger le code secret et la proposition dans deux
+tableaux, puis les comparer case par case. À la fin de cette étape, votre jeu se
+joue déjà, mais il ne répond encore que les chiffres bien placés.
 
 **Règle de l'étape : exécutez votre programme après chaque partie, avant
 d'écrire la suivante.**
@@ -42,14 +42,14 @@ Trouvé en 3 essai(s) !
 Pour l'instant, le code secret est écrit dans le programme, et il vaut
 `1 2 3 4`. Ce n'est pas très secret : il sera tiré au hasard en séance 11.
 
-Créez un nouveau projet IntelliJ, `code-secret`, comme en séance 03. Tout
-le jeu tient dans `Main.java`.
+Créez un nouveau projet IntelliJ, `code-secret`, comme en séance 03. Tout le jeu
+tient dans `Main.java`.
 
 ## 1. Ranger le code et la proposition
 
-Déclarez un tableau `secret` qui contient `1, 2, 3, 4`, et un tableau `guess`
-de même taille, vide. Demandez quatre chiffres à la personne qui joue, un par
-un, et rangez-les dans `guess`. Affichez ensuite les deux tableaux.
+Déclarez un tableau `secret` qui contient `1, 2, 3, 4`, et un tableau `guess` de
+même taille, vide. Demandez quatre chiffres à la personne qui joue, un par un,
+et rangez-les dans `guess`. Affichez ensuite les deux tableaux.
 
 ```text
 Chiffre 1 : 1
@@ -138,12 +138,12 @@ chiffres bien placés, le `1` et le `4`.
 
 ## 3. Jouer jusqu'à trouver
 
-Faites rejouer la personne tant qu'elle n'a pas trouvé les quatre chiffres,
-avec au plus dix essais. À la fin, affichez `Trouvé en 3 essai(s) !`, ou, après
-dix essais ratés, `Perdu. Le code était [1, 2, 3, 4]`.
+Faites rejouer la personne tant qu'elle n'a pas trouvé les quatre chiffres, avec
+au plus dix essais. À la fin, affichez `Trouvé en 3 essai(s) !`, ou, après dix
+essais ratés, `Perdu. Le code était [1, 2, 3, 4]`.
 
-Testez les deux fins : une partie gagnée, et une partie perdue où vous tapez
-`6` à chaque fois.
+Testez les deux fins : une partie gagnée, et une partie perdue où vous tapez `6`
+à chaque fois.
 
 ??? tip "Coup de pouce"
 
@@ -217,8 +217,8 @@ Testez les deux fins : une partie gagnée, et une partie perdue où vous tapez
 ### Le piège du compteur qui ne repart pas de 0
 
 La ligne 16, `wellPlaced = 0;`, remet le compteur à zéro au début de chaque
-comptage. Sans elle, le programme compile, et voici ce qu'il fait avec les
-mêmes propositions :
+comptage. Sans elle, le programme compile, et voici ce qu'il fait avec les mêmes
+propositions :
 
 ```text
 Chiffre 1 : 1
@@ -239,16 +239,15 @@ Chiffre 4 : 4
 Perdu. Le code était [1, 2, 3, 4]
 ```
 
-Les bien placés de chaque essai s'ajoutent à ceux du précédent : 1, puis
-1 + 2, puis 3 + 4. Et la personne a trouvé le code, mais le jeu lui dit qu'elle
-a perdu : 7 n'est pas égal à 4. Un compteur se remet à zéro au début de ce
-qu'il compte.
+Les bien placés de chaque essai s'ajoutent à ceux du précédent : 1, puis 1 + 2,
+puis 3 + 4. Et la personne a trouvé le code, mais le jeu lui dit qu'elle a perdu
+: 7 n'est pas égal à 4. Un compteur se remet à zéro au début de ce qu'il compte.
 
 ## 4. Pour aller plus loin : les mal placés
 
 Un chiffre est **mal placé** quand il fait partie du code secret, mais pas à
-cette place. Avec le secret `1 2 3 4`, la proposition `1 3 5 6` a un bien
-placé (le `1`) et un mal placé (le `3`).
+cette place. Avec le secret `1 2 3 4`, la proposition `1 3 5 6` a un bien placé
+(le `1`) et un mal placé (le `3`).
 
 Ne cherchez pas encore à l'écrire. Sur papier, répondez à ces questions :
 
@@ -261,10 +260,10 @@ Les mal placés sont l'objet de l'étape 2, en séance 09.
 
 ## Ce qui vous attend en séance 09
 
-Votre `main` fait déjà près de trente lignes, et il va encore grandir. En séance 09,
-vous apprendrez à passer un tableau à une fonction : le comptage des bien
-placés deviendra une fonction `countWellPlaced`, et le jeu gardera
-l'historique de tous les essais dans un tableau à deux dimensions.
+Votre `main` fait déjà près de trente lignes, et il va encore grandir. En séance
+09, vous apprendrez à passer un tableau à une fonction : le comptage des bien
+placés deviendra une fonction `countWellPlaced`, et le jeu gardera l'historique
+de tous les essais dans un tableau à deux dimensions.
 
 <!-- URLs -->
 

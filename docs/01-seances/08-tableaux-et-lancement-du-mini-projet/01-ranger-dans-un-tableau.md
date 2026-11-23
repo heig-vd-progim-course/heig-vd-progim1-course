@@ -6,8 +6,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Objectif
 
-Garder plusieurs valeurs du même type dans une seule variable, et y accéder
-par leur numéro. À la fin de cette page, vous saurez déclarer un tableau, le
+Garder plusieurs valeurs du même type dans une seule variable, et y accéder par
+leur numéro. À la fin de cette page, vous saurez déclarer un tableau, le
 remplir, le parcourir avec une boucle, et éviter l'erreur la plus fréquente :
 l'indice de trop.
 
@@ -27,8 +27,8 @@ l'indice de trop.
 calcule leur moyenne. Pour cela, il additionne chaque note dans `sum` au moment
 où il la lit, puis il passe à la suivante.
 
-Ajoutons une demande : **afficher les notes en dessous de la moyenne**, celles
-à retravailler.
+Ajoutons une demande : **afficher les notes en dessous de la moyenne**, celles à
+retravailler.
 
 Le programme ne peut pas le faire. La moyenne n'est connue qu'après la dernière
 note, et à ce moment-là, les notes précédentes ont disparu : chacune a été
@@ -81,9 +81,9 @@ moyenne fausse sans aucun message d'erreur.
 
 </div>
 
-Et pour afficher les notes en dessous de la moyenne, il faudrait cinq `if`,
-un par variable. Avec trente notes, trente variables et trente `if`. Il faut
-une autre façon de ranger les notes.
+Et pour afficher les notes en dessous de la moyenne, il faudrait cinq `if`, un
+par variable. Avec trente notes, trente variables et trente `if`. Il faut une
+autre façon de ranger les notes.
 
 ## Étape 2 : un tableau
 
@@ -110,25 +110,25 @@ public class Main {
 
 Ligne 3, trois nouveautés :
 
-| Écriture               | Ce qu'elle dit                                           |
-| :--------------------- | :------------------------------------------------------- |
-| `double[]`             | Le type : un tableau de `double`                         |
-| `grades`               | Le nom du tableau. Au pluriel, puisqu'il en contient plusieurs |
-| `{5, 6, 4, 4.5, 5.5}`  | Les valeurs, dans l'ordre, entre accolades               |
+| Écriture              | Ce qu'elle dit                                                 |
+| :-------------------- | :------------------------------------------------------------- |
+| `double[]`            | Le type : un tableau de `double`                               |
+| `grades`              | Le nom du tableau. Au pluriel, puisqu'il en contient plusieurs |
+| `{5, 6, 4, 4.5, 5.5}` | Les valeurs, dans l'ordre, entre accolades                     |
 
 Le tableau ressemble à ceci :
 
-| Indice  |   0 |   1 |   2 |   3 |   4 |
-| :------ | --: | --: | --: | --: | --: |
-| Valeur  | 5.0 | 6.0 | 4.0 | 4.5 | 5.5 |
+| Indice |   0 |   1 |   2 |   3 |   4 |
+| :----- | --: | --: | --: | --: | --: |
+| Valeur | 5.0 | 6.0 | 4.0 | 4.5 | 5.5 |
 
 Le numéro d'une case s'appelle son **indice**. On lit une case en écrivant son
 indice entre crochets : `grades[0]` vaut `5.0`.
 
 - **Les indices commencent à 0.** La première case est `grades[0]`, pas
   `grades[1]`.
-- **`grades.length` est le nombre de cases**, ici 5. Sans parenthèses : ce
-  n'est pas un appel de fonction.
+- **`grades.length` est le nombre de cases**, ici 5. Sans parenthèses : ce n'est
+  pas un appel de fonction.
 - La dernière case a donc l'indice `grades.length - 1`, ici 4.
 - **La taille d'un tableau ne change plus** une fois qu'il est créé.
 
@@ -143,9 +143,9 @@ Avec `double[] grades = {5, 6, 4, 4.5, 5.5};`, que vaut `grades[1]` ?
 
 <div class="quiz-explanation" markdown>
 
-La case 0 contient `5.0`, la case 1 contient `6.0`. Si vous avez répondu
-`5.0`, vous avez compté à partir de 1. C'est l'erreur la plus naturelle, et
-elle reviendra sous la forme d'un indice de trop.
+La case 0 contient `5.0`, la case 1 contient `6.0`. Si vous avez répondu `5.0`,
+vous avez compté à partir de 1. C'est l'erreur la plus naturelle, et elle
+reviendra sous la forme d'un indice de trop.
 
 </div>
 
@@ -154,8 +154,8 @@ elle reviendra sous la forme d'un indice de trop.
 ## Étape 3 : parcourir le tableau avec une boucle
 
 Puisque les cases sont numérotées de 0 à `grades.length - 1`, une boucle `for`
-de la séance 07 peut les visiter une par une. Réécrivons le calcul de la
-moyenne :
+de la séance 07 peut les visiter une par une. Réécrivons le calcul de la moyenne
+:
 
 === "Avant"
 
@@ -251,24 +251,25 @@ Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 5 out
 ```
 
 Le programme compile. Il affiche les cinq notes, puis il s'arrête avec une
-**exception**. Au sixième tour, `i` vaut 5 et `5 <= 5` est vrai : Java essaie
-de lire `grades[5]`, une case qui n'existe pas.
+**exception**. Au sixième tour, `i` vaut 5 et `5 <= 5` est vrai : Java essaie de
+lire `grades[5]`, une case qui n'existe pas.
 
 Le message se lit de gauche à droite :
 
-| Morceau                                 | Ce qu'il dit                                      |
-| :-------------------------------------- | :------------------------------------------------ |
-| `ArrayIndexOutOfBoundsException`        | Un indice de tableau hors des limites             |
-| `Index 5 out of bounds for length 5`    | L'indice 5 n'existe pas dans un tableau de 5 cases |
-| `at Main.main(Main.java:6)`             | C'est arrivé ligne 6                              |
+| Morceau                              | Ce qu'il dit                                       |
+| :----------------------------------- | :------------------------------------------------- |
+| `ArrayIndexOutOfBoundsException`     | Un indice de tableau hors des limites              |
+| `Index 5 out of bounds for length 5` | L'indice 5 n'existe pas dans un tableau de 5 cases |
+| `at Main.main(Main.java:6)`          | C'est arrivé ligne 6                               |
 
-Ce n'est pas une erreur de compilation : le compilateur ne connaît pas la
-valeur de `i`. L'erreur ne se voit qu'**à l'exécution**. La séance 10 apprendra
-à rattraper ce genre d'arrêt ; pour l'instant, on l'évite.
+Ce n'est pas une erreur de compilation : le compilateur ne connaît pas la valeur
+de `i`. L'erreur ne se voit qu'**à l'exécution**. La séance 10 apprendra à
+rattraper ce genre d'arrêt ; pour l'instant, on l'évite.
 
 <div class="quiz" markdown>
 
-Un tableau a 3 cases. Quel indice provoque une `ArrayIndexOutOfBoundsException` ?
+Un tableau a 3 cases. Quel indice provoque une `ArrayIndexOutOfBoundsException`
+?
 
 - [ ] `0`
 - [ ] `2`
@@ -331,8 +332,8 @@ Deux nouveautés :
   d'office : la ligne `import` dit à Java où le trouver. Elle se place tout en
   haut du fichier, avant `public class Main`. IntelliJ la propose tout seul
   quand vous tapez `Arrays`.
-- **Ligne 7, `grades[2] = 5.5;`.** Une case s'utilise comme une variable :
-  on peut lui **affecter** une nouvelle valeur. La note 4.0 de la case 2 est
+- **Ligne 7, `grades[2] = 5.5;`.** Une case s'utilise comme une variable : on
+  peut lui **affecter** une nouvelle valeur. La note 4.0 de la case 2 est
   remplacée par 5.5.
 
 ## Étape 6 : créer un tableau vide, puis le remplir
@@ -369,8 +370,8 @@ Note 3 : 6
 
 - **Ligne 6, `new double[count]`** crée un tableau de `count` cases. La taille
   peut venir d'une variable : elle est choisie au moment de l'exécution.
-- **Ligne 8** montre qu'un tableau neuf n'est pas vide : chaque case contient
-  la valeur par défaut de son type, `0.0` pour un `double`, `0` pour un `int`,
+- **Ligne 8** montre qu'un tableau neuf n'est pas vide : chaque case contient la
+  valeur par défaut de son type, `0.0` pour un `double`, `0` pour un `int`,
   `false` pour un `boolean`.
 - **Ligne 11** remplit la case `i`. La question affiche `i + 1` : pour la
   personne qui tape, la première note est la note 1, même si elle va dans la
@@ -378,8 +379,8 @@ Note 3 : 6
 
 ## Étape 7 : enfin, afficher les notes en dessous de la moyenne
 
-Les notes sont gardées : on peut les parcourir **une seconde fois**, une fois
-la moyenne connue. C'est ce que l'étape 1 ne pouvait pas faire.
+Les notes sont gardées : on peut les parcourir **une seconde fois**, une fois la
+moyenne connue. C'est ce que l'étape 1 ne pouvait pas faire.
 
 ```java title="Main.java" linenums="1" hl_lines="12-16"
 public class Main {
@@ -418,14 +419,15 @@ Pourquoi faut-il deux boucles, et pas une seule ?
 
 - [ ] Parce qu'un tableau ne se parcourt qu'une fois par boucle
 - [ ] Parce que Java interdit un `if` dans la boucle qui fait la somme
-- [x] Parce que la moyenne n'est connue qu'après avoir additionné toutes les notes
+- [x] Parce que la moyenne n'est connue qu'après avoir additionné toutes les
+      notes
 - [ ] Ce n'est pas nécessaire : une seule boucle donnerait le même résultat
 
 <div class="quiz-explanation" markdown>
 
 Pendant la première boucle, `average` n'existe pas encore : on ne peut pas
-comparer une note à une moyenne qu'on est en train de calculer. C'est
-exactement pour cela qu'il fallait garder les notes.
+comparer une note à une moyenne qu'on est en train de calculer. C'est exactement
+pour cela qu'il fallait garder les notes.
 
 </div>
 
@@ -433,13 +435,13 @@ exactement pour cela qu'il fallait garder les notes.
 
 ## Résumé
 
-| Écriture                         | Ce qu'elle fait                                     |
-| :------------------------------- | :-------------------------------------------------- |
-| `double[] grades = {5, 6, 4};`   | Crée un tableau avec ses valeurs                    |
-| `double[] grades = new double[n];` | Crée un tableau de `n` cases, remplies de `0.0`   |
-| `grades[i]`                      | La case d'indice `i`, à lire ou à affecter          |
-| `grades.length`                  | Le nombre de cases                                  |
-| `Arrays.toString(grades)`        | Le contenu du tableau, sous forme de texte          |
+| Écriture                           | Ce qu'elle fait                                 |
+| :--------------------------------- | :---------------------------------------------- |
+| `double[] grades = {5, 6, 4};`     | Crée un tableau avec ses valeurs                |
+| `double[] grades = new double[n];` | Crée un tableau de `n` cases, remplies de `0.0` |
+| `grades[i]`                        | La case d'indice `i`, à lire ou à affecter      |
+| `grades.length`                    | Le nombre de cases                              |
+| `Arrays.toString(grades)`          | Le contenu du tableau, sous forme de texte      |
 
 - Les indices vont de **0** à **`length - 1`**.
 - La boucle de parcours : `for (int i = 0; i < grades.length; i++)`.

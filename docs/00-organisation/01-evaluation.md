@@ -8,16 +8,16 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 La note de l'unité d'enseignement est composée de trois éléments :
 
-| Partie            | Quand                    | Poids | Forme                                 |
-| :---------------- | :----------------------- | ----: | :------------------------------------ |
-| Évaluation écrite | Lundi 9 novembre 2026    |   50% | Papier et crayon, sans ressources     |
-| Questionnaires    | Séances 09 à 12          |   10% | Quatre feuilles rendues, à la main    |
-| Oral              | Session d'examens        |   40% | Deux questions tirées au sort         |
+| Partie            | Quand                 | Poids | Forme                              |
+| :---------------- | :-------------------- | ----: | :--------------------------------- |
+| Évaluation écrite | Lundi 9 novembre 2026 |   50% | Papier et crayon, sans ressources  |
+| Questionnaires    | Séances 09 à 12       |   10% | Quatre feuilles rendues, à la main |
+| Oral              | Session d'examens     |   40% | Deux questions tirées au sort      |
 
 L'évaluation écrite mesure ce que vous avez compris des séances 01 à 05. Les
 questionnaires récompensent la régularité pendant le
-[mini-projet](02-mini-projet.md). L'oral vérifie que vous savez expliquer ce
-que vous avez programmé.
+[mini-projet](02-mini-projet.md). L'oral vérifie que vous savez expliquer ce que
+vous avez programmé.
 
 ## Partie 1 - Évaluation écrite (50%)
 
@@ -54,8 +54,8 @@ suffit pas : il faut aussi savoir dire ce que fait chacune de ses parties.
 ### L'évaluation finale
 
 Les boucles, les tableaux et tout ce qui suit sont évalués par la
-[partie 2](#partie-2-questionnaires-et-oral-50) : les questionnaires des
-séances 08 à 11, puis un oral pendant la session d'examens.
+[partie 2](#partie-2-questionnaires-et-oral-50) : les questionnaires des séances
+08 à 11, puis un oral pendant la session d'examens.
 
 ### Comment s'y préparer
 
@@ -83,10 +83,10 @@ avez programmé (_"que se passe-t-il si la personne tape 9 ?"_) et revenir sur
 votre manière de travailler : où vous avez bloqué, ce que vous avez essayé, ce
 qui vous a débloqué.
 
-| Ce qui compte                                   | Ce qui ne compte pas            |
-| :---------------------------------------------- | :------------------------------ |
-| Le questionnaire est rendu à temps               | L'écriture, l'orthographe       |
-| Chaque question a une réponse sincère et réfléchie | Que vos réponses soient justes  |
+| Ce qui compte                                      | Ce qui ne compte pas           |
+| :------------------------------------------------- | :----------------------------- |
+| Le questionnaire est rendu à temps                 | L'écriture, l'orthographe      |
+| Chaque question a une réponse sincère et réfléchie | Que vos réponses soient justes |
 
 Chaque questionnaire vaut 2,5% de la note : il est **validé ou non validé**. Il
 est validé s'il est rendu à temps et si ses réponses montrent une vraie
@@ -114,9 +114,9 @@ ressemblent à celles de l'oral : c'est aussi un entraînement.
 ### Pourquoi un oral
 
 Parce que la seule chose que je peux évaluer de façon fiable, c'est votre
-capacité à expliquer du code. Un programme qui fonctionne mais que vous ne
-savez pas expliquer ne vaut rien pour votre formation, et il ne vaudra rien
-pour votre employeur non plus.
+capacité à expliquer du code. Un programme qui fonctionne mais que vous ne savez
+pas expliquer ne vaut rien pour votre formation, et il ne vaudra rien pour votre
+employeur non plus.
 
 ## Aides extérieures et honnêteté
 

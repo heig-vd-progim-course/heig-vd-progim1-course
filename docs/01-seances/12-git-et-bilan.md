@@ -12,16 +12,16 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Intention
 
-Rendre son code secret sur un dépôt Git, revenir sur ce qui a été appris
-pendant le semestre, et donner son avis sur le cours.
+Rendre son code secret sur un dépôt Git, revenir sur ce qui a été appris pendant
+le semestre, et donner son avis sur le cours.
 
 ## Objectifs pressentis
 
 À la fin de cette séance, la personne qui étudie devrait être capable de :
 
 - expliquer à quoi sert un système de gestion de versions ;
-- initialiser un dépôt, enregistrer des modifications et consulter
-  l'historique ;
+- initialiser un dépôt, enregistrer des modifications et consulter l'historique
+  ;
 - publier son travail sur un dépôt distant.
 
 ## Activité pressentie
@@ -33,9 +33,9 @@ pendant le semestre, et donner son avis sur le cours.
 
 ## Point d'attention
 
-Git arrive quand il y a quelque chose à rendre, pas avant. Se limiter à
-`init`, `add`, `commit`, `log`, `push`. Pas de branches, pas de fusion,
-pas de résolution de conflits.
+Git arrive quand il y a quelque chose à rendre, pas avant. Se limiter à `init`,
+`add`, `commit`, `log`, `push`. Pas de branches, pas de fusion, pas de
+résolution de conflits.
 
 <!-- URLs -->
 

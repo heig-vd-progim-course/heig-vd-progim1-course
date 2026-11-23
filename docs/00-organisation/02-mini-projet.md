@@ -6,13 +6,13 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Le principe
 
-De la séance 08 à la séance 11, vous programmez un même jeu, pas à pas :
-**Code secret**. Chaque séance apporte une notion, et une étape du jeu qui
-l'utilise. En séance 12, vous rendez votre jeu terminé.
+De la séance 08 à la séance 11, vous programmez un même jeu, pas à pas : **Code
+secret**. Chaque séance apporte une notion, et une étape du jeu qui l'utilise.
+En séance 12, vous rendez votre jeu terminé.
 
 Le mini-projet est **guidé** : tout le monde programme le même jeu, en suivant
-les mêmes étapes. Il n'y a pas de partie libre. Vous pouvez aller plus loin
-que les étapes, mais rien ne l'exige.
+les mêmes étapes. Il n'y a pas de partie libre. Vous pouvez aller plus loin que
+les étapes, mais rien ne l'exige.
 
 ## Le jeu
 
@@ -26,18 +26,18 @@ chiffres, et le jeu vous répond :
 Avec le code secret `1 2 3 4`, la proposition `1 3 5 6` donne un chiffre bien
 placé (le `1`) et un chiffre mal placé (le `3`).
 
-C'est le principe d'un jeu traditionnel, connu en anglais sous le nom de
-_Bulls and Cows_, et vendu dans le commerce sous d'autres noms.
+C'est le principe d'un jeu traditionnel, connu en anglais sous le nom de _Bulls
+and Cows_, et vendu dans le commerce sous d'autres noms.
 
 ## Les étapes
 
-| Séance | Notion du jour                     | Ce que le jeu sait faire à la fin de la séance                     |
-| -----: | :--------------------------------- | :----------------------------------------------------------------- |
-|     08 | Tableaux                           | Comparer une proposition au code secret, compter les bien placés    |
-|     09 | Tableaux à deux dimensions         | Compter les mal placés, afficher l'historique des essais, découper en fonctions |
-|     10 | Exceptions                         | Ne plus planter quand on tape `abc` ou un chiffre hors limites      |
-|     11 | Hasard et tri                      | Tirer le code au hasard, garder un classement des parties          |
-|     12 | Git                                | Le jeu est rendu sur un dépôt                                       |
+| Séance | Notion du jour             | Ce que le jeu sait faire à la fin de la séance                                  |
+| -----: | :------------------------- | :------------------------------------------------------------------------------ |
+|     08 | Tableaux                   | Comparer une proposition au code secret, compter les bien placés                |
+|     09 | Tableaux à deux dimensions | Compter les mal placés, afficher l'historique des essais, découper en fonctions |
+|     10 | Exceptions                 | Ne plus planter quand on tape `abc` ou un chiffre hors limites                  |
+|     11 | Hasard et tri              | Tirer le code au hasard, garder un classement des parties                       |
+|     12 | Git                        | Le jeu est rendu sur un dépôt                                                   |
 
 Chaque étape est décrite sur la page de la séance, avec une solution possible
 dans un bloc repliable. Si vous n'avez pas terminé une étape, terminez-la avant
@@ -52,12 +52,12 @@ page [Évaluation](01-evaluation.md#les-questionnaires-10).
 
 ## Le rendu, en séance 12
 
-En séance 12, vous rendez votre jeu sur un dépôt Git, avec Classroom50. Le
-dépôt contient au minimum :
+En séance 12, vous rendez votre jeu sur un dépôt Git, avec Classroom50. Le dépôt
+contient au minimum :
 
 - le code source, dans un fichier `Main.java` lisible ;
-- un fichier `README.md` qui dit comment lancer le jeu, ce qui fonctionne et
-  ce qui ne fonctionne pas encore, et quelles aides extérieures vous avez
+- un fichier `README.md` qui dit comment lancer le jeu, ce qui fonctionne et ce
+  qui ne fonctionne pas encore, et quelles aides extérieures vous avez
   utilisées.
 
 !!! note "Le lien vers Classroom50"
@@ -76,8 +76,7 @@ Ce qui est regardé, dans cet ordre :
 5. Les commentaires expliquent pourquoi, pas ce que fait la ligne suivante.
 
 Ce qui n'est pas regardé : l'élégance, la performance, le nombre de
-fonctionnalités. Un petit jeu simple et compris vaut mieux qu'un gros jeu
-copié.
+fonctionnalités. Un petit jeu simple et compris vaut mieux qu'un gros jeu copié.
 
 ## Calendrier
 

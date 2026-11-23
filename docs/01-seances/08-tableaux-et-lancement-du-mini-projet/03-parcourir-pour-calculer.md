@@ -50,9 +50,9 @@ Suffisantes : 3 sur 5
 
 ## Le minimum et le maximum
 
-Pour trouver la plus grande note, on garde la **meilleure valeur vue jusqu'ici**.
-À chaque case, on se pose une question : _"cette note est-elle plus grande que
-la meilleure vue jusqu'ici ?"_ Si oui, elle la remplace.
+Pour trouver la plus grande note, on garde la **meilleure valeur vue
+jusqu'ici**. À chaque case, on se pose une question : _"cette note est-elle plus
+grande que la meilleure vue jusqu'ici ?"_ Si oui, elle la remplace.
 
 Reste à savoir d'où partir. La seule réponse sûre : de la **première case**.
 
@@ -95,14 +95,13 @@ inutile.
 | 4^e^ fois       |   4 |         5.5 |                  4.0 |                  6.0 |
 | 5^e^ fois       |   5 |             |              on sort |                      |
 
-Les deux `if` sont indépendants, sans `else` : une même note peut, en
-principe, faire bouger les deux. C'est le cas de la première case, d'où l'on
-part.
+Les deux `if` sont indépendants, sans `else` : une même note peut, en principe,
+faire bouger les deux. C'est le cas de la première case, d'où l'on part.
 
 <div class="quiz" markdown>
 
-Un programme cherche la température la plus haute de
-`{-3, -8, -1, -5}`. Il part de `int max = 0;`. Qu'affiche-t-il ?
+Un programme cherche la température la plus haute de `{-3, -8, -1, -5}`. Il part
+de `int max = 0;`. Qu'affiche-t-il ?
 
 - [ ] `-1`
 - [x] `0`
@@ -124,9 +123,9 @@ Vous retrouverez ce programme dans l'atelier.
 
 ## Le `String[] args` de `main`
 
-Depuis la séance 03, vous écrivez `public static void main(String[] args)`
-sans savoir ce que veut dire `String[] args`. Vous pouvez maintenant le lire :
-`args` est un **tableau de `String`**, un paramètre de la fonction `main`.
+Depuis la séance 03, vous écrivez `public static void main(String[] args)` sans
+savoir ce que veut dire `String[] args`. Vous pouvez maintenant le lire : `args`
+est un **tableau de `String`**, un paramètre de la fonction `main`.
 
 ```java title="Main.java" linenums="1" hl_lines="3"
 public class Main {
@@ -141,19 +140,19 @@ public class Main {
 ```
 
 Ce tableau contient les mots tapés après le nom du programme quand on le lance
-depuis un terminal, par exemple `java Main.java bonjour`. Depuis le bouton
-_Run_ d'IntelliJ, on n'en tape aucun : le tableau a zéro case. Vous ne vous en
+depuis un terminal, par exemple `java Main.java bonjour`. Depuis le bouton _Run_
+d'IntelliJ, on n'en tape aucun : le tableau a zéro case. Vous ne vous en
 servirez pas dans ce cours, mais il n'y a plus de mot mystérieux dans votre
 programme.
 
 ## Résumé
 
-| Parcours | Avant la boucle         | Dans la boucle                                  |
-| :------- | :---------------------- | :---------------------------------------------- |
-| Somme    | `sum = 0`               | `sum = sum + values[i]`                         |
-| Compte   | `count = 0`             | `if (condition) { count++; }`                   |
-| Maximum  | `max = values[0]`       | `if (values[i] > max) { max = values[i]; }`     |
-| Minimum  | `min = values[0]`       | `if (values[i] < min) { min = values[i]; }`     |
+| Parcours | Avant la boucle   | Dans la boucle                              |
+| :------- | :---------------- | :------------------------------------------ |
+| Somme    | `sum = 0`         | `sum = sum + values[i]`                     |
+| Compte   | `count = 0`       | `if (condition) { count++; }`               |
+| Maximum  | `max = values[0]` | `if (values[i] > max) { max = values[i]; }` |
+| Minimum  | `min = values[0]` | `if (values[i] < min) { min = values[i]; }` |
 
 - Le résultat se déclare **avant** la boucle, et se lit **après**.
 - Un minimum ou un maximum part de la première case, jamais d'une valeur

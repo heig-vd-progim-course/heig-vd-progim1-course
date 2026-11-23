@@ -15,8 +15,7 @@ contenu du tableau à la fin, case par case.**
 
 ## 1. Prédire
 
-Pour chaque programme, écrivez ce que la console va afficher, puis
-exécutez-le.
+Pour chaque programme, écrivez ce que la console va afficher, puis exécutez-le.
 
 ### Programme A
 
@@ -171,8 +170,8 @@ Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 3 out
 
 ## 3. Le fil rouge garde ses notes
 
-Repartez de votre fil rouge de la séance 07, étapes 1 et 2 de l'atelier
-_`for` et FizzBuzz_.
+Repartez de votre fil rouge de la séance 07, étapes 1 et 2 de l'atelier _`for`
+et FizzBuzz_.
 
 ### Étape 1 - Ranger les notes
 
@@ -182,8 +181,8 @@ boucle, affichez les notes avec `Arrays.toString`.
 
 ### Étape 2 - Les notes à retravailler
 
-Après l'appréciation, affichez chaque note en dessous de la moyenne, précédée
-de `À retravailler : `.
+Après l'appréciation, affichez chaque note en dessous de la moyenne, précédée de
+`À retravailler : `.
 
 Vérifiez avec 2 personnes : Camille, 2 notes, 3.3 et 4.6 ; Noah, 3 notes, 4, 5
 et 6.
