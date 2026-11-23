@@ -41,7 +41,9 @@ Sous Windows, PowerShell accepte ces commandes.
 
 ### Ce qui est autorisé
 
-Tout, tout le temps, sauf pendant les évaluations.
+Tout, tout le temps, sauf pendant l'évaluation écrite et l'oral. Pour le
+mini-projet et les questionnaires, ils sont permis, à condition de les
+déclarer.
 
 Il serait absurde de vous en priver : vous les utiliserez dans votre travail.
 Mais il serait tout aussi absurde de vous laisser croire qu'ils remplacent la
