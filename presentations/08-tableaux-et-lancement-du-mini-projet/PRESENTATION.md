@@ -74,7 +74,9 @@ Impossible : quand la moyenne est connue, les notes ont **disparu**.
 - expliquer ce qu'est le `String[] args` de `main` ;
 - comparer deux tableaux case par case.
 
-## Étape 1 : une variable par note (1/2)
+## Étape 1 : une variable par note
+
+<small>
 
 ```java
 public class Main {
@@ -84,11 +86,7 @@ public class Main {
         double grade3 = 4;
         double grade4 = 4.5;
         double grade5 = 5.5;
-```
 
-## Étape 1 : une variable par note (2/2)
-
-```java
         double sum = (((grade1 + grade2) + grade3) + grade4) + grade5;
         double average = sum / 5;
 
@@ -97,29 +95,15 @@ public class Main {
 }
 ```
 
+</small>
+
 `Moyenne : 5.0`
 
-## Quiz : une sixième note
-
-Pour passer à six notes, combien d'endroits faut-il modifier ?
-
-A. Un : ajouter `double grade6 = ...;`
-
-B. Deux : la déclaration et la somme
-
-C. Trois : la déclaration, la somme et le `5` de la ligne 10
-
-D. Aucun : Java s'adapte
-
-## C. Trois
+## Et avec une sixième note ?
 
 <!-- _class: lead -->
 
-Oubliez le `5` de la division, et la moyenne est **fausse**, sans aucun
-message d'erreur.
-
-Pour comparer chaque note à la moyenne : cinq `if`. Avec trente notes,
-trente.
+Et avec trente ?
 
 ## Étape 2 : un tableau (ligne 3)
 
@@ -236,21 +220,6 @@ Au sixième tour, `i` vaut 5, et `5 <= 5` est vrai : Java essaie de lire
 
 Le compilateur ne dit rien : l'erreur n'apparaît qu'**à l'exécution**.
 
-## Quiz : trois cases
-
-Un tableau a 3 cases. Quel indice provoque une
-`ArrayIndexOutOfBoundsException` ?
-
-A. `0` - B. `2` - C. `3` - D. Aucun : Java agrandit le tableau
-
-## C. `3`
-
-<!-- _class: lead -->
-
-Les indices valides vont de **0 à 2**.
-
-Un tableau ne s'agrandit **jamais**.
-
 ## Étape 5 : afficher tout le tableau (1/2)
 
 ```java
@@ -282,7 +251,9 @@ public class Main {
 
 `[5.0, 6.0, 5.5, 4.5, 5.5]` : la case 2 a été remplacée.
 
-## Étape 6 : créer vide, puis remplir (1/2)
+## Étape 6 : créer vide, puis remplir
+
+<small>
 
 ```java
 import java.util.Arrays;
@@ -293,11 +264,6 @@ public class Main {
         double[] grades = new double[count];
 
         System.out.println(Arrays.toString(grades));
-```
-
-## Étape 6 : créer vide, puis remplir (2/2)
-
-```java
 
         for (int i = 0; i < grades.length; i++) {
             grades[i] = Double.parseDouble(IO.readln("Note " + (i + 1) + " : "));
@@ -306,6 +272,8 @@ public class Main {
     }
 }
 ```
+
+</small>
 
 ## Un tableau neuf n'est pas vide
 
@@ -322,7 +290,11 @@ Note 3 : 6
 - Chaque case vaut `0.0` au départ.
 - `i + 1` : la note 1 va dans la case 0.
 
-## Étape 7 : les notes en dessous (1/2)
+## Étape 7 : les notes en dessous
+
+<small>
+
+<small>
 
 ```java
 public class Main {
@@ -335,11 +307,7 @@ public class Main {
         }
         double average = sum / grades.length;
         System.out.println("Moyenne : " + average);
-```
 
-## Étape 7 : les notes en dessous (2/2)
-
-```java
         for (int i = 0; i < grades.length; i++) {
             if (grades[i] < average) {
                 System.out.println("En dessous : " + grades[i]);
@@ -349,34 +317,28 @@ public class Main {
 }
 ```
 
-`Moyenne : 5.0`, `En dessous : 4.0`, `En dessous : 4.5`
+</small>
 
-## Quiz : deux boucles
+</small>
 
-Pourquoi faut-il deux boucles, et pas une seule ?
-
-A. Un tableau ne se parcourt qu'une fois par boucle
-
-B. Java interdit un `if` dans la boucle qui fait la somme
-
-C. La moyenne n'est connue qu'après avoir additionné toutes les notes
-
-D. Ce n'est pas nécessaire
-
-## C. La moyenne arrive trop tard
+## Pourquoi deux boucles ?
 
 <!-- _class: lead -->
 
-Pendant la première boucle, `average` n'existe pas encore.
+`Moyenne : 5.0`, `En dessous : 4.0`, `En dessous : 4.5`
 
-C'est pour cela qu'il fallait **garder** les notes.
+La première additionne les notes. La moyenne n'est connue qu'**après** elle.
+
+La seconde compare chaque note à cette moyenne.
+
+Avec une seule boucle, il faudrait comparer chaque note à une moyenne qui
+n'existe pas encore. C'est pour cela qu'il fallait **garder** les notes.
 
 ## Activité - Des tableaux en quatuor
 
 <!-- _class: lead -->
 
-**Avant de rejoindre qui que ce soit, faites tourner le programme de votre
-carte dans votre tête, tour par tour, en notant ce que devient chaque case.**
+**Un quatuor, ce sont quatre cartes qui décrivent le même programme.**
 
 ## Parcourir pour calculer
 
@@ -387,18 +349,16 @@ Toujours la même forme :
 3. dans la boucle, une mise à jour du résultat ;
 4. après la boucle, le résultat est prêt.
 
-## Compter (1/2)
+## Compter
+
+<small>
 
 ```java
 public class Main {
     public static void main(String[] args) {
         double[] grades = {5, 6, 3.5, 4.5, 3};
         int passedCount = 0;
-```
 
-## Compter (2/2)
-
-```java
         for (int i = 0; i < grades.length; i++) {
             if (grades[i] >= 4) {
                 passedCount++;
@@ -409,11 +369,15 @@ public class Main {
 }
 ```
 
+</small>
+
 `Suffisantes : 3 sur 5`
 
-## Le minimum et le maximum (1/2)
+## Le minimum et le maximum
 
-On part de la **première case** : c'est la meilleure valeur vue jusqu'ici.
+<small>
+
+<small>
 
 ```java
 public class Main {
@@ -426,11 +390,6 @@ public class Main {
             if (grades[i] < min) {
                 min = grades[i];
             }
-```
-
-## Le minimum et le maximum (2/2)
-
-```java
             if (grades[i] > max) {
                 max = grades[i];
             }
@@ -441,25 +400,33 @@ public class Main {
 }
 ```
 
-`Minimum : 4.0`, `Maximum : 6.0`
+</small>
 
-## Quiz : des températures négatives
+</small>
 
-`int[] temperatures = {-3, -8, -1, -5};`
+## Un minimum qui part de 0
 
-Le programme cherche la plus haute en partant de `int max = 0;`.
+<small>
 
-A. `-1` - B. `0` - C. `-8` - D. Une erreur
+```java
+public class Main {
+    public static void main(String[] args) {
+        double[] grades = {5, 6, 4, 4.5, 5.5};
+        double min = 0;
 
-## B. `0`
+        for (int i = 0; i < grades.length; i++) {
+            if (grades[i] < min) {
+                min = grades[i];
+            }
+        }
+        System.out.println("Minimum : " + min);
+    }
+}
+```
 
-<!-- _class: lead -->
+</small>
 
-Aucune température n'est plus grande que 0 : `max` ne change jamais.
-
-Il compile, s'exécute, et répond **faux**.
-
-On part de `temperatures[0]`, jamais d'une valeur inventée.
+`Minimum : 0.0` au lieu de `4.0` : `min` ne change jamais.
 
 ## Le `String[] args` de `main`
 

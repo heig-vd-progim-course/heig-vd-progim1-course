@@ -6,12 +6,8 @@ skinparam defaultFontSize 22
 
 start
 :values = {3, 8, 2, 7, 5};
-:sum = 0;
-:i = 0;
-while (i < values.length ?) is ([oui])
-  :sum = sum + values[i];
-  :i += 2;
-endwhile ([non])
-:Afficher sum;
+:i = 2;
+:values[i] = values[i + 1];
+:Afficher values[i];
 stop
 @enduml

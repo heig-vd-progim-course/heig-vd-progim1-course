@@ -6,11 +6,8 @@ skinparam defaultFontSize 22
 
 start
 :values = {3, 8, 2, 7, 5};
-:i = 0;
-while (i < values.length ?) is ([oui])
-  :values[i] = values[i] + i;
-  :i++;
-endwhile ([non])
-:Afficher values[4];
+:i = 2;
+:values[i + 1] = values[i];
+:Afficher values[i];
 stop
 @enduml

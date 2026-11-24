@@ -74,7 +74,7 @@ Que fait votre programme ? Est-ce ce que vous voulez qu'il fasse ? Si non,
 que devrait-il faire ?
 
 ```{=latex}
-\answerbox{4cm}
+\answerbox{8cm}
 ```
 
 ### Question 2
@@ -84,7 +84,7 @@ chiffres bien placés votre programme annonce-t-il ? Expliquez, case par case,
 comment il arrive à ce nombre.
 
 ```{=latex}
-\answerbox{4.5cm}
+\answerbox{9cm}
 ```
 
 ### Question 3
@@ -95,7 +95,7 @@ lançant son jeu, et à quel moment exactement ? Comment lui expliqueriez-vous
 d'où vient le problème ?
 
 ```{=latex}
-\answerbox{4.5cm}
+\answerbox{9cm}
 ```
 
 ### Question 4
@@ -106,7 +106,7 @@ Expliquez pourquoi, avec vos mots, comme vous l'expliqueriez à quelqu'un qui
 n'a pas suivi le cours.
 
 ```{=latex}
-\answerbox{4.5cm}
+\answerbox{9cm}
 ```
 
 ## Partie 2 - Revenir sur votre manière de travailler
@@ -118,7 +118,7 @@ n'avanciez plus. Qu'avez-vous essayé, et dans quel ordre ? Qu'est-ce qui vous a
 débloqué, ou qu'est-ce qui vous aurait aidé ?
 
 ```{=latex}
-\answerbox{6cm}
+\answerbox{12cm}
 ```
 
 ### Question 6
@@ -133,7 +133,7 @@ Si une partie ne fonctionne pas encore, décrivez ce qui se passe quand vous
 l'exécutez.
 
 ```{=latex}
-\answerbox{3cm}
+\answerbox{6cm}
 ```
 
 ### Question 7
@@ -143,7 +143,7 @@ _"Je n'ai rien compris"_ n'est pas une question précise ; _"pourquoi la
 boucle part de 0 et pas de 1 ?"_ en est une.
 
 ```{=latex}
-\answerbox{2.5cm}
+\answerbox{5cm}
 ```
 
 ### Question 8
@@ -153,5 +153,5 @@ d'intelligence artificielle) pour l'étape 1 ou pour ce questionnaire ? Si oui :
 quand, pour quoi faire, et comment. Si non, écrivez-le.
 
 ```{=latex}
-\answerbox{2.5cm}
+\answerbox{5cm}
 ```

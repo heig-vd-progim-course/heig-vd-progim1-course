@@ -98,28 +98,38 @@ inutile.
 Les deux `if` sont indépendants, sans `else` : une même note peut, en principe,
 faire bouger les deux. C'est le cas de la première case, d'où l'on part.
 
-<div class="quiz" markdown>
+### Pourquoi pas 0 ?
 
-Un programme cherche la température la plus haute de `{-3, -8, -1, -5}`. Il part
-de `int max = 0;`. Qu'affiche-t-il ?
+On est tenté de partir de 0, comme pour une somme. Voici le même calcul du
+minimum, parti de 0 :
 
-- [ ] `-1`
-- [x] `0`
-- [ ] `-8`
-- [ ] Une erreur
+```java title="Main.java" linenums="1" hl_lines="4"
+public class Main {
+    public static void main(String[] args) {
+        double[] grades = {5, 6, 4, 4.5, 5.5};
+        double min = 0;
 
-<div class="quiz-explanation" markdown>
+        for (int i = 0; i < grades.length; i++) {
+            if (grades[i] < min) {
+                min = grades[i];
+            }
+        }
+        System.out.println("Minimum : " + min);
+    }
+}
+```
 
-Aucune température n'est plus grande que 0 : `max` ne change jamais, et le
-programme affiche une température qui n'est pas dans le tableau. Il compile,
-s'exécute sans erreur, et donne une réponse fausse. Partir de la première case,
-`int max = temperatures[0];`, règle le problème pour toutes les valeurs.
+```text
+Minimum : 0.0
+```
 
-Vous retrouverez ce programme dans l'atelier.
+Aucune note n'est plus petite que 0 : la condition de la ligne 7 n'est jamais
+vraie, et `min` ne change jamais. Le programme compile, s'exécute sans erreur,
+et affiche une note qui n'est pas dans le tableau, au lieu de `4.0`.
 
-</div>
-
-</div>
+0 n'est pas une valeur neutre pour un minimum ou un maximum : tout dépend des
+valeurs du tableau. La première case, elle, est toujours une valeur possible.
+Vous retrouverez cette erreur dans l'atelier, sous une autre forme.
 
 ## Le `String[] args` de `main`
 

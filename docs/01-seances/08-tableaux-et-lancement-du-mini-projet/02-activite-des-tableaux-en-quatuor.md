@@ -10,9 +10,8 @@ Suivre, case par case, ce qu'une boucle fait à un tableau, sans ordinateur. Et
 relier quatre façons de voir le même programme : le code, le diagramme
 d'activité, ce que la console affiche, et ce que devient le tableau.
 
-**Règle de l'activité : avant de rejoindre qui que ce soit, faites tourner le
-programme de votre carte dans votre tête, tour par tour, en notant au crayon ce
-que devient chaque case.**
+**Règle de l'activité : un quatuor, ce sont quatre cartes qui décrivent le même
+programme.**
 
 Pas de téléphone, pas d'ordinateur. Un crayon pour annoter le dos de votre
 carte.
@@ -34,8 +33,10 @@ l'état dans lequel il laisse le tableau.
 
 !!! warning "Les cartes se ressemblent exprès"
 
-    Tous les programmes partent du même tableau. Plusieurs codes ne diffèrent
-    que d'un caractère : `i = 0` ou `i = 1`, `i + 1` ou `i - 1`, `<` ou `>`.
+    Tous les programmes partent du même tableau. La moitié ont une boucle,
+    l'autre moitié n'en ont pas. Plusieurs codes ne diffèrent que d'un
+    caractère, `i = 0` ou `i = 1`, `i + 1` ou `i - 1`, ou par l'ordre de deux
+    lignes.
     Deux programmes peuvent afficher la même chose et laisser des tableaux
     différents ; deux autres peuvent laisser le même tableau et afficher
     autre chose. Il faut les deux cartes pour être sûr.

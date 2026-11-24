@@ -50,21 +50,21 @@ QUATUORS = [
      "3", [3, 3, 8, 2, 7]),
     ("A06", "for (int i = 1; i < values.length; i++) {\n    values[i] = values[i - 1];\n}\nSystem.out.println(values[0]);",
      "3", [3, 3, 3, 3, 3]),
-    ("A07", "int count = 0;\nfor (int i = 0; i < values.length; i++) {\n    if (values[i] > 4) {\n        values[i] = 0;\n        count++;\n    }\n}\nSystem.out.println(count);",
-     "3", [3, 0, 2, 0, 0]),
-    ("A08", "int count = 0;\nfor (int i = 0; i < values.length; i++) {\n    if (values[i] < 4) {\n        values[i] = 0;\n        count++;\n    }\n}\nSystem.out.println(count);",
-     "2", [0, 8, 0, 7, 5]),
+    ("A07", "values[1] = values[3];\nvalues[3] = values[1] + 1;\nSystem.out.println(values[3]);",
+     "8", [3, 7, 2, 8, 5]),
+    ("A08", "values[3] = values[1] + 1;\nvalues[1] = values[3];\nSystem.out.println(values[3]);",
+     "9", [3, 9, 2, 9, 5]),
     ("A09", "int temp = values[0];\nvalues[0] = values[4];\nvalues[4] = temp;\nSystem.out.println(values[0]);",
      "5", [5, 8, 2, 7, 3]),
     ("A10", "values[0] = values[4];\nvalues[4] = values[0];\nSystem.out.println(values[0]);",
      "5", [5, 8, 2, 7, 5]),
-    ("A11", "int sum = 0;\nfor (int i = 0; i < values.length; i += 2) {\n    sum = sum + values[i];\n}\nSystem.out.println(sum);",
-     "10", [3, 8, 2, 7, 5]),
-    ("A12", "for (int i = 0; i < values.length; i++) {\n    values[i] = values[i] + i;\n}\nSystem.out.println(values[4]);",
-     "9", [3, 9, 4, 10, 9]),
+    ("A11", "int i = 2;\nvalues[i] = values[i + 1];\nSystem.out.println(values[i]);",
+     "7", [3, 8, 7, 7, 5]),
+    ("A12", "int i = 2;\nvalues[i + 1] = values[i];\nSystem.out.println(values[i]);",
+     "2", [3, 8, 2, 2, 5]),
 ]
 
-REMOVAL_ORDER = "A12, A11, A08, A07, A02, A01, A06, A05, A10, A09, A04, A03"
+REMOVAL_ORDER = "A12, A11, A02, A01, A08, A07, A06, A05, A10, A09, A04, A03"
 
 
 def solutions_page():
@@ -84,13 +84,21 @@ def solutions_page():
   {{pages}} pages A4 en tout, à imprimer en couleur, recto seul : une carte
   par page, en paysage. Tous les codes commencent par
   <code>int[] values = {{3, 8, 2, 7, 5}};</code></p>
-  <p>Les paires se ressemblent exprès : A03 et A04 ont le même tableau à la
-  fin, seule la sortie les distingue ; A05 et A06 affichent tous deux 3,
-  seul le tableau les distingue ; A09 et A10 aussi. Pour A04, la carte
+  <p>Six quatuors ont une boucle (A01 à A06), six n'en ont pas (A07 à
+  A12). Les paires se ressemblent exprès : A03 et A04 ont le même tableau à
+  la fin, seule la sortie les distingue ; A05 et A06 affichent tous deux 3,
+  seul le tableau les distingue ; A09 et A10 aussi. A07 et A08 ont les mêmes
+  lignes dans un autre ordre ; A11 et A12 placent <code>i + 1</code> à gauche
+  ou à droite du <code>=</code>. Pour A04, la carte
   Tableau montre l'état au moment où le programme s'arrête, et la carte
   Sortie la première ligne du message d'erreur, coupée pour tenir.</p>
+  <p>Les cartes ne portent pas d'identifiant : il donnerait la réponse. Dans
+  chaque série, elles sont imprimées dans l'ordre de ce tableau, A01 d'abord.
+  Pour retirer un quatuor, retrouver ses cartes par leur code, leur sortie et
+  leur tableau.</p>
   <p>Ordre de retrait si la salle compte moins de 48 personnes : {REMOVAL_ORDER}.
-  Retirer les paires ensemble : un jumeau sans l'autre perd son intérêt.</p>
+  Retirer les paires ensemble : un jumeau sans l'autre perd son intérêt. Cet
+  ordre garde autant de quatuors avec boucle que sans.</p>
   <table>
     <thead><tr><th>Quatuor</th><th>Code</th><th>Sortie</th><th>Tableau à la fin</th></tr></thead>
     <tbody>{"".join(rows)}</tbody>
@@ -108,13 +116,13 @@ def main():
     svgs = {q[0]: render_plantuml(DIAGRAMS / f"{q[0].lower()}.puml") for q in QUATUORS}
     svgs = scale_svgs(svgs, 262, 168)
     codes = [
-        card("code", q, f'<pre class="code code-small">{highlight(DECLARATION + c)}</pre>')
+        card("code", q, f'<pre class="code code-small">{highlight(DECLARATION + c)}</pre>', show_footer=False)
         for q, c, _, _ in QUATUORS
     ]
-    diagrams = [card("diagram", q, diagram_body(svgs[q])) for q, _, _, _ in QUATUORS]
+    diagrams = [card("diagram", q, diagram_body(svgs[q]), show_footer=False) for q, _, _, _ in QUATUORS]
     outputs = [
         card("output", q, output_body(o).replace('class="console"', 'class="console console-small"')
-             if o == CRASH else output_body(o))
+             if o == CRASH else output_body(o), show_footer=False)
         for q, _, o, _ in QUATUORS
     ]
     arrays = [

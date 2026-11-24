@@ -75,7 +75,7 @@ doit produire ; et sans l'étape 1, le mini-projet commence en retard.
 ## Méthodes d'enseignement et d'apprentissage
 
 - Présentation magistrale courte, sous forme de tutoriel : un même programme
-  réécrit pas à pas, avec des quiz à choix multiple à faire en classe.
+  réécrit pas à pas, avec des questions posées à la classe.
 - Activité en mouvement : retrouver les quatre cartes qui décrivent le même
   programme.
 - Atelier individuel : prédire, réparer, puis écrire.

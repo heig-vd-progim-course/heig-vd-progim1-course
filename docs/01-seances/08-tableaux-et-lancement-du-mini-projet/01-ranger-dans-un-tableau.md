@@ -60,26 +60,10 @@ public class Main {
 Moyenne : 5.0
 ```
 
-Ça fonctionne. Mais regardez ce que coûte une sixième note.
-
-<div class="quiz" markdown>
-
-Pour passer à six notes, combien d'endroits du programme faut-il modifier ?
-
-- [ ] Un : ajouter `double grade6 = ...;`
-- [ ] Deux : la déclaration et la somme
-- [x] Trois : la déclaration, la somme et le `5` de la ligne 10
-- [ ] Aucun : Java s'adapte
-
-<div class="quiz-explanation" markdown>
-
-Il faut déclarer `grade6`, l'ajouter à la somme, ligne 9, **et** remplacer le
-`5` de la ligne 10 par `6`. Oubliez le troisième, et le programme calcule une
-moyenne fausse sans aucun message d'erreur.
-
-</div>
-
-</div>
+Ça fonctionne. Mais regardez ce que coûte une sixième note : il faut déclarer
+`grade6`, l'ajouter à la somme, ligne 9, **et** remplacer le `5` de la ligne 10
+par `6`. Oubliez le troisième endroit, et le programme calcule une moyenne
+fausse sans aucun message d'erreur.
 
 Et pour afficher les notes en dessous de la moyenne, il faudrait cinq `if`, un
 par variable. Avec trente notes, trente variables et trente `if`. Il faut une
@@ -266,26 +250,6 @@ Ce n'est pas une erreur de compilation : le compilateur ne connaît pas la valeu
 de `i`. L'erreur ne se voit qu'**à l'exécution**. La séance 10 apprendra à
 rattraper ce genre d'arrêt ; pour l'instant, on l'évite.
 
-<div class="quiz" markdown>
-
-Un tableau a 3 cases. Quel indice provoque une `ArrayIndexOutOfBoundsException`
-?
-
-- [ ] `0`
-- [ ] `2`
-- [x] `3`
-- [ ] Aucun : Java agrandit le tableau
-
-<div class="quiz-explanation" markdown>
-
-Les indices valides vont de 0 à 2. L'indice 3 est le premier qui n'existe pas,
-même s'il est égal à `length`. Et un tableau ne s'agrandit jamais : sa taille
-est fixée à sa création.
-
-</div>
-
-</div>
-
 ## Étape 5 : afficher tout le tableau
 
 Pour vérifier le contenu d'un tableau, on a envie d'écrire
@@ -409,29 +373,13 @@ En dessous : 4.0
 En dessous : 4.5
 ```
 
-Deux boucles, deux parcours. Le premier calcule la moyenne ; le second compare
-chaque note à cette moyenne. Avec cinq notes ou avec trente, le programme est le
-même.
+Deux boucles, deux parcours. Le premier additionne les notes : la moyenne n'est
+connue qu'**après** lui, ligne 9. Le second compare chaque note à cette moyenne.
 
-<div class="quiz" markdown>
-
-Pourquoi faut-il deux boucles, et pas une seule ?
-
-- [ ] Parce qu'un tableau ne se parcourt qu'une fois par boucle
-- [ ] Parce que Java interdit un `if` dans la boucle qui fait la somme
-- [x] Parce que la moyenne n'est connue qu'après avoir additionné toutes les
-      notes
-- [ ] Ce n'est pas nécessaire : une seule boucle donnerait le même résultat
-
-<div class="quiz-explanation" markdown>
-
-Pendant la première boucle, `average` n'existe pas encore : on ne peut pas
-comparer une note à une moyenne qu'on est en train de calculer. C'est exactement
-pour cela qu'il fallait garder les notes.
-
-</div>
-
-</div>
+Une seule boucle ne suffirait pas : pendant le premier parcours, `average`
+n'existe pas encore, et on ne peut pas comparer une note à une moyenne qu'on est
+en train de calculer. C'est exactement pour cela qu'il fallait garder les notes.
+Avec cinq notes ou avec trente, le programme est le même.
 
 ## Résumé
 

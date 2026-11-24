@@ -28,6 +28,7 @@ et l'indice de trop ne se voit qu'à l'exécution.
 | Pas de tableau en paramètre de fonction                | Demande explicite : il arrive en séance 09. Le `main` du code secret grandit exprès, pour motiver le découpage                                                                 |
 | Pas de `for each`                                      | Retiré du programme. Une boucle de plus à choisir, pour un gain faible                                                                                                         |
 | Une carte **Tableau** dans les quatuors                | Demande explicite : l'état du tableau au début et à la fin oblige à dérouler la boucle case par case                                                                           |
+| Six quatuors sans boucle                               | Demande explicite : lire et écrire une case avec `[]` est une compétence à part. Mélangés aux boucles, ces quatuors ne sont pas un niveau facile mais un autre piège           |
 | Le fil rouge s'arrête ici                              | Deux fils (le fil rouge et le mini-projet) dans la même séance chargeraient trop. Le code secret prend le relais                                                               |
 | Un mini-projet guidé, le même pour tout le monde       | Sur le modèle du mini-projet de ProgServ1 de L. Delafontaine. Un projet libre, choisi en séance 08 à quatre séances de la fin, est trop risqué pour des personnes qui débutent |
 
@@ -64,7 +65,7 @@ même si une partie des réponses vient d'une aide extérieure.
 | Quoi                              | Détail                                                                                                         |
 | :-------------------------------- | :------------------------------------------------------------------------------------------------------------- |
 | Imprimer les cartes               | [Le PDF des cartes](materiel/08-tableaux-cartes.pdf), 49 pages, **en couleur**, recto seul                     |
-| Imprimer les questionnaires       | [Le questionnaire 08](../00-organisation/questionnaire-08.pdf), 3 pages, un par personne, recto verso          |
+| Imprimer les questionnaires       | [Le questionnaire 08](../00-organisation/questionnaire-08.pdf), 5 pages, un par personne, recto verso          |
 | Tester les quiz                   | Sur le site publié, depuis le réseau de l'école : les confettis viennent d'un CDN                              |
 | Exécuter l'étape 1 du code secret | Les trois solutions de la page, avec le JDK du cours, pour avoir le jeu prêt à montrer                         |
 | Préparer Classroom50              | Pas pour cette séance, mais le rendu de la séance 12 en dépend : créer la classe et le dépôt modèle à l'avance |
@@ -79,8 +80,10 @@ même si une partie des réponses vient d'une aide extérieure.
 | 26-37 | Cartes **Sortie**, bandeau gris      | 12 cartes    |
 | 38-49 | Cartes **Tableau**, bandeau orange   | 12 cartes    |
 
-La carte **Tableau** ne porte pas d'identifiant, comme la carte Énoncé des
-séances 06 et 07 : c'est elle qui sert de point de départ.
+Aucune carte ne porte d'identifiant : un numéro de quatuor en bas de page
+donnerait la réponse. Dans chaque série, les cartes sont imprimées dans l'ordre
+A01 à A12 de la page de solutions. Les trier par série dès l'impression, avant
+de les mélanger.
 
 Avec moins de 48 personnes, retirer des quatuors dans l'ordre indiqué sur la
 page de solutions. **Retirer les paires ensemble** : A03 et A04 laissent le même
@@ -118,10 +121,10 @@ connue, les notes ont disparu.
 ### Déroulement
 
 1. Distribuer une carte par personne, face cachée, mélangées.
-2. Laisser 2 minutes de silence pour dérouler sa carte, au crayon.
-3. Lancer la recherche des quatuors : 10 minutes.
-4. Vérification par quatuor, avec la page de solutions : 3 minutes.
-5. Débriefing : 5 minutes.
+2. Lancer la recherche des quatuors : 12 minutes. Pas de consigne sur la manière
+   de s'y prendre : les personnes s'organisent.
+3. Vérification par quatuor, avec la page de solutions : 3 minutes.
+4. Débriefing : 5 minutes.
 
 ### Débriefing
 
@@ -135,6 +138,10 @@ Ce qu'il faut faire émerger :
 - **A05 et A06** : décaler vers la droite oblige à parcourir **à l'envers**.
   Dans l'autre sens, la première valeur se recopie partout.
 - **A02** : la boucle qui part de 1 saute la case 0, et c'est la case affichée.
+- **A07 et A08** : les mêmes lignes dans un autre ordre donnent un autre
+  tableau. Une affectation lit les cases **au moment où elle s'exécute**.
+- **A11 et A12** : `values[i + 1]` à gauche du `=` écrit dans la case 3, à
+  droite il la lit. C'est le corps des boucles de A03 et A05, sans la boucle.
 
 ### Ce qui rate habituellement
 
@@ -146,9 +153,11 @@ Ce qu'il faut faire émerger :
 ## Théorie - Parcourir pour calculer
 
 Aller vite sur la somme et le compte, déjà vus en séance 07 sous forme
-d'accumulateur. Passer le temps sur le maximum : dérouler le tableau de trace,
-puis poser le quiz des températures négatives **avant** de montrer la solution.
-La section `String[] args` se fait en deux minutes, ou se lit.
+d'accumulateur. Passer le temps sur le maximum : dérouler le tableau de trace.
+Sur la diapositive _Un minimum qui part de 0_, demander ce que le programme
+affiche **avant** de lire la sortie. Le programme D de l'atelier fait la même
+erreur avec un maximum et des températures : ne pas le montrer ici. La section
+`String[] args` se fait en deux minutes, ou se lit.
 
 ## Pendant l'atelier
 
