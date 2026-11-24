@@ -80,10 +80,6 @@ Ce que vous venez de faire porte un nom dans le métier : c'est une
 qu'on vous donne est incomplet, puis décider explicitement de ce qu'on fait
 dans les cas qu'il ne couvre pas.
 
-Vous referez cet exercice au jalon 2 du mini-projet, sur votre propre problème.
-Ce sera plus difficile, parce que les trous d'un énoncé qu'on a écrit soi-même
-sont beaucoup plus durs à voir.
-
 <!-- URLs -->
 
 [licence]:

@@ -6,16 +6,18 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Vue d'ensemble
 
-La note de l'unité d'enseignement est composée de deux parties de poids égal :
+La note de l'unité d'enseignement est composée de trois éléments :
 
-| Partie            | Quand                 | Poids | Forme                                |
-| :---------------- | :-------------------- | ----: | :----------------------------------- |
-| Évaluation écrite | Lundi 9 novembre 2026 |   50% | Papier et crayon, sans ressources    |
-| Mini-projet       | Séances 08 à 12       |   50% | Projet a jalons + présentation orale |
+| Partie            | Quand                 | Poids | Forme                              |
+| :---------------- | :-------------------- | ----: | :--------------------------------- |
+| Évaluation écrite | Lundi 9 novembre 2026 |   50% | Papier et crayon, sans ressources  |
+| Questionnaires    | Séances 09 à 12       |   10% | Quatre feuilles rendues, à la main |
+| Oral              | Session d'examens     |   40% | Deux questions tirées au sort      |
 
-Les deux parties mesurent deux choses différentes et complémentaires :
-l'évaluation écrite mesure ce que vous avez compris, le mini-projet mesure ce
-que vous savez faire quand personne ne vous dit quoi faire.
+L'évaluation écrite mesure ce que vous avez compris des séances 01 à 05. Les
+questionnaires récompensent la régularité pendant le
+[mini-projet](02-mini-projet.md). L'oral vérifie que vous savez expliquer ce que
+vous avez programmé.
 
 ## Partie 1 - Évaluation écrite (50%)
 
@@ -51,8 +53,9 @@ suffit pas : il faut aussi savoir dire ce que fait chacune de ses parties.
 
 ### L'évaluation finale
 
-Une évaluation a lieu après la fin du semestre, pendant la session. Elle porte
-sur l'ensemble du cours, boucles et tableaux compris.
+Les boucles, les tableaux et tout ce qui suit sont évalués par la
+[partie 2](#partie-2-questionnaires-et-oral-50) : les questionnaires des séances
+08 à 11, puis un oral pendant la session d'examens.
 
 ### Comment s'y préparer
 
@@ -66,60 +69,74 @@ avec des situations rencontrées dans les supports et les ateliers. Faites-le su
 papier, sans ressource et en temps limité, avant la séance où il est corrigé
 collectivement.
 
-## Partie 2 - Mini-projet (50%)
+## Partie 2 - Questionnaires et oral (50%)
 
-Le mini-projet occupe la seconde moitié du semestre. Il est décrit en détail sur
-la page [Mini-projet et jalons](02-mini-projet-et-jalons.md).
+### Les questionnaires (10%)
 
-Il se décompose ainsi :
+À la fin des séances 08, 09, 10 et 11, vous recevez un questionnaire papier.
+Vous le remplissez **à la main**, chez vous, et vous le rendez **au début de la
+séance suivante**. Il est disponible en PDF sur la page de chaque séance, pour
+les personnes absentes.
 
-- des **jalons** obligatoires, validés ou non validés, qui structurent
-  l'avancement et ne donnent pas de note ;
-- un **rendu final** : le code et son fichier `README.md` ;
-- une **présentation orale** de 10 minutes, questions comprises, qui décide de
-  la note.
+Il ne demande pas de réciter le cours. Il vous fait raisonner sur ce que vous
+avez programmé (_"que se passe-t-il si la personne tape 9 ?"_) et revenir sur
+votre manière de travailler : où vous avez bloqué, ce que vous avez essayé, ce
+qui vous a débloqué.
 
-### Pourquoi une présentation orale
+| Ce qui compte                                      | Ce qui ne compte pas           |
+| :------------------------------------------------- | :----------------------------- |
+| Le questionnaire est rendu à temps                 | L'écriture, l'orthographe      |
+| Chaque question a une réponse sincère et réfléchie | Que vos réponses soient justes |
+
+Chaque questionnaire vaut 2,5% de la note : il est **validé ou non validé**. Il
+est validé s'il est rendu à temps et si ses réponses montrent une vraie
+réflexion. _"Je n'ai pas compris la question 3, voici ce que j'ai essayé"_ est
+une réponse valable ; une réponse vide ou recopiée ne l'est pas.
+
+Les feuilles vous sont rendues annotées la séance d'après. Leurs questions
+ressemblent à celles de l'oral : c'est aussi un entraînement.
+
+### L'oral (40%)
+
+- Pendant la session d'examens, après la fin du semestre.
+- Vous tirez au sort **deux questions** sur la programmation, et vous répondez
+  aux deux.
+- Les questions portent sur ce que vous avez fait en cours et dans le
+  mini-projet : boucles, tableaux, tableaux à deux dimensions, exceptions,
+  hasard et tri. Elles sont de la même nature que celles des questionnaires.
+
+!!! warning "Modalités à préciser"
+
+    La durée de préparation, la durée de l'oral, les ressources autorisées et
+    la grille d'évaluation seront publiées sur cette page avant la fin du
+    semestre.
+
+### Pourquoi un oral
 
 Parce que la seule chose que je peux évaluer de façon fiable, c'est votre
-capacité à expliquer votre propre code. Un programme qui fonctionne mais que
-vous ne savez pas expliquer ne vaut rien pour votre formation, et il ne vaudra
-rien pour votre employeur non plus.
-
-### Critères de la présentation orale
-
-| Critère                                                          | Poids |
-| :--------------------------------------------------------------- | ----: |
-| Le problème traité est clairement posé et le choix est justifié  |   15% |
-| La conception (diagramme, découpage en fonctions) est expliquée  |   25% |
-| Le code présenté est compris ligne à ligne par la personne       |   35% |
-| Les limites, bogues connus et pistes d'amélioration sont énoncés |   15% |
-| La clarté de la présentation et la gestion du temps              |   10% |
-
-Le critère central est le troisième. Si vous ne savez pas expliquer une partie
-de votre code, dites-le : une limite assumée coûte beaucoup moins cher qu'une
-explication inventée.
+capacité à expliquer du code. Un programme qui fonctionne mais que vous ne savez
+pas expliquer ne vaut rien pour votre formation, et il ne vaudra rien pour votre
+employeur non plus.
 
 ## Aides extérieures et honnêteté
 
 Vous pouvez utiliser Internet, la documentation et les outils d'intelligence
-artificielle pendant le mini-projet.
+artificielle pendant le mini-projet et pour préparer les questionnaires.
 
 En contrepartie, deux obligations :
 
-1. Indiquer dans le `README.md` de votre projet quand, pourquoi et comment vous
+1. Indiquer, dans le questionnaire concerné, quand, pourquoi et comment vous
    avez utilisé une aide extérieure.
-2. Être capable d'expliquer chaque ligne de ce que vous rendez.
+2. Être capable d'expliquer chaque ligne du code que vous rendez en séance 12.
 
-Une explication qui ne tient pas la route à l'oral vaut mieux qu'une tricherie
-découverte, mais les deux mènent au même endroit : la note 1 pour la partie
-concernée. Votre intégrité vous appartient ; je ne fais que constater.
+À l'oral, aucune aide extérieure n'est autorisée. C'est là que se voit ce que
+vous avez réellement appris.
 
 ## Rattrapage et cas particuliers
 
-Une absence à l'évaluation écrite doit être annoncée et justifiée selon le
-règlement de l'école. Un jalon manqué pour raison sérieuse se rattrape en me
-contactant avant l'échéance, pas après.
+Une absence à l'évaluation écrite ou à l'oral doit être annoncée et justifiée
+selon le règlement de l'école. Un questionnaire qui ne peut pas être rendu pour
+une raison sérieuse se rattrape en me contactant avant la séance, pas après.
 
 <!-- URLs -->
 

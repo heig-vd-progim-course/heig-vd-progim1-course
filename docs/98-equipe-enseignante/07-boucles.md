@@ -48,8 +48,8 @@ traite conditions **et** boucles. Pour les boucles, dans cet ordre :
 
 - **`for` avant `do-while`** : `do-while` est rare, `for` est partout. Il vient
   en dernier, dans un bloc repliable ;
-- **`for each` est repoussé** en séance 08 : il suppose un tableau ou une
-  liste, et les `import` de `List` et `Arrays` ;
+- **`for each` n'est pas au programme** : il suppose un tableau ou une
+  liste, et la boucle `for` indicée suffit pour tout ce que fait ce cours ;
 - **les trois ingrédients sont nommés** (situation initiale, condition, mise à
   jour) et servent de grille de lecture dans toute la séance. OpenClassrooms
   les cite, sans en faire un outil ;
@@ -430,8 +430,8 @@ Les pièges propres à cette séance :
 
 - **garder les notes pour les afficher à la fin** : cela demande un tableau.
   La réponse est _"en séance 08"_, et c'est la transition ;
-- **`for each`** : il suppose un tableau. Si la question vient, _"en séance
-  08"_ ;
+- **`for each`** : il suppose un tableau, et il n'est pas au programme. Si la
+  question vient, dire qu'il existe et que la boucle `for` suffit ;
 - **`break` et `continue`** : absents volontairement. Une boucle qui sort par
   `break` se lit mal, et l'on ne veut pas que ce soit le premier réflexe ;
 - **les boucles imbriquées** : elles ne sont pas au programme de la séance.

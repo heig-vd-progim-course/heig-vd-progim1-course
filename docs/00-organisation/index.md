@@ -80,8 +80,8 @@ Voir la page
 [Environnement de travail et outils](03-environnement-et-outils.md), section
 _"Outils d'intelligence artificielle"_.
 
-En résumé : vous pouvez les utiliser, sauf pendant les évaluations, et vous
-devez pouvoir expliquer tout ce que vous rendez.
+En résumé : vous pouvez les utiliser, sauf pendant l'évaluation écrite et
+l'oral, et vous devez pouvoir expliquer tout ce que vous rendez.
 
 ## Et si ça va mal
 

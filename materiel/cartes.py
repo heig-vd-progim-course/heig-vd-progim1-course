@@ -30,12 +30,14 @@ BAND_STATEMENT = COLOR_STRING  # du texte en français, comme une chaîne
 BAND_CODE = COLOR_KEYWORD  # la couleur des mots-clés
 BAND_OUTPUT = "#3C3F41"  # la console
 BAND_DIAGRAM = COLOR_FIELD  # une quatrième couleur de l'éditeur
+BAND_ARRAY = "#B35900"  # une couleur que les trois autres bandeaux n'ont pas
 
 KINDS = {
     "statement": ("Énoncé", BAND_STATEMENT),
     "code": ("Code", BAND_CODE),
     "output": ("Sortie", BAND_OUTPUT),
     "diagram": ("Diagramme", BAND_DIAGRAM),
+    "array": ("Tableau", BAND_ARRAY),
 }
 
 KEYWORDS = {
@@ -111,6 +113,24 @@ def output_body(output):
 
 def diagram_body(svg):
     return f'<div class="diagram">{svg}</div>'
+
+
+def array_body(name, before, after, before_label="Au début", after_label="À la fin"):
+    """Deux rangées de cases indicées : l'état d'un tableau avant et après."""
+
+    def row(label, values):
+        cells = "".join(f"<td>{html.escape(str(v))}</td>" for v in values)
+        return f'<tr><th class="row-label">{html.escape(label)}</th>{cells}</tr>'
+
+    indices = "".join(f"<th>{i}</th>" for i in range(len(before)))
+    return f"""<table class="array">
+  <caption><code>{html.escape(name)}</code></caption>
+  <tr class="indices"><th></th>{indices}</tr>
+  {row(before_label, before)}
+  <tr class="gap"><td colspan="{len(before) + 1}"></td></tr>
+  <tr class="indices"><th></th>{indices}</tr>
+  {row(after_label, after)}
+</table>"""
 
 
 def one_per_page(cards):
@@ -215,6 +235,15 @@ pre {{ font-family: "DejaVu Sans Mono", "JetBrains Mono", monospace; margin: 0; 
   -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }}
 .diagram {{ display: flex; align-items: center; justify-content: center; }}
+.array {{ border-collapse: separate; border-spacing: 0; font-size: 30pt; }}
+.array caption {{ font-size: 24pt; margin-bottom: 4mm; text-align: left; }}
+.array td {{
+  border: 0.6mm solid {COLOR_TEXT}; width: 30mm; height: 24mm; text-align: center;
+  font-family: "DejaVu Sans Mono", "JetBrains Mono", monospace; color: {COLOR_NUMBER};
+}}
+.array tr.indices th {{ font-size: 16pt; color: #777; font-weight: normal; padding-bottom: 1mm; }}
+.array th.row-label {{ font-size: 20pt; text-align: right; padding-right: 6mm; white-space: nowrap; }}
+.array tr.gap td {{ border: none; height: 10mm; }}
 .landscape > .card {{ width: 297mm; height: 210mm; border-bottom: none; }}
 .landscape > .card header {{ font-size: 26pt; padding: 5mm 12mm; }}
 .landscape > .card footer {{ font-size: 10pt; right: 8mm; bottom: 6mm; }}
