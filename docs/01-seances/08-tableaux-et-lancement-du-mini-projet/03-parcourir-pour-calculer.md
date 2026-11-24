@@ -13,7 +13,7 @@ parcours, et vous saurez pourquoi un maximum ne doit pas partir de 0.
 ## Trois parcours, une même forme
 
 Vous avez déjà écrit le premier : la somme, à la page
-[Ranger dans un tableau](01-ranger-dans-un-tableau.md#etape-3-parcourir-le-tableau-avec-une-boucle).
+[Ranger dans un tableau](01-ranger-dans-un-tableau.md#etape-4-parcourir-le-tableau-avec-une-boucle).
 Les autres ont la même forme :
 
 1. une variable de résultat, déclarée **avant** la boucle ;

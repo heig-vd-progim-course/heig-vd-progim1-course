@@ -22,8 +22,9 @@ et l'indice de trop ne se voit qu'à l'exécution.
 | Choix                                                  | Raison                                                                                                                                                                         |
 | :----------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Partir de cinq variables `grade1` à `grade5`           | Le tableau répond à une gêne vécue : trois endroits à modifier pour une note de plus, cinq `if` pour les comparer                                                              |
-| La théorie en tutoriel, un programme réécrit sept fois | Repris de l'archive de l'édition précédente (`archive/09.01-methodologies-de-resolution-de-problemes/`), qui avait bien fonctionné                                             |
+| La théorie en tutoriel, un programme réécrit huit fois | Repris de l'archive de l'édition précédente (`archive/09.01-methodologies-de-resolution-de-problemes/`), qui avait bien fonctionné                                             |
 | Le besoin du second parcours comme fil conducteur      | _"Afficher les notes en dessous de la moyenne"_ est impossible sans garder les notes. Sans ce besoin, le tableau ne sert à rien dans le fil rouge, qui additionne déjà au vol  |
+| Une étape sur les crochets, avant la boucle            | Demande explicite : lire et écrire une case avec `[]` d'abord, sans boucle. La somme case par case montre ensuite ce que la boucle automatise                                  |
 | L'indice de trop montré, exécuté, lu                   | C'est l'erreur de la séance. Mieux vaut l'avoir vue avec son message complet que la découvrir seul dans le mini-projet                                                         |
 | Pas de tableau en paramètre de fonction                | Demande explicite : il arrive en séance 09. Le `main` du code secret grandit exprès, pour motiver le découpage                                                                 |
 | Pas de `for each`                                      | Retiré du programme. Une boucle de plus à choisir, pour un gain faible                                                                                                         |
@@ -104,7 +105,11 @@ connue, les notes ont disparu.
 - Coder les étapes en direct, dans IntelliJ, plutôt que de projeter la page.
   L'étape 1 doit durer : faire ajouter une sixième note par la classe, et
   oublier volontairement le `5` de la division.
-- À l'étape 4, **exécuter** la version avec `<=` et lire le message ensemble,
+- À l'étape 3, rester sur les crochets sans boucle : lire une case, puis en
+  écrire une. Demander oralement _"que vaut `grades[1]` ?"_ : qui répond `5.0`
+  compte à partir de 1. Finir sur la ligne 5 de la somme, où seul l'indice
+  change : c'est elle qui amène la boucle.
+- À l'étape 5, **exécuter** la version avec `<=` et lire le message ensemble,
   morceau par morceau. C'est le moment de la séance.
 - Dessiner le tableau au tableau blanc : une rangée de cases, les indices
   au-dessus. Le garder affiché pendant l'activité.
@@ -254,7 +259,7 @@ Ce qui se comprime, dans cet ordre :
 
 Ce qui ne se comprime jamais :
 
-- l'étape 4 de la théorie, l'indice de trop exécuté et lu ;
+- l'étape 5 de la théorie, l'indice de trop exécuté et lu ;
 - l'activité en quatuor et son débriefing ;
 - les parties 1 et 2 de l'étape 1 du code secret, en classe : sans elles, la
   séance 09 commence en retard pour tout le monde.

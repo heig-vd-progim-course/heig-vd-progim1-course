@@ -51,9 +51,9 @@ de pause.
 | Temps       |  Durée | Contenu                                                                                                                          |
 | :---------- | -----: | :------------------------------------------------------------------------------------------------------------------------------- |
 | 00:00-00:10 | 10 min | [Rappel de la séance 07 : le fil rouge oublie les notes](01-ranger-dans-un-tableau.md#le-probleme-le-fil-rouge-oublie-les-notes) |
-| 00:10-00:35 | 25 min | [Théorie - Ranger dans un tableau](01-ranger-dans-un-tableau.md)                                                                 |
-| 00:35-00:55 | 20 min | [Activité - Des tableaux en quatuor](02-activite-des-tableaux-en-quatuor.md)                                                     |
-| 00:55-01:10 | 15 min | [Théorie - Parcourir pour calculer](03-parcourir-pour-calculer.md)                                                               |
+| 00:10-00:40 | 30 min | [Théorie - Ranger dans un tableau](01-ranger-dans-un-tableau.md)                                                                 |
+| 00:40-01:00 | 20 min | [Activité - Des tableaux en quatuor](02-activite-des-tableaux-en-quatuor.md)                                                     |
+| 01:00-01:10 | 10 min | [Théorie - Parcourir pour calculer](03-parcourir-pour-calculer.md)                                                               |
 | 01:10-01:25 | 15 min | Pause                                                                                                                            |
 | 01:25-01:45 | 20 min | [Atelier - Tableaux](04-atelier-tableaux.md)                                                                                     |
 | 01:45-02:00 | 15 min | [Lancement du mini-projet : Code secret, questionnaires et oral](../../00-organisation/02-mini-projet.md)                        |
@@ -67,7 +67,7 @@ Si la séance déborde, ce sont la partie _Prédire_ de l'atelier, l'étape 2 du
 rouge et la section sur `String[] args` qui sautent. Les deux premières se
 terminent à la maison ; la troisième se lit sur la page.
 
-Ce qui ne se coupe jamais : l'indice de trop de l'étape 4 de la théorie,
+Ce qui ne se coupe jamais : l'indice de trop de l'étape 5 de la théorie,
 l'activité en quatuor, et les parties 1 et 2 de l'étape 1 du code secret. Savoir
 suivre ce qu'une boucle fait à un tableau, case par case, c'est ce que la séance
 doit produire ; et sans l'étape 1, le mini-projet commence en retard.
@@ -96,8 +96,8 @@ pour 2,5% de la note : voir la page
   ne venez pas sans elle.
 - Remplir le questionnaire 08, à la main, et l'apporter en séance 09.
 - Terminer le fil rouge jusqu'à l'étape 2 de l'atelier.
-- Refaire les quiz de la théorie une semaine plus tard, sans relire la page
-  avant.
+- Une semaine plus tard, réécrire de mémoire le programme de l'étape 8 de la
+  théorie, puis le comparer à la page.
 
 <!-- URLs -->
 

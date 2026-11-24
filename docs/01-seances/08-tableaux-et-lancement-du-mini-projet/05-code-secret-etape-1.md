@@ -65,8 +65,8 @@ Proposition : [1, 3, 2, 4]
     La taille de `guess` ne s'écrit pas en dur : `new int[secret.length]`. Si
     le code passe un jour à cinq chiffres, une seule ligne changera.
 
-    La lecture des quatre chiffres est la boucle de l'étape 6 de la page
-    [Ranger dans un tableau](01-ranger-dans-un-tableau.md#etape-6-creer-un-tableau-vide-puis-le-remplir),
+    La lecture des quatre chiffres est la boucle de l'étape 7 de la page
+    [Ranger dans un tableau](01-ranger-dans-un-tableau.md#etape-7-creer-un-tableau-vide-puis-le-remplir),
     avec `Integer.parseInt` au lieu de `Double.parseDouble`.
 
 ??? note "Une solution possible"

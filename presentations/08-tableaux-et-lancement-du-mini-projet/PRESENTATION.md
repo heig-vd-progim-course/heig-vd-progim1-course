@@ -132,21 +132,51 @@ public class Main {
 - La dernière case est `grades[grades.length - 1]`.
 - La taille ne change plus une fois le tableau créé.
 
-## Quiz : la case 1
+## Étape 3 : lire une case (lignes 5 et 6)
 
-Avec `double[] grades = {5, 6, 4, 4.5, 5.5};`, que vaut `grades[1]` ?
+```java
+public class Main {
+    public static void main(String[] args) {
+        double[] grades = {5, 6, 4, 4.5, 5.5};
 
-A. `5.0` - B. `6.0` - C. `4.0` - D. Une erreur
+        double sum = (((grades[0] + grades[1]) + grades[2]) + grades[3]) + grades[4];
+        double average = sum / grades.length;
 
-## B. `6.0`
+        System.out.println("Moyenne : " + average);
+    }
+}
+```
+
+`Moyenne : 5.0` : `grades[0]` s'utilise comme `grade1`.
+
+## Étape 3 : écrire une case (ligne 6)
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        double[] grades = {5, 6, 4, 4.5, 5.5};
+
+        System.out.println("Case 2 : " + grades[2]);
+        grades[2] = 5.5;
+        System.out.println("Case 2 : " + grades[2]);
+    }
+}
+```
+
+`Case 2 : 4.0`, puis `Case 2 : 5.5` : à droite du `=`, une case se **lit** ;
+à gauche, elle s'**écrit**.
+
+## Seul l'indice change
 
 <!-- _class: lead -->
 
-La case 0 contient `5.0`, la case 1 contient `6.0`.
+Ligne 5 de l'étape 3 : les indices 0 à 4, écrits à la main.
 
-Si vous avez répondu A, vous avez compté à partir de 1.
+Avec trente notes, trente cases à écrire.
 
-## Étape 3 : parcourir (lignes 3, 4 et 6 à 9)
+D'une case à l'autre, seul l'indice change : c'est le travail d'une boucle.
+
+## Étape 4 : parcourir (lignes 4 et 6 à 8)
 
 ```java
 public class Main {
@@ -185,7 +215,7 @@ Elle part de **0**, et s'arrête **avant** `grades.length`.
 
 Six notes ? Une valeur de plus entre les accolades. Le reste s'adapte.
 
-## Étape 4 : l'indice de trop (ligne 5)
+## Étape 5 : l'indice de trop (ligne 5)
 
 ```java
 public class Main {
@@ -220,7 +250,7 @@ Au sixième tour, `i` vaut 5, et `5 <= 5` est vrai : Java essaie de lire
 
 Le compilateur ne dit rien : l'erreur n'apparaît qu'**à l'exécution**.
 
-## Étape 5 : afficher tout le tableau (1/2)
+## Étape 6 : afficher tout le tableau (1/2)
 
 ```java
 public class Main {
@@ -234,7 +264,7 @@ public class Main {
 
 `[D@2b2fa4f7` : une sorte d'adresse, pas le contenu.
 
-## Étape 5 : afficher tout le tableau (2/2)
+## Étape 6 : afficher tout le tableau (2/2)
 
 ```java
 import java.util.Arrays;
@@ -251,7 +281,7 @@ public class Main {
 
 `[5.0, 6.0, 5.5, 4.5, 5.5]` : la case 2 a été remplacée.
 
-## Étape 6 : créer vide, puis remplir
+## Étape 7 : créer vide, puis remplir
 
 <small>
 
@@ -290,7 +320,7 @@ Note 3 : 6
 - Chaque case vaut `0.0` au départ.
 - `i + 1` : la note 1 va dans la case 0.
 
-## Étape 7 : les notes en dessous
+## Étape 8 : les notes en dessous
 
 <small>
 
@@ -511,7 +541,7 @@ La personne trouve le code... et le jeu lui dit qu'elle a perdu.
 - Terminer les parties 1 à 3 de l'étape 1 du code secret.
 - Remplir le questionnaire 08 **à la main**, et l'apporter en séance 09.
 - Terminer le fil rouge jusqu'à l'étape 2 de l'atelier.
-- Refaire les quiz dans une semaine, sans relire la page avant.
+- Dans une semaine, réécrire de mémoire le programme de l'étape 8.
 
 ## Questions
 

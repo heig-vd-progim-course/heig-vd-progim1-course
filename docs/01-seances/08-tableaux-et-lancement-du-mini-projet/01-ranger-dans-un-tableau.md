@@ -13,7 +13,7 @@ l'indice de trop.
 
 !!! note "Comment lire cette page"
 
-    Cette page est un **tutoriel** : un même programme est réécrit sept fois,
+    Cette page est un **tutoriel** : un même programme est réécrit huit fois,
     et chaque version corrige un défaut de la précédente. Exécutez chaque
     version sur votre machine avant de passer à la suivante.
 
@@ -116,30 +116,11 @@ indice entre crochets : `grades[0]` vaut `5.0`.
 - La dernière case a donc l'indice `grades.length - 1`, ici 4.
 - **La taille d'un tableau ne change plus** une fois qu'il est créé.
 
-<div class="quiz" markdown>
+## Étape 3 : lire et écrire une case
 
-Avec `double[] grades = {5, 6, 4, 4.5, 5.5};`, que vaut `grades[1]` ?
-
-- [ ] `5.0`
-- [x] `6.0`
-- [ ] `4.0`
-- [ ] Une erreur : il n'y a pas de case 1
-
-<div class="quiz-explanation" markdown>
-
-La case 0 contient `5.0`, la case 1 contient `6.0`. Si vous avez répondu `5.0`,
-vous avez compté à partir de 1. C'est l'erreur la plus naturelle, et elle
-reviendra sous la forme d'un indice de trop.
-
-</div>
-
-</div>
-
-## Étape 3 : parcourir le tableau avec une boucle
-
-Puisque les cases sont numérotées de 0 à `grades.length - 1`, une boucle `for`
-de la séance 07 peut les visiter une par une. Réécrivons le calcul de la moyenne
-:
+Une case s'utilise exactement comme une variable : `grades[0]` remplace
+`grade1`, `grades[1]` remplace `grade2`, et ainsi de suite. Reprenons le calcul
+de la moyenne de l'étape 1 :
 
 === "Avant"
 
@@ -162,7 +143,99 @@ de la séance 07 peut les visiter une par une. Réécrivons le calcul de la moye
 
 === "Après"
 
-    ```java title="Main.java" linenums="1" hl_lines="3-4 6-9"
+    ```java title="Main.java" linenums="1" hl_lines="3 5-6"
+    public class Main {
+        public static void main(String[] args) {
+            double[] grades = {5, 6, 4, 4.5, 5.5};
+
+            double sum = (((grades[0] + grades[1]) + grades[2]) + grades[3]) + grades[4];
+            double average = sum / grades.length;
+
+            System.out.println("Moyenne : " + average);
+        }
+    }
+    ```
+
+```text
+Moyenne : 5.0
+```
+
+Les cinq variables sont remplacées par un tableau, ligne 3. La somme lit les
+cases une par une, ligne 5, et le `5` écrit en dur devient `grades.length`,
+ligne 6.
+
+Une case se lit, et elle s'écrit aussi : on peut lui **affecter** une nouvelle
+valeur, comme à une variable.
+
+```java title="Main.java" linenums="1" hl_lines="5-7"
+public class Main {
+    public static void main(String[] args) {
+        double[] grades = {5, 6, 4, 4.5, 5.5};
+
+        System.out.println("Case 2 : " + grades[2]);
+        grades[2] = 5.5;
+        System.out.println("Case 2 : " + grades[2]);
+    }
+}
+```
+
+```text
+Case 2 : 4.0
+Case 2 : 5.5
+```
+
+Ligne 6, `grades[2] = 5.5;` remplace la note 4.0 de la case 2 par 5.5. Les
+autres cases ne changent pas. À droite du `=`, `grades[2]` se **lit** ; à
+gauche, il s'**écrit**.
+
+<div class="quiz" markdown>
+
+Avec `double[] grades = {5, 6, 4, 4.5, 5.5};`, que vaut `grades[1]` ?
+
+- [ ] `5.0`
+- [x] `6.0`
+- [ ] `4.0`
+- [ ] Une erreur : il n'y a pas de case 1
+
+<div class="quiz-explanation" markdown>
+
+La case 0 contient `5.0`, la case 1 contient `6.0`. Si vous avez répondu `5.0`,
+vous avez compté à partir de 1. C'est l'erreur la plus naturelle, et elle
+reviendra à l'étape 5, sous la forme d'un indice de trop.
+
+</div>
+
+</div>
+
+Regardez à nouveau la ligne 5 du calcul de la moyenne : on y écrit les indices
+0, 1, 2, 3 et 4 à la main. Avec trente notes, la ligne serait aussi longue qu'à
+l'étape 1. Mais d'une case à l'autre, seul l'indice change : c'est le travail
+d'une boucle.
+
+## Étape 4 : parcourir le tableau avec une boucle
+
+Puisque les cases sont numérotées de 0 à `grades.length - 1`, une boucle `for`
+de la séance 07 peut les visiter une par une. Réécrivons le calcul de la moyenne
+de l'étape 3 :
+
+=== "Avant"
+
+    ```java title="Main.java" linenums="1" hl_lines="5"
+    public class Main {
+        public static void main(String[] args) {
+            double[] grades = {5, 6, 4, 4.5, 5.5};
+
+            double sum = (((grades[0] + grades[1]) + grades[2]) + grades[3]) + grades[4];
+            double average = sum / grades.length;
+
+            System.out.println("Moyenne : " + average);
+        }
+    }
+    ```
+
+=== "Après"
+
+    ```java title="Main.java" linenums="1" hl_lines="4 6-8"
     public class Main {
         public static void main(String[] args) {
             double[] grades = {5, 6, 4, 4.5, 5.5};
@@ -182,9 +255,9 @@ de la séance 07 peut les visiter une par une. Réécrivons le calcul de la moye
 Moyenne : 5.0
 ```
 
-Les cinq variables sont remplacées par un tableau, ligne 3. La longue somme est
-remplacée par un accumulateur et une boucle, lignes 4 à 8, et le `5` écrit en
-dur par `grades.length`, ligne 9.
+La somme case par case de la ligne 5 est remplacée par un accumulateur, ligne 4,
+et une boucle, lignes 6 à 8. Le tableau et la division par `grades.length` ne
+changent pas.
 
 Le cœur du parcours est la ligne 7 : `grades[i]`. À chaque tour, `i` change, et
 `grades[i]` désigne une autre case.
@@ -208,7 +281,7 @@ d'écrire `grades.length` plutôt que `5`.
     plus souvent avec un tableau. Elle part de 0, et elle s'arrête **avant**
     `grades.length`, avec `<` et non `<=`.
 
-## Étape 4 : l'indice de trop
+## Étape 5 : l'indice de trop
 
 Que se passe-t-il avec `<=` à la place de `<` ?
 
@@ -250,7 +323,7 @@ Ce n'est pas une erreur de compilation : le compilateur ne connaît pas la valeu
 de `i`. L'erreur ne se voit qu'**à l'exécution**. La séance 10 apprendra à
 rattraper ce genre d'arrêt ; pour l'instant, on l'évite.
 
-## Étape 5 : afficher tout le tableau
+## Étape 6 : afficher tout le tableau
 
 Pour vérifier le contenu d'un tableau, on a envie d'écrire
 `System.out.println(grades);`. Le résultat surprend :
@@ -296,11 +369,10 @@ Deux nouveautés :
   d'office : la ligne `import` dit à Java où le trouver. Elle se place tout en
   haut du fichier, avant `public class Main`. IntelliJ la propose tout seul
   quand vous tapez `Arrays`.
-- **Ligne 7, `grades[2] = 5.5;`.** Une case s'utilise comme une variable : on
-  peut lui **affecter** une nouvelle valeur. La note 4.0 de la case 2 est
-  remplacée par 5.5.
+- **Ligne 7, `grades[2] = 5.5;`.** L'écriture de l'étape 3 : `Arrays.toString`
+  montre le tableau entier, et la case 2 qui a changé.
 
-## Étape 6 : créer un tableau vide, puis le remplir
+## Étape 7 : créer un tableau vide, puis le remplir
 
 Jusqu'ici, les notes sont écrites dans le code. Pour les lire au clavier, il
 faut créer le tableau **avant** de connaître les valeurs, avec sa seule taille :
@@ -341,7 +413,7 @@ Note 3 : 6
   personne qui tape, la première note est la note 1, même si elle va dans la
   case 0.
 
-## Étape 7 : enfin, afficher les notes en dessous de la moyenne
+## Étape 8 : enfin, afficher les notes en dessous de la moyenne
 
 Les notes sont gardées : on peut les parcourir **une seconde fois**, une fois la
 moyenne connue. C'est ce que l'étape 1 ne pouvait pas faire.
